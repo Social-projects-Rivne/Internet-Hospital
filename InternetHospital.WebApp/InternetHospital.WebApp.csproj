@@ -25,6 +25,11 @@
     <Folder Include="Hubs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InternetHospital.BusinessLogic\InternetHospital.BusinessLogic.csproj" />
+    <ProjectReference Include="..\InternetHospital.DataAccess\InternetHospital.DataAccess.csproj" />
+  </ItemGroup>
+
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
