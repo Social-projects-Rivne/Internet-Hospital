@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.WebApp", "InternetHospital.WebApp\InternetHospital.WebApp.csproj", "{ED24F9C2-14FB-46C8-A52D-C1D92EA93ADB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.BusinessLogic", "InternetHospital.BusinessLogic\InternetHospital.BusinessLogic.csproj", "{750B5456-B6FF-4EDC-BC49-557813A13CEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.BusinessLogic", "InternetHospital.BusinessLogic\InternetHospital.BusinessLogic.csproj", "{750B5456-B6FF-4EDC-BC49-557813A13CEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.DataAccess", "InternetHospital.DataAccess\InternetHospital.DataAccess.csproj", "{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.DataAccess", "InternetHospital.DataAccess\InternetHospital.DataAccess.csproj", "{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.WebApp", "InternetHospital.WebApp\InternetHospital.WebApp.csproj", "{57CA379D-C8BA-447B-BD73-0874456A8241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED24F9C2-14FB-46C8-A52D-C1D92EA93ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED24F9C2-14FB-46C8-A52D-C1D92EA93ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED24F9C2-14FB-46C8-A52D-C1D92EA93ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED24F9C2-14FB-46C8-A52D-C1D92EA93ADB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{750B5456-B6FF-4EDC-BC49-557813A13CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{750B5456-B6FF-4EDC-BC49-557813A13CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{750B5456-B6FF-4EDC-BC49-557813A13CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57CA379D-C8BA-447B-BD73-0874456A8241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57CA379D-C8BA-447B-BD73-0874456A8241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57CA379D-C8BA-447B-BD73-0874456A8241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57CA379D-C8BA-447B-BD73-0874456A8241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
