@@ -6,6 +6,11 @@ import { MaterialModule } from './Modules/material/material.module';
 import { HeaderComponent } from './Components/Layout/header/header.component';
 import { SignInComponent } from './Components/Authorization/sign-in/sign-in.component';
 import { SignUpComponent } from './Components/Authorization/sign-up/sign-up.component';
+import { HomeComponent } from './Components/Home/home/home.component';
+import { AuthorizationService } from './Services/authorization.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -14,12 +19,17 @@ import { SignUpComponent } from './Components/Authorization/sign-up/sign-up.comp
     HeaderComponent,
     SignInComponent,
     SignUpComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,    
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthorizationService],
+  bootstrap: [AppComponent],
+  entryComponents: [SignUpComponent]
 })
 export class AppModule { }
