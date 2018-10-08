@@ -11,6 +11,7 @@ export class AuthorizationService {
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     fullName: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
     mobile: new FormControl('', [Validators.required, Validators.minLength(8)]),
     address: new FormControl(''),
@@ -23,6 +24,7 @@ export class AuthorizationService {
     this.form.setValue({
       $key: null,
       fullName: '',
+      password: '',
       email: '',
       mobile: '',
       address: '',

@@ -1,10 +1,18 @@
 <form [formGroup]="service.form" class="normal-form">
-  <mat-grid-list cols="2" rowHeight="400px">
+  <mat-grid-list cols="2" rowHeight="550px">
     <mat-grid-tile>
       <div class="controles-container">
         <input type="hidden" formControlName="$key">
         <mat-form-field>
           <input formControlName="fullName" matInput placeholder="Full Name*">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" formControlName="password" matInput placeholder="Password*">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" formControlName="confirmPassword" matInput placeholder="Confirm Password*">
           <mat-error>This field is mandatory.</mat-error>
         </mat-form-field>
         <mat-form-field>

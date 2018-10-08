@@ -10,7 +10,9 @@ import { HomeComponent } from './Components/Home/home/home.component';
 import { AuthorizationService } from './Services/authorization.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HomeNewsComponent } from './Components/Home/home-news/home-news.component';
+import { HomeNewsItemComponent } from './Components/Home/home-news-item/home-news-item.component';
+import { FooterComponent } from './Components/Layout/footer/footer.component';
 
 
 @NgModule({
@@ -20,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignInComponent,
     SignUpComponent,
     HomeComponent,
+    HomeNewsComponent,
+    HomeNewsItemComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
