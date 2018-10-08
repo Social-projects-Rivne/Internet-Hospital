@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.BusinessLo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.DataAccess", "InternetHospital.DataAccess\InternetHospital.DataAccess.csproj", "{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.WebApp", "InternetHospital.WebApp\InternetHospital.WebApp.csproj", "{57CA379D-C8BA-447B-BD73-0874456A8241}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.WebApi", "InternetHospital.WebApi\InternetHospital.WebApi.csproj", "{7361DB0D-7314-4205-A524-056CDEFD861B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57CA379D-C8BA-447B-BD73-0874456A8241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57CA379D-C8BA-447B-BD73-0874456A8241}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57CA379D-C8BA-447B-BD73-0874456A8241}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57CA379D-C8BA-447B-BD73-0874456A8241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7361DB0D-7314-4205-A524-056CDEFD861B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7361DB0D-7314-4205-A524-056CDEFD861B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7361DB0D-7314-4205-A524-056CDEFD861B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7361DB0D-7314-4205-A524-056CDEFD861B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
