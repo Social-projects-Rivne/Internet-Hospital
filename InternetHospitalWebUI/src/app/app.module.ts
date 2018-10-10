@@ -10,6 +10,9 @@ import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { MaterialModule } from './Modules/material/material.module';
 import { AuthorizationService } from './Services/authorization.service';
+import { HomeComponent } from './Components/Home/home/home.component';
+import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
+import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { AuthorizationService } from './Services/authorization.service';
     SignUpComponent,
     SignInComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    HomeNewsComponent,
+    HomeNewsItemComponent
   ],
   imports: [
     BrowserModule,
