@@ -50,7 +50,7 @@ namespace InternetHospital.WebApi
             .AllowAnyHeader()
             .AllowCredentials());
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseMvc();
         }

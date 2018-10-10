@@ -5,11 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ContextOptionsProvider\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repository\" />
+    <Compile Remove="ContextOptionsProvider\**" />
+    <Compile Remove="Helpers\**" />
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="Repository\**" />
+    <EmbeddedResource Remove="ContextOptionsProvider\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="ContextOptionsProvider\**" />
+    <None Remove="Helpers\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
   </ItemGroup>
 
 </Project>
