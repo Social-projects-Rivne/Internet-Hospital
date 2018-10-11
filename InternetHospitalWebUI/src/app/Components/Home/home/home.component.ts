@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HOME_IMAGES } from '../../../Mock-Objects/mock-home-news';
+import { HomeService } from '../../../Services/home.service';
+import { HomeImages } from '../../../Models/Temp/HomeImage';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,15 @@ import { HOME_IMAGES } from '../../../Mock-Objects/mock-home-news';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  homeImages = HOME_IMAGES;
+  homeImages: HomeImages[];
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+    this.getHomeImages();
   }
 
+  getHomeImages(): void {
+    this.homeImages = this.homeService.getHomeImages();
+  }
 }
