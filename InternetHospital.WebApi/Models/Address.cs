@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.WebApi.Models
 {
     public class Address
     {
@@ -12,8 +13,8 @@ namespace InternetHospital.DataAccess.Entities
         public string City { get; set; }
         public string Street { get; set; }
 
-        public virtual Patient Patient { get; set; }
+        public Patient Patient { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public Doctor Doctor { get; set; }
     }
 }

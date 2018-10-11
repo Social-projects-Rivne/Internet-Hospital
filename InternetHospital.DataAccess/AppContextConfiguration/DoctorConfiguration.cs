@@ -13,6 +13,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         {
             builder.HasKey(d => d.PatientId);
             builder.Property(d => d.PatientId).ValueGeneratedNever();
+
+            builder.Property(d => d.IsApproved).HasDefaultValue(false);
+        
             builder.HasOne(d => d.Address).WithOne(a => a.Doctor).HasForeignKey<Doctor>("WorkingAddressId");
 
             builder.HasData(new Doctor[]

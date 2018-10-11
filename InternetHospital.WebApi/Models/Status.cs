@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.WebApi.Models
 {
     public class Status
     {
@@ -10,6 +11,6 @@ namespace InternetHospital.DataAccess.Entities
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

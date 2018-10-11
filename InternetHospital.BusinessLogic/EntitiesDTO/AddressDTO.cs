@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.BusinessLogic.EntitiesDTO
 {
-    public class Address
+    public class AddressDTO
     {
         public int Id { get; set; }
         public string Country { get; set; }
@@ -12,8 +12,8 @@ namespace InternetHospital.DataAccess.Entities
         public string City { get; set; }
         public string Street { get; set; }
 
-        public virtual Patient Patient { get; set; }
+        public PatientDTO PatientDTO { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public DoctorDTO DoctorDTO { get; set; }
     }
 }

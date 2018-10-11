@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.BusinessLogic.EntitiesDTO
 {
-    public class Patient
+    public class PatientDTO
     {
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public UserDTO UserDTO { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public DoctorDTO DoctorDTO { get; set; }
 
         public string FirstName { get; set; }
         public string SecondName { get; set; }
@@ -19,7 +19,7 @@ namespace InternetHospital.DataAccess.Entities
         public string AvatarURL { get; set; }
         public string PassportURL { get; set; }
 
-        public virtual Address Address { get; set; }
+        public AddressDTO AddressDTO { get; set; }
         public int? LivingAddressId { get; set; }
     }
 }

@@ -11,7 +11,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(u => u.Id);
+            builder.Property(u => u.Email).IsRequired();
+            builder.Property(u => u.Password).IsRequired();
+
             builder.HasData(new User[]
             {
                 new User { Id = 1, Email = "user@gmail.com", Password = "1111", RoleId = 1, StatusId = 2},

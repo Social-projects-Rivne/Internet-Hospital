@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.BusinessLogic.EntitiesDTO
 {
-    public class User
+    public class UserDTO
     {
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public virtual Patient Patient { get; set; }
+        public PatientDTO PatientDTO { get; set; }
 
-        public virtual Role Role { get; set; }
+        public RoleDTO RoleDTO { get; set; }
         public int RoleId { get; set; }
 
-        public virtual Status Status { get; set; }
+        public StatusDTO StatusDTO { get; set; }
         public int StatusId { get; set; }
 
-        public virtual ICollection<RefreshToken> Tokens { get; set; }
+        public ICollection<RefreshTokenDTO> TokensDTO { get; set; }
         //public string PasswordHashed { get; set; }
         //public string PasswordSalt { get; set; }
     }

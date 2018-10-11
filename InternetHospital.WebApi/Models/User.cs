@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.WebApi.Models
 {
     public class User
     {
@@ -10,15 +11,15 @@ namespace InternetHospital.DataAccess.Entities
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public virtual Patient Patient { get; set; }
+        public Patient Patient { get; set; }
 
-        public virtual Role Role { get; set; }
+        public Role Role { get; set; }
         public int RoleId { get; set; }
 
-        public virtual Status Status { get; set; }
+        public Status Status { get; set; }
         public int StatusId { get; set; }
 
-        public virtual ICollection<RefreshToken> Tokens { get; set; }
+        public ICollection<RefreshToken> Tokens { get; set; }
         //public string PasswordHashed { get; set; }
         //public string PasswordSalt { get; set; }
     }

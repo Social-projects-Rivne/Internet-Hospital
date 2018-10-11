@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.BusinessLogic.EntitiesDTO
 {
-    public class Doctor
+    public class DoctorDTO
     {
         public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; }
+        public PatientDTO PatientDTO { get; set; }
 
         public string LicenseURL { get; set; }
         public string DoctorsInfo { get; set; }
         public bool IsApproved { get; set; }
 
-        public virtual Specialization Specialization { get; set; }
+        public SpecializationDTO SpecializationDTO { get; set; }
         public int? SpecializationId { get; set; }
 
-        public virtual Address Address { get; set; }
+        public AddressDTO AddressDTO { get; set; }
         public int? WorkingAddressId { get; set; }
 
-        public virtual ICollection<Diploma> Diplomas { get; set; }
+        public ICollection<DiplomaDTO> DiplomasDTO { get; set; }
     }
 }

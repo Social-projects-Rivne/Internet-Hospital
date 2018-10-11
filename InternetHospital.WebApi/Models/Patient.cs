@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace InternetHospital.DataAccess.Entities
+namespace InternetHospital.WebApi.Models
 {
     public class Patient
     {
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public Doctor Doctor { get; set; }
 
         public string FirstName { get; set; }
         public string SecondName { get; set; }
@@ -19,7 +20,8 @@ namespace InternetHospital.DataAccess.Entities
         public string AvatarURL { get; set; }
         public string PassportURL { get; set; }
 
-        public virtual Address Address { get; set; }
+        public Address Address { get; set; }
         public int? LivingAddressId { get; set; }
+
     }
 }
