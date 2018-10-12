@@ -14,7 +14,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
             builder.HasData(new Status[]
             {
                 new Status { Id = 1, Name = "Banned", Description = "Banned user!"},
-                new Status { Id = 2, Name = "Working", Description = "Working user!"}
+                new Status { Id = 2, Name = "New", Description = "New user!"},
+                new Status { Id = 3, Name = "Approved", Description = "Approved user!"},
+                new Status { Id = 4, Name = "Not Approved", Description = "Not approved user!"}
             });
         }
     }

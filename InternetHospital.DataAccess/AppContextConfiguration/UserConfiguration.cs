@@ -16,9 +16,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
 
             builder.HasData(new User[]
             {
-                new User { Id = 1, Email = "user@gmail.com", Password = "1111", RoleId = 1, StatusId = 2},
-                new User { Id = 2, Email = "patient@gmail.com", Password = "2222", RoleId = 2, StatusId = 2 },
-                new User { Id = 3, Email = "doctor@gmail.com", Password = "3333", RoleId = 3, StatusId = 2 }
+                new User { Id = 1, Email = "user@gmail.com", Password = "1111", RoleId = 1, StatusId = 2 },
+                new User { Id = 2, Email = "patient@gmail.com", Password = "2222", RoleId = 1, StatusId = 3 },
+                new User { Id = 3, Email = "doctor@gmail.com", Password = "3333", RoleId = 2, StatusId = 3 }
             });
         }
     }
