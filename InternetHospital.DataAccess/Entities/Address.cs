@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InternetHospital.DataAccess.Entities
+﻿namespace InternetHospital.DataAccess.Entities
 {
     public class Address
     {

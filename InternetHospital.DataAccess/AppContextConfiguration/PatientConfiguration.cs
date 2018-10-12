@@ -2,9 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace InternetHospital.DataAccess.AppContextConfiguration
 {
@@ -17,32 +14,34 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
 
             builder.HasOne(p => p.Address).WithOne(a => a.Patient).HasForeignKey<Patient>("LivingAddressId");
 
-            builder.HasData(new Patient[]
-            {
-                new Patient {
-                    UserId = 1,
-                    FirstName = "PatientFirstName",
-                    SecondName = "PatientSecondName",
-                    ThirdName = "PatientThirdName",
-                    BirthDay =new DateTime(1999,06,24),
-                    PassportURL =$"/Passports/PassportId{2}",
-                    AvatarURL =$"/Avatars/AvatarId{2}",
-                    Phone = "38(096)-512-23-65",
-                    LivingAddressId = 1
-                },
 
-                new Patient {
-                    UserId = 2,
-                    FirstName = "DoctorFirstName",
-                    SecondName = "DoctorSecondName",
-                    ThirdName = "DoctorThirdName",
-                    BirthDay =new DateTime(1989,11,20),
-                    PassportURL =$"/Passports/PassportId{3}",
-                    AvatarURL =$"/Avatars/AvatarId{3}",
-                    Phone = "38(096)-512-23-65",
-                    LivingAddressId = 2
-                }
-            });
+
+            //builder.HasData(new Patient[]
+            //{
+            //    new Patient {
+            //        UserId = 2,
+            //        FirstName = "PatientFirstName",
+            //        SecondName = "PatientSecondName",
+            //        ThirdName = "PatientThirdName",
+            //        BirthDay =new DateTime(1999,06,24),
+            //        PassportURL =$"/Passports/PassportId{2}",
+            //        AvatarURL =$"/Avatars/AvatarId{2}",
+            //        Phone = "38(096)-512-23-65",
+            //        LivingAddressId = 1
+            //    },
+
+            //    new Patient {
+            //        UserId = 3,
+            //        FirstName = "DoctorFirstName",
+            //        SecondName = "DoctorSecondName",
+            //        ThirdName = "DoctorThirdName",
+            //        BirthDay =new DateTime(1989,11,20),
+            //        PassportURL =$"/Passports/PassportId{3}",
+            //        AvatarURL =$"/Avatars/AvatarId{3}",
+            //        Phone = "38(096)-512-23-65",
+            //        LivingAddressId = 2
+            //    }
+            //});
         }
     }
 }

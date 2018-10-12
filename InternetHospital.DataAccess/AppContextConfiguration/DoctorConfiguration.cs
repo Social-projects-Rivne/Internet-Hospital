@@ -1,9 +1,6 @@
 ﻿using InternetHospital.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace InternetHospital.DataAccess.AppContextConfiguration
 {
@@ -18,17 +15,17 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         
             builder.HasOne(d => d.Address).WithOne(a => a.Doctor).HasForeignKey<Doctor>("WorkingAddressId");
 
-            builder.HasData(new Doctor[]
-            {
-                new Doctor {
-                    PatientId = 2,
-                    IsApproved = true,
-                    LicenseURL = $"/Licenses/License{3}",
-                    DoctorsInfo = "SuperPuperDoctor",
-                    SpecializationId = 1,
-                    WorkingAddressId = 2
-                }
-            });
+            //builder.HasData(new Doctor[]
+            //{
+            //    new Doctor {
+            //        PatientId = 3,
+            //        IsApproved = true,
+            //        LicenseURL = $"/Licenses/License{3}",
+            //        DoctorsInfo = "SuperPuperDoctor",
+            //        SpecializationId = 1,
+            //        WorkingAddressId = 2
+            //    }
+            //});
         }
     }
 }

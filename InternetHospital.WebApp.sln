@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.BusinessLogic", "InternetHospital.BusinessLogic\InternetHospital.BusinessLogic.csproj", "{750B5456-B6FF-4EDC-BC49-557813A13CEA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD} = {1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.DataAccess", "InternetHospital.DataAccess\InternetHospital.DataAccess.csproj", "{1798A449-A72E-46CA-BD3A-8CBCFB16C7FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetHospital.WebApi", "InternetHospital.WebApi\InternetHospital.WebApi.csproj", "{7361DB0D-7314-4205-A524-056CDEFD861B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternetHospital.WebApi", "InternetHospital.WebApi\InternetHospital.WebApi.csproj", "{7361DB0D-7314-4205-A524-056CDEFD861B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
