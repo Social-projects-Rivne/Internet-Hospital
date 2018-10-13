@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './Components/Authorization/sign-up/sign-up.component';
-import { SignInComponent } from './Components/Authorization/sign-in/sign-in.component';
+import { LoginformComponent } from './Components/Authorization/sign-in/loginform.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { MaterialModule } from './Modules/material/material.module';
@@ -18,7 +18,7 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
   declarations: [
     AppComponent,
     SignUpComponent,
-    SignInComponent,
+    LoginformComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
