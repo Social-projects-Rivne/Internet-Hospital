@@ -1,0 +1,1 @@
+export const configUrl = 'https://localhost:44390';

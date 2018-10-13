@@ -3,12 +3,13 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { User } from '../Models/User';
+import { configUrl } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
-  url = 'https://localhost:44390/api/Signup';
+  url = configUrl + '/api/Signup';
   httpOptions = { headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })};  
@@ -16,7 +17,6 @@ export class AuthorizationService {
   constructor(private http: HttpClient) { }
 
   form: FormGroup = new FormGroup({
-    Id: new FormControl(null),
     UserName: new FormControl('', Validators.required),
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
@@ -27,7 +27,6 @@ export class AuthorizationService {
 
   initializeFormGroup() {
     this.form.setValue({
-      Id: null,
       UserName: '',
       Email: '',
       Password: '',

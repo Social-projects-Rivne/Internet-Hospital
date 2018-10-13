@@ -1,10 +1,7 @@
-.normal-form {
-    display: flex;
-    flex-direction: column;
-    background-origin: padding-box;
-    padding: 10px;
-    width:50%;
-    min-width: 320px;
-    margin: auto;
-  }
+.add-bottom-padding {
+    padding-bottom: 10px;
+}
 
+mat-radio-group mat-radio-button {
+    margin-left: 5px;
+}
