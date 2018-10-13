@@ -1,3 +1,41 @@
-<p>
-  sign-up works!
-</p>
+<form [formGroup]="service.form" #signUpForm="ngForm" class="normal-form" (ngSubmit)="onSubmit(signUpForm)">
+  <div class="controles-container">
+    <input type="hidden" name="Id" formControlName="Id">
+    <div class="controles-row">
+      <mat-form-field>
+        <input formControlName="UserName" matInput placeholder="Login*">
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+  </div>
+    <div class="controles-row">
+        <mat-form-field>
+          <input formControlName="Email" matInput placeholder="Email*">
+          <mat-error>Invalid email address.</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="controles-row">
+      <mat-form-field>
+        <input type="password" formControlName="Password" matInput placeholder="Password*">
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="controles-row">
+      <mat-form-field>
+        <input type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password*">
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="controles-row">
+      <mat-form-field>
+        <input formControlName="AddressFull" matInput placeholder="Address*">
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="controles-container">
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+        <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+      </div>
+    </div>
+  </div>
+</form>
