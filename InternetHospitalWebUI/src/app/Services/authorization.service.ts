@@ -3,13 +3,13 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { User } from '../Models/User';
-import { configUrl } from '../config';
+import { HOST_URL } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
-  url = configUrl + '/api/Signup';
+  url = HOST_URL + '/api/Signup';
   httpOptions = { headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })};  
@@ -21,7 +21,7 @@ export class AuthorizationService {
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
     ConfirmPassword: new FormControl('', Validators.required),
-    Role: new FormControl('Patient'),
+    Role: new FormControl(''),
     AddressFull: new FormControl('', Validators.required)
   });
 
@@ -38,7 +38,6 @@ export class AuthorizationService {
 
   postUser(user: User) {    
     var body = JSON.stringify(user);
-    console.log(body);
     return this.http.post<User>(this.url, body, this.httpOptions);
   }  
 }

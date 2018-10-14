@@ -1,1 +1,1 @@
-export const configUrl = 'https://localhost:44390';
+export const HOST_URL = 'https://localhost:44390';

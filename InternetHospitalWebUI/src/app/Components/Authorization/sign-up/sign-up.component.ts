@@ -17,12 +17,11 @@ export class SignUpComponent implements OnInit {
 
   onClear() {
     this.service.form.reset();
-    this.service.initializeFormGroup();
   }
 
   onSubmit(form: NgForm) {
     if(this.service.form.valid) {
-      this.service.postUser(form.value).subscribe(res => console.log(res));
+      this.service.postUser(form.value);
       this.service.form.reset();
       this.service.initializeFormGroup();
     }

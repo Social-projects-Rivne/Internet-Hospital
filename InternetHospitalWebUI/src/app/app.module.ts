@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Modules/material/material.module';
-import { RoutingModule, routingComponents } from './Modules/routing/routing.module';
+import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
+    ROUTING_COMPONENTS,
     HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
