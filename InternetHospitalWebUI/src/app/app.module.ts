@@ -13,6 +13,7 @@ import { AuthorizationService } from './Services/authorization.service';
 import { HomeComponent } from './Components/Home/home/home.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
+import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
     FooterComponent,
     HomeComponent,
     HomeNewsComponent,
-    HomeNewsItemComponent
+    HomeNewsItemComponent,
+    SignOutComponent
   ],
   imports: [
     BrowserModule,
