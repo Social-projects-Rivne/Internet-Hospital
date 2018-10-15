@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 //import {FormControl, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'loginform',
-  templateUrl: './loginform.component.html',
-  styleUrls: ['./loginform.component.css']
+  selector: 'SignInComponent',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
-export class LoginformComponent implements OnInit {
+export class SignInComponent implements OnInit {
   
   hide = true;
 
