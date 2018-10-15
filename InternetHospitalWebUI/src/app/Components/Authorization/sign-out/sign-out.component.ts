@@ -14,6 +14,5 @@ export class SignOutComponent implements OnInit {
 
   signOut() {
     localStorage.removeItem('currentUser');
-    //router.navigateByUrl("");
   }
 }
