@@ -25,23 +25,21 @@ namespace InternetHospital.WebApi
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddCors(); //for enable CROS
+            services.AddCors();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(opt =>
             {
-                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("InternetHospital.WebApi"));
+                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),m=>m.MigrationsAssembly("InternetHospital.WebApi"));
             });
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -53,8 +51,7 @@ namespace InternetHospital.WebApi
                 app.UseHsts();
             }
 
-
-            app.UseCors(options => // for enable CROS
+            app.UseCors(options => 
             options
             .AllowAnyOrigin()
             .AllowAnyMethod()

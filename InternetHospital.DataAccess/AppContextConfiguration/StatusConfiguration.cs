@@ -8,12 +8,17 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public void Configure(EntityTypeBuilder<Status> builder)
         {
+            const string BANNED = "Banned";
+            const string NEW = "New";
+            const string APPROVED = "Approved";
+            const string NOT_APPROVED = "Not approved";
+
             builder.HasData(new Status[]
             {
-                new Status { Id = 1, Name = "Banned", Description = "Banned user!"},
-                new Status { Id = 2, Name = "New", Description = "New user!"},
-                new Status { Id = 3, Name = "Approved", Description = "Approved user!"},
-                new Status { Id = 4, Name = "Not Approved", Description = "Not approved user!"}
+                new Status { Id = 1, Name = BANNED, Description = "Banned user!"},
+                new Status { Id = 2, Name = NEW, Description = "New user!"},
+                new Status { Id = 3, Name = APPROVED, Description = "Approved user!"},
+                new Status { Id = 4, Name = NOT_APPROVED, Description = "Not approved user!"}
             });
         }
     }

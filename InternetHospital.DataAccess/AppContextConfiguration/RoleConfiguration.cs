@@ -9,29 +9,28 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
 {
     public class RoleConfiguration
     {
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager)
+        public static async Task InitializeAsync(RoleManager<IdentityRole<int>> roleManager)
         {
-            string Patient = "Patient";
-            string Doctor = "Doctor";
-            string Moderator = "Moderator";
-            string Admin = "Admin";
-
+            const string PATIENT = "Patient";
+            const string DOCTOR = "Doctor";
+            const string MODERATOR = "Moderator";
+            const string ADMIN = "Admin";
          
-            if (await roleManager.FindByNameAsync(Patient) == null)
+            if (await roleManager.FindByNameAsync(PATIENT) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(Patient));
+                await roleManager.CreateAsync(new IdentityRole<int>(PATIENT));
             }
-            if (await roleManager.FindByNameAsync(Doctor) == null)
+            if (await roleManager.FindByNameAsync(DOCTOR) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(Doctor));
+                await roleManager.CreateAsync(new IdentityRole<int>(DOCTOR));
             }
-            if (await roleManager.FindByNameAsync(Moderator) == null)
+            if (await roleManager.FindByNameAsync(MODERATOR) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(Moderator));
+                await roleManager.CreateAsync(new IdentityRole<int>(MODERATOR));
             }
-            if (await roleManager.FindByNameAsync(Admin) == null)
+            if (await roleManager.FindByNameAsync(ADMIN) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(Admin));
+                await roleManager.CreateAsync(new IdentityRole<int>(ADMIN));
             }
         }
     }

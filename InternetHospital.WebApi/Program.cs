@@ -20,17 +20,14 @@ namespace InternetHospital.WebApi
         {
             var host = CreateWebHostBuilder(args).Build();
 
-
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
                 {
-
-                    var userManager = services.GetRequiredService<UserManager<User>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole<int>>>();
 
-                    await RoleConfiguration.InitializeAsync(userManager, roleManager);
+                    await RoleConfiguration.InitializeAsync(roleManager);
                 }
                 catch (InvalidOperationException ex)
                 {

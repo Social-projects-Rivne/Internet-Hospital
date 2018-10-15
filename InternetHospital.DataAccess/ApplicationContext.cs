@@ -19,6 +19,7 @@ namespace InternetHospital.DataAccess
         {
            
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new DoctorConfiguration());

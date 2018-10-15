@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20181015131010_Initial")]
+    [Migration("20181015170413_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace InternetHospital.WebApi.Migrations
                         new { Id = 1, Description = "Banned user!", Name = "Banned" },
                         new { Id = 2, Description = "New user!", Name = "New" },
                         new { Id = 3, Description = "Approved user!", Name = "Approved" },
-                        new { Id = 4, Description = "Not approved user!", Name = "Not Approved" }
+                        new { Id = 4, Description = "Not approved user!", Name = "Not approved" }
                     );
                 });
 
@@ -124,7 +124,7 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<string>("AvatarURL");
 
-                    b.Property<DateTime?>("BirthDay");
+                    b.Property<DateTime?>("BirthDate");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

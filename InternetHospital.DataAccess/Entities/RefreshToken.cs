@@ -8,8 +8,8 @@ namespace InternetHospital.DataAccess.Entities
         public string Token { get; set; }
         public DateTime ExpiresDate { get; set; }
         public bool Revoked { get; set; }
+        public int UserId { get; set; }
 
         public virtual User User { get; set; }
-        public int UserId { get; set; }
     }
 }

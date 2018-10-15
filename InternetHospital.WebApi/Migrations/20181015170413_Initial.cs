@@ -96,7 +96,7 @@ namespace InternetHospital.WebApi.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     SecondName = table.Column<string>(nullable: true),
                     ThirdName = table.Column<string>(nullable: true),
-                    BirthDay = table.Column<DateTime>(nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
                     AvatarURL = table.Column<string>(nullable: true),
                     PassportURL = table.Column<string>(nullable: true)
@@ -275,7 +275,7 @@ namespace InternetHospital.WebApi.Migrations
                     { 1, "Banned user!", "Banned" },
                     { 2, "New user!", "New" },
                     { 3, "Approved user!", "Approved" },
-                    { 4, "Not approved user!", "Not Approved" }
+                    { 4, "Not approved user!", "Not approved" }
                 });
 
             migrationBuilder.CreateIndex(
