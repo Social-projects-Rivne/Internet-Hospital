@@ -11,6 +11,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+//--
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -28,7 +30,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     MatIconModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    BrowserAnimationsModule
   ],
   declarations: [],
   exports: [
@@ -45,7 +48,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     MatIconModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    BrowserAnimationsModule
   ]
 })
 export class MaterialModule { }
