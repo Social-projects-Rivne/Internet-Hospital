@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AuthorizationService } from '../../../Services/authorization.service';
+import { RegistrationService } from '../../../Services/registration.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +10,7 @@ import { AuthorizationService } from '../../../Services/authorization.service';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private service: AuthorizationService) { }
+  constructor(private service: RegistrationService) { }
 
   ngOnInit() {
   }

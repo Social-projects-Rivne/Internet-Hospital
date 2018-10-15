@@ -8,7 +8,7 @@ import { HOST_URL } from '../config';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizationService {
+export class RegistrationService {
   url = HOST_URL + '/api/Signup';
   httpOptions = { headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -21,8 +21,7 @@ export class AuthorizationService {
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
     ConfirmPassword: new FormControl('', Validators.required),
-    Role: new FormControl(''),
-    AddressFull: new FormControl('', Validators.required)
+    Role: new FormControl('', Validators.required),
   });
 
   initializeFormGroup() {
@@ -32,7 +31,6 @@ export class AuthorizationService {
       Password: '',
       ConfirmPassword: '',
       Role: '',
-      AddressFull: '',
     });
   }
 
