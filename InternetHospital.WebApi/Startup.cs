@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetHospital.DataAccess;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -21,16 +25,21 @@ namespace InternetHospital.WebApi
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddCors(); //for enable CROS
-        }
+            services.AddCors();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(opt =>
+            {
+                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),m=>m.MigrationsAssembly("InternetHospital.WebApi"));
+            });
+            services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+        }
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -42,15 +51,16 @@ namespace InternetHospital.WebApi
                 app.UseHsts();
             }
 
-
-            app.UseCors(options => // for enable CROS
+            app.UseCors(options => 
             options
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

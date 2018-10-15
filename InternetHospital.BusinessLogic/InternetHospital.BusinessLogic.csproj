@@ -2,13 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
     <Folder Include="Validation\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InternetHospital.DataAccess\InternetHospital.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
