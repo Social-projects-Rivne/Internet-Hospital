@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using InternetHospital.BusinessLogic.Interfaces;
+using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -36,8 +40,16 @@ namespace InternetHospital.WebApi
             {
                 opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),m=>m.MigrationsAssembly("InternetHospital.WebApi"));
             });
-            services.AddIdentity<User, IdentityRole<int>>()
-                .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole<int>>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.SignIn.RequireConfirmedEmail = true;
+                config.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<ApplicationContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -61,6 +73,12 @@ namespace InternetHospital.WebApi
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<UserRegistrationModel, User>();
+
+            });
 
             app.UseMvc();
         }
