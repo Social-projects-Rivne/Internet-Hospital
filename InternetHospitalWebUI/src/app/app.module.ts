@@ -11,6 +11,7 @@ import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
+import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
     HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
-    HomeNewsItemComponent
+    HomeNewsItemComponent,
+    SignOutComponent
   ],
   imports: [
     BrowserModule,
