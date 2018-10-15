@@ -8,24 +8,10 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public void Configure(EntityTypeBuilder<Doctor> builder)
         {
-            builder.HasKey(d => d.PatientId);
-            builder.Property(d => d.PatientId).ValueGeneratedNever();
+            builder.HasKey(d => d.UserId);
+            builder.Property(d => d.UserId).ValueGeneratedNever();
 
             builder.Property(d => d.IsApproved).HasDefaultValue(false);
-        
-            builder.HasOne(d => d.Address).WithOne(a => a.Doctor).HasForeignKey<Doctor>("WorkingAddressId");
-
-            //builder.HasData(new Doctor[]
-            //{
-            //    new Doctor {
-            //        PatientId = 3,
-            //        IsApproved = true,
-            //        LicenseURL = $"/Licenses/License{3}",
-            //        DoctorsInfo = "SuperPuperDoctor",
-            //        SpecializationId = 1,
-            //        WorkingAddressId = 2
-            //    }
-            //});
         }
     }
 }

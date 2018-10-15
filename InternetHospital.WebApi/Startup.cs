@@ -35,7 +35,7 @@ namespace InternetHospital.WebApi
 
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(opt =>
             {
-                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("InternetHospital.WebApi"));
             });
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
