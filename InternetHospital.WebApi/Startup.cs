@@ -66,8 +66,8 @@ namespace InternetHospital.WebApi
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = appSettings.JwtIssuer,
                     ClockSkew = TimeSpan.Zero,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(appSettings.JwtKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.
+                    UTF8.GetBytes(appSettings.JwtKey))
             };
         });
             services.AddScoped<IMailService, MailService>();
