@@ -7,15 +7,15 @@ export function compareValidator(controlNameTocompare: string): ValidatorFn {
     if (control.value === null || control.value.length === 0) {
       return null;
     }
-    const controlToCompare = control.root.get(controlNameTocompare);
-    if (controlToCompare) {
-      const SUBSCRIPTION: Subscription = controlToCompare.valueChanges.subscribe(() => {
+    const CONTROL_TO_COMPARE = control.root.get(controlNameTocompare);
+    if (CONTROL_TO_COMPARE) {
+      const SUBSCRIPTION: Subscription = CONTROL_TO_COMPARE.valueChanges.subscribe(() => {
         control.updateValueAndValidity();
         SUBSCRIPTION.unsubscribe();
       });
     }
 
-    return controlToCompare && controlToCompare.value !== control.value ? { 'compare': true } : null;
+    return CONTROL_TO_COMPARE && CONTROL_TO_COMPARE.value !== control.value ? { 'compare': true } : null;
   }
 };
 
