@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.DataAccess;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore;
 
 namespace InternetHospital.WebApi.controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class SignupController : ControllerBase
@@ -67,7 +63,6 @@ namespace InternetHospital.WebApi.controllers
                     {
                         return BadRequest("Role type doesn't match conditions! must be only a Doctor or a patient");
                     }
-
                     await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
                                  $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
                     return Ok("Your account is created. Confirm your account on email!");
@@ -91,13 +86,11 @@ namespace InternetHospital.WebApi.controllers
             {
                 return BadRequest("lost userId or token!");
             }
-
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return BadRequest("Not such users in DB to confirm");
             }
-
             var result = await _userManager.ConfirmEmailAsync(user, code);
 
             return Ok("Email Confirmed!");
