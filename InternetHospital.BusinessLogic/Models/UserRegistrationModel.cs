@@ -19,6 +19,5 @@ namespace InternetHospital.BusinessLogic.Models
         [Compare("Password", ErrorMessage = "Passwords are different")]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,24}$", ErrorMessage = "Password must be at least 8 characters and contain digits, upper and lower case and non alphanumeric symbols")]
         public string ConfirmPassword { get; set; }
-
     }
 }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -115,20 +114,5 @@ namespace InternetHospital.WebApi.controllers
             );
             return callbackUrl;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 }

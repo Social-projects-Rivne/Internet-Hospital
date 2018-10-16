@@ -22,7 +22,6 @@ namespace InternetHospital.BusinessLogic.services
             {
                 Text = msg
             };
-
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.gmail.com", 587, false);
@@ -30,7 +29,6 @@ namespace InternetHospital.BusinessLogic.services
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
-
         }
     }
 }

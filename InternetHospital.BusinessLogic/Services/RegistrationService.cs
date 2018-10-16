@@ -44,8 +44,6 @@ namespace InternetHospital.BusinessLogic.services
             return user;
         }
 
-        
-
         public async Task<User> PatientRegistration(UserRegistrationModel vm)
         {
             var user = await UserRegistration(vm);
@@ -76,8 +74,6 @@ namespace InternetHospital.BusinessLogic.services
             }
 
             return null;
-            //throw new Exception("User hasn't created!");
         }
-
     }
 }

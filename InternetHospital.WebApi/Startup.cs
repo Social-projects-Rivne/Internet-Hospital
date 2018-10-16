@@ -77,7 +77,6 @@ namespace InternetHospital.WebApi
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserRegistrationModel, User>();
-
             });
 
             app.UseMvc();
