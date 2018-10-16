@@ -3,19 +3,19 @@ import { Validator, AbstractControl, ValidationErrors, NG_VALIDATORS, ValidatorF
 import { Subscription } from "rxjs";
 
 export function compareValidator(controlNameTocompare: string): ValidatorFn {
-  return (c: AbstractControl): ValidationErrors | null => {
-    if (c.value === null || c.value.length === 0) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (control.value === null || control.value.length === 0) {
       return null;
     }
-    const controlToCompare = c.root.get(controlNameTocompare);
+    const controlToCompare = control.root.get(controlNameTocompare);
     if (controlToCompare) {
-      const subscription: Subscription = controlToCompare.valueChanges.subscribe(() => {
-        c.updateValueAndValidity();
-        subscription.unsubscribe();
+      const SUBSCRIPTION: Subscription = controlToCompare.valueChanges.subscribe(() => {
+        control.updateValueAndValidity();
+        SUBSCRIPTION.unsubscribe();
       });
     }
 
-    return controlToCompare && controlToCompare.value !== c.value ? { 'compare': true } : null;
+    return controlToCompare && controlToCompare.value !== control.value ? { 'compare': true } : null;
   }
 };
 
@@ -26,18 +26,7 @@ export function compareValidator(controlNameTocompare: string): ValidatorFn {
 export class CompareValidatorDirective implements Validator {
   @Input('compare') controlNameToCompare: string;
 
-  validate(c: AbstractControl): ValidationErrors | null {
-    if (c.value === null || c.value.length === 0) {
-      return null;
-    }
-    const controlToCompare = c.root.get(this.controlNameToCompare);
-    if (controlToCompare) {
-      const subscription: Subscription = controlToCompare.valueChanges.subscribe(() => {
-        c.updateValueAndValidity();
-        subscription.unsubscribe();
-      });
-    }
-
-    return controlToCompare && controlToCompare.value !== c.value ? { 'compare': true } : null;
+  validate(control: AbstractControl): ValidationErrors | null {
+   return compareValidator(this.controlNameToCompare)(control);
   }
 }
