@@ -34,7 +34,8 @@ namespace InternetHospital.WebApi.Controllers
         public async Task<ActionResult> SignIn(LoginForm form)
         {
             var user = await _userManager.FindByNameAsync(form.UserName);
-            if (user != null)            {
+            if (user != null)
+            {
                 if (!await _userManager.IsEmailConfirmedAsync(user))
                 {
                     return NotFound(new { message = "User not found or not confirmed" });
