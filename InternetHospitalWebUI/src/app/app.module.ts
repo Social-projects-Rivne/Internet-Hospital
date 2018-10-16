@@ -12,6 +12,7 @@ import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
 import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.component';
+import { CompareValidatorDirective } from './directives/compare-validator.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.c
     FooterComponent,
     HomeNewsComponent,
     HomeNewsItemComponent,
-    SignOutComponent
+    SignOutComponent,
+    CompareValidatorDirective
   ],
   imports: [
     BrowserModule,
