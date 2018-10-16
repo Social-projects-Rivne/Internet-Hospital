@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -12,6 +12,11 @@ import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
 import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.component';
+import { SignUpComponent } from './Components/Authorization/sign-up/sign-up.component';
+import { SignInComponent } from './Components/Authorization/sign-in/sign-in.component';
+import { AuthenticationService } from './Services/authentication.service';
+import { InterceptorService  } from './Services/interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +26,9 @@ import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.c
     FooterComponent,
     HomeNewsComponent,
     HomeNewsItemComponent,
-    SignOutComponent
+    SignOutComponent,
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +37,9 @@ import { SignOutComponent } from './Components/Authorization/sign-out/sign-out.c
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RoutingModule,
-    HttpClientModule 
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

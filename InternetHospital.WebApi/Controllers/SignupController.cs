@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.DataAccess;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore;
 
 namespace InternetHospital.WebApi.controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class SignupController : ControllerBase
