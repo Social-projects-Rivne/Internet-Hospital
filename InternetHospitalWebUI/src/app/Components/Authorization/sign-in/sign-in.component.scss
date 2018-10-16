@@ -1,0 +1,45 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    background-origin: padding-box;
+    padding: 10px;
+    width:320px;
+    min-width: 320px;
+    margin: auto;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+  
+  #CancelBtn{
+    margin-right: 10px;
+  }
+  .RightFloat{
+    float: right;
+  }
+  #LoginBtn{
+    margin-left: 10px;
+  }
+  #mat-form-fieldStrech{
+    width: 100%;
+  }
+  #WarnBtn{
+    margin-top: -20px;
+    font-size: 14px;
+    float: right;
+  }
+  // #FatherForm{
+  //   position: relative;
+  //   float:center;
+  //   margin-top: 14%;
+  // }
