@@ -63,7 +63,6 @@ namespace InternetHospital.WebApi.controllers
                     {
                         return BadRequest("Role type doesn't match conditions! must be only a Doctor or a patient");
                     }
-
                     await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
                                  $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
                     return Ok("Your account is created. Confirm your account on email!");
@@ -87,13 +86,11 @@ namespace InternetHospital.WebApi.controllers
             {
                 return BadRequest("lost userId or token!");
             }
-
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return BadRequest("Not such users in DB to confirm");
             }
-
             var result = await _userManager.ConfirmEmailAsync(user, code);
 
             return Ok("Email Confirmed!");

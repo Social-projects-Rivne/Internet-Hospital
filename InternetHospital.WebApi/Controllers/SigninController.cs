@@ -33,21 +33,17 @@ namespace InternetHospital.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult> SignIn(LoginForm form)
         {
-
             var user = await _userManager.FindByNameAsync(form.UserName);
-            if (user != null)
-            {
+            if (user != null)            {
                 if (!await _userManager.IsEmailConfirmedAsync(user))
                 {
                     return NotFound(new { message = "User not found or not confirmed" });
                 }
             }
-
             if (!await _userManager.CheckPasswordAsync(user, form.Password))
             {
                 return NotFound(new { message = "Wrong password" });
             }
-
             return Ok(new
             {
                 access_token = new JwtSecurityTokenHandler().WriteToken(await tokenService.GenerateAccessToken(user)),
@@ -62,13 +58,11 @@ namespace InternetHospital.WebApi.Controllers
         public async Task<IActionResult> Refresh(string refresh)
         {
             var refreshedToken = await tokenService.RefreshTokinValidation(refresh);
-
             if (refreshedToken == null)
+            {
                 return BadRequest("invalid_grant");
-
-
+            }
             var user = await _userManager.FindByIdAsync(refreshedToken.UserId.ToString());
-
             return Ok(new
             {
                 access_token = new JwtSecurityTokenHandler().WriteToken(await tokenService.GenerateAccessToken(user)),
@@ -76,7 +70,6 @@ namespace InternetHospital.WebApi.Controllers
                 user_id = user.Id,
                 user_email = user.FirstName
             });
-        }
-       
+        }       
     }
 }

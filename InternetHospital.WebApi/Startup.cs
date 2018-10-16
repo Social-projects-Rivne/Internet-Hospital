@@ -37,8 +37,6 @@ namespace InternetHospital.WebApi
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-
-
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(opt =>
             {
                 opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), m => m.MigrationsAssembly("InternetHospital.WebApi"));
@@ -50,31 +48,28 @@ namespace InternetHospital.WebApi
                 config.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<ApplicationContext>()
             .AddDefaultTokenProviders();
-
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;                    
                 })
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
+                .AddJwtBearer(options =>
             {
-                ValidateIssuer = true,
-                ValidateAudience = false,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = appSettings.JwtIssuer,
-                ClockSkew = TimeSpan.Zero,
-                IssuerSigningKey = new SymmetricSecurityKey(
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = appSettings.JwtIssuer,
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(appSettings.JwtKey))
             };
         });
-
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
         }
@@ -89,24 +84,17 @@ namespace InternetHospital.WebApi
             {
                 app.UseHsts();
             }
-
             app.UseCors(options =>
             options
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
-
-            //app.UseHttpsRedirection();
-
-            app.UseAuthentication();
-
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+                app.UseAuthentication();
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserRegistrationModel, User>();
-
             });
-
             app.UseMvc();
         }
     }
