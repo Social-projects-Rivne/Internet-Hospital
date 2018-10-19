@@ -15,9 +15,11 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         {
             try
             {
-                string json = File.ReadAllText(@"..\InternetHospital.DataAccess\AppContextConfiguration\RoleConfigurationJSON.json");
+                const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\RoleConfigurationJSON.json";
 
-                var jsonRoles = JArray.Parse(json);
+                string jsonString = File.ReadAllText(PATH);
+
+                var jsonRoles = JArray.Parse(jsonString);
 
                 string role = null;
 
@@ -27,7 +29,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
                     role = item.Name;
                     if (await roleManager.FindByNameAsync(role) == null)
                     {
-                        await roleManager.CreateAsync(new IdentityRole<int>(role.ToString()));
+                        await roleManager.CreateAsync(new IdentityRole<int>(role));
                     }
                 }
             }

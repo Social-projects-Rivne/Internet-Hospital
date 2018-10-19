@@ -11,7 +11,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public void Configure(EntityTypeBuilder<Status> builder)
         {
-            string jsonString = File.ReadAllText(@"..\InternetHospital.DataAccess\AppContextConfiguration\StatusConfigurationJSON.json");
+            const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\StatusConfigurationJSON.json";
+
+            string jsonString = File.ReadAllText(PATH);
 
             var jsonStatuses = JArray.Parse(jsonString);
 
