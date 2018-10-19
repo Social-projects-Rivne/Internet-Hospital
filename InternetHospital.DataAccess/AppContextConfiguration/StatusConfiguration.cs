@@ -12,12 +12,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         public void Configure(EntityTypeBuilder<Status> builder)
         {
             const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\StatusConfigurationJSON.json";
-
             string jsonString = File.ReadAllText(PATH);
-
-            var jsonStatuses = JArray.Parse(jsonString);
-
             var initialStatuses = new List<Status>();
+            var jsonStatuses = JArray.Parse(jsonString);
 
             foreach (dynamic item in jsonStatuses)
             {

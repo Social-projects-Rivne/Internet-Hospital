@@ -16,12 +16,9 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
             try
             {
                 const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\RoleConfigurationJSON.json";
-
                 string jsonString = File.ReadAllText(PATH);
-
-                var jsonRoles = JArray.Parse(jsonString);
-
                 string role = null;
+                var jsonRoles = JArray.Parse(jsonString);
 
                 foreach (dynamic item in jsonRoles)
                 {

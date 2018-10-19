@@ -16,9 +16,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
             try
             {
                 const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\UserConfigurationJSON.json";
-
                 string jsonString = File.ReadAllText(PATH);
-
                 var jsonUsers = JArray.Parse(jsonString);
 
                 //It's necessary because i had an exception in runtime execution 
