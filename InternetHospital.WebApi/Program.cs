@@ -26,8 +26,10 @@ namespace InternetHospital.WebApi
                 try
                 {
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole<int>>>();
+                    var userManager = services.GetRequiredService<UserManager<User>>();
 
                     await RoleConfiguration.InitializeAsync(roleManager);
+                    await UserConfiguration.InitializeAsync(userManager);
                 }
                 catch (InvalidOperationException ex)
                 {

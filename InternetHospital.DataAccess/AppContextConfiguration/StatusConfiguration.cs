@@ -1,6 +1,9 @@
 ﻿using InternetHospital.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.IO;
 
 namespace InternetHospital.DataAccess.AppContextConfiguration
 {
@@ -8,18 +11,18 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public void Configure(EntityTypeBuilder<Status> builder)
         {
-            const string BANNED = "Banned";
-            const string NEW = "New";
-            const string APPROVED = "Approved";
-            const string NOT_APPROVED = "Not approved";
+            string jsonString = File.ReadAllText(@"..\InternetHospital.DataAccess\AppContextConfiguration\StatusConfigurationJSON.json");
 
-            builder.HasData(new Status[]
+            var jsonStatuses = JArray.Parse(jsonString);
+
+            var initialStatuses = new List<Status>();
+
+            foreach (dynamic item in jsonStatuses)
             {
-                new Status { Id = 1, Name = BANNED, Description = "Banned user!"},
-                new Status { Id = 2, Name = NEW, Description = "New user!"},
-                new Status { Id = 3, Name = APPROVED, Description = "Approved user!"},
-                new Status { Id = 4, Name = NOT_APPROVED, Description = "Not approved user!"}
-            });
+                initialStatuses.Add(new Status { Id = item.Id, Name = item.Name, Description = item.Description });
+            }
+
+            builder.HasData(initialStatuses.ToArray());
         }
     }
 }

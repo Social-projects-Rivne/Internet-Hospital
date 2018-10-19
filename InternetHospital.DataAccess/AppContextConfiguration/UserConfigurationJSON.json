@@ -1,0 +1,39 @@
+[
+  {
+    "Email": "newuser@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "NewUserFirstName",
+    "SecondName": "NewUserSecondName",
+    "ThirdName": "NewUserThirdName",
+    "StatusId": "2",
+    "Role": "Patient"
+  },
+  {
+    "Email": "firstdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "FirstDoctorFirstName",
+    "SecondName": "FirstDoctorSecondName",
+    "ThirdName": "FirstDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am first doctor in our system!",
+      "Address": "Ukraine, Rivne, Soborna 120",
+      "IsApproved": "true"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "seconddoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "SecondDoctorFirstName",
+    "SecondName": "SecondDoctorSecondName",
+    "ThirdName": "SecondDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am second doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true"
+    },
+    "Role": "Doctor"
+  }
+]
