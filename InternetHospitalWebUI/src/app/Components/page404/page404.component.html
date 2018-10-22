@@ -5,18 +5,13 @@
           <h1>4<span id="Zero">0</span>4</h1>
           <h2>oops... </h2>
           <h3>this page is not found</h3>
-          <h4 id="GoHome"><a id="GoHome" mat-button color="warn" href="../Home/home/home.component.html">return to home page?</a></h4>
+          <h4 id="GoHome"><a id="GoHome" mat-button color="warn" [routerLink]="['']">return to home page?</a></h4>
       </div>     
     </mat-grid-tile>
     <mat-grid-tile id=right>
-      <div>
-        <br><h4>footer content</h4><br>
-        <h4>doctor's list </h4><br>
-        <h4>header</h4><br>
-      </div>
+        <h4>Footer content should be here</h4>
     </mat-grid-tile>
   </mat-grid-list>
   <div class="row">
-      <!-- <app-footer></app-footer> -->
   </div>
 </div>
