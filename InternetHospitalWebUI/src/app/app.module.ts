@@ -17,6 +17,7 @@ import { SignInComponent } from './Components/Authorization/sign-in/sign-in.comp
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService  } from './Services/interceptor.service';
 import { CompareValidatorDirective } from './directives/compare-validator.directive';
+import { Page404Component } from './Components/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CompareValidatorDirective } from './directives/compare-validator.direct
     SignUpComponent,
     SignInComponent,
     CompareValidatorDirective,
+    Page404Component,
   ],
   imports: [
     BrowserModule,
