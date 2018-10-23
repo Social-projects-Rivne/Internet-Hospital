@@ -1,0 +1,161 @@
+[
+  {
+    "Email": "newuser@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "NewUserFirstName",
+    "SecondName": "NewUserSecondName",
+    "ThirdName": "NewUserThirdName",
+    "StatusId": "2",
+    "Role": "Patient"
+  },
+  {
+    "Email": "firstdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "FirstDoctorFirstName",
+    "SecondName": "FirstDoctorSecondName",
+    "ThirdName": "FirstDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am first doctor in our system!",
+      "Address": "Ukraine, Rivne, Soborna 120",
+      "IsApproved": "true",
+      "SpecializationId": "1"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "seconddoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "SecondDoctorFirstName",
+    "SecondName": "SecondDoctorSecondName",
+    "ThirdName": "SecondDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am second doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "2"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "thirddoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "ThirdDoctorFirstName",
+    "SecondName": "ThirdDoctorSecondName",
+    "ThirdName": "ThirdDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am third doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "3"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "fourthdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "FourthDoctorFirstName",
+    "SecondName": "FourthDoctorSecondName",
+    "ThirdName": "FourthDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am fourth doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "4"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "fifthdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "FifthDoctorFirstName",
+    "SecondName": "FifthDoctorSecondName",
+    "ThirdName": "FifthDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am fifth doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "5"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "sixthdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "SixthDoctorFirstName",
+    "SecondName": "SixthDoctorSecondName",
+    "ThirdName": "SixthDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am sixth doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "6"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "seventhdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "SeventhDoctorFirstName",
+    "SecondName": "SeventhDoctorSecondName",
+    "ThirdName": "SeventhDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am seventh doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "7"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "eighthdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "EighthDoctorFirstName",
+    "SecondName": "EighthDoctorSecondName",
+    "ThirdName": "EighthDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am eighth doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "8"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "ninthdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "NinthDoctorFirstName",
+    "SecondName": "NinthDoctorSecondName",
+    "ThirdName": "NinthDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am ninth doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "9"
+    },
+    "Role": "Doctor"
+  },
+  {
+    "Email": "tenthdoctor@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "TenthDoctorFirstName",
+    "SecondName": "TenthDoctorSecondName",
+    "ThirdName": "TenthDoctorThirdName",
+    "StatusId": "3",
+    "Doctor": {
+      "DoctorsInfo": "Hello i am tenth doctor in our system!",
+      "Address": "Ukraine, Lviv, Prospekt peremogi",
+      "IsApproved": "true",
+      "SpecializationId": "10"
+    },
+    "Role": "Doctor"
+  }
+]

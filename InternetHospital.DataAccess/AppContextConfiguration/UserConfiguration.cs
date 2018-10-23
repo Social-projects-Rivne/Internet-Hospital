@@ -1,4 +1,5 @@
-﻿using InternetHospital.DataAccess.Entities;
+﻿using InternetHospital.DataAccess.AppContextConfiguration.Helpers;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,62 +16,79 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         {
             try
             {
-                const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\UserConfigurationJSON.json";
-                string jsonString = File.ReadAllText(PATH);
+                string jsonString = File.ReadAllText(UrlHelper.JsonFilesURL + UrlHelper.UserConfigJSON);
                 var jsonUsers = JArray.Parse(jsonString);
 
                 //It's necessary because i had an exception in runtime execution 
-                string Email = null;
-                string FirstName = null;
-                string SecondName = null;
-                string ThirdName = null;
-                dynamic Doctor = null;
-                string Password = null;
-                string Role = null;
-                string StatusId = null;
+                string email = null;
+                string firstName = null;
+                string secondName = null;
+                string thirdName = null;
+                dynamic doctor = null;
+                string password = null;
+                string role = null;
+                string statusId = null;
 
                 foreach (dynamic item in jsonUsers)
                 {
-                    Email = item.Email;
-                    if (await userManager.FindByNameAsync(Email) == null)
+                    email = item.Email;
+                    if (await userManager.FindByNameAsync(email) == null)
                     {
-                        FirstName = item.FirstName;
-                        SecondName = item.SecondName;
-                        ThirdName = item.ThirdName;
-                        StatusId = item.StatusId;
-                        Doctor = item.Doctor;
-                        Password = item.Password;
-                        Role = item.Role;
+                        firstName = item.FirstName;
+                        secondName = item.SecondName;
+                        thirdName = item.ThirdName;
+                        statusId = item.StatusId;
+                        doctor = item.Doctor;
+                        password = item.Password;
+                        role = item.Role;
 
-                        var user = new User {
-                            UserName = Email,
-                            Email = Email,
+                        if (!int.TryParse(statusId, out int stId))
+                        {
+                            throw new ApplicationException($"'StatusId' in UserConfigurationFile can`t be parsed to int! The value is {statusId}");
+                        }
+
+                        var user = new User
+                        {
+                            UserName = email,
+                            Email = email,
                             EmailConfirmed = true,
-                            FirstName = FirstName,
-                            SecondName = SecondName,
-                            ThirdName = ThirdName,
-                            StatusId = Int32.Parse(StatusId),
+                            FirstName = firstName,
+                            SecondName = secondName,
+                            ThirdName = thirdName,
+                            StatusId = stId,
                             SignUpTime = DateTime.Now,
                             LastStatusChangeTime = DateTime.Now
                         };
 
-                        if(Doctor != null)
+                        if (doctor != null)
                         {
-                            string DoctorsInfo = item.Doctor.DoctorsInfo;
-                            string Address = item.Doctor.Address;
-                            string IsApproved = item.Doctor.IsApproved;
+                            string doctorsInfo = item.Doctor.DoctorsInfo;
+                            string address = item.Doctor.Address;
+                            string isApproved = item.Doctor.IsApproved;
+                            string SpecializationId = item.Doctor.SpecializationId;
 
-                            user.Doctor = new Doctor {
-                                DoctorsInfo = DoctorsInfo,
-                                Address = Address,
-                                IsApproved = Boolean.Parse(IsApproved)
+                            if(!bool.TryParse(isApproved, out bool isAppr))
+                            {
+                                throw new ApplicationException($"'IsApproved' in UserConfigurationFile can`t be parsed to bool! The value is {isApproved}");
+                            }
+                            if (!int.TryParse(SpecializationId, out int specId))
+                            {
+                                throw new ApplicationException($"'SpecializationId' in UserConfigurationFile can`t be parsed to int! The value is {isApproved}");
+                            }
+
+                            user.Doctor = new Doctor
+                            {
+                                DoctorsInfo = doctorsInfo,
+                                Address = address,
+                                IsApproved = isAppr,
+                                SpecializationId = specId
                             };
                         }
 
-                        IdentityResult result = await userManager.CreateAsync(user, Password);
+                        IdentityResult result = await userManager.CreateAsync(user, password);
                         if (result.Succeeded)
                         {
-                            await userManager.AddToRoleAsync(user, Role);
+                            await userManager.AddToRoleAsync(user, role);
                         }
                     }
                 }
@@ -83,6 +101,11 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
             catch (IOException ex)
             {
                 Console.WriteLine($"Something wrong with file or path, its better to check them: {ex.Message}");
+                throw;
+            }
+            catch (ApplicationException ex)
+            {
+                Console.WriteLine($"Probably it`s something wrong with parsing jsonFiles: {ex.Message}");
                 throw;
             }
         }

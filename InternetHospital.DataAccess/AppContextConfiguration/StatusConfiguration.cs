@@ -1,4 +1,5 @@
-﻿using InternetHospital.DataAccess.Entities;
+﻿using InternetHospital.DataAccess.AppContextConfiguration.Helpers;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json.Linq;
@@ -11,8 +12,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public void Configure(EntityTypeBuilder<Status> builder)
         {
-            const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\StatusConfigurationJSON.json";
-            string jsonString = File.ReadAllText(PATH);
+            string jsonString = File.ReadAllText(UrlHelper.JsonFilesURL + UrlHelper.StatusConfigJSON);
             var initialStatuses = new List<Status>();
             var jsonStatuses = JArray.Parse(jsonString);
 

@@ -1,4 +1,5 @@
-﻿using InternetHospital.DataAccess.Entities;
+﻿using InternetHospital.DataAccess.AppContextConfiguration.Helpers;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,8 +16,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         {
             try
             {
-                const string PATH = @"..\InternetHospital.DataAccess\AppContextConfiguration\RoleConfigurationJSON.json";
-                string jsonString = File.ReadAllText(PATH);
+                string jsonString = File.ReadAllText(UrlHelper.JsonFilesURL + UrlHelper.RoleConfigJSON);
                 string role = null;
                 var jsonRoles = JArray.Parse(jsonString);
 
