@@ -65,13 +65,13 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
                             string doctorsInfo = item.Doctor.DoctorsInfo;
                             string address = item.Doctor.Address;
                             string isApproved = item.Doctor.IsApproved;
-                            string SpecializationId = item.Doctor.SpecializationId;
+                            string specializationId = item.Doctor.SpecializationId;
 
                             if(!bool.TryParse(isApproved, out bool isAppr))
                             {
                                 throw new ApplicationException($"'IsApproved' in UserConfigurationFile can`t be parsed to bool! The value is {isApproved}");
                             }
-                            if (!int.TryParse(SpecializationId, out int specId))
+                            if (!int.TryParse(specializationId, out int specId))
                             {
                                 throw new ApplicationException($"'SpecializationId' in UserConfigurationFile can`t be parsed to int! The value is {isApproved}");
                             }
