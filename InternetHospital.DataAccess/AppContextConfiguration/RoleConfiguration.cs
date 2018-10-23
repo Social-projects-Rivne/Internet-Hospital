@@ -1,7 +1,10 @@
-﻿using InternetHospital.DataAccess.Entities;
+﻿using InternetHospital.DataAccess.AppContextConfiguration.Helpers;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,26 +14,31 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public static async Task InitializeAsync(RoleManager<IdentityRole<int>> roleManager)
         {
-            const string PATIENT = "Patient";
-            const string DOCTOR = "Doctor";
-            const string MODERATOR = "Moderator";
-            const string ADMIN = "Admin";
-         
-            if (await roleManager.FindByNameAsync(PATIENT) == null)
+            try
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(PATIENT));
+                string jsonString = File.ReadAllText(UrlHelper.JsonFilesURL + UrlHelper.RoleConfigJSON);
+                string role = null;
+                var jsonRoles = JArray.Parse(jsonString);
+
+                foreach (dynamic item in jsonRoles)
+                {
+                    //It's necessary because i had an exception in runtime execution
+                    role = item.Name;
+                    if (await roleManager.FindByNameAsync(role) == null)
+                    {
+                        await roleManager.CreateAsync(new IdentityRole<int>(role));
+                    }
+                }
             }
-            if (await roleManager.FindByNameAsync(DOCTOR) == null)
+            catch (FileNotFoundException ex)
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(DOCTOR));
+                Console.WriteLine($"Check if file exist and path is correct: {ex.Message}");
+                throw;
             }
-            if (await roleManager.FindByNameAsync(MODERATOR) == null)
+            catch (IOException ex)
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(MODERATOR));
-            }
-            if (await roleManager.FindByNameAsync(ADMIN) == null)
-            {
-                await roleManager.CreateAsync(new IdentityRole<int>(ADMIN));
+                Console.WriteLine($"Something wrong with file or path, its better to check them: {ex.Message}");
+                throw;
             }
         }
     }

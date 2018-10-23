@@ -24,6 +24,7 @@ namespace InternetHospital.DataAccess
         {
             builder.ApplyConfiguration(new DoctorConfiguration());
             builder.ApplyConfiguration(new StatusConfiguration());
+            builder.ApplyConfiguration(new SpecializationConfiguration());
             base.OnModelCreating(builder);
         }
     }

@@ -1,0 +1,27 @@
+[
+  {
+    "Id": "1",
+    "Name": "Banned",
+    "Description": "Banned user who is violated our rules"
+  },
+  {
+    "Id": "2",
+    "Name": "New",
+    "Description": "New user who is registered in our system"
+  },
+  {
+    "Id": "3",
+    "Name": "Approved",
+    "Description": "Approved user with checked data"
+  },
+  {
+    "Id": "4",
+    "Name": "Not approved",
+    "Description": "Not approved user whose data was invalid"
+  },
+  {
+    "Id": "5",
+    "Name": "Deleted",
+    "Description": "Deleted user by Admin or Moderator"
+  }
+]

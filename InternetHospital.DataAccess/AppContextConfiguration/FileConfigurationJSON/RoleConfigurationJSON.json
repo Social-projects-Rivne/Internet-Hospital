@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "Patient"
+  },
+  {
+    "Name": "Doctor"
+  },
+  {
+    "Name": "Moderator"
+  },
+  {
+    "Name": "Admin"
+  }
+]
