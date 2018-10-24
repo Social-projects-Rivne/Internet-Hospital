@@ -38,11 +38,18 @@ export class SignUpComponent implements OnInit {
     reader.onload = (event: any) => {
       if(event.target.readyState === FileReader.DONE)
       {
+        if (this.validation.isImageFile(event.target.result) == false )
+        {
+          this.fileToUpload = null;
+          this.imageUrl = this.defaultImage;
+          // notification service will replace this alert in future
+          alert("Only image file is acceptable!");
+        }
         var img = new Image();
         img.src = event.target.result;
         img.onload = () =>
         {
-            if(this.validation.hasImageValidSize(MAX_HEIGHT, MIN_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
+            if(this.validation.hasImageValidSize(MAX_HEIGHT, MAX_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
             {
               this.imageUrl = event.target.result;
               this.isImageValid = true;  
@@ -54,6 +61,7 @@ export class SignUpComponent implements OnInit {
                 this.imageUrl = this.defaultImage;
                 this.isImageValid = false;
 
+              // notification service will replace this alert in future
               alert("Image is invalid! It might be too big or too small.");
             }
         }

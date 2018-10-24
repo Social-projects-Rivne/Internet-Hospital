@@ -35,6 +35,9 @@ namespace InternetHospital.WebApi.controllers
         [HttpPost]
         public async Task<ActionResult> Register(IFormFile formFile)
         {
+            const string PATIENT = "Patient";
+            const string DOCTOR = "Doctor";
+
             var file = Request.Form.Files["Image"];
             var userRegistrationModel = new UserRegistrationModel
             {
@@ -53,7 +56,7 @@ namespace InternetHospital.WebApi.controllers
                 {
                     string callbackUrl = null;
                     User user = null;
-                    if (userRegistrationModel.Role == "Patient")
+                    if (userRegistrationModel.Role == PATIENT)
                     {
                         user = await _registrationService.PatientRegistration(userRegistrationModel);
                         if (user == null)
@@ -62,7 +65,7 @@ namespace InternetHospital.WebApi.controllers
                         }
                         callbackUrl = await GenerateConfirmationLink(user);
                     } 
-                    else if (userRegistrationModel.Role == "Doctor")
+                    else if (userRegistrationModel.Role == DOCTOR)
                     {
                         user = await _registrationService.DoctorRegistration(userRegistrationModel);
                         if (user == null)
