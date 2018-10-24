@@ -20,19 +20,21 @@ namespace InternetHospital.BusinessLogic.services
     {
         private IHostingEnvironment _env;
         private ApplicationContext _context;
-        private UserManager<User> _userManager;
 
-        public UploadingService(IHostingEnvironment env, ApplicationContext context, 
-            UserManager<User> userManager)
+        public UploadingService(IHostingEnvironment env, ApplicationContext context)
         {
             _env = env;
             _context = context;
-            _userManager = userManager;
         }
 
         public async Task<User> UploadAvatar(IFormFile image, User user)
         {
-            var isValiImage = ImageValidation.IsValidImageFile(image, 150, 3000, 150, 3000);
+            const int MIN_HEIGHT = 150;
+            const int MAX_HEIGHT = 3000;
+            const int MIN_WIDTH = 150;
+            const int MAX_WIDTH = 3000;
+
+            var isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH);
 
             if (!isValiImage)
             {

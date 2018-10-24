@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace InternetHospital.BusinessLogic.Models
 {
     public class UserRegistrationModel

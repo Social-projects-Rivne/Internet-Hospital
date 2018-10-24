@@ -17,18 +17,16 @@ namespace InternetHospital.WebApi.controllers
         private UserManager<User> _userManager;
         private RoleManager<IdentityRole<int>> _roleManager;
         private IMailService _mailService;
-        private ApplicationContext _context;
         private IRegistrationService _registrationService;
         private IUploadingFiles _uploadingFiles;
 
         public SignupController(UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager,
-            IMailService mailService, ApplicationContext context, IRegistrationService registrationService,
+            IMailService mailService, IRegistrationService registrationService,
             IUploadingFiles uploadingFiles)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mailService = mailService;
-            _context = context;
             _registrationService = registrationService;
             _uploadingFiles = uploadingFiles;
         }
@@ -38,7 +36,7 @@ namespace InternetHospital.WebApi.controllers
         public async Task<ActionResult> Register(IFormFile formFile)
         {
             var file = Request.Form.Files["Image"];
-            var vm = new UserRegistrationModel
+            var userRegistrationModel = new UserRegistrationModel
             {
                 Email = Request.Form["Email"],
                 Password = Request.Form["Password"],
@@ -47,26 +45,26 @@ namespace InternetHospital.WebApi.controllers
                 Role = Request.Form["Role"]
             };
 
-            bool isValid = TryValidateModel(vm);
+            bool isValid = TryValidateModel(userRegistrationModel);
 
             if (ModelState.IsValid)
             {
-                if (await _userManager.FindByEmailAsync(vm.Email) == null)
+                if (await _userManager.FindByEmailAsync(userRegistrationModel.Email) == null)
                 {
                     string callbackUrl = null;
                     User user = null;
-                    if (vm.Role == "Patient" || vm.Role == "patient")
+                    if (userRegistrationModel.Role == "Patient")
                     {
-                        user = await _registrationService.PatientRegistration(vm);
+                        user = await _registrationService.PatientRegistration(userRegistrationModel);
                         if (user == null)
                         {
                             return BadRequest("Error during patient registration");
                         }
                         callbackUrl = await GenerateConfirmationLink(user);
                     } 
-                    else if (vm.Role == "Doctor" || vm.Role == "doctor")
+                    else if (userRegistrationModel.Role == "Doctor")
                     {
-                        user = await _registrationService.DoctorRegistration(vm);
+                        user = await _registrationService.DoctorRegistration(userRegistrationModel);
                         if (user == null)
                         {
                             return BadRequest("Error during doctor registration");
@@ -82,7 +80,7 @@ namespace InternetHospital.WebApi.controllers
                                  $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
                     if (userWithAvatar == null)
                     {
-                        return Ok("Your account is created. But avatar didn't upload. Confirm your account on email!");
+                        return Ok("Your account is created. But avatar wasn't upload. Confirm your account on email!");
                     }
                     else
                     {

@@ -5,6 +5,12 @@ import { RegistrationService } from '../../../Services/registration.service';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ImageValidationService } from '../../../Services/image-validation.service';
 
+
+const MIN_HEIGHT: number = 150;
+const MAX_HEIGHT: number = 3000;
+const MIN_WIDTH: number = 150;
+const MAX_WIDTH: number = 3000;
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -36,7 +42,7 @@ export class SignUpComponent implements OnInit {
         img.src = event.target.result;
         img.onload = () =>
         {
-            if(this.validation.hasImageValidSize(3000, 3000,150,150, img.height, img.width))
+            if(this.validation.hasImageValidSize(MAX_HEIGHT, MIN_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
             {
               this.imageUrl = event.target.result;
               this.isImageValid = true;  
@@ -48,7 +54,7 @@ export class SignUpComponent implements OnInit {
                 this.imageUrl = this.defaultImage;
                 this.isImageValid = false;
 
-              alert("Image is invalid!");
+              alert("Image is invalid! It might be too big or too small.");
             }
         }
       }

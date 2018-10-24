@@ -36,10 +36,6 @@ export class RegistrationService {
 
   postUser(user: User, fileToUpload: File) {    
         let formData = new FormData();
-        console.log(user.Email);
-        console.log(user.Password);
-        console.log(user.Role);
-        console.log(user.ConfirmPassword);
         
         formData.append("Image", fileToUpload);
         formData.append("Email", user.Email);
