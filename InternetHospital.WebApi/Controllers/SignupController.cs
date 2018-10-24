@@ -48,7 +48,7 @@ namespace InternetHospital.WebApi.controllers
                 Role = Request.Form["Role"]
             };
 
-            bool isValid = TryValidateModel(userRegistrationModel);
+            TryValidateModel(userRegistrationModel);
 
             if (ModelState.IsValid)
             {

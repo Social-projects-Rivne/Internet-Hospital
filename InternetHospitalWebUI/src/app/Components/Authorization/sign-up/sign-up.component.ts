@@ -46,7 +46,6 @@ export class SignUpComponent implements OnInit {
           alert("Only image file is acceptable!");
         }
         var img = new Image();
-        img.src = event.target.result;
         img.onload = () =>
         {
             if(this.validation.hasImageValidSize(MAX_HEIGHT, MAX_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
@@ -65,6 +64,7 @@ export class SignUpComponent implements OnInit {
               alert("Image is invalid! It might be too big or too small.");
             }
         }
+		img.src = event.target.result;
       }
     }
     reader.readAsDataURL(this.fileToUpload);
