@@ -10,33 +10,43 @@ import { compareValidator } from "../Directives/compare-validator.directive";
   providedIn: 'root'
 })
 export class RegistrationService {
-  url = HOST_URL + '/api/Signup';
-  httpOptions = { headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })};  
+  url = HOST_URL + '/api/Signup'; 
 
   constructor(private http: HttpClient) { }
 
   form: FormGroup = new FormGroup({
-    UserName: new FormControl('', Validators.required),
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
     ConfirmPassword: new FormControl('', [Validators.required, compareValidator('Password')]),
     Role: new FormControl('', Validators.required),
+    Image: new FormControl('', Validators.required)
   });
 
+  file: File;
+  
   initializeFormGroup() {
     this.form.setValue({
-      UserName: '',
       Email: '',
       Password: '',
       ConfirmPassword: '',
       Role: '',
+      Image: ''
     });
   }
 
-  postUser(user: User) {    
-    var body = JSON.stringify(user);
-    return this.http.post<User>(this.url, body, this.httpOptions);
-  }
+  postUser(user: User, fileToUpload: File) {    
+        let formData = new FormData();
+        console.log(user.Email);
+        console.log(user.Password);
+        console.log(user.Role);
+        console.log(user.ConfirmPassword);
+        
+        formData.append("Image", fileToUpload);
+        formData.append("Email", user.Email);
+        formData.append("Password", user.Password);
+        formData.append("ConfirmPassword", user.ConfirmPassword);    
+        formData.append("Role", user.Role);    
+    
+         return this.http.post(this.url, formData);
+      }
 }
