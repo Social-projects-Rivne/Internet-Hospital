@@ -46,6 +46,7 @@ namespace InternetHospital.WebApi
                 config.User.RequireUniqueEmail = true;
                 config.SignIn.RequireConfirmedEmail = true;
                 config.Password.RequiredLength = 8;
+                config.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<ApplicationContext>()
             .AddDefaultTokenProviders();
             // configure jwt authentication
@@ -72,6 +73,7 @@ namespace InternetHospital.WebApi
         });
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IUploadingFiles, UploadingService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -89,8 +91,10 @@ namespace InternetHospital.WebApi
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
-                app.UseAuthentication();
+                .AllowCredentials()
+                );
+
+            app.UseAuthentication();
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserRegistrationModel, User>();

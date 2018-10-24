@@ -58,6 +58,7 @@ namespace InternetHospital.BusinessLogic.services
         private async Task<User> UserRegistration(UserRegistrationModel vm)
         {
             var user = Mapper.Map<User>(vm);
+            user.SignUpTime = DateTime.UtcNow;
             if (await _roleManager.FindByNameAsync(vm.Role) == null)
             {
                 await _roleManager.CreateAsync(new IdentityRole<int>(vm.Role));
