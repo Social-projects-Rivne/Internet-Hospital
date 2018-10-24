@@ -1,5 +1,6 @@
 <mat-toolbar *ngIf="!authenticationService.isauthorised()">
     <button   mat-button [routerLink]="['/sign-up']">Sign Up</button>
-    <button   mat-button [routerLink]="['/sign-in']">Sign In</button>    
+    <button   mat-button [routerLink]="['/sign-in']">Sign In</button>
+    <a routerLink="/doctor-list">Go To Doctor's List</a>
 </mat-toolbar>
 <app-sign-out *ngIf="authenticationService.isauthorised()"></app-sign-out>

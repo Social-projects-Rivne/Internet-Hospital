@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -17,6 +18,7 @@ import { SignInComponent } from './Components/Authorization/sign-in/sign-in.comp
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService  } from './Services/interceptor.service';
 import { CompareValidatorDirective } from './directives/compare-validator.directive';
+import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-list.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { CompareValidatorDirective } from './directives/compare-validator.direct
     SignUpComponent,
     SignInComponent,
     CompareValidatorDirective,
+    DoctorListComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { CompareValidatorDirective } from './directives/compare-validator.direct
     BrowserAnimationsModule,
     RoutingModule,
     HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],

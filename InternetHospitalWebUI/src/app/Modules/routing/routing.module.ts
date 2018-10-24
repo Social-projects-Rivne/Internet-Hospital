@@ -5,10 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from '../../Components/Authorization/sign-up/sign-up.component';
 import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.component';
 import { HomeComponent } from '../../Components/Home/home/home.component';
+import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
+
 const ROUTES: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'sign-in', component: SignInComponent } 
+  { path: 'sign-in', component: SignInComponent },
+  { path: 'doctor-list', component: DoctorListComponent}
 ];
 
 @NgModule({
@@ -25,4 +28,5 @@ export const ROUTING_COMPONENTS = [
   SignUpComponent,
   SignInComponent,
   HomeComponent,
+  DoctorListComponent,
 ]

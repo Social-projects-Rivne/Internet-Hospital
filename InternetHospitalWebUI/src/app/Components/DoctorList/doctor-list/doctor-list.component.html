@@ -1,0 +1,29 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="20%">
+    <h3>Filter Panel</h3>
+  </div>
+  <div fxFlex="80%">
+    <mat-form-field class="search-form-field" floatLabel="never" style="width:100%">
+      <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    <div *ngFor="let doctor of service.doctorsList">
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
+        <mat-card style="width:100%">
+          <div fxFlex="20%">
+            <img mat-card-image [src]="urlAvatar">
+          </div>
+          <div fxFlex="40%">
+            <mat-card-content>{{doctor.secondName}} {{doctor.sirstName}} {{doctor.thirdName}}</mat-card-content>
+          </div>
+          <div fxFlex="40%">
+            <mat-card-content>{{doctor.specializationName}}</mat-card-content>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
