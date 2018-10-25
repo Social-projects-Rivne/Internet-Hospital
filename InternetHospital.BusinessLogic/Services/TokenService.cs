@@ -22,7 +22,8 @@ namespace InternetHospital.BusinessLogic.Services
         private UserManager<User> _userManager;
         const string APPROVED = "Approved";
         const string DOCTOR = "Doctor";
-
+        const int MAXIMUM_LOGGED_DEVICES = 5;
+        const int REFRESH_TOKEN_LIFETIME = 15;
         public TokenService(ApplicationContext context, IOptions<AppSettings> settings, UserManager<User> userManager)
         {
             _userManager = userManager;
@@ -74,7 +75,8 @@ namespace InternetHospital.BusinessLogic.Services
         public RefreshToken GenerateRefreshToken(User user)
         {
             var usertokens = _context.Tokens.Where(x => x.UserId == user.Id);
-            if (usertokens.Count() > 5)
+            //you have to relogin if number of logged devices higher than maximum allowed
+            if (usertokens.Count() > MAXIMUM_LOGGED_DEVICES)
             {
                 foreach (var item in usertokens)
                 {
@@ -86,7 +88,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 UserId = user.Id,
                 Token = Guid.NewGuid().ToString(),
-                ExpiresDate = DateTime.UtcNow.AddDays(15),
+                ExpiresDate = DateTime.UtcNow.AddDays(REFRESH_TOKEN_LIFETIME),
                 Revoked = false
             };
             _context.Tokens.Add(newRefreshToken);
