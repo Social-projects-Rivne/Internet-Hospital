@@ -16,7 +16,7 @@ import { SignUpComponent } from './Components/Authorization/sign-up/sign-up.comp
 import { SignInComponent } from './Components/Authorization/sign-in/sign-in.component';
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService  } from './Services/interceptor.service';
-import { CompareValidatorDirective } from './directives/compare-validator.directive';
+import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
 @NgModule({
   declarations: [
