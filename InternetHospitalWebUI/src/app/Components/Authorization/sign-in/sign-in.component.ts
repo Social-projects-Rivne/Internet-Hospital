@@ -9,7 +9,6 @@ import { AuthenticationService } from '../../../Services/authentication.service'
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-
     loginForm: FormGroup;
     returnUrl: string;
 
@@ -42,7 +41,12 @@ export class SignInComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                this.router.navigate([this.returnUrl]);
+                if(this.authenticationService.hasAdminRole()){
+                    this.router.navigate(['/supersecurityadminpanel']);
+                }
+                else{
+                    this.router.navigate([this.returnUrl]);
+                }
             },
             error => {
                 // for notifications
