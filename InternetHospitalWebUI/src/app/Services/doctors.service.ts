@@ -18,6 +18,5 @@ export class DoctorsService {
   getDoctors() {
     this.http.get<Doctor[]>(this.url, this.httpOptions)
     .subscribe(data => this.doctorsList = data);
-    console.log(this.doctorsList);
   }
 }

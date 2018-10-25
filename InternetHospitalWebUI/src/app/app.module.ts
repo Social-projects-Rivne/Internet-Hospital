@@ -19,6 +19,7 @@ import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService  } from './Services/interceptor.service';
 import { CompareValidatorDirective } from './directives/compare-validator.directive';
 import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-list.component';
+import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-
     SignInComponent,
     CompareValidatorDirective,
     DoctorListComponent,
+    DoctorListItemComponent,
   ],
   imports: [
     BrowserModule,
