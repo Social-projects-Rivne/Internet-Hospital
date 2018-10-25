@@ -25,17 +25,14 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet]
         public IQueryable<DoctorsDto> GetDoctors()
         {
-            var doctors = from b in _context.Doctors select new DoctorsDto()
+            var doctors = _context.Doctors.Select(d => new DoctorsDto
             {
-                Id = b.UserId,
-                FirstName = b.User.FirstName,
-                SecondName = b.User.SecondName,
-                ThirdName = b.User.ThirdName,
-                SpecializationName = b.Specialization.Name
-            };
-            //IEnumerable<Doctor> DoctorInfo = _context.Doctors
-            //        .Include(d => d.User)
-            //        .Include(d => d.Specialization);
+                Id = d.UserId,
+                FirstName = d.User.FirstName,
+                SecondName = d.User.SecondName,
+                ThirdName = d.User.ThirdName,
+                SpecializationName = d.Specialization.Name
+            });
             return doctors;
         }
 
