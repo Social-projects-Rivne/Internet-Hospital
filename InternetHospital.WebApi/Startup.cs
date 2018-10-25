@@ -79,8 +79,6 @@ namespace InternetHospital.WebApi
                         context => context.User.HasClaim(claim =>
                             claim.Type == "ApprovedPatient")
                             && context.User.IsInRole("Patient")));
-
-
                 options.AddPolicy("ApprovedDoctors",
                     policyBuilder => policyBuilder.RequireAssertion(
                         context => context.User.HasClaim(claim =>
