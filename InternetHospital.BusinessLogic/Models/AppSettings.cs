@@ -1,4 +1,4 @@
-﻿namespace InternetHospital.WebApi.Auth
+﻿namespace InternetHospital.BusinessLogic.Models
 {
     public class AppSettings
     {

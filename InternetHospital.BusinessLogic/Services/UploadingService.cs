@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
 
-namespace InternetHospital.BusinessLogic.services
+namespace InternetHospital.BusinessLogic.Services
 {
     public class UploadingService : IUploadingFiles
     {
