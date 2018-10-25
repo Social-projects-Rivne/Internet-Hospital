@@ -5,12 +5,14 @@ import { Observable,BehaviorSubject } from 'rxjs';
 import { Router} from '@angular/router';
 import { ICurrentUser } from '../Models/CurrentUser'
 import { HOST_URL } from '../../app/config';
+import { SIGN_IN } from '../../app/config';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 const PATIENT:string = 'Patient';
 const DOCTOR:string = 'Doctor';
 const MODERATOR:string = 'Moderator';
 const ADMIN:string = 'Admin';
+const TOKEN:string ='currentUser';
 
 @Injectable()
 export class  AuthenticationService  {
@@ -26,7 +28,7 @@ export class  AuthenticationService  {
             .pipe(map(user => {
                 if (user && user.access_token) {
                     //save tokens into local storage
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem(TOKEN, JSON.stringify(user));
                     //set flag that a user is logged in
                     this.isLoginSubject.next(true);
                     //set user role depending on the token claims
@@ -62,7 +64,7 @@ export class  AuthenticationService  {
         return this.isLoginSubject.asObservable();
     }
     hasAccessToken():boolean{
-        if (localStorage.getItem('currentUser')) {           
+        if (localStorage.getItem(TOKEN)) {           
             return true;
         }
         return false;
@@ -118,8 +120,8 @@ export class  AuthenticationService  {
 
     //return if user is approved doctor
     isApprovedPatient():boolean{
-        if (localStorage.getItem('currentUser')){
-            var tokenPayload = this.jwtHelper.decodeToken(JSON.parse(localStorage.getItem('currentUser')).access_token);
+        if (localStorage.getItem(TOKEN)){
+            var tokenPayload = this.getTokenPayload();
             if(tokenPayload["ApprovedPatient"]!==undefined)
                 return true;
         }
@@ -128,8 +130,8 @@ export class  AuthenticationService  {
 
     //return if user is approved doctor
     isApprovedDoctor():boolean{
-        if (localStorage.getItem('currentUser')){
-            var tokenPayload = this.jwtHelper.decodeToken(JSON.parse(localStorage.getItem('currentUser')).access_token);
+        if (localStorage.getItem(TOKEN)){
+            var tokenPayload = this.getTokenPayload();
             if(tokenPayload["ApprovedDoctor"]!==undefined)
                 return true;
         }
@@ -138,21 +140,26 @@ export class  AuthenticationService  {
 
     //return user role
     private getUserRole():string{
-        if (localStorage.getItem('currentUser')){
-            var tokenPayload = this.jwtHelper.decodeToken(JSON.parse(localStorage.getItem('currentUser')).access_token);
+        if (localStorage.getItem(TOKEN)){
+            var tokenPayload = this.getTokenPayload();
             return tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];  
         }
     }
+    
+    private getTokenPayload():string{
+        return this.jwtHelper.decodeToken(JSON.parse(localStorage.getItem(TOKEN)).access_token);
+    }
+
 
     //refresh access token 
     refreshToken() : Observable<ICurrentUser> {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem(TOKEN));
         let token = currentUser.refresh_token;          
         return this.http.post<ICurrentUser>(this.url+"/api/Signin/refresh",{ RefreshToken: token } )
           .pipe(
             map(user => {     
                 if (user && user.access_token) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem(TOKEN, JSON.stringify(user));
                 }     
               return <ICurrentUser>user;
           }));
@@ -160,7 +167,7 @@ export class  AuthenticationService  {
 
     //get a token of logged user
     getAuthToken() : string {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem(TOKEN));
         if(currentUser != null) {            
             return currentUser.access_token;
         }
@@ -170,14 +177,13 @@ export class  AuthenticationService  {
     // log out user
     logout() {
         //clear localStorage
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem(TOKEN);
         //set all flags about user status to false
         this.removeAllAuthorizeFlags();
         //redirect to sign in page     
-        this.router.navigate(['sign-in']);
+        this.router.navigate([SIGN_IN]);
     }
-    private removeAllAuthorizeFlags()
-    {
+    private removeAllAuthorizeFlags() {
         this.isLoginSubject.next(false); 
         this.isPatientSubject.next(false);
         this.isDoctorSubject.next(false);

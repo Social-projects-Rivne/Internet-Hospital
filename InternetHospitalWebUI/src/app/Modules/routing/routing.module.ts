@@ -13,12 +13,15 @@ import { DoctorGuard } from '../../Services/Guards/doctor.guard';
 import { ModeratorGuard } from '../../Services/Guards/moderator.guard';
 import { AdminGuard } from '../../Services/Guards/admin.guard';
 
+import { ADMIN_PANEL } from '../../config';
+import { SIGN_IN } from '../../config';
+import { SIGN_UP } from '../../config';
 
 const ROUTES: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'supersecurityadminpanel', component:AdminPanelComponent,canActivate: [AdminGuard]},
+  { path: SIGN_UP, component: SignUpComponent },
+  { path: SIGN_IN, component: SignInComponent },
+  { path: ADMIN_PANEL, component:AdminPanelComponent,canActivate: [AdminGuard]},
   { path: '**',  redirectTo: ''}
 ];
 

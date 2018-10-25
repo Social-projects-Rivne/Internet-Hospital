@@ -20,6 +20,8 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly AppSettings _appSettings;
         private ApplicationContext _context;
         private UserManager<User> _userManager;
+        const string APPROVED = "Approved";
+        const string DOCTOR = "Doctor";
 
         public TokenService(ApplicationContext context, IOptions<AppSettings> settings, UserManager<User> userManager)
         {
@@ -27,6 +29,7 @@ namespace InternetHospital.BusinessLogic.Services
             _appSettings = settings.Value;
             _context = context;
         }
+
         /// <summary>
         /// Method for generation access tokens for app uesers
         /// </summary>
@@ -41,11 +44,11 @@ namespace InternetHospital.BusinessLogic.Services
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, userRoles[0])
                };
-            if (userStatus.Name == "Approved")
+            if (userStatus.Name == APPROVED)
             {
                 claims.Add(new Claim("ApprovedPatient", "approved"));
             }
-            if (userRoles[0] == "Doctor")
+            if (userRoles[0] == DOCTOR)
             {
                 var doctorStatus = _context.Doctors.Find(user.Id);
                 if (doctorStatus.IsApproved != null && (bool)doctorStatus.IsApproved)
@@ -62,6 +65,7 @@ namespace InternetHospital.BusinessLogic.Services
                 signingCredentials: credential);
             return token;
         }
+
         /// <summary>
         /// Method for generation and saving in DB refresh tokens for renewing access tokens
         /// </summary>
@@ -89,6 +93,7 @@ namespace InternetHospital.BusinessLogic.Services
             _context.SaveChanges();
             return newRefreshToken;
         }
+
         /// <summary>
         /// Method for validation of refresh token that was sent by user
         /// </summary>

@@ -41,7 +41,7 @@ import { AdminGuard } from './Services/Guards/admin.guard'
     RoutingModule,
     HttpClientModule,
   ],
-  providers: [AuthenticationService,AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

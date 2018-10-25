@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../Services/authentication.service';
+import { ADMIN_PANEL } from '../../../config';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -26,8 +28,7 @@ export class SignInComponent implements OnInit {
         password: ['', Validators.required]
     });
     this.authenticationService.logout();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';   
   }
 
   get f() { return this.loginForm.controls; }
@@ -42,7 +43,7 @@ export class SignInComponent implements OnInit {
         .subscribe(
             data => {
                 if(this.authenticationService.hasAdminRole()){
-                    this.router.navigate(['/supersecurityadminpanel']);
+                    this.router.navigate([ADMIN_PANEL]);
                 }
                 else{
                     this.router.navigate([this.returnUrl]);

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { SIGN_IN } from '../../config';
+
 @Injectable()
 export class AuthGuard implements CanActivate {
 
@@ -9,7 +11,7 @@ export class AuthGuard implements CanActivate {
         if (localStorage.getItem('currentUser')) {            
             return true;
         }        
-        this.router.navigate(['/sign-in'], { queryParams: { returnUrl: state.url }});        
+        this.router.navigate([SIGN_IN], { queryParams: { returnUrl: state.url }});        
         return false;
     }
 }

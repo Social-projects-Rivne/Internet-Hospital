@@ -18,6 +18,7 @@ namespace InternetHospital.WebApi.Controllers
         private ITokenService _tokenService;
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
+
         public SigninController(ApplicationContext context,
             UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
         {
@@ -26,6 +27,7 @@ namespace InternetHospital.WebApi.Controllers
             _signInManager = signInManager;
             _tokenService = tokenService;
         }
+
         [HttpPost]
         public async Task<ActionResult> SignIn([FromBody]UserLoginModel form)
         {
@@ -51,6 +53,7 @@ namespace InternetHospital.WebApi.Controllers
                 refresh_token = _tokenService.GenerateRefreshToken(user).Token
             });
         }
+
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh([FromBody]RefreshTokenModel refresh)
         {
