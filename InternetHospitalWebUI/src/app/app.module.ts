@@ -14,6 +14,10 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
 
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService  } from './Services/interceptor.service';
+<<<<<<< HEAD
+import { CompareValidatorDirective } from './directives/compare-validator.directive';
+import { Page404Component } from './Components/page404/page404.component';
+=======
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
 import { AuthGuard } from './Services/Guards/auth.guard';
@@ -21,6 +25,7 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard'
+>>>>>>> 422457bb60da0b623afce59d7575fa29fd761aaa
 
 @NgModule({
   declarations: [
@@ -31,6 +36,7 @@ import { AdminGuard } from './Services/Guards/admin.guard'
     HomeNewsComponent,
     HomeNewsItemComponent,
     CompareValidatorDirective,
+    Page404Component,
   ],
   imports: [
     BrowserModule,

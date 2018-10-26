@@ -5,6 +5,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from '../../Components/Authorization/sign-up/sign-up.component';
 import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.component';
 import { HomeComponent } from '../../Components/Home/home/home.component';
+<<<<<<< HEAD
+import { Page404Component } from '../../Components/page404/page404.component'
+
+const ROUTES: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-in', component: SignInComponent },
+  { path: '404', component: Page404Component },
+
+  { path: '**', redirectTo: '404' },
+=======
 import { AdminPanelComponent } from '../../Components/adminpanel/adminpanel.component';
 
 import { AuthGuard } from '../../Services/Guards/auth.guard';
@@ -23,6 +34,7 @@ const ROUTES: Routes = [
   { path: SIGN_IN, component: SignInComponent },
   { path: ADMIN_PANEL, component:AdminPanelComponent,canActivate: [AdminGuard]},
   { path: '**',  redirectTo: ''}
+>>>>>>> 422457bb60da0b623afce59d7575fa29fd761aaa
 ];
 
 @NgModule({
@@ -39,5 +51,9 @@ export const ROUTING_COMPONENTS = [
   SignUpComponent,
   SignInComponent,
   HomeComponent,
+<<<<<<< HEAD
+  Page404Component,
+=======
   AdminPanelComponent
+>>>>>>> 422457bb60da0b623afce59d7575fa29fd761aaa
 ]
