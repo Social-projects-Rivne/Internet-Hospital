@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from '../../Components/Authorization/sign-up/sign-up.component';
 import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.component';
 import { HomeComponent } from '../../Components/Home/home/home.component';
+<<<<<<< HEAD
 import { Page404Component } from '../../Components/page404/page404.component'
 
 const ROUTES: Routes = [
@@ -14,6 +15,26 @@ const ROUTES: Routes = [
   { path: '404', component: Page404Component },
 
   { path: '**', redirectTo: '404' },
+=======
+import { AdminPanelComponent } from '../../Components/adminpanel/adminpanel.component';
+
+import { AuthGuard } from '../../Services/Guards/auth.guard';
+import { PatientGuard } from '../../Services/Guards/patient.guard';
+import { DoctorGuard } from '../../Services/Guards/doctor.guard';
+import { ModeratorGuard } from '../../Services/Guards/moderator.guard';
+import { AdminGuard } from '../../Services/Guards/admin.guard';
+
+import { ADMIN_PANEL } from '../../config';
+import { SIGN_IN } from '../../config';
+import { SIGN_UP } from '../../config';
+
+const ROUTES: Routes = [
+  { path: '', component: HomeComponent },
+  { path: SIGN_UP, component: SignUpComponent },
+  { path: SIGN_IN, component: SignInComponent },
+  { path: ADMIN_PANEL, component:AdminPanelComponent,canActivate: [AdminGuard]},
+  { path: '**',  redirectTo: ''}
+>>>>>>> 422457bb60da0b623afce59d7575fa29fd761aaa
 ];
 
 @NgModule({
@@ -30,5 +51,9 @@ export const ROUTING_COMPONENTS = [
   SignUpComponent,
   SignInComponent,
   HomeComponent,
+<<<<<<< HEAD
   Page404Component,
+=======
+  AdminPanelComponent
+>>>>>>> 422457bb60da0b623afce59d7575fa29fd761aaa
 ]

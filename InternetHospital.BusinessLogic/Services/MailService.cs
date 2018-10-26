@@ -8,7 +8,7 @@ using MailKit.Net.Smtp;
 
 using InternetHospital.BusinessLogic.Interfaces;
 
-namespace InternetHospital.BusinessLogic.services
+namespace InternetHospital.BusinessLogic.Services
 {
     public class MailService : IMailService
     {
