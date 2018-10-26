@@ -3,10 +3,9 @@ using System.Text;
 using AutoMapper;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
-using InternetHospital.BusinessLogic.services;
+using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
-using InternetHospital.WebApi.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,16 +30,18 @@ namespace InternetHospital.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            //enable CORS
             services.AddCors();
-
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            //configure entity framework
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(opt =>
             {
                 opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), m => m.MigrationsAssembly("InternetHospital.WebApi"));
             });
+            //configure identity
             services.AddIdentity<User, IdentityRole<int>>(config =>
             {
                 config.User.RequireUniqueEmail = true;
@@ -49,15 +50,14 @@ namespace InternetHospital.WebApi
                 config.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<ApplicationContext>()
             .AddDefaultTokenProviders();
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
+            // configure jwt authentication            
             services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;                    
-                })
-                .AddJwtBearer(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -69,8 +69,24 @@ namespace InternetHospital.WebApi
                     ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.
                     UTF8.GetBytes(appSettings.JwtKey))
-            };
-        });
+                };
+            });
+            //Add Authorization policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApprovedPatients",
+                    policyBuilder => policyBuilder.RequireAssertion(
+                        context => context.User.HasClaim(claim =>
+                            claim.Type == "ApprovedPatient")
+                            && context.User.IsInRole("Patient")));
+                options.AddPolicy("ApprovedDoctors",
+                    policyBuilder => policyBuilder.RequireAssertion(
+                        context => context.User.HasClaim(claim =>
+                            claim.Type == "ApprovedDoctor")
+                            && context.User.IsInRole("Doctor")));
+            });
+            //Dependency injection
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IUploadingFiles, UploadingService>();
