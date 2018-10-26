@@ -11,6 +11,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     MatIconModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule,
+    MatDividerModule
   ],
   declarations: [],
   exports: [
@@ -45,7 +49,9 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     MatIconModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }

@@ -2,25 +2,20 @@
     display: flex;
     flex-direction: column;
     background-origin: padding-box;
-    padding: 10px;
-    width:320px;
+    width: 40%;
     min-width: 320px;
     margin: auto;
   }
-  
   .example-right-align {
     text-align: right;
   }
-  
   input.example-right-align::-webkit-outer-spin-button,
   input.example-right-align::-webkit-inner-spin-button {
     display: none;
   }
-  
   input.example-right-align {
     -moz-appearance: textfield;
   }
-  
   #CancelBtn{
     margin-right: 10px;
   }
@@ -38,8 +33,9 @@
     font-size: 14px;
     float: right;
   }
-  // #FatherForm{
-  //   position: relative;
-  //   float:center;
-  //   margin-top: 14%;
-  // }
+  #divider{
+    margin-top: 50px;
+  }
+  #FatherDiv{
+    background-color: #e1e8f0;
+  }
