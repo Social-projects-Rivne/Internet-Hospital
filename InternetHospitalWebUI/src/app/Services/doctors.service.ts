@@ -8,7 +8,7 @@ import { Doctor } from '../Models/Doctors';
 })
 export class DoctorsService {
   doctorsList: Doctor[];
-  url = HOST_URL + '/api/Doctors'
+  url = HOST_URL + '/api/Doctors';
   httpOptions = { headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })};

@@ -10,17 +10,11 @@ namespace InternetHospital.BusinessLogic.Models
         public DoctorsDto() { }
 
         public int Id { get; set; }
-
         public string FirstName { get; set; }
-
         public string SecondName { get; set; }
-
         public string ThirdName { get; set; }
-
         public string SpecializationName { get; set; }
-
         public User User { get; set; }
-
         public Specialization Specialization { get; set; }
     }
 }
