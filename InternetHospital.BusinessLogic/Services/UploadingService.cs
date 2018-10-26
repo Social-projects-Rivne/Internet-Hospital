@@ -50,7 +50,14 @@ namespace InternetHospital.BusinessLogic.Services
                 Directory.CreateDirectory(fileDestDir);
             }
 
-            var fileFullPath = Path.Combine(fileDestDir, image.FileName);
+            int lastIndex = 20;
+            if (user.UserName.Length < 20)
+            {
+                lastIndex = user.UserName.Length;
+            }
+            var fileExtesion = Path.GetExtension(image.FileName);
+            var fileName = user.UserName.Substring(0, lastIndex) + fileExtesion;
+            var fileFullPath = Path.Combine(fileDestDir, fileName);
 
             using (var stream = new FileStream(fileFullPath, FileMode.Create))
             {
