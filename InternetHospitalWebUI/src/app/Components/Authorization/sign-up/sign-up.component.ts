@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private service: RegistrationService, private validation: ImageValidationService, private router: Router) { }
 
-  defaultImage: string = '../../../assets/img/default.png';
+  defaultImage: string = '../../../assets/img/default-image.png';
   imageUrl: string = this.defaultImage;
   fileToUpload: File = null;
   isImageValid: boolean = false;
@@ -32,6 +32,7 @@ export class SignUpComponent implements OnInit {
   }
 
   handleFileInput(file : FileList){
+	this.imageUrl = this.defaultImage;
     this.fileToUpload = file.item(0);
 
     var reader = new FileReader();
@@ -44,6 +45,7 @@ export class SignUpComponent implements OnInit {
           this.imageUrl = this.defaultImage;
           // notification service will replace this alert in future
           alert("Only image file is acceptable!");
+          return; // added by martyniuk
         }
         var img = new Image();
         img.onload = () =>
@@ -51,11 +53,13 @@ export class SignUpComponent implements OnInit {
             if(this.validation.hasImageValidSize(MAX_HEIGHT, MAX_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
             {
               this.imageUrl = event.target.result;
-              this.isImageValid = true;  
+              this.isImageValid = true; 
+              // alert("this.service.form.valid: " + this.service.form.valid);
+              // alert("isImageValid: " + this.isImageValid);
             }
             else
             {
-                this.service.form.invalid;
+                this.service.form.invalid; // what is this line?
                 this.fileToUpload = null;
                 this.imageUrl = this.defaultImage;
                 this.isImageValid = false;
@@ -67,10 +71,16 @@ export class SignUpComponent implements OnInit {
 		img.src = event.target.result;
       }
     }
-    reader.readAsDataURL(this.fileToUpload);
+	if (this.fileToUpload != null) 
+	{
+		reader.readAsDataURL(this.fileToUpload);
+	}
   }
 
 onSubmit(form: NgForm) {
+
+  //alert("this.service.form.valid: " + this.service.form.valid);
+            
     if(this.service.form.valid) {
       this.service.postUser(form.value, this.fileToUpload).subscribe(res => console.log(res));      
       this.router.navigate(['/sign-in']);

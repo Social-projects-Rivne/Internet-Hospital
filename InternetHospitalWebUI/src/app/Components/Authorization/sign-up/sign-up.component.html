@@ -2,7 +2,6 @@
   <mat-card>
 
     <mat-card-header>
-
       <mat-card-title>Registration</mat-card-title>
     </mat-card-header>
 
@@ -15,21 +14,21 @@
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input required formControlName="Email" matInput>
+            <input formControlName="Email" matInput>
             <mat-error>Invalid email address.</mat-error>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input required type="password" formControlName="Password" matInput>
+            <input type="password" formControlName="Password" matInput>
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Confirm Password</mat-label>
-            <input required type="password" formControlName="ConfirmPassword" matInput>
+            <input type="password" formControlName="ConfirmPassword" matInput>
             <mat-error>Passwords don't match.</mat-error>
           </mat-form-field>
         </div>
@@ -46,8 +45,8 @@
         </div>
         <div>
           <div div fxLayout="row" fxLayoutAlign="space-around center">
+            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="isImageValid == false">Submit</button>
             <button class="marginbtn" mat-raised-button color="warn" (click)="onClear()">Clear</button>
-            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid || isImageValid == false">Submit</button>
           </div>
         </div>
       </div>
