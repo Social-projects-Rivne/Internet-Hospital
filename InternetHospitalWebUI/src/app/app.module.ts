@@ -5,19 +5,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
+import { Page404Component } from './Components/page404/page404.component';
+import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-list.component';
+import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
 
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService  } from './Services/interceptor.service';
-<<<<<<< HEAD
-import { CompareValidatorDirective } from './directives/compare-validator.directive';
-import { Page404Component } from './Components/page404/page404.component';
-=======
+
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
 import { AuthGuard } from './Services/Guards/auth.guard';
@@ -25,7 +26,6 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard'
->>>>>>> 422457bb60da0b623afce59d7575fa29fd761aaa
 
 @NgModule({
   declarations: [
@@ -37,6 +37,8 @@ import { AdminGuard } from './Services/Guards/admin.guard'
     HomeNewsItemComponent,
     CompareValidatorDirective,
     Page404Component,
+    DoctorListComponent,
+    DoctorListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { AdminGuard } from './Services/Guards/admin.guard'
     BrowserAnimationsModule,
     RoutingModule,
     HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
