@@ -32,6 +32,7 @@ export class SignUpComponent implements OnInit {
   }
 
   handleFileInput(file : FileList){
+	this.imageUrl = this.defaultImage;
     this.fileToUpload = file.item(0);
 
     var reader = new FileReader();
@@ -67,7 +68,10 @@ export class SignUpComponent implements OnInit {
 		img.src = event.target.result;
       }
     }
-    reader.readAsDataURL(this.fileToUpload);
+	if (this.fileToUpload != null) 
+	{
+		reader.readAsDataURL(this.fileToUpload);
+	}
   }
 
 onSubmit(form: NgForm) {

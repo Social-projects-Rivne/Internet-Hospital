@@ -33,8 +33,10 @@ namespace InternetHospital.BusinessLogic.Services
             const int MAX_HEIGHT = 3000;
             const int MIN_WIDTH = 150;
             const int MAX_WIDTH = 3000;
+            const int IMAGE_MAX_LENGTH = 20;
 
-            var isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH);
+            bool isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH) 
+                && ImageValidation.IsImage(image);
 
             if (!isValiImage)
             {
@@ -43,22 +45,27 @@ namespace InternetHospital.BusinessLogic.Services
 
             string webRootPath = _env.WebRootPath;
             string folderName = "Images";
-            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, "Avatar");
+            string avatarFolder = "Avatar";
+            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, avatarFolder);
 
             if (!Directory.Exists(fileDestDir))
             {
                 Directory.CreateDirectory(fileDestDir);
             }
 
-            var fileFullPath = Path.Combine(fileDestDir, image.FileName);
+            int fileNameLength = user.UserName.Length < IMAGE_MAX_LENGTH ? user.UserName.Length : IMAGE_MAX_LENGTH;
+            var fileExtesion = Path.GetExtension(image.FileName);
+            var fileName = user.UserName.Substring(0, fileNameLength) + fileExtesion;
+            var fileFullPath = Path.Combine(fileDestDir, fileName);
 
             using (var stream = new FileStream(fileFullPath, FileMode.Create))
             {
                 await image.CopyToAsync(stream); 
             }
 
+            string pathFile = $"/{folderName}/{user.UserName}/{avatarFolder}/{fileName}";
             _context.Users.Update(user);
-            user.AvatarURL = fileFullPath; 
+            user.AvatarURL = pathFile; 
             await _context.SaveChangesAsync();
 
             return user;

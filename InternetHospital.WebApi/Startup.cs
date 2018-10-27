@@ -102,6 +102,9 @@ namespace InternetHospital.WebApi
             {
                 app.UseHsts();
             }
+
+            app.UseStaticFiles();
+
             app.UseCors(options =>
             options
                 .AllowAnyOrigin()
