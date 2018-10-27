@@ -15,7 +15,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MAT_MODULS = [
-  CommonModule,
+    CommonModule,
     MatToolbarModule,
     MatGridListModule,
     MatFormFieldModule,
