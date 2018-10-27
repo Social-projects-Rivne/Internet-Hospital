@@ -51,8 +51,9 @@ namespace InternetHospital.BusinessLogic.Services
                 Directory.CreateDirectory(fileDestDir);
             }
 
-            int lastIndex = 20;
-            if (user.UserName.Length < 20)
+            const int IMAGE_MAX_LENGTH = 20;
+            int lastIndex = IMAGE_MAX_LENGTH;
+            if (user.UserName.Length < IMAGE_MAX_LENGTH)
             {
                 lastIndex = user.UserName.Length;
             }
