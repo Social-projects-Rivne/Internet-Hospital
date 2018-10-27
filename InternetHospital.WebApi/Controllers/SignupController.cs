@@ -49,7 +49,10 @@ namespace InternetHospital.WebApi.controllers
             };
 
             TryValidateModel(userRegistrationModel);
-
+            if (userRegistrationModel.UserName.Contains('/'))
+            {
+                ModelState.AddModelError("", "Invalid email name!");
+            }
             if (ModelState.IsValid)
             {
                 if (await _userManager.FindByEmailAsync(userRegistrationModel.Email) == null)

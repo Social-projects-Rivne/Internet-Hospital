@@ -43,7 +43,8 @@ namespace InternetHospital.BusinessLogic.Services
 
             string webRootPath = _env.WebRootPath;
             string folderName = "Images";
-            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, "Avatar");
+            string avatarFolder = "Avatar";
+            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, avatarFolder);
 
             if (!Directory.Exists(fileDestDir))
             {
@@ -64,8 +65,9 @@ namespace InternetHospital.BusinessLogic.Services
                 await image.CopyToAsync(stream); 
             }
 
+            string pathFile = $"/{folderName}/{user.UserName}/{avatarFolder}/{fileName}";
             _context.Users.Update(user);
-            user.AvatarURL = fileFullPath; 
+            user.AvatarURL = pathFile; 
             await _context.SaveChangesAsync();
 
             return user;
