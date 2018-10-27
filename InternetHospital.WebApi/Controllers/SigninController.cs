@@ -1,64 +1,63 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
-using InternetHospital.WebApi.Auth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace InternetHospital.WebApi.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class SigninController : ControllerBase
     {
-        private readonly AppSettings _appSettings;
         private ApplicationContext _context;
-        private readonly TokenService tokenService;
+        private ITokenService _tokenService;
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
-        public SigninController(IOptions<AppSettings> appSettings, ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+
+        public SigninController(ApplicationContext context,
+            UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
         {
-            _appSettings = appSettings.Value;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
-            tokenService = new TokenService(_context, _appSettings, _userManager);
+            _tokenService = tokenService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> SignIn(LoginForm form)
+        public async Task<ActionResult> SignIn([FromBody]UserLoginModel form)
         {
-            var user = await _userManager.FindByNameAsync(form.UserName);
-            if (user != null)
+            var user = await _userManager.FindByNameOrEmailAsync(form.UserName);
+            if (user == null)
+            {
+                return NotFound(new { message = "You have entered an invalid username or password" });
+            }
+            else
             {
                 if (!await _userManager.IsEmailConfirmedAsync(user))
                 {
-                    return NotFound(new { message = "User not found or not confirmed" });
+                    return NotFound(new { message = "You have entered an invalid username or password" });
                 }
             }
             if (!await _userManager.CheckPasswordAsync(user, form.Password))
             {
-                return NotFound(new { message = "Wrong password" });
+                return NotFound(new { message = "You have entered an invalid username or password" });
             }
             return Ok(new
             {
-                access_token = new JwtSecurityTokenHandler().WriteToken(await tokenService.GenerateAccessToken(user)),
-                refresh_token = (await tokenService.GenerateRefreshToken(user)).Token,
-                user_id = user.Id,
-                user_email = user.Email
+                access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
+                refresh_token = _tokenService.GenerateRefreshToken(user).Token
             });
-
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> Refresh(string refresh)
+        public async Task<IActionResult> Refresh([FromBody]RefreshTokenModel refresh)
         {
-            var refreshedToken = await tokenService.RefreshTokinValidation(refresh);
+            var refreshedToken = _tokenService.RefreshTokenValidation(refresh.RefreshToken);
             if (refreshedToken == null)
             {
                 return BadRequest("invalid_grant");
@@ -66,11 +65,10 @@ namespace InternetHospital.WebApi.Controllers
             var user = await _userManager.FindByIdAsync(refreshedToken.UserId.ToString());
             return Ok(new
             {
-                access_token = new JwtSecurityTokenHandler().WriteToken(await tokenService.GenerateAccessToken(user)),
-                refresh_token = refreshedToken.Token,
-                user_id = user.Id,
-                user_email = user.FirstName
+                access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
+                refresh_token = refreshedToken.Token
             });
-        }       
+        }    
     }
+
 }

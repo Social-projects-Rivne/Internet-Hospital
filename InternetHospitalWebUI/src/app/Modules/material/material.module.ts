@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
@@ -30,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatIconModule,
     MatDialogModule,
     MatCardModule,
+    MatMenuModule,
     MatPaginatorModule
   ],
   declarations: [],
@@ -48,6 +50,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatIconModule,
     MatDialogModule,
     MatCardModule,
+    MatMenuModule,
     MatPaginatorModule
   ]
 })

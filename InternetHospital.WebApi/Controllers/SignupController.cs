@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace InternetHospital.WebApi.controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class SignupController : ControllerBase
@@ -18,41 +17,57 @@ namespace InternetHospital.WebApi.controllers
         private UserManager<User> _userManager;
         private RoleManager<IdentityRole<int>> _roleManager;
         private IMailService _mailService;
-        private ApplicationContext _context;
         private IRegistrationService _registrationService;
+        private IUploadingFiles _uploadingFiles;
 
         public SignupController(UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager,
-            IMailService mailService, ApplicationContext context, IRegistrationService registrationService)
+            IMailService mailService, IRegistrationService registrationService,
+            IUploadingFiles uploadingFiles)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mailService = mailService;
-            _context = context;
             _registrationService = registrationService;
+            _uploadingFiles = uploadingFiles;
         }
 
         // POST: api/Signup
         [HttpPost]
-        public async Task<ActionResult> Register([FromBody] UserRegistrationModel vm)
+        public async Task<ActionResult> Register(IFormFile formFile)
         {
+            const string PATIENT = "Patient";
+            const string DOCTOR = "Doctor";
+
+            var file = Request.Form.Files["Image"];
+            var userRegistrationModel = new UserRegistrationModel
+            {
+                Email = Request.Form["Email"],
+                Password = Request.Form["Password"],
+                ConfirmPassword = Request.Form["ConfirmPassword"],
+                UserName = Request.Form["Email"],
+                Role = Request.Form["Role"]
+            };
+
+            TryValidateModel(userRegistrationModel);
+
             if (ModelState.IsValid)
             {
-                if (await _userManager.FindByEmailAsync(vm.Email) == null)
+                if (await _userManager.FindByEmailAsync(userRegistrationModel.Email) == null)
                 {
                     string callbackUrl = null;
                     User user = null;
-                    if (vm.Role == "Patient" || vm.Role == "patient")
+                    if (userRegistrationModel.Role == PATIENT)
                     {
-                        user = await _registrationService.PatientRegistration(vm);
+                        user = await _registrationService.PatientRegistration(userRegistrationModel);
                         if (user == null)
                         {
                             return BadRequest("Error during patient registration");
                         }
                         callbackUrl = await GenerateConfirmationLink(user);
-                    }
-                    else if (vm.Role == "Doctor" || vm.Role == "doctor")
+                    } 
+                    else if (userRegistrationModel.Role == DOCTOR)
                     {
-                        user = await _registrationService.DoctorRegistration(vm);
+                        user = await _registrationService.DoctorRegistration(userRegistrationModel);
                         if (user == null)
                         {
                             return BadRequest("Error during doctor registration");
@@ -63,9 +78,17 @@ namespace InternetHospital.WebApi.controllers
                     {
                         return BadRequest("Role type doesn't match conditions! must be only a Doctor or a patient");
                     }
+                    var userWithAvatar = await _uploadingFiles.UploadAvatar(file, user);
                     await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
                                  $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
-                    return Ok("Your account is created. Confirm your account on email!");
+                    if (userWithAvatar == null)
+                    {
+                        return Ok("Your account is created. But avatar wasn't upload. Confirm your account on email!");
+                    }
+                    else
+                    {
+                        return Ok("Your account is created. Confirm your account on email!");
+                    }
                 }
                 else
                 {
@@ -76,9 +99,9 @@ namespace InternetHospital.WebApi.controllers
             {
                 ModelState.AddModelError("", "Wrong form!");
                 return BadRequest(ModelState);
-            }
+            }            
         }
-    
+
         [HttpGet("ConfirmEmail")]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {

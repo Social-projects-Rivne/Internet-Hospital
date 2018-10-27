@@ -1,6 +1,19 @@
-<mat-toolbar *ngIf="!authenticationService.isauthorised()">
-    <button   mat-button [routerLink]="['/sign-up']">Sign Up</button>
-    <button   mat-button [routerLink]="['/sign-in']">Sign In</button>
+<mat-toolbar color="primary">
+    <button mat-button [routerLink]="['/']">HOME</button>
+    <span class="example-fill-remaining-space"></span>      
+    <button  *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
+    <button  *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
     <a routerLink="/doctor-list">Go To Doctor's List</a>
+    <button *ngIf="(isLoggedIn | async)"  mat-button [matMenuTriggerFor]="appMenu">           
+        <img  src="https://blog.circle.com/content/images/2018/04/rachel.png" style="max-width: 30px;"/>
+        <mat-icon >arrow_drop_down</mat-icon>
+    </button>
 </mat-toolbar>
-<app-sign-out *ngIf="authenticationService.isauthorised()"></app-sign-out>
+<mat-menu #appMenu="matMenu" [overlapTrigger]="false"  xPosition="before">    
+    <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/']">My history</button>
+    <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">My plans</button>
+    <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+    <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
+</mat-menu>
