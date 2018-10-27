@@ -35,7 +35,8 @@ namespace InternetHospital.BusinessLogic.Services
             const int MAX_WIDTH = 3000;
             const int IMAGE_MAX_LENGTH = 20;
 
-            var isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH);
+            bool isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH) 
+                && ImageValidation.IsImage(image);
 
             if (!isValiImage)
             {
@@ -52,9 +53,9 @@ namespace InternetHospital.BusinessLogic.Services
                 Directory.CreateDirectory(fileDestDir);
             }
 
-            int lastIndex = user.UserName.Length < IMAGE_MAX_LENGTH ? user.UserName.Length : IMAGE_MAX_LENGTH;
+            int fileNameLength = user.UserName.Length < IMAGE_MAX_LENGTH ? user.UserName.Length : IMAGE_MAX_LENGTH;
             var fileExtesion = Path.GetExtension(image.FileName);
-            var fileName = user.UserName.Substring(0, lastIndex) + fileExtesion;
+            var fileName = user.UserName.Substring(0, fileNameLength) + fileExtesion;
             var fileFullPath = Path.Combine(fileDestDir, fileName);
 
             using (var stream = new FileStream(fileFullPath, FileMode.Create))
