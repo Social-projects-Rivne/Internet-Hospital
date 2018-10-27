@@ -12,46 +12,31 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule} from '@angular/material/menu';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+const MAT_MODULS = [
+  CommonModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatDialogModule,
+    MatCardModule,
+    MatMenuModule,
+    MatPaginatorModule
+]
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatDialogModule,
-    MatCardModule,
-    MatMenuModule,
-    MatPaginatorModule
-  ],
+  imports: [MAT_MODULS],
   declarations: [],
-  exports: [
-    MatToolbarModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatDialogModule,
-    MatCardModule,
-    MatMenuModule,
-    MatPaginatorModule
-  ]
+  exports: [MAT_MODULS]
 })
 export class MaterialModule { }
