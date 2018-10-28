@@ -19,10 +19,11 @@ namespace InternetHospital.BusinessLogic.Services
             var _doctors = _context.Doctors.AsQueryable();
             if (queryParameters.SearchByName != null)
             {
+                var toLowerSearchParameter = queryParameters.SearchByName.ToLower();
                 _doctors = _doctors
-                    .Where(x => x.User.FirstName.ToLower().Contains(queryParameters.SearchByName.ToLower())
-                    || x.User.SecondName.ToLower().Contains(queryParameters.SearchByName.ToLower())
-                    || x.User.ThirdName.ToLower().Contains(queryParameters.SearchByName.ToLower()));
+                    .Where(x => x.User.FirstName.ToLower().Contains(toLowerSearchParameter)
+                    || x.User.SecondName.ToLower().Contains(toLowerSearchParameter)
+                    || x.User.ThirdName.ToLower().Contains(toLowerSearchParameter));
             }
             if (queryParameters.SearchBySpecialization != null)
             {
