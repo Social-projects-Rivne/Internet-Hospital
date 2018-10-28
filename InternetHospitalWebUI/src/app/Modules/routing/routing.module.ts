@@ -18,16 +18,22 @@ import { AdminGuard } from '../../Services/Guards/admin.guard';
 import { ADMIN_PANEL, DOCTOR_LIST, PAGE_404 } from '../../config';
 import { SIGN_IN } from '../../config';
 import { SIGN_UP } from '../../config';
+import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 
 const ROUTES: Routes = [
-  { path: '', component: HomeComponent },
-  { path: SIGN_UP, component: SignUpComponent },
-  { path: SIGN_IN, component: SignInComponent },
+  {
+    path: '', component: HomeComponent, children: [
+      { path: '', component: HomeNewsComponent },
+      { path: SIGN_UP, component: SignUpComponent },
+      { path: SIGN_IN, component: SignInComponent },
+      { path: DOCTOR_LIST, component: DoctorListComponent },
+    ]
+  },
   { path: PAGE_404, component: Page404Component },
-  { path: DOCTOR_LIST, component: DoctorListComponent},
-  { path: ADMIN_PANEL, component:AdminPanelComponent,canActivate: [AdminGuard]},
+  { path: ADMIN_PANEL, component: AdminPanelComponent, canActivate: [AdminGuard] },
 
-  { path: '**', redirectTo: '404' },
+  { path: '**', redirectTo: PAGE_404 },
+
 ]
 
 @NgModule({
@@ -47,4 +53,5 @@ export const ROUTING_COMPONENTS = [
   Page404Component,
   AdminPanelComponent,
   DoctorListComponent,
+  HomeNewsComponent
 ]

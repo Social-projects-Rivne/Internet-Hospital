@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../../Services/home.service';
-import { HomeImages } from '../../../Models/Temp/HomeImage';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +6,10 @@ import { HomeImages } from '../../../Models/Temp/HomeImage';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  homeImages: HomeImages[];
 
-  constructor(private homeService: HomeService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getHomeImages();
   }
 
-  getHomeImages(): void {
-    this.homeService.getHomeImages()
-        .subscribe(homeImages => this.homeImages = homeImages);
-  }
 }
