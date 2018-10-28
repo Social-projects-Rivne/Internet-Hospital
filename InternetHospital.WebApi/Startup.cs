@@ -88,6 +88,7 @@ namespace InternetHospital.WebApi
             //Dependency injection
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IUploadingFiles, UploadingService>();
         }
