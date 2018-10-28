@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
@@ -15,25 +16,27 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class DoctorsController : ControllerBase
     {
+        private readonly IDoctorService _doctorService;
         private ApplicationContext _context;
-        public DoctorsController(ApplicationContext context)
+        public DoctorsController(ApplicationContext context, IDoctorService service)
         {
             _context = context;
+            _doctorService = service;
         }
 
         // GET: api/Doctors
         [HttpGet]
-        public IQueryable<DoctorsDto> GetDoctors()
+        public IActionResult GetDoctors([FromQuery] DoctorSearchParameters queryParameters)
         {
-            var doctors = _context.Doctors.Select(d => new DoctorsDto
-            {
-                Id = d.UserId,
-                FirstName = d.User.FirstName,
-                SecondName = d.User.SecondName,
-                ThirdName = d.User.ThirdName,
-                SpecializationName = d.Specialization.Name
-            });
-            return doctors;
+            var (doctors, count) = _doctorService.GetAll(queryParameters);
+            List<DoctorsDto> allDoctors = doctors.OrderBy(x => x.SecondName).ToList();
+            return Ok(
+                new
+                {
+                    doctors = allDoctors,
+                    totalDoctors = count
+                }
+              );
         }
     }
 }
