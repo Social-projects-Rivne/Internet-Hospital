@@ -11,41 +11,38 @@
       <mat-divider></mat-divider>
 
       <div style="margin-top:20px" fxLayout="column" fxLayoutAlign="space-around center">
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input formControlName="Email" matInput>
+        <div class="controles-row">
+          <mat-form-field>
+            <input required formControlName="Email" matInput placeholder="Email">
             <mat-error>Invalid email address.</mat-error>
           </mat-form-field>
         </div>
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input type="password" formControlName="Password" matInput>
+        <div class="controles-row">
+          <mat-form-field>
+            <input required type="password" formControlName="Password" matInput placeholder="Password">
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
         </div>
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Confirm Password</mat-label>
-            <input type="password" formControlName="ConfirmPassword" matInput>
-            <mat-error>Passwords don't match.</mat-error>
+        <div class="controles-row">
+          <mat-form-field>
+            <input required type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password">
+            <mat-error>Passwords don't match.</mat-error>          
           </mat-form-field>
         </div>
-        <div>
-          <mat-radio-group fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-radio-button class="marginbtn" value="Patient">Patient</mat-radio-button>
-            <mat-radio-button class="marginbtn" value="Doctor">Doctor</mat-radio-button>
-          </mat-radio-group>
+        <div style="margin-top:-15px;">
+            <mat-radio-group formControlName="Role">
+                <mat-radio-button checked class="marginten" checked value="Patient">Patient</mat-radio-button>
+                <mat-radio-button class="marginten" value="Doctor">Doctor</mat-radio-button>
+              </mat-radio-group>
         </div>
-        <div class="marginten">
+        <div>
           <input id="Image" formControlName="Image" #Image type="file" accept="image/*" (change)="handleFileInput($event.target.files)"
           class="inputfile" name="Image">
           <label class="mi-text-header" for="Image"><i class="fas fa-upload"></i><strong> Choose passport photo</strong></label>
         </div>
         <div>
           <div div fxLayout="row" fxLayoutAlign="space-around center">
-            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="isImageValid == false || !this.service.form.invalid">Submit</button>
+            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="isImageValid == false || service.form.invalid">Submit</button>
             <button class="marginbtn" mat-raised-button color="warn" (click)="onClear()">Clear</button>
           </div>
         </div>
