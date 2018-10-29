@@ -11,8 +11,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDividerModule } from '@angular/material/divider';
 
 const MAT_MODULS = [
     CommonModule,
@@ -30,9 +32,11 @@ const MAT_MODULS = [
     MatIconModule,
     MatDialogModule,
     MatCardModule,
-    MatMenuModule,
-    MatPaginatorModule
-]
+    FlexLayoutModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    MatMenuModule
+  ]
 
 @NgModule({
   imports: [MAT_MODULS],
