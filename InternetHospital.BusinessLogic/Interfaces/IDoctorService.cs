@@ -5,6 +5,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IDoctorService
     {
-        (IQueryable<DoctorsDto> doctors, int count) GetAll(DoctorSearchParameters queryParameters);
+        (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters);
     }
 }

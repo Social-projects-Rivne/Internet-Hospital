@@ -9,6 +9,15 @@
     "Role": "Patient"
   },
   {
+    "Email": "admin@gmail.com",
+    "Password": "1234Passw@rd",
+    "FirstName": "AdminUserFirstName",
+    "SecondName": "AdminUserSecondName",
+    "ThirdName": "AdminUserThirdName",
+    "StatusId": "2",
+    "Role": "Admin"
+  },
+  {
     "Email": "firstdoctor@gmail.com",
     "Password": "1234Passw@rd",
     "FirstName": "FirstDoctorFirstName",

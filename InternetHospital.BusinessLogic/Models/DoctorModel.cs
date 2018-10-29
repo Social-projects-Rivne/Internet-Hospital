@@ -1,6 +1,6 @@
 ﻿namespace InternetHospital.BusinessLogic.Models
 {
-    public class DoctorsDto
+    public class DoctorModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
