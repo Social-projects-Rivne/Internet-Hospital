@@ -5,8 +5,8 @@
       <mat-card-title>Registration</mat-card-title>
     </mat-card-header>
 
-    <form fxLayout="row" fxFlexAlign="space-evenly center" fxLayoutAlign="space-around start" [formGroup]="service.form" #signUpForm="ngForm"
-      (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data">
+    <form fxLayout="row" fxFlexAlign="space-evenly center" [formGroup]="service.form" 
+    #signUpForm="ngForm" class="normal-form" (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data">
 
       <mat-divider></mat-divider>
 
@@ -45,7 +45,7 @@
         </div>
         <div>
           <div div fxLayout="row" fxLayoutAlign="space-around center">
-            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="isImageValid == false">Submit</button>
+            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="isImageValid == false || !this.service.form.invalid">Submit</button>
             <button class="marginbtn" mat-raised-button color="warn" (click)="onClear()">Clear</button>
           </div>
         </div>

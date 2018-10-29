@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private service: RegistrationService, private validation: ImageValidationService, private router: Router) { }
 
-  defaultImage: string = '../../../assets/img/default-image.png';
+  defaultImage: string = '../../../assets/img/default.png';
   imageUrl: string = this.defaultImage;
   fileToUpload: File = null;
   isImageValid: boolean = false;
