@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HOST_URL } from '../config';
+import { HOST_URL, API_DOCTORS } from '../config';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Doctor } from '../Models/Doctors';
 import { PaginationService } from './pagination.service';
 import { Specialization } from '../Models/Specialization';
+
+const searchbyname = "searchbyname";
+const searchbyspecialization = "searchbyspecialization";
 
 @Injectable({
   providedIn: 'root'
@@ -30,17 +33,17 @@ export class DoctorsService {
   getDoctors(name?: string, specialization?: number) {
     let doctorsUrl = this.url;
     if (name != null && name != "") {
-      this.httpOptions.params =  this.httpOptions.params.set("searchbyname", name);
+      this.httpOptions.params =  this.httpOptions.params.set(searchbyname, name);
     }
     else {
-      this.httpOptions.params = this.httpOptions.params.delete("searchbyname");
+      this.httpOptions.params = this.httpOptions.params.delete(searchbyname);
     }
 
     if (specialization != 0 && !isNaN(specialization)) {
-      this.httpOptions.params =  this.httpOptions.params.set("searchbyspecialization", specialization.toString())
+      this.httpOptions.params =  this.httpOptions.params.set(searchbyspecialization, specialization.toString())
     }
     else {
-      this.httpOptions.params = this.httpOptions.params.delete("searchbyspecialization");
+      this.httpOptions.params = this.httpOptions.params.delete(searchbyspecialization);
     }
 
     this.http.get(doctorsUrl, this.httpOptions)
@@ -51,7 +54,7 @@ export class DoctorsService {
   }
 
   getSpecializations() {
-    let specUrl = this.url + "/specializations";
+    let specUrl = this.url + API_DOCTORS;
     this.http.get<Specialization[]>(specUrl)
       .subscribe(data => this.specializations = data);
   }

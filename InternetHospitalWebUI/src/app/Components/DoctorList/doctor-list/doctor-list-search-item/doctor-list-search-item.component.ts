@@ -13,18 +13,18 @@ export class DoctorListSearchItemComponent implements OnInit {
   @Input()
   specializations: Specialization[];
   @Output()
-  onSearch= new EventEmitter();
+  onSearch = new EventEmitter();
 
   selectedSpecialization = "";
-  searchKey: string;  
+  searchKey: string;
 
-  constructor(private service:DoctorsService, private paginationService: PaginationService) { }
+  constructor(private service: DoctorsService, private paginationService: PaginationService) { }
 
   ngOnInit() {
   }
 
   search() {
-    this.onSearch.emit({searchKey : this.searchKey,selectedSpecialization : this.selectedSpecialization});
+    this.onSearch.emit({ searchKey: this.searchKey, selectedSpecialization: this.selectedSpecialization });
   }
 
   onSearchClear() {
