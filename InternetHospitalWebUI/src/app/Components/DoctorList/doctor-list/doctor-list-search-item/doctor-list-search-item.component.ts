@@ -13,7 +13,7 @@ export class DoctorListSearchItemComponent implements OnInit {
   @Input()
   specializations: Specialization[];
   @Output()
-  onSearch= new EventEmitter<PageEvent>();
+  onSearch= new EventEmitter();
 
   selectedSpecialization = "";
   searchKey: string;  
@@ -24,20 +24,10 @@ export class DoctorListSearchItemComponent implements OnInit {
   }
 
   search() {
-    this.paginationService.page = 1;
-    this.service.httpOptions.params = this.service.httpOptions.params.set("page", this.paginationService.page.toString());
-    this.service.getDoctors(this.searchKey,+this.selectedSpecialization);
-    let event = new PageEvent();
-    event.pageSize = this.paginationService.pageCount;
-    event.pageIndex = this.paginationService.page - 1;
-    console.log(`Before length ${event.length}`)
-    event.length = this.service.doctorsAmount;
-    console.log(`After length ${event.length}`)
-    this.onSearch.emit(event);
+    this.onSearch.emit({searchKey : this.searchKey,selectedSpecialization : this.selectedSpecialization});
   }
 
   onSearchClear() {
     this.searchKey = "";
-    this.search();
   }
 }

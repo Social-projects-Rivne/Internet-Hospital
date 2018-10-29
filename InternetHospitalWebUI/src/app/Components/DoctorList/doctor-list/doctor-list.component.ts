@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
-import  { PaginationService } from '../../../Services/pagination.service'
+import { PaginationService } from '../../../Services/pagination.service'
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -9,7 +9,11 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./doctor-list.component.scss']
 })
 export class DoctorListComponent implements OnInit {
-  constructor(private service: DoctorsService,private pagService: PaginationService) { }
+  constructor(private service: DoctorsService, private pagService: PaginationService) { }
+
+  private isWithParams: Boolean;
+  private searchKey: string;
+  private selectedSpecialization: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -17,20 +21,32 @@ export class DoctorListComponent implements OnInit {
     this.service.getDoctors();
     this.service.getSpecializations();
   }
-  
-  onSearch(event: PageEvent) {
-    console.log("Before FP")
+
+  onSearch($event) {
+    this.searchKey = $event.searchKey;
+    this.selectedSpecialization = $event.selectedSpecialization;
+    if (this.searchKey || this.selectedSpecialization) {
+      this.isWithParams = true;
+    }
+    else {
+      this.isWithParams = false;
+    }
     this.paginator.firstPage();
-    console.log("After FP")
-    console.log("Before Pag Change")
-    this.pagService.change(event);
-    console.log("After Pag Change")
+    let event = new PageEvent();
+    event.pageSize = this.pagService.pageSize;
+    event.pageIndex = this.pagService.pageIndex - 1;
+    event.length = this.service.doctorsAmount;
+    this.pageSwitch(event);
   }
 
-  pageSwitch(event: PageEvent) { 
-    console.log("UNBELIEVABLE!E!@EAS");
+  pageSwitch(event: PageEvent) {
     this.pagService.change(event);
-    this.service.httpOptions.params = this.service.httpOptions.params.set("page", this.pagService.page.toString());
-    this.service.getDoctors();
-}
+    this.service.httpOptions.params = this.service.httpOptions.params.set("page", this.pagService.pageIndex.toString());
+    if (this.isWithParams == true) {
+      this.service.getDoctors(this.searchKey, +this.selectedSpecialization);
+    }
+    else {
+      this.service.getDoctors();
+    }
+  }
 }

@@ -8,13 +8,13 @@ import { Pagination } from '../Models/Pagination';
 export class PaginationService {
     private paginationModel: Pagination;
 
-    get page(): number {
+    get pageIndex(): number {
         return this.paginationModel.pageIndex;
     }
-    set page(num: number) {
+    set pageIndex(num: number) {
         this.paginationModel.pageIndex = num;
     }
-    get pageCount(): number {
+    get pageSize(): number {
         return this.paginationModel.pageSize;
     }
 

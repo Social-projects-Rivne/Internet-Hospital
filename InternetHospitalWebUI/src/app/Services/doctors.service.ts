@@ -20,8 +20,8 @@ export class DoctorsService {
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-      .set("page", this.paginationService.page.toString())
-      .set("pagecount", this.paginationService.pageCount.toString())
+      .set("page", this.paginationService.pageIndex.toString())
+      .set("pagecount", this.paginationService.pageSize.toString())
   };
 
   constructor(private http: HttpClient,
