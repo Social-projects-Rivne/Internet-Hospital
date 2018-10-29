@@ -5,7 +5,6 @@ import { RegistrationService } from '../../../Services/registration.service';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ImageValidationService } from '../../../Services/image-validation.service';
 
-
 const MIN_HEIGHT: number = 150;
 const MAX_HEIGHT: number = 3000;
 const MIN_WIDTH: number = 150;
@@ -54,12 +53,10 @@ export class SignUpComponent implements OnInit {
             {
               this.imageUrl = event.target.result;
               this.isImageValid = true; 
-              // alert("this.service.form.valid: " + this.service.form.valid);
-              // alert("isImageValid: " + this.isImageValid);
             }
             else
             {
-                this.service.form.invalid; // what is this line?
+                this.service.form.invalid;
                 this.fileToUpload = null;
                 this.imageUrl = this.defaultImage;
                 this.isImageValid = false;
@@ -78,8 +75,6 @@ export class SignUpComponent implements OnInit {
   }
 
 onSubmit(form: NgForm) {
-
-  //alert("this.service.form.valid: " + this.service.form.valid);
             
     if(this.service.form.valid) {
       this.service.postUser(form.value, this.fileToUpload).subscribe(res => console.log(res));      
