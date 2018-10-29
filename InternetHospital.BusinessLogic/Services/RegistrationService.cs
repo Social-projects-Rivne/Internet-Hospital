@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InternetHospital.BusinessLogic.services
+namespace InternetHospital.BusinessLogic.Services
 {
     public class RegistrationService : IRegistrationService
     {

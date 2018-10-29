@@ -1,0 +1,57 @@
+#container{
+    height: 100vmin;
+}
+
+#left{
+    background-color: #6ed3cf;
+}
+#right{
+    background-color: #9068be;  
+    background-image: url(./Images/pinkpaper2.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#LeftInner{
+    background-color: #e62739;
+    min-width: 100px;
+    min-height: 100px;
+}
+#Zero{
+    color:#e62739;
+}
+h1{
+    color:#e1e8f0;
+    margin: -40px;
+}
+h2{
+    color:#e1e8f0;
+    margin: 0px;
+}
+h3{
+    color:#e1e8f0;
+    margin: 0px;
+}
+h4{
+    color:#e1e8f0;
+    margin: -30px;
+    float: right;
+}
+
+    h1{
+        font-family: 'Roboto', sans-serif;
+        font-size: 200px;
+    }
+    h2{
+        font-family: 'Roboto', sans-serif;
+        font-size: 40px;
+    }
+    h3{
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+    }
+    h4{
+        font-family: 'Roboto', sans-serif;
+        font-size: 150px;
+    }
+

@@ -12,10 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatMenuModule} from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDividerModule } from '@angular/material/divider';
 
-@NgModule({
-  imports: [
+const MAT_MODULS = [
     CommonModule,
     MatToolbarModule,
     MatGridListModule,
@@ -32,26 +33,14 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDialogModule,
     MatCardModule,
     FlexLayoutModule,
-    MatDividerModule
-  ],
-  declarations: [],
-  exports: [
-    MatToolbarModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatDialogModule,
-    MatCardModule,
-    FlexLayoutModule,
-    MatDividerModule
+    MatDividerModule,
+    MatPaginatorModule,
+    MatMenuModule
   ]
+
+@NgModule({
+  imports: [MAT_MODULS],
+  declarations: [],
+  exports: [MAT_MODULS]
 })
 export class MaterialModule { }

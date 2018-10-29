@@ -1,0 +1,13 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
+  <mat-card style="width:100%">
+    <div fxFlex="20%">
+      <img mat-card-image [src]="urlAvatar">
+    </div>
+    <div fxFlex="40%">
+      <mat-card-content>{{doctor.secondName}} {{doctor.firstName}} {{doctor.thirdName}}</mat-card-content>
+    </div>
+    <div fxFlex="40%">
+      <mat-card-content>{{doctor.specializationName}}</mat-card-content>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,14 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="20%">
+    <h3>Filter Panel</h3>
+  </div>
+  <div fxFlex="80%">
+    <mat-form-field class="search-form-field" floatLabel="never" style="width:100%">
+      <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <app-doctor-list-item *ngFor="let doctor of service.doctorsList" [doctor]="doctor"></app-doctor-list-item>
+  </div>
+</div>
