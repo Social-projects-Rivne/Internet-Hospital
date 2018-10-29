@@ -16,7 +16,7 @@ export class DoctorsService {
   specializations: Specialization[];
   doctorsAmount: number;
 
-  url = HOST_URL + '/api/Doctors';
+  url = HOST_URL + API_DOCTORS;
   
   httpOptions = {
     headers: new HttpHeaders({
@@ -54,7 +54,7 @@ export class DoctorsService {
   }
 
   getSpecializations() {
-    let specUrl = this.url + API_DOCTORS;
+    let specUrl = this.url + "/specializations";
     this.http.get<Specialization[]>(specUrl)
       .subscribe(data => this.specializations = data);
   }
