@@ -10,11 +10,11 @@ body {
     padding: 38px 0 27px;
     background: #38479e;    
     color: #000000;
-
     position: absolute;
     width: 100%;  
     display: block;
     clear: both;
+
     a {
         transition: .3s;
         position: relative;
@@ -22,8 +22,7 @@ body {
         color: #000000;
         font-size: 16px;
         font-family: OpenSans;
-    }
-    
+    }    
 }
 .footer-top {
     img {
@@ -36,16 +35,15 @@ body {
     background: #e1e8f0;
     box-sizing: border-box;
     padding: 10px 20px;
-    margin-top: 10px;
-    
+    margin-top: 10px;    
 }
 
-.footer-contacts{
-    h2{
+.footer-contacts {
+    h2 {
         font-size: 16px;
         border-bottom: 2px solid #000000;
     }
-    p{
+    p {
         font-size: 14px;
     }
 }
@@ -63,7 +61,7 @@ a {
         width: $width;
     }
 
-    &:after{
+    &:after {
         content: '';
         position: absolute;
         left: 0;
