@@ -29,7 +29,7 @@ namespace InternetHospital.WebApi.Controllers
         public IActionResult GetDoctors([FromQuery] DoctorSearchParameters queryParameters)
         {
             var (doctors, count) = _doctorService.GetAll(queryParameters);
-            List<DoctorsDto> allDoctors = doctors.OrderBy(x => x.SecondName).ToList();
+            List<DoctorModel> allDoctors = doctors.OrderBy(x => x.SecondName).ToList();
             return Ok(
                 new
                 {
@@ -37,6 +37,13 @@ namespace InternetHospital.WebApi.Controllers
                     totalDoctors = count
                 }
               );
+        }
+
+        [HttpGet("specializations")]
+        public ICollection<SpecializationModel> GetSpecializations()
+        {
+            var specizalizations = _context.Specializations.Where(s => s.Doctors.Count > 0).OrderBy(s => s).Select(s => new SpecializationModel { Id = s.Id, Specialization = s.Name }).ToList();
+            return specizalizations;
         }
     }
 }

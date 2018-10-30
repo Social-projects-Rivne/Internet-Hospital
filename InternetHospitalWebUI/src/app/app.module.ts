@@ -25,7 +25,8 @@ import { AuthGuard } from './Services/Guards/auth.guard';
 import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
-import { AdminGuard } from './Services/Guards/admin.guard'
+import { AdminGuard } from './Services/Guards/admin.guard';
+import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AdminGuard } from './Services/Guards/admin.guard'
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
+    DoctorListSearchItemComponent,
   ],
   imports: [
     BrowserModule,
