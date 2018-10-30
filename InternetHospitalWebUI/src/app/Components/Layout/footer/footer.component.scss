@@ -1,7 +1,7 @@
 body {
-    margin:0;   
-    padding:0;
-    height:100%;
+    margin: 0;   
+    padding: 0;
+    height: 100%;
     min-width: 625px;
  }
 
@@ -12,15 +12,29 @@ body {
     color: #000000;
 
     position: absolute;
-    width:100%;  
+    width: 100%;  
     display: block;
     clear: both;
+    a {
+        transition: .3s;
+        position: relative;
+        text-decoration: none;    
+        color: #000000;
+        font-size: 16px;
+        font-family: OpenSans;
+    }
     
+}
+.footer-top {
+    img {
+        width: 200px;
+        height: 200px;
+    }
 }
 
 .footer-menu, .footer-contacts {
     background: #e1e8f0;
-    border: solid 2px #aaaaaa;
+    //border: solid 2px #aaaaaa;
     box-sizing: border-box;
     padding: 10px 20px;
     margin-top: 10px;
@@ -37,28 +51,10 @@ body {
     }
 }
 
-.footer {   
-    a {
-    transition: .3s;
-    position: relative;
-    text-decoration: none;    
-    color: #000000;
-    font-size: 16px;
-    font-family: OpenSans;
-    }
-}
-
 a {
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
-}
-
-.footer-menu {
-    span {
-    margin: 0;
-    display: inline-block;
-    } 
 }
 
 @mixin actions($width) {
@@ -81,6 +77,10 @@ a {
 }
 
 .footer-menu {
+    span {
+        margin: 0;
+        display: inline-block;
+    } 
     a {
         @include actions(100%)
     }
