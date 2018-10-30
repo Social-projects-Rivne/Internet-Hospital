@@ -2,7 +2,7 @@ body {
     margin:0;   
     padding:0;
     height:100%;
-    min-width: 500px;
+    min-width: 625px;
  }
 
 .footer {
@@ -11,8 +11,7 @@ body {
     background: #38479e;    
     color: #000000;
 
-    position: relative;    
-    bottom:0;
+    position: absolute;
     width:100%;  
     display: block;
     clear: both;
@@ -27,10 +26,6 @@ body {
     margin-top: 10px;
     
 }
-
-// .footer-contacts{
-//     margin-right: -12%;
-// }
 
 .footer-contacts{
     h2{
@@ -48,7 +43,7 @@ body {
     position: relative;
     text-decoration: none;    
     color: #000000;
-    font-size: 14px;
+    font-size: 16px;
     font-family: OpenSans;
     }
 }
