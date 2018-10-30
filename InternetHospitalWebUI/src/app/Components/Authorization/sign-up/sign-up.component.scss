@@ -1,3 +1,23 @@
+
+#GlobalDiv{
+  background-color: #e1e8f0;
+}
+#PictureDiv{
+    margin-left: 25px;
+}
+#PicSize{
+  font-size: 12px;
+    color: #e62739;
+}
+
+.marginten{
+    margin:10px ;
+}
+.marginbtn{
+    margin-left:5px ;
+    margin-right: 5px;
+}
+
 .add-bottom-padding {
     padding-bottom: 10px;
 }
@@ -16,34 +36,21 @@ mat-radio-group mat-radio-button {
 }
 
 .inputfile + label {
-    font-size: 1.25em;
+    font-size: 1.2em;
     font-weight: 700;
     color: white;
-    background-color: red;
+    background-color: #e62739;
     display: inline-block;
     padding: 5px;
     border-radius: 5px;
 }
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: black;
-}
-
-.inputfile + label {
-	cursor: pointer; 
-}
-
-.inputfile:focus + label {
-	outline: 1px dotted #000;
-}
-
-.inputfile + label * {
-	pointer-events: none;
-}
-
 .image-view {
     margin: 15px;
-    border-radius: 2%;
-    width: 250px;
+    max-width:350px;
+    max-height: 350px;
+}
+
+.mat-card-title{
+    font-size: 2em;
 }

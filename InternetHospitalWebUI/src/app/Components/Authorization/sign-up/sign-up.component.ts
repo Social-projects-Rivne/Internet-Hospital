@@ -5,7 +5,6 @@ import { RegistrationService } from '../../../Services/registration.service';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ImageValidationService } from '../../../Services/image-validation.service';
 
-
 const MIN_HEIGHT: number = 150;
 const MAX_HEIGHT: number = 3000;
 const MIN_WIDTH: number = 150;
@@ -20,7 +19,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private service: RegistrationService, private validation: ImageValidationService, private router: Router) { }
 
-  defaultImage: string = '../../../assets/img/default-image.png';
+  defaultImage: string = '../../../assets/img/default.png';
   imageUrl: string = this.defaultImage;
   fileToUpload: File = null;
   isImageValid: boolean = false;
@@ -45,6 +44,7 @@ export class SignUpComponent implements OnInit {
           this.imageUrl = this.defaultImage;
           // notification service will replace this alert in future
           alert("Only image file is acceptable!");
+          return; // added by martyniuk
         }
         var img = new Image();
         img.onload = () =>
@@ -52,7 +52,7 @@ export class SignUpComponent implements OnInit {
             if(this.validation.hasImageValidSize(MAX_HEIGHT, MAX_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
             {
               this.imageUrl = event.target.result;
-              this.isImageValid = true;  
+              this.isImageValid = true; 
             }
             else
             {
@@ -75,6 +75,7 @@ export class SignUpComponent implements OnInit {
   }
 
 onSubmit(form: NgForm) {
+            
     if(this.service.form.valid) {
       this.service.postUser(form.value, this.fileToUpload).subscribe(res => console.log(res));      
       this.router.navigate(['/sign-in']);
