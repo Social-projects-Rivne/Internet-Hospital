@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 enum TypeCodes{
-  PNG="89504e470d0a1a0a",
+  PNG="89504e47",
   JPG="ffd8ff",
 }
 const BASE64_MARKER:string = ';base64,';
@@ -15,8 +15,6 @@ const SYSTEM_OF_NUMBERS = 16;
 export class ImageValidationService {
 
   constructor(private http: HttpClient) { }
-
-
 
   private convertDataURIToBinary(dataURI): Uint8Array {  
     var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;

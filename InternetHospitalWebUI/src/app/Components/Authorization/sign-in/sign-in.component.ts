@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { ADMIN_PANEL } from '../../../config';
+import { NotificationService } from '../../../Services/notification.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,9 +19,8 @@ export class SignInComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: AuthenticationService,
+      private notification: NotificationService
       ) { }
-  
-
 
   ngOnInit() {   
     this.loginForm = this.formBuilder.group({
@@ -50,7 +50,7 @@ export class SignInComponent implements OnInit {
                 }
             },
             error => {
-                // for notifications
+                this.notification.error(error);
             });
 }
 }
