@@ -64,7 +64,7 @@ namespace InternetHospital.WebApi.controllers
                         user = await _registrationService.PatientRegistration(userRegistrationModel);
                         if (user == null)
                         {
-                            return BadRequest("Error during patient registration");
+                            return BadRequest(new { message = "Error during patient registration" });
                         }
                         callbackUrl = await GenerateConfirmationLink(user);
                     } 
@@ -73,29 +73,29 @@ namespace InternetHospital.WebApi.controllers
                         user = await _registrationService.DoctorRegistration(userRegistrationModel);
                         if (user == null)
                         {
-                            return BadRequest("Error during doctor registration");
+                            return BadRequest(new { message = "Error during doctor registration" });
                         }
                         callbackUrl = await GenerateConfirmationLink(user);
                     }
                     else
                     {
-                        return BadRequest("Role type doesn't match conditions! must be only a Doctor or a patient");
+                        return BadRequest(new { message = "Role type doesn't match conditions! must be only a Doctor or a patient" });
                     }
                     var userWithAvatar = await _uploadingFiles.UploadAvatar(file, user);
                     await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
                                  $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
                     if (userWithAvatar == null)
                     {
-                        return Ok("Your account is created. But avatar wasn't upload. Confirm your account on email!");
+                        return Ok(new { message = "Your account is created. But avatar wasn't upload. Confirm your account on email!" });
                     }
                     else
                     {
-                        return Ok("Your account is created. Confirm your account on email!");
+                        return Ok(new { message = "Your account is created. Confirm your account on email!" });
                     }
                 }
                 else
                 {
-                    return BadRequest("This email is already exist!");
+                    return BadRequest(new { message = "This email is already registered!" });
                 }
             }
             else
@@ -110,16 +110,16 @@ namespace InternetHospital.WebApi.controllers
         {
             if (userId == null || code == null)
             {
-                return BadRequest("lost userId or token!");
+                return BadRequest(new { message = "lost userId or token!" });
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return BadRequest("Not such users in DB to confirm");
+                return BadRequest(new { message = "Not such users in DB to confirm" });
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
 
-            return Ok("Email Confirmed!");
+            return Ok(new { message = "Email Confirmed!" });
         }
 
         private async Task<string> GenerateConfirmationLink(User user)
