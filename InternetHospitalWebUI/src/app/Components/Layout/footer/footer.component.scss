@@ -8,18 +8,19 @@ body {
 .footer {
     text-decoration: none;
     padding: 38px 0 27px;
-    background: #131313;    
-    color: #ffffff;
+    background: #38479e;    
+    color: #000000;
 
     position: relative;    
     bottom:0;
     width:100%;  
     display: block;
     clear: both;
+    
 }
 
 .footer-menu, .footer-contacts {
-    background: rgb(0, 0, 0);
+    background: #e1e8f0;
     border: solid 2px #aaaaaa;
     box-sizing: border-box;
     padding: 10px 20px;
@@ -27,10 +28,14 @@ body {
     
 }
 
+// .footer-contacts{
+//     margin-right: -12%;
+// }
+
 .footer-contacts{
     h2{
         font-size: 16px;
-        border-bottom: 2px solid #aaaaaa;
+        border-bottom: 2px solid #000000;
     }
     p{
         font-size: 14px;
@@ -42,7 +47,7 @@ body {
     transition: .3s;
     position: relative;
     text-decoration: none;    
-    color: #ffffff;
+    color: #000000;
     font-size: 14px;
     font-family: OpenSans;
     }
@@ -74,7 +79,7 @@ a {
         left: 0;
         bottom: -2px;
         height: 2px;
-        background-color: #ffffff;
+        background-color: #000000;
         width: 0;
         transition: width 0.4s;
     }
@@ -83,11 +88,5 @@ a {
 .footer-menu {
     a {
         @include actions(100%)
-    }
-}
-
-.footer-copyright{
-    p {
-        color: #ffffff;        
     }
 }
