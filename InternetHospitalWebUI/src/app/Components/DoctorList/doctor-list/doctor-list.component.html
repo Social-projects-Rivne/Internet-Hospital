@@ -6,5 +6,5 @@
     <app-doctor-list-item *ngFor="let doctor of service.doctorsList" [doctor]="doctor"></app-doctor-list-item>
   </div>
 </div>
-<mat-paginator [length]="service.doctorsAmount" [pageSize]="pagService.pageSize" (page)="pageSwitch($event)" [hidePageSize]="true">
+<mat-paginator fxLayoutAlign="end start" [length]="service.doctorsAmount" [pageSize]="pagService.pageSize" (page)="pageSwitch($event)" [hidePageSize]="true">
 </mat-paginator>
