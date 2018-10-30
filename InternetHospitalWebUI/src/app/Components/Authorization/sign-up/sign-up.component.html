@@ -1,49 +1,55 @@
-<div align="center">
-    <form [formGroup]="service.form" #signUpForm="ngForm" class="normal-form" (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--4-col mdl-cell--2-offset-desktop">
-          <div>
-            <div class="controles-row">
-              <mat-form-field>
-                <input formControlName="Email" matInput placeholder="Email*">
-                <mat-error>Invalid email address.</mat-error>
-              </mat-form-field>
-            </div>
-            <div class="controles-row">
-              <mat-form-field>
-                <input type="password" formControlName="Password" matInput placeholder="Password*">
-                <mat-error>This field is mandatory.</mat-error>
-              </mat-form-field>
-            </div>
-            <div class="controles-row">
-              <mat-form-field>
-                <input type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password*">
-                <mat-error>Passwords don't match.</mat-error>          
-              </mat-form-field>
-            </div>
-            <div class="add-bottom-padding">
-                <mat-radio-group formControlName="Role">
-                    <mat-radio-button value="Patient">Patient</mat-radio-button>
-                    <mat-radio-button value="Doctor">Doctor</mat-radio-button>
-                  </mat-radio-group>
-            </div>
-            <div>
-                <div class="button-row">
-                  <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid || isImageValid == false">Submit</button>
-                  <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
-                </div>
-              </div>
-          </div>
+<div id="GlobalDiv" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card>
+
+    <mat-card-header>
+      <mat-card-title>Registration</mat-card-title>
+    </mat-card-header>
+
+    <form fxLayout="row" fxFlexAlign="space-evenly center" [formGroup]="service.form" 
+    #signUpForm="ngForm" class="normal-form" (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data">
+
+      <mat-divider></mat-divider>
+
+      <div style="margin-top:20px" fxLayout="column" fxLayoutAlign="space-around center">
+        <div class="controles-row">
+          <mat-form-field>
+            <input required formControlName="Email" matInput placeholder="Email">
+            <mat-error>Invalid email address.</mat-error>
+          </mat-form-field>
         </div>
-        <div class="mdl-cell mdl-cell--4-col">
-          <div class="offset-md-3">
-            <div>
-              <input id="Image" formControlName="Image" #Image type="file"  accept="image/*" (change)="handleFileInput($event.target.files)" class="inputfile" name="Image">                  
-              <label class="mi-text-header" for="Image"><i class="fas fa-upload"></i><strong> Choose a photo..</strong></label> 
-            </div>
-            <img [src]="imageUrl" name="Caption" class="image-view">
+        <div class="controles-row">
+          <mat-form-field>
+            <input required type="password" formControlName="Password" matInput placeholder="Password">
+            <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="controles-row">
+          <mat-form-field>
+            <input required type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password">
+            <mat-error>Passwords don't match.</mat-error>          
+          </mat-form-field>
+        </div>
+        <div style="margin-top:-15px;">
+            <mat-radio-group formControlName="Role">
+                <mat-radio-button checked class="marginten" checked value="Patient">Patient</mat-radio-button>
+                <mat-radio-button class="marginten" value="Doctor">Doctor</mat-radio-button>
+              </mat-radio-group>
+        </div>
+        <div>
+          <input id="Image" formControlName="Image" #Image type="file" accept="image/*" (change)="handleFileInput($event.target.files)"
+          class="inputfile" name="Image">
+          <label class="mi-text-header" for="Image"><i class="fas fa-upload"></i><strong> Choose profile photo</strong></label>
+        </div>
+        <div>
+          <div div fxLayout="row" fxLayoutAlign="space-around center">
+            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="isImageValid == false || service.form.invalid">Submit</button>
+            <button class="marginbtn" mat-raised-button color="warn" (click)="onClear()">Clear</button>
           </div>
         </div>
       </div>
+      <div id="PictureDiv" fxLayout="column" fxLayoutAlign="end center">
+        <img [src]="imageUrl" name="Caption" class="image-view">
+      </div>
     </form>
-  </div>
+  </mat-card>
+</div>

@@ -1,6 +1,7 @@
-body{
-    height: 100%;
+#container{
+    height: 100vmin;
 }
+
 #left{
     background-color: #6ed3cf;
 }
@@ -21,72 +22,36 @@ body{
 }
 h1{
     color:#e1e8f0;
-    margin: 0;
+    margin: -40px;
 }
 h2{
     color:#e1e8f0;
-    margin: 0;
+    margin: 0px;
 }
 h3{
     color:#e1e8f0;
-    margin: 0;
+    margin: 0px;
 }
 h4{
     color:#e1e8f0;
-    margin: 0;
+    margin: -30px;
     float: right;
 }
-@media screen and (max-width: 750px) {
-    h1{       
-        font-family: 'Roboto', sans-serif;
-        font-size: 60px;  
-    }
-    h2{
-        font-family: 'Roboto', sans-serif;
-        font-size: 15px;
-    }
-    h3{
-        font-family: 'Roboto', sans-serif;
-        font-size: 10px;
-    }
-    #GoHome{
-        visibility: collapse;
-    }
-}
-@media screen and (min-width: 751px) {
+
     h1{
         font-family: 'Roboto', sans-serif;
         font-size: 200px;
     }
     h2{
         font-family: 'Roboto', sans-serif;
-        font-size: 50px;
+        font-size: 40px;
     }
     h3{
         font-family: 'Roboto', sans-serif;
-        font-size: 25px;
+        font-size: 20px;
     }
     h4{
         font-family: 'Roboto', sans-serif;
-        font-size: 15px;
+        font-size: 150px;
     }
-}
-@media screen and (min-width: 1080px) {
-    h1{
-        font-family: 'Roboto', sans-serif;
-        font-size: 300px;
-    }
-    h2{
-        font-family: 'Roboto', sans-serif;
-        font-size: 60px;
-    }
-    h3{
-        font-family: 'Roboto', sans-serif;
-        font-size: 30px;
-    }
-    h4{
-        font-family: 'Roboto', sans-serif;
-        font-size: 30px;
-    }
-}
-  
+

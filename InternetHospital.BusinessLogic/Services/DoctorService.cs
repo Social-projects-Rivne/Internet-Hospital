@@ -14,7 +14,7 @@ namespace InternetHospital.BusinessLogic.Services
             _context = context;
         }
 
-        public (IQueryable<DoctorsDto> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
+        public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
         {
             var _doctors = _context.Doctors.AsQueryable();
             if (queryParameters.SearchByName != null)
@@ -32,7 +32,7 @@ namespace InternetHospital.BusinessLogic.Services
             int doctorsAmount = _doctors.Count();
             var doctorsResult = _doctors
                 .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
-                .Take(queryParameters.PageCount).Select(x => new DoctorsDto
+                .Take(queryParameters.PageCount).Select(x => new DoctorModel
                 {
                     Id = x.UserId,
                     FirstName = x.User.FirstName,

@@ -1,16 +1,16 @@
-<div class="container">
-  <mat-grid-list cols="2">
-    <mat-grid-tile id="left">
-      <div>
-          <h1>4<span id="Zero">0</span>4</h1>
-          <h2>oops... </h2>
-          <h3>this page is not found</h3>
+<div id="container">
+
+    <div fxFlex id="left" fxLayout="column" fxLayoutAlign="center center" >
+      <div fxLayout="column" fxLayoutAlign="center end">
+          <h1 fxHide.xs >4<span id="Zero">0</span>4</h1>
+        <h2>oops...</h2>
+        <h3>this page is not found</h3>
           <h4 id="GoHome"><a id="GoHome" mat-button color="warn" [routerLink]="['']">return to home page?</a></h4>
       </div>     
-    </mat-grid-tile>
-    <mat-grid-tile id=right>   
-    </mat-grid-tile>
-  </mat-grid-list>
-  <div class="row">
-  </div>
+    </div>
+
+
+    <div fxHide.sm fxHide.xs fxShow.md fxFlex="50" fxLayout="column" id=right>   
+    </div>
+
 </div>

@@ -18,7 +18,7 @@ export class RegistrationService {
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
     ConfirmPassword: new FormControl('', [Validators.required, compareValidator('Password')]),
-    Role: new FormControl('', Validators.required),
+    Role: new FormControl(''),
     Image: new FormControl('', Validators.required)
   });
 
