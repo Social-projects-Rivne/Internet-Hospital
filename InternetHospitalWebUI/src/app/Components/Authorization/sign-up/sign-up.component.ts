@@ -31,6 +31,7 @@ export class SignUpComponent implements OnInit {
   fileToUpload: File = null;
   isImageValid: boolean = false;
   ngOnInit() {
+    this.service.form.controls['Role'].setValue('Patient');
   }
 
   onClear() {
