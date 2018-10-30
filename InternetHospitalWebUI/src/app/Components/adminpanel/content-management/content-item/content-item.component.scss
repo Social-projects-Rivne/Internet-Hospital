@@ -1,0 +1,85 @@
+.content-item{
+    display: inline-block;
+    margin:10px;
+    width:400px;
+    padding: 0;
+    word-break: break-all;
+
+    mat-card-header, .content-body{
+        padding: 16px;
+    }
+}
+
+
+
+.delete-button{
+    position: absolute;
+    right:-10px;
+    top:-10px;
+    font-size: 10px;
+    background-color: red;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border-width: 0;
+    min-width: 0;
+    padding: 0;
+    padding-top: 2px;
+    line-height: 0;
+}
+
+.slides {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.carousel{
+    margin-right: 0;
+    margin-left: 0;
+}
+.image-container{
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+.left-button, .right-button{
+    position: absolute;
+    top:250px;
+    height:150px;
+    padding-top: 10px;
+    margin-top: -50px;
+    font-size: 10em;
+    opacity: 0;
+}
+
+.right-button{
+    right:0;
+}
+
+.left-button{
+    left: 0;
+}
+
+.left-button:hover, .right-button:hover{
+    opacity:0.5;
+}
+
+
+.edit-button{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+}
+
+mat-card-content.content-body{
+    margin-bottom: 30px;
+    height: 70px;
+    
+    p{
+        height: 70px;
+        overflow: hidden;
+    }
+}

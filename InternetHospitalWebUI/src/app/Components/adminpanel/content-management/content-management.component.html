@@ -1,0 +1,12 @@
+<div class="content-page">
+  <div>
+    <app-content-edit [(content)]="selectedContent"></app-content-edit>
+  
+    <app-content-preview [content]="selectedContent"></app-content-preview>
+  </div>
+  <div>
+    <app-content-item *ngFor="let cont of contentItems" [content]="cont" (onChanged)="onChange($event)" (onDeleted)="onDelete(cont)"></app-content-item>
+  </div>
+  </div>
+  
+  

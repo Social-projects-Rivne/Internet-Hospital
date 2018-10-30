@@ -1,0 +1,20 @@
+<mat-card class="mat-elevation-z10 content-item">
+  <button class="delete-button" mat-button (click)="delete()">&#x2716;</button>
+  <mat-card-header>
+      <mat-card-title>{{content.Title}}</mat-card-title>
+  </mat-card-header>
+  <div class="carousel">
+    <div class="image-container">
+      <img class="slides" *ngFor="let img of content.Images" src="{{img}}"
+      [@imageDisplay]="img === imgs[slideIndex] ? 'displayed' : 'hidden'">
+      <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
+      <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
+    </div>
+  </div>
+  <mat-card-content class="content-body">
+    <p>
+      {{content.Body}}
+    </p>
+  </mat-card-content>
+  <button class="edit-button" mat-raised-button color="primary" (click)="edit()">Edit</button>
+</mat-card>

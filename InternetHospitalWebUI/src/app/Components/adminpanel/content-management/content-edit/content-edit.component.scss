@@ -1,0 +1,24 @@
+.content-edit{
+    width: 400px;
+    margin:10px;
+    display:inline-block;
+    text-align: center;
+    vertical-align: top;
+
+    button{
+        width: 85px;
+        margin: 5px;
+    }
+
+    mat-form-field{
+        width: 300px;
+    }
+
+    .return-button{
+        width:180px;
+    }
+
+    .text-body{
+        height:375px;
+    }
+}

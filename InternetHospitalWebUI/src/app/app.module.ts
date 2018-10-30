@@ -28,6 +28,9 @@ import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
+import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { SidebarComponent } from './Components/adminpanel/sidebar/sidebar.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +44,7 @@ import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-li
     DoctorListComponent,
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,8 @@ import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-li
     BrowserAnimationsModule,
     RoutingModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AdminpanelModule
   ],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],

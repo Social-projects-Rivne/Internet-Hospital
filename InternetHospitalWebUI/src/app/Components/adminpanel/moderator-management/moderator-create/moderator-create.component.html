@@ -1,0 +1,47 @@
+<div class="moder-create-container">
+  <mat-card class="mat-elevation-z10">
+  <form [formGroup]="service.form" #createForm="ngForm" (ngSubmit)="onSubmit(createForm)" enctype="multipart/form-data">
+          <div>
+            <mat-form-field>
+              <input formControlName="Email" matInput placeholder="Email">
+              <mat-error>Invalid email address.</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field>
+                <input formControlName="Surname" matInput placeholder="Surname">
+                <mat-error>Invalid surname address.</mat-error>
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field>
+                <input formControlName="Name" matInput placeholder="Name">
+                <mat-error>Invalid name.</mat-error>
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field>
+                <input formControlName="Lastname" matInput placeholder="Lastname">
+                <mat-error>Invalid lastname.</mat-error>
+              </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input type="password" formControlName="Password" matInput placeholder="Password">
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password">
+              <mat-error>Passwords don't match.</mat-error>          
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid || isImageValid == false">Submit</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+          </div>
+  </form>
+  <button mat-raised-button color="primary" class="return-button" (click)="returnToManagementPage()">Return</button>
+  </mat-card>
+</div>

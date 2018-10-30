@@ -1,0 +1,31 @@
+<mat-card class="mat-elevation-z10 content-edit">
+  <form [formGroup]="service.form" class="normal-form mat-elavation-z10" (ngSubmit)="onSubmit(contForm)" #contForm enctype="multipart/form-data">
+    <div>
+      <mat-form-field>
+        <input formControlName="Id" matInput [value]="content?.Id" placeholder="Id">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input formControlName="Title" [value]="content?.Title" matInput placeholder="Title">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <textarea formControlName="Body" class="text-body" maxlength="1000" [value]="content?.Body" matInput placeholder="Body"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input formControlName="Source" [value]="content?.Source" matInput placeholder="Source">
+      </mat-form-field>
+    </div>
+    <div>
+      <input formControlName="Images" placeholder="Images" type="file" accept="image/*" (change)="handleFileInput($event.target.files)" multiple>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+    </div>
+  </form>
+</mat-card>
