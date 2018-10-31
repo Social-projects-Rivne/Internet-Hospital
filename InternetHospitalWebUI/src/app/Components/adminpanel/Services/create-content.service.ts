@@ -19,7 +19,7 @@ export class CreateContentService {
     Body: new FormControl('', Validators.required)
   });
   files: string[];
-  
+
   initializeFormGroup() {
     this.form.setValue({
       Id: '',
@@ -30,17 +30,16 @@ export class CreateContentService {
     });
   }
 
-  putContent(content: Content, fileToUpload: string[]) {    
-    let formData = new FormData();
-    for(var i = 0; i < fileToUpload.length; ++i)
-    {
-      formData.append("Images", fileToUpload[i]);
+  putContent(content: Content, fileToUpload: string[]) {
+    const formData = new FormData();
+    for (let i = 0; i < fileToUpload.length; ++i) {
+      formData.append('Images', fileToUpload[i]);
     }
-    formData.append("Id", content.Id.toString());    
-    formData.append("Title", content.Title);
-    formData.append("Body", content.Body);
-    formData.append("Source", content.Source); 
+    formData.append('Id', content.Id.toString());
+    formData.append('Title', content.Title);
+    formData.append('Body', content.Body);
+    formData.append('Source', content.Source);
 
-    //place for sending
+    // place method for sending
   }
 }

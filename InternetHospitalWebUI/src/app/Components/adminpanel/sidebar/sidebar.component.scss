@@ -8,17 +8,22 @@
     z-index: 999;
     -ms-overflow-y: auto;
     overflow-y: auto;
+
     .mat-nav-list {
         width: 100%;
+
         a {
+            display: block;
+
             .mat-icon {
                 margin-right: 15px;
             }
-            display: block;
         }
     }
 }
+
 @media screen and (max-width: 992px) {
+    
     #sidebar {
         left: -250px;
     }

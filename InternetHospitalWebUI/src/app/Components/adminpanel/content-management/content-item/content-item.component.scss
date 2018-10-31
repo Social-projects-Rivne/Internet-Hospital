@@ -1,21 +1,19 @@
-.content-item{
+.content-item {
     display: inline-block;
-    margin:10px;
-    width:400px;
+    margin: 10px;
+    width: 400px;
     padding: 0;
     word-break: break-all;
 
-    mat-card-header, .content-body{
+    mat-card-header, .content-body {
         padding: 16px;
     }
 }
 
-
-
-.delete-button{
+.delete-button {
     position: absolute;
-    right:-10px;
-    top:-10px;
+    right: -10px;
+    top: -10px;
     font-size: 10px;
     background-color: red;
     margin: 0;
@@ -34,51 +32,51 @@
     width: 100%;
     height: 100%;
 }
-.carousel{
+.carousel {
     margin-right: 0;
     margin-left: 0;
 }
-.image-container{
+.image-container {
     position: relative;
     width: 100%;
     height: 500px;
 }
 
-.left-button, .right-button{
+.left-button, .right-button {
     position: absolute;
-    top:250px;
-    height:150px;
+    top: 250px;
+    height: 150px;
     padding-top: 10px;
     margin-top: -50px;
     font-size: 10em;
     opacity: 0;
 }
 
-.right-button{
+.right-button {
     right:0;
 }
 
-.left-button{
+.left-button { 
     left: 0;
 }
 
 .left-button:hover, .right-button:hover{
-    opacity:0.5;
+    opacity: 0.5;
 }
 
 
-.edit-button{
+.edit-button {
     position: absolute;
     bottom: 0;
     right: 0;
     width: 200px;
 }
 
-mat-card-content.content-body{
+mat-card-content.content-body {
     margin-bottom: 30px;
     height: 70px;
     
-    p{
+    p {
         height: 70px;
         overflow: hidden;
     }

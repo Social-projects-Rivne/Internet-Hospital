@@ -16,15 +16,17 @@ const MIN_HEIGHT_IMG = 300;
   templateUrl: './content-edit.component.html',
   styleUrls: ['./content-edit.component.scss']
 })
+
 export class ContentEditComponent implements OnInit {
-
-  constructor(private service: EditContentService, private imgService: ImageValidationService) { }
-
-  ngOnInit() {
-  }
 
   @Input() content: Content;
   imgs: File[] = null;
+
+  constructor(private service: EditContentService, private imgService: ImageValidationService) {
+  }
+
+  ngOnInit() {
+  }
 
 
   onClear() {
@@ -32,47 +34,47 @@ export class ContentEditComponent implements OnInit {
     this.content = null;
   }
 
-  handleFileInput(file : FileList){
+  handleFileInput(file: FileList) {
     this.imgs = [];
-    for(var i = 0; i < file.length && i < 5; ++i) {
-      var reader = new FileReader();
+
+    for (let i = 0; i < file.length && i < 5; ++i) {
+      const reader = new FileReader();
 
       reader.onload = (event: any) => {
-        if(event.target.readyState === FileReader.DONE) {
-          if (this.imgService.isImageFile(event.target.result) == false ) {
+        if (event.target.readyState === FileReader.DONE) {
+          if (this.imgService.isImageFile(event.target.result) === false ) {
             // notification service will replace this alert in future
-            alert("Only image files are acceptable!");
+            alert('Only image files are acceptable!');
           }
-          else{
-            var img = new Image();
-            
+          else {
+            const img = new Image();
+
             img.onload = () => {
-              if(this.imgService.hasImageValidSize(MAX_HEIGHT_IMG, MAX_WIDTH_IMG, 
-                                                    MIN_HEIGHT_IMG, MIN_WIDTH_IMG, 
+              if (this.imgService.hasImageValidSize(MAX_HEIGHT_IMG, MAX_WIDTH_IMG,
+                                                    MIN_HEIGHT_IMG, MIN_WIDTH_IMG,
                                                     img.height, img.width)) {
                 this.imgs.push(event.target.result);
               }
               else {
                 this.service.form.invalid;
                 // notification service will replace this alert in future
-                alert("Image is invalid! It might be too big or too small.");
+                alert('Image is invalid! It might be too big or too small.');
               }
-            }
+            };
             img.src = event.target.result;
           }
         }
-      }
+      };
       reader.readAsDataURL(file.item(i));
     }
   }
 
   onSubmit(form: NgForm) {
-    if(this.service.form.valid) {
+    if (this.service.form.valid) {
      // this.service.putContent(form.value, this.fileToUpload).subscribe(res => console.log(res)); 
-    }     
+    }
     this.service.form.reset();
     this.service.initializeFormGroup();
     this.content = null;
   }
-
 }

@@ -8,13 +8,6 @@ import { HomeComponent } from '../../Components/Home/home/home.component';
 import { Page404Component } from '../../Components/page404/page404.component';
 import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
 
-//import { AdminPanelComponent } from '../../Components/adminpanel/adminpanel.component';
-import { ModeratorManagementComponent } from '../../Components/adminpanel/moderator-management/moderator-management.component';
-import { ModeratorCreateComponent } from '../../Components/adminpanel/moderator-management/moderator-create/moderator-create.component';
-import { UserManagementComponent } from '../../Components/adminpanel/user-management/user-management.component';
-import { RequestManagementComponent } from "../../Components/adminpanel/request-management/request-management.component";
-import { ContentManagementComponent } from '../../Components/adminpanel/content-management/content-management.component';
-
 import { AuthGuard } from '../../Services/Guards/auth.guard';
 import { PatientGuard } from '../../Services/Guards/patient.guard';
 import { DoctorGuard } from '../../Services/Guards/doctor.guard';
@@ -38,8 +31,7 @@ const ROUTES: Routes = [
   { path: PAGE_404, component: Page404Component },
   { path: ADMIN_PANEL, redirectTo: ADMIN_PANEL, canActivate: [AdminGuard]},
   { path: '**', redirectTo: PAGE_404 },
-
-]
+];
 
 @NgModule({
   imports: [
@@ -58,4 +50,4 @@ export const ROUTING_COMPONENTS = [
   Page404Component,
   DoctorListComponent,
   HomeNewsComponent
-]
+];

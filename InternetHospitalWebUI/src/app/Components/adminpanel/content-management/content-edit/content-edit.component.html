@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z10 content-edit">
-  <form [formGroup]="service.form" class="normal-form mat-elavation-z10" (ngSubmit)="onSubmit(contForm)" #contForm enctype="multipart/form-data">
+  <form [formGroup]="service.form" class="mat-elavation-z10" (ngSubmit)="onSubmit(contForm)" #contForm enctype="multipart/form-data">
     <div>
       <mat-form-field>
         <input formControlName="Id" matInput [value]="content?.Id" placeholder="Id">

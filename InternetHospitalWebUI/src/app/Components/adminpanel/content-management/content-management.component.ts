@@ -10,11 +10,13 @@ import { Content } from '../../../Models/Content';
 export class ContentManagementComponent implements OnInit {
 
   selectedContent: Content = null;
-  contentItems: Content[] = []; 
-  constructor() { }
+  contentItems: Content[] = [];
+
+  constructor() {
+  }
 
   ngOnInit() {
-    for(var i = 0; i < 5; ++i) {
+    for (let i = 0; i < 5; ++i) {
       this.contentItems.push(createNewContent(i));
     }
   }
@@ -24,16 +26,16 @@ export class ContentManagementComponent implements OnInit {
   }
 
   onDelete(sel: Content) {
-    var ind = this.contentItems.indexOf(sel);
+    const ind = this.contentItems.indexOf(sel);
     this.contentItems.splice(ind, 1);
-    
-    //method for delete from DB
+
+    // method for delete from DB
   }
 
 }
 
-//Generating data
-// Constants used to fill up our data base. 
+// Generating data
+// Constants used to fill up our data base.
 const SURNAMES = [
   'Cook',
   'Smith',
@@ -73,27 +75,25 @@ const NAMES = [
   'Elizabeth'
 ];
 
-//Builds and returns a new Content. 
+// Builds and returns a new Content.
 function createNewContent(id: number): Content {
   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
   const surname = SURNAMES[Math.round(Math.random() * (SURNAMES.length - 1))];
   const lastname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
-  const email = surname.substr(0, Math.round(Math.random() * surname.length)) 
-                + name.substr(0, Math.round(Math.random() * name.length)) 
-                + "@gmail.com";
+  const email = surname.substr(0, Math.round(Math.random() * surname.length))
+                + name.substr(0, Math.round(Math.random() * name.length))
+                + '@gmail.com';
 
-  var cont: Content = new Content();
+  const cont: Content = new Content();
   cont.Id = id;
   cont.Title = email;
   cont.Source = lastname;
-  cont.Images = [ "https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg",
-  "https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg",
-  "https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg"
-];
-  cont.Body = "";
-  for(var i = 0; i < 100; ++i)
-  {
-    cont.Body += "wwwwwwwwww"
+  cont.Images = [ 'https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
+                  'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
+                  'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg'];
+  cont.Body = '';
+  for (let i = 0; i < 100; ++i) {
+    cont.Body += 'wwwwwwwwww';
   }
   return cont;
 }

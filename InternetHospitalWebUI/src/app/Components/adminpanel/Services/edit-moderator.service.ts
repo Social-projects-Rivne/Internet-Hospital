@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { Moder } from '../../../Models/Moder';
 import { HOST_URL } from '../../../config';
-import { compareValidator } from "../../../Directives/compare-validator.directive";
+import { compareValidator } from '../../../Directives/compare-validator.directive';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class EditModeratorService {
   url = HOST_URL + '/somelink';
   httpOptions = { headers: new HttpHeaders({
     'Content-Type': 'application/json'
-  })};  
+  })};
 
   constructor(private http: HttpClient) { }
 
@@ -29,15 +29,15 @@ export class EditModeratorService {
   initializeFormGroup() {
     this.form.setValue({
       Name: '',
-      Surname:'',
-      Lastname:'',
+      Surname: '',
+      Lastname: '',
       Password: '',
       ConfirmPassword: '',
     });
   }
 
-  putModer(moder: Moder) {    
-    var body = JSON.stringify(moder);
+  putModer(moder: Moder) {
+    const body = JSON.stringify(moder);
     return this.http.put<Moder>(this.url, body, this.httpOptions);
   }
 }

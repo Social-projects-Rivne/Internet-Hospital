@@ -5,7 +5,7 @@ import { AdminPanelComponent } from './adminpanel.component';
 import { AdminpanelRoutingModule } from './adminpanel-routing.module';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { AdminHeaderComponent } from './admin-header/admin-header.component'
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 import { UserManagementComponent } from '../adminpanel/user-management/user-management.component';
 import { RequestManagementComponent } from '../adminpanel/request-management/request-management.component';
@@ -28,8 +28,10 @@ import { MatFormFieldModule,
         MatButtonModule,
         MatMenuModule
       } from '@angular/material';
-        
-import { FormsModule, 
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -49,19 +51,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatMenuModule,
     FormsModule,
-    ReactiveFormsModule, 
-    BrowserAnimationsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   declarations: [
     AdminPanelComponent,
-    SidebarComponent, 
+    SidebarComponent,
     AdminHeaderComponent,
-    UserManagementComponent, 
-    RequestManagementComponent, 
-    ModeratorManagementComponent, 
-    ModeratorCreateComponent, 
-    ContentManagementComponent, 
-    ContentPreviewComponent, 
+    UserManagementComponent,
+    RequestManagementComponent,
+    ModeratorManagementComponent,
+    ModeratorCreateComponent,
+    ContentManagementComponent,
+    ContentPreviewComponent,
     ContentEditComponent,
     ContentItemComponent
   ],
