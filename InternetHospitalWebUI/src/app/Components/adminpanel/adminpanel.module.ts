@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { AdminPanelComponent } from './adminpanel.component';
 import { AdminpanelRoutingModule } from './adminpanel-routing.module';
-//import { SidebarComponent } from '../adminpanel/sidebar/sidebar.component';
+
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { AdminHeaderComponent } from './admin-header/admin-header.component'
 
 import { UserManagementComponent } from '../adminpanel/user-management/user-management.component';
 import { RequestManagementComponent } from '../adminpanel/request-management/request-management.component';
@@ -23,7 +25,8 @@ import { MatFormFieldModule,
         MatToolbarModule,
         MatIconModule,
         MatListModule,
-        MatButtonModule
+        MatButtonModule,
+        MatMenuModule
       } from '@angular/material';
         
 import { FormsModule, 
@@ -44,12 +47,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatPaginatorModule,
     MatCheckboxModule,
     MatCardModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule, 
     BrowserAnimationsModule
   ],
   declarations: [
-    //SidebarComponent, 
+    AdminPanelComponent,
+    SidebarComponent, 
+    AdminHeaderComponent,
     UserManagementComponent, 
     RequestManagementComponent, 
     ModeratorManagementComponent, 
@@ -59,7 +65,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContentEditComponent,
     ContentItemComponent
   ],
-  providers: [],
-  bootstrap: [AdminPanelComponent, /*SidebarComponent*/]
+  providers: []
 })
 export class AdminpanelModule { }

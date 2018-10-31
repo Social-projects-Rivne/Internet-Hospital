@@ -29,8 +29,6 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
-import { SidebarComponent } from './Components/adminpanel/sidebar/sidebar.component'
-import { AdminHeaderComponent } from './Components/adminpanel/admin-header/admin-header.component'
 
 @NgModule({
   declarations: [
@@ -44,9 +42,7 @@ import { AdminHeaderComponent } from './Components/adminpanel/admin-header/admin
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
-    DoctorListSearchItemComponent,
-    SidebarComponent,
-    AdminHeaderComponent
+    DoctorListSearchItemComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +55,7 @@ import { AdminHeaderComponent } from './Components/adminpanel/admin-header/admin
     FlexLayoutModule,
     AdminpanelModule
   ],
+  exports:[MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
