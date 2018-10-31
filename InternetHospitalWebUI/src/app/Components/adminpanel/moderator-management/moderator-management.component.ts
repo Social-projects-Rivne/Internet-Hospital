@@ -26,6 +26,7 @@ export class ModeratorManagementComponent implements OnInit {
   displayedColumns = ['select', 'id', 'email', 'surname', 'name', 'lastname', 'status', 'edit'];
   dataColumns = ['id', 'email', 'surname', 'name', 'lastname', 'status'];
   displayedRow: UserData;
+  previousRow: UserData;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private service: EditModeratorService, private router: Router){
@@ -40,6 +41,10 @@ export class ModeratorManagementComponent implements OnInit {
 
   ngOnInit(){
     this.dataSource.paginator = this.paginator;
+  }
+  
+  isShowing(row): boolean {
+    return row === this.displayedRow || row === this.previousRow;
   }
 
   isAllSelected() {
@@ -74,8 +79,7 @@ export class ModeratorManagementComponent implements OnInit {
       this.service.initializeFormGroup();
     }
   }
- 
-
+   
   createNewModer()
   {
     this.router.navigate(['/supersecurityadminpanel/createmod']);

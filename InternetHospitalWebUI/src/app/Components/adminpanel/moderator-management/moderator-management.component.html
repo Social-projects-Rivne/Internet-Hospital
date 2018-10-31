@@ -39,7 +39,7 @@
         <td mat-cell *matCellDef="let moder" [attr.colspan]="displayedColumns.length">
           <div class="moder-detail"
             [@detailExpand]="moder === displayedRow ? 'expanded' : 'collapsed'">
-            <mat-card class="mat-elevation-z10">
+            <mat-card class="mat-elevation-z10" *ngIf="isShowing(moder)">
               <form [formGroup]="service.form" #editForm="ngForm" (ngSubmit)="editModer(editForm)" enctype="multipart/form-data">
                 <div>
                   <mat-form-field>
