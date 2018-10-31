@@ -11,7 +11,7 @@ import { AdminPanelComponent } from './adminpanel.component';
 import { CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE} from './routesConfig';
 const routes: Routes = [
   {
-      path: '',
+      path: 'admpanel',
       component: AdminPanelComponent,
       children: [
           {

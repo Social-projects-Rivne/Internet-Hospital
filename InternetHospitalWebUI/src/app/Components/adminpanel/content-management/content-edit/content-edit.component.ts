@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Content } from '../../../../Models/Content';
-import { ImageValidationService } from '../../../../services/image-validation.service';
+import { ImageValidationService } from '../../../../Services/image-validation.service';
 import { EditContentService } from '../../services/edit-content.service';
 import { CreateContentService } from '../../services/create-content.service';
 

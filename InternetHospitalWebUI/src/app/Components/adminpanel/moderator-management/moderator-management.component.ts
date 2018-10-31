@@ -78,7 +78,7 @@ export class ModeratorManagementComponent implements OnInit {
 
   createNewModer()
   {
-    this.router.navigate(['/createmod']);
+    this.router.navigate(['/supersecurityadminpanel/createmod']);
   }
 }
 

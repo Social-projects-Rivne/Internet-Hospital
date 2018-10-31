@@ -30,6 +30,7 @@ import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-li
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
 import { SidebarComponent } from './Components/adminpanel/sidebar/sidebar.component'
+import { AdminHeaderComponent } from './Components/adminpanel/admin-header/admin-header.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SidebarComponent } from './Components/adminpanel/sidebar/sidebar.compon
     DoctorListComponent,
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
-    SidebarComponent
+    SidebarComponent,
+    AdminHeaderComponent
   ],
   imports: [
     BrowserModule,

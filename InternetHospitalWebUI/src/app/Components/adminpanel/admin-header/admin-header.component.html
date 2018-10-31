@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="fix-nav">
+  <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <div class="nav-brand">
+    <button id="HeaderButton" mat-button [routerLink]="['/']">
+      <img width="40" height="40" src="../../../assets/img/LogoCircle.png">
+      <span class="header">
+          <span class="color_red"> I</span>nternet
+          <span class="color_blue"> H</span>ospital
+      </span>
+    </button>
+  </div>
+  
+  <!-- Space -->
+  <span class="example-fill-remaining-space"></span>
+
+  <!-- Phone Menu -->
+  <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.sm fxHide.md fxHide.lg>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <br><a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
+    <br>a mat-button routerLink="/sign-in">Sign out</a>
+  </mat-menu>
+  
+  <!-- Desktop Menu -->
+  <div id="DeskMenu" fxHide.xs>
+    <a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
+    <button mat-button [matMenuTriggerFor]="appMenu">
+      <img class="user-avatar" src="https://blog.circle.com/content/images/2018/04/rachel.png" />
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+ </div>
+  
+  <mat-menu #appMenu="matMenu" [overlapTrigger]="false" xPosition="before">
+    <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+    <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
+  </mat-menu>
+</mat-toolbar>
