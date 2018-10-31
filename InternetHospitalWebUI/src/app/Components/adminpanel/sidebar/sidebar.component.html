@@ -1,6 +1,6 @@
 <div id="sidebar">
   <mat-nav-list>
-      <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['moders']">
+      <a mat-list-item [routerLinkActive]="'active'" (click)="showUser()" [routerLink]="moders">
           <mat-icon class="sidenav-icon">supervised_user_circle</mat-icon> Moderators
       </a>
       <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['users']">

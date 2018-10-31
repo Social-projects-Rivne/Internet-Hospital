@@ -9,9 +9,11 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { AdminPanelComponent } from './adminpanel.component';
 
 import { CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE} from './routesConfig';
+
+import { ADMIN_PANEL } from '../../config';
 const routes: Routes = [
   {
-      path: 'admpanel',
+      path: ADMIN_PANEL,
       component: AdminPanelComponent,
       children: [
           {

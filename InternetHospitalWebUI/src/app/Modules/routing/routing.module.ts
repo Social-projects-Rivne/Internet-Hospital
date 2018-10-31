@@ -36,41 +36,7 @@ const ROUTES: Routes = [
     ]
   },
   { path: PAGE_404, component: Page404Component },
-  { path: ADMIN_PANEL, component: AdminPanelComponent, canActivate: [AdminGuard],
-    children: [
-      {
-          path: '',
-          redirectTo: 'moders',
-          pathMatch: 'full'
-      },
-      {
-          path: 'moders',
-          component: ModeratorManagementComponent,
-          pathMatch: 'full'
-      },
-      {
-        path: 'users',
-        component: UserManagementComponent,
-        pathMatch: 'full'
-      },
-      {
-          path: 'requests',
-          component: RequestManagementComponent,
-          pathMatch: 'full'
-      },
-      {
-          path: 'contents',
-          component: ContentManagementComponent,
-          pathMatch: 'full'
-      },
-      {
-          path: 'createmod',
-          component: ModeratorCreateComponent,
-          pathMatch: 'full'
-      },
-  ]
-},
-
+  { path: ADMIN_PANEL, redirectTo: ADMIN_PANEL, canActivate: [AdminGuard]},
   { path: '**', redirectTo: PAGE_404 },
 
 ]

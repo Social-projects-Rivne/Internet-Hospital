@@ -11,7 +11,16 @@ export class SidebarComponent implements OnInit {
 
   constructor() { }
 
-  users = "/admpanel/" + this.users;
+  users = "/"  + ADMIN_PANEL +  "/" + USERS_MNG;
+  moders = "/"  + ADMIN_PANEL +  "/"+ MODERATORS_MNG;
+  contents = "/" + ADMIN_PANEL + "/" + CONTENTS_MNG;
+  requests = "/" + ADMIN_PANEL + "/" + REQUESTS_MNG+"']";
+
+  showUser()
+  {
+    console.log(this.users);
+    console.log(this.moders);
+  }
 
   ngOnInit() {
     console.log(this.users);
