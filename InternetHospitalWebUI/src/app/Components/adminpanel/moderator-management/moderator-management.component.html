@@ -1,0 +1,80 @@
+<div>
+  <button mat-raised-button (click)="createNewModer()" color="primary">Create</button>
+  <button mat-raised-button color="warn" [disabled]="!selection.hasValue()">Delete selected</button>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of dataColumns">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-button color="primary" (click)="changeRow(row)" class="expand-button">
+            <mat-icon>{{ row === displayedRow ? "keyboard_arrow_up" : "keyboard_arrow_down"}}</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let moder" [attr.colspan]="displayedColumns.length">
+          <div class="moder-detail" [@detailExpand]="moder === displayedRow ? 'expanded' : 'collapsed'">
+            <mat-card class="mat-elevation-z10" *ngIf="isShowing(moder)">
+              <form [formGroup]="service.form" #editForm="ngForm" (ngSubmit)="editModer(editForm)" enctype="multipart/form-data">
+                <div>
+                  <mat-form-field>
+                    <input matInput formControlName="Name" [value]="displayedRow?.name" placeholder="Name">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput formControlName="Surname" [value]="displayedRow?.surname" placeholder="Surname">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput formControlName="Lastname" [value]="displayedRow?.lastname" placeholder="Lastname">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput formControlName="Password" placeholder="Password">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput formControlName="ConfirmPassword" placeholder="Confirm password">
+                    <mat-error>Passwords don't match.</mat-error>
+                  </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid || isImageValid == false">Update</button>
+                <button mat-raised-button color="warn">Delete</button>
+              </form>
+            </mat-card>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="element-row" [class.example-expanded-row]="displayedRow === element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

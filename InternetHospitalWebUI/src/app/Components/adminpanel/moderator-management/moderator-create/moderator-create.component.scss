@@ -1,0 +1,21 @@
+.moder-create-container{
+    width:100%;
+    text-align:center;
+    
+    mat-form-field{
+        width: 300px;
+    }
+
+    button{
+        width: 145px;
+        margin: 5px;
+    }
+    .mat-card{
+        width:350px;
+        display:inline-block;
+        .return-button{
+            width:300px;
+            background-color: lightseagreen;
+        }
+    }
+}

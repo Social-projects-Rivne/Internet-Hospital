@@ -4,10 +4,10 @@ import { AuthenticationService } from '../../Services/authentication.service';
 @Injectable()
 export class AdminGuard implements CanActivate {
 
-    constructor(private router: Router,private authenticationService: AuthenticationService) { }
+    constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        
+        // console.log(this.authenticationService.hasAdminRole());
         if (this.authenticationService.hasAdminRole()) {  
             return true;
         }        

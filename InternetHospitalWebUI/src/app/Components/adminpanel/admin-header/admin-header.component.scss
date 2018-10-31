@@ -1,0 +1,76 @@
+:host {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand {
+    width: 215px;
+    text-align: center;
+}
+
+.topnav-icon {
+    text-decoration: none;
+    display: flex;
+    color: #fff;
+}
+
+.nav-spacer {
+    flex: 1 1 auto;
+}
+
+.visible-md {
+    display: none;
+}
+
+.visible-sm {
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    .visible-md {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .visible-sm {
+        display: block;
+    }
+
+    .nav-brand {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .hidden-sm {
+        display: none;
+    }
+}
+
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+  }
+
+  #HeaderButton {
+    padding: 5px;
+  }
+
+  .color_blue {
+    color: \#6ed3cf
+  }
+
+  .color_red {
+    color:#e62030;
+  }
+
+  .header {
+    font-size: 25px
+  }
+
+  .user-avatar {
+    height:30px;
+  }

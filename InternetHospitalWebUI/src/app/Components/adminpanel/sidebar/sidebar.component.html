@@ -1,0 +1,16 @@
+<div id="sidebar">
+  <mat-nav-list>
+    <a mat-list-item [routerLinkActive]="'active'" [routerLink]="moders">
+      <mat-icon class="sidenav-icon">supervised_user_circle</mat-icon> Moderators
+    </a>
+    <a mat-list-item [routerLinkActive]="'active'" [routerLink]="users">
+      <mat-icon class="sidenav-icon">group</mat-icon> Users
+    </a>
+    <a mat-list-item [routerLinkActive]="'active'" [routerLink]="requests">
+      <mat-icon class="sidenav-icon">bar_chart</mat-icon> Requests
+    </a>
+    <a mat-list-item [routerLinkActive]="'active'" [routerLink]="contents">
+      <mat-icon class="sidenav-icon">view_module</mat-icon> Content
+    </a>
+  </mat-nav-list>
+</div>

@@ -7,7 +7,6 @@ import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.
 import { HomeComponent } from '../../Components/Home/home/home.component';
 import { Page404Component } from '../../Components/page404/page404.component';
 import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
-import { AdminPanelComponent } from '../../Components/adminpanel/adminpanel.component';
 
 import { AuthGuard } from '../../Services/Guards/auth.guard';
 import { PatientGuard } from '../../Services/Guards/patient.guard';
@@ -30,11 +29,9 @@ const ROUTES: Routes = [
     ]
   },
   { path: PAGE_404, component: Page404Component },
-  { path: ADMIN_PANEL, component: AdminPanelComponent, canActivate: [AdminGuard] },
-
+  { path: ADMIN_PANEL, redirectTo: ADMIN_PANEL, canActivate: [AdminGuard]},
   { path: '**', redirectTo: PAGE_404 },
-
-]
+];
 
 @NgModule({
   imports: [
@@ -51,7 +48,6 @@ export const ROUTING_COMPONENTS = [
   SignInComponent,
   HomeComponent,
   Page404Component,
-  AdminPanelComponent,
   DoctorListComponent,
   HomeNewsComponent
-]
+];
