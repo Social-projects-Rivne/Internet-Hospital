@@ -4,11 +4,6 @@ export class Filter {
     isWithParams: boolean;
   
     public CheckIfPropertyExist():void {
-      if (this.searchKey || this.selectedSpecialization) {
-        this.isWithParams = true;
-      }
-      else {
-        this.isWithParams = false;
-      }
+      this.isWithParams = this.searchKey || this.selectedSpecialization ? true : false;
     }
   }
