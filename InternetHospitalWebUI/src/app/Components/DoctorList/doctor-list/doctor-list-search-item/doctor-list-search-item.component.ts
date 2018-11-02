@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Specialization } from 'src/app/Models/Specialization';
-import { DoctorsService } from 'src/app/Services/doctors.service';
-import { PaginationService } from 'src/app/Services/pagination.service';
-import { PageEvent } from '@angular/material/paginator';
+import { Filter } from "../../../../Models/Filter";
 
 @Component({
   selector: 'app-doctor-list-search-item',
@@ -15,19 +13,18 @@ export class DoctorListSearchItemComponent implements OnInit {
   @Output()
   onSearch = new EventEmitter();
 
-  selectedSpecialization = "";
-  searchKey: string;
+  filter = new Filter();
 
-  constructor(private service: DoctorsService, private paginationService: PaginationService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   search() {
-    this.onSearch.emit({ searchKey: this.searchKey, selectedSpecialization: this.selectedSpecialization });
+    this.onSearch.emit(this.filter);
   }
 
   onSearchClear() {
-    this.searchKey = "";
+    this.filter.searchKey = "";
   }
 }

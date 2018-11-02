@@ -54,7 +54,7 @@ namespace InternetHospital.BusinessLogic.Validation
                     return img;
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }
