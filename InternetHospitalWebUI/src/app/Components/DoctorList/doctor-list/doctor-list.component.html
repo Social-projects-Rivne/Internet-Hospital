@@ -1,10 +1,13 @@
-<div class="container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <div fxFlex="20%">
-    <app-doctor-list-search-item (onSearch)="onSearch($event)" [specializations]="service.specializations"></app-doctor-list-search-item>
+<div class="container">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <div fxFlex="20%">
+      <app-doctor-list-search-item (onSearch)="onSearch($event)" [specializations]="service.specializations"></app-doctor-list-search-item>
+    </div>
+    <div fxFlex="80%">
+      <app-doctor-list-item *ngFor="let doctor of service.doctorsList" [doctor]="doctor"></app-doctor-list-item>
+    </div>
   </div>
-  <div fxFlex="80%" >
-    <app-doctor-list-item *ngFor="let doctor of service.doctorsList" [doctor]="doctor"></app-doctor-list-item>
-  </div>
-</div>
-<mat-paginator fxLayoutAlign="end start" [length]="service.doctorsAmount" [pageSize]="pagService.pageSize" (page)="pageSwitch($event)" [hidePageSize]="true">
+  <mat-paginator class="container-bottom" fxLayoutAlign="end start" [length]="service.doctorsAmount" [pageSize]="pagService.pageSize"
+  (page)="pageSwitch($event)" [hidePageSize]="true">
 </mat-paginator>
+</div>

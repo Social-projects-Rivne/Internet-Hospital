@@ -1,3 +1,5 @@
-.container {
-    height: 150vh;
+.container {    
+    min-height: 100%;
+    overflow: auto;
+    padding-bottom: 350px;
 }
