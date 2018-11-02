@@ -13,24 +13,31 @@
     <span class="example-fill-remaining-space"></span>
 
     <!-- Phone Menu -->
-    <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.gt-xs>
-        <mat-icon>more_vert</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.sm fxHide.md fxHide.lg>
+        <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+        <a mat-button routerLink="/doctor-list">Doctor's List</a>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
-        <br><button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
-        <br><a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
+        <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
+        <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/']">My history</button>
+        <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">My plans</button>
+        <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+        <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
     </mat-menu>
 
     <!-- Desktop Menu -->
     <div id="DeskMenu" fxHide.xs>
-        <a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
+        <a mat-button routerLink="/doctor-list">Doctor's List</a>
         <button *ngIf="(isLoggedIn | async)" mat-button [matMenuTriggerFor]="appMenu">
             <img class="user-avatar" src="https://blog.circle.com/content/images/2018/04/rachel.png" />
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
+        
     </div>
 
 </mat-toolbar>
