@@ -101,7 +101,7 @@ namespace InternetHospital.WebApi.controllers
             else
             {
                 ModelState.AddModelError("", "Wrong form!");
-                return BadRequest(ModelState);
+                return BadRequest( new { message = ModelState.Root.Errors[0].ErrorMessage });
             }            
         }
 
