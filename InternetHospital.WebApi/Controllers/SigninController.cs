@@ -49,6 +49,7 @@ namespace InternetHospital.WebApi.Controllers
             }
             return Ok(new
             {
+                user_avatar = user.AvatarURL,
                 access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
                 refresh_token = _tokenService.GenerateRefreshToken(user).Token
             });
