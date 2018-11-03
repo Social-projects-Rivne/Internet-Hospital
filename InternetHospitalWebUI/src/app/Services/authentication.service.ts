@@ -34,7 +34,7 @@ export class  AuthenticationService  {
                     this.isLoginSubject.next(true);
                     //set user role depending on the token claims
                     this.setUserRole();
-                    this.AvatarURL.next(this.url + user.user_avatar);                    
+                    this.AvatarURL.next(this.checkAvatarUrl());                    
                 }
                 return user;
             }));
