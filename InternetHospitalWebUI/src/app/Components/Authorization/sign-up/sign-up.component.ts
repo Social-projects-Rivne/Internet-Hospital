@@ -91,7 +91,6 @@ export class SignUpComponent implements OnInit {
             },
             error => {
               this.notification.error(error);
-              console.log({error});
             });
   }
 }
