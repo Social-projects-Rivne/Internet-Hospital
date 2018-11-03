@@ -1,7 +1,7 @@
 <div class="container" fxLayout="row" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
   <mat-card>
     <div fxFlex="20%">
-      <img mat-card-image [src]="urlAvatar">
+      <img [src]="urlAvatar" class="user-avatar">
     </div>
     <div fxFlex="40%" fxLayout="column" fxLayoutAlign="center">
       <mat-card-content class="mat-display-1" fxFlex>{{doctor.secondName}} {{doctor.firstName}} {{doctor.thirdName}}</mat-card-content>
