@@ -1,0 +1,25 @@
+#GlobalDiv{
+    background-color: #e1e8f0;
+    height: 100vh;
+}
+#FatherCard{
+    max-width: 700px;
+    min-width: 300px;
+    width: 50%;
+}
+#RadioBlock{
+    margin-top:15px;
+}
+
+.InputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top:10px;
+}
+  
+.InputContainer > * {
+    width: 100%;
+}
+#FeedBackArea{
+    min-height: 250px;
+}

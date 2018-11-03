@@ -1,0 +1,36 @@
+<div id="GlobalDiv" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card id="FatherCard">
+
+    <mat-card-header>
+      <mat-card-title>Request</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    
+    <form>
+      
+      <div id="RadioBlock">
+        <mat-radio-group fxLayout="row" fxLayoutAlign="space-evenly center">
+            <mat-radio-button value="FeedBack">Feedback</mat-radio-button>
+            <mat-radio-button value="Request">Request</mat-radio-button>
+            <mat-radio-button value="Complaint">Complaint</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      
+      <div class="InputContainer">
+          <mat-form-field appearance="outline">
+              <mat-label>Enter text here</mat-label>
+              <textarea id="FeedBackArea" matInput></textarea>
+          </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-button [routerLink]="['/']" >Back</button>
+          <button mat-raised-button color="primary">Submit</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+
+</div>

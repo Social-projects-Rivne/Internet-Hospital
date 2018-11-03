@@ -29,6 +29,7 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
-    DoctorListSearchItemComponent
+    DoctorListSearchItemComponent,
+    FeedbacksComponent
   ],
   imports: [
     BrowserModule,
