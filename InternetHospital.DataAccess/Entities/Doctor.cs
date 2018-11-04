@@ -16,5 +16,6 @@ namespace InternetHospital.DataAccess.Entities
         public virtual User User { get; set; }
         public virtual Specialization Specialization { get; set; }
         public virtual ICollection<Diploma> Diplomas { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
