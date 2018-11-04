@@ -1,6 +1,7 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
+using InternetHospital.DataAccess.Entities;
 using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
@@ -17,6 +18,7 @@ namespace InternetHospital.BusinessLogic.Services
         public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
         {
             var _doctors = _context.Doctors.AsQueryable();
+
             if (queryParameters.SearchByName != null)
             {
                 var toLowerSearchParameter = queryParameters.SearchByName.ToLower();
@@ -25,14 +27,23 @@ namespace InternetHospital.BusinessLogic.Services
                     || x.User.SecondName.ToLower().Contains(toLowerSearchParameter)
                     || x.User.ThirdName.ToLower().Contains(toLowerSearchParameter));
             }
+
             if (queryParameters.SearchBySpecialization != null)
             {
                 _doctors = _doctors.Where(x => x.SpecializationId == queryParameters.SearchBySpecialization);
             }
+
             int doctorsAmount = _doctors.Count();
-            var doctorsResult = _doctors
-                .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
-                .Take(queryParameters.PageCount).Select(x => new DoctorModel
+            var doctorsResult = PaginationHelper(_doctors, queryParameters.PageCount, queryParameters.Page);
+
+            return (doctorsResult, doctorsAmount);
+        }
+
+        private IQueryable<DoctorModel> PaginationHelper(IQueryable<Doctor> doctors, int pageCount, int page)
+        {
+            var doctorsModel = doctors
+                .Skip(pageCount * (page - 1))
+                .Take(pageCount).Select(x => new DoctorModel
                 {
                     Id = x.UserId,
                     FirstName = x.User.FirstName,
@@ -41,7 +52,8 @@ namespace InternetHospital.BusinessLogic.Services
                     AvatarURL = x.User.AvatarURL,
                     Specialization = x.Specialization.Name
                 });
-            return (doctorsResult, doctorsAmount);
+
+            return doctorsModel;
         }
 
     }

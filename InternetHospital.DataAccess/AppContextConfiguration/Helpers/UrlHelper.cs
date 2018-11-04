@@ -11,5 +11,6 @@ namespace InternetHospital.DataAccess.AppContextConfiguration.Helpers
         public static string RoleConfigJSON { get; } = "RoleConfigurationJSON.json";
         public static string UserConfigJSON { get; } = "UserConfigurationJSON.json";
         public static string SpecializationConfigJSON { get; } = "SpecializationConfigurationJSON.json";
+        public static string AppointmentStatusConfigJSON { get; set; } = "AppointmentStatusConfigurationJSON.json";
     }
 }

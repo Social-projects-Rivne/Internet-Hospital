@@ -17,6 +17,7 @@ export class DoctorListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    this.filter = new Filter();
     this.service.getDoctors();
     this.service.getSpecializations();
   }

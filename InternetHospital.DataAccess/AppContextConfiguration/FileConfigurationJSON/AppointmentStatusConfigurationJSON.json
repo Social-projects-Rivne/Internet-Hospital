@@ -1,0 +1,27 @@
+[
+  {
+    "Id": "1",
+    "Name": "Open",
+    "Description": "Appointment is created. No one signed up"
+  },
+  {
+    "Id": "2",
+    "Name": "Reserved",
+    "Description": "Patient signed up for appointment"
+  },
+  {
+    "Id": "3",
+    "Name": "Canceled",
+    "Description": "Doctor canceled an appointment"
+  },
+  {
+    "Id": "4",
+    "Name": "Finished",
+    "Description": "Patient has been accepted"
+  },
+  {
+    "Id": "5",
+    "Name": "Missed",
+    "Description": "Appointmem is missed by patient"
+  }
+]
