@@ -3,6 +3,8 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -13,6 +15,34 @@ namespace InternetHospital.BusinessLogic.Services
         public DoctorService(ApplicationContext context)
         {
             _context = context;
+        }
+
+        public DoctorDetailedModel Get(int id)
+        {
+            DoctorDetailedModel returnedModel = null;
+            DateTime dt = DateTime.Now;
+            var serchedDoctor = _context.Doctors.Include(d => d.User).Include(d => d.Specialization).Include(d => d.Diplomas)
+                .FirstOrDefault(d => d.UserId == id && d.User != null);
+            var firstVar = DateTime.Now - dt;
+            dt = DateTime.Now;
+            if (serchedDoctor != null)
+            {
+                returnedModel = new DoctorDetailedModel
+                {
+                    Id = serchedDoctor.UserId,
+                    FirstName = serchedDoctor.User.FirstName,
+                    SecondName = serchedDoctor.User.SecondName,
+                    ThirdName = serchedDoctor.User.ThirdName,
+                    BirthDate = serchedDoctor.User.BirthDate,
+                    Address = serchedDoctor.Address,
+                    Specialization = serchedDoctor.Specialization.Name,
+                    DoctorsInfo = serchedDoctor.DoctorsInfo,
+                    AvatarURL = serchedDoctor.User.AvatarURL,
+                    LicenseURL = serchedDoctor.LicenseURL,
+                    DiplomaURL = serchedDoctor.Diplomas.Where(d => d.IsValid == true).Select(d => d.DiplomaURL).ToArray(),
+                };
+            }
+            return returnedModel;
         }
 
         public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)

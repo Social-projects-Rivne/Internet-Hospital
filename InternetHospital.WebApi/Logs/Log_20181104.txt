@@ -1,0 +1,408 @@
+2018-11-04T23:43:40.1287273+02:00 0HLI2JQAMSD9K:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-04T23:43:40.1287273+02:00 0HLI2JQAMSD9J:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/doctor/   (ca22a1cb)
+2018-11-04T23:43:41.2340886+02:00 0HLI2JQAMSD9J:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:41.2341104+02:00 0HLI2JQAMSD9K:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:41.4687844+02:00 0HLI2JQAMSD9K:00000001 [INF] Request finished in 1346.9539ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:41.4687844+02:00 0HLI2JQAMSD9J:00000001 [INF] Request finished in 1346.9448ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:42.5450779+02:00 0HLI2JQAMSD9J:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:43:42.5669950+02:00 0HLI2JQAMSD9J:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:42.5791052+02:00 0HLI2JQAMSD9J:00000002 [INF] Request finished in 34.0276ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:43.2587934+02:00 0HLI2JQAMSD9J:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/   (ca22a1cb)
+2018-11-04T23:43:43.2737067+02:00 0HLI2JQAMSD9J:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:43.2845509+02:00 0HLI2JQAMSD9J:00000003 [INF] Request finished in 25.7551ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:43.5569943+02:00 0HLI2JQAMSD9J:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:43:43.5682629+02:00 0HLI2JQAMSD9J:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:43.5856681+02:00 0HLI2JQAMSD9J:00000004 [INF] Request finished in 28.7942ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:48.2462474+02:00 0HLI2JQAMSD9J:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/   (ca22a1cb)
+2018-11-04T23:43:48.2596045+02:00 0HLI2JQAMSD9J:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:48.2766190+02:00 0HLI2JQAMSD9J:00000005 [INF] Request finished in 30.5334ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:48.5869822+02:00 0HLI2JQAMSD9J:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:43:48.5984936+02:00 0HLI2JQAMSD9J:00000006 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:48.6216044+02:00 0HLI2JQAMSD9J:00000006 [INF] Request finished in 34.6525ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:50.7262173+02:00 0HLI2JQAMSD9J:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/   (ca22a1cb)
+2018-11-04T23:43:50.7386615+02:00 0HLI2JQAMSD9J:00000007 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:50.7528046+02:00 0HLI2JQAMSD9J:00000007 [INF] Request finished in 26.6251ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:43:51.0992860+02:00 0HLI2JQAMSD9J:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:43:51.1090428+02:00 0HLI2JQAMSD9J:00000008 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:43:51.1287336+02:00 0HLI2JQAMSD9J:00000008 [INF] Request finished in 29.5122ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:44:54.6684686+02:00 0HLI2JQAMSD9L:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/1   (ca22a1cb)
+2018-11-04T23:44:54.6855620+02:00 0HLI2JQAMSD9L:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:44:54.6951032+02:00 0HLI2JQAMSD9L:00000001 [INF] Request finished in 26.674ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:44:55.0968102+02:00 0HLI2JQAMSD9L:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:44:55.1088541+02:00 0HLI2JQAMSD9L:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:44:55.1200651+02:00 0HLI2JQAMSD9L:00000002 [INF] Request finished in 23.6776ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:45:49.2740201+02:00 0HLI2JQAMSD9L:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/default   (ca22a1cb)
+2018-11-04T23:45:49.2921433+02:00 0HLI2JQAMSD9L:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:45:49.3036085+02:00 0HLI2JQAMSD9L:00000003 [INF] Request finished in 29.6133ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:45:49.7279029+02:00 0HLI2JQAMSD9L:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:45:49.7362919+02:00 0HLI2JQAMSD9L:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+Attribute routes with the same name 'Get' must have the same template:
+Action: 'InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)' - Template: 'api/Default/{id}'
+Action: 'InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)' - Template: 'api/Doctors/{id}'
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Internal.ActionDescriptorCollectionProvider.get_ActionDescriptors()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:45:49.7461280+02:00 0HLI2JQAMSD9L:00000004 [INF] Request finished in 18.2357ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:49:19.1162642+02:00 0HLI2JTFPAOQK:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-04T23:49:19.6047341+02:00 0HLI2JTFPAOQK:00000001 [INF] Request finished in 494.9475ms 404  (791a596a)
+2018-11-04T23:49:27.0703209+02:00 0HLI2JTFPAOQK:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/default   (ca22a1cb)
+2018-11-04T23:49:27.3430777+02:00 0HLI2JTFPAOQK:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Default\"}". Executing action "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:49:27.3893822+02:00 0HLI2JTFPAOQK:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-04T23:49:27.3940764+02:00 0HLI2JTFPAOQK:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 0.5431ms. (50a9e262)
+2018-11-04T23:49:27.4020320+02:00 0HLI2JTFPAOQK:00000002 [INF] Executing ObjectResult, writing value of type '"System.String[]"'. (8a1b66c8)
+2018-11-04T23:49:27.5422326+02:00 0HLI2JTFPAOQK:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)" in 167.9267ms (afa2e885)
+2018-11-04T23:49:27.5537851+02:00 0HLI2JTFPAOQK:00000002 [INF] Request finished in 481.265ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-04T23:49:27.8286877+02:00 0HLI2JTFPAOQK:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/favicon.ico   (ca22a1cb)
+2018-11-04T23:49:27.8312069+02:00 0HLI2JTFPAOQK:00000003 [INF] Request finished in 2.5393ms 404  (791a596a)
+2018-11-04T23:49:36.8386919+02:00 0HLI2JTFPAOQK:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctor   (ca22a1cb)
+2018-11-04T23:49:36.8389659+02:00 0HLI2JTFPAOQK:00000004 [INF] Request finished in 0.3193ms 404  (791a596a)
+2018-11-04T23:49:41.3507048+02:00 0HLI2JTFPAOQK:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors   (ca22a1cb)
+2018-11-04T23:49:41.4968906+02:00 0HLI2JTFPAOQK:00000005 [INF] Route matched with "{action = \"GetDoctors\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:49:41.5629619+02:00 0HLI2JTFPAOQK:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.DoctorSearchParameters"]) - Validation state: Valid (4e3479ed)
+2018-11-04T23:49:41.5991485+02:00 0HLI2JTFPAOQK:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-04T23:49:42.0061024+02:00 0HLI2JTFPAOQK:00000005 [INF] Executed DbCommand ("287"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)::INT4
+FROM \"Doctors\" AS d" (0723d8ff)
+2018-11-04T23:49:42.0618821+02:00 0HLI2JTFPAOQK:00000005 [WRN] Query: '"(from Doctor <generated>_2 in DbSet<Doctor> select [<generated>_2]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2018-11-04T23:49:42.4168280+02:00 0HLI2JTFPAOQK:00000005 [INF] Executed DbCommand ("124"ms) [Parameters=["@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\" AS \"Id\", \"x.User\".\"FirstName\", \"x.User\".\"SecondName\", \"x.User\".\"ThirdName\", \"x.User\".\"AvatarURL\", \"x.Specialization\".\"Name\" AS \"Specialization\"
+FROM (
+    SELECT d.*
+    FROM \"Doctors\" AS d
+    LIMIT @__p_1 OFFSET @__p_0
+) AS t
+LEFT JOIN \"Specializations\" AS \"x.Specialization\" ON t.\"SpecializationId\" = \"x.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"x.User\" ON t.\"UserId\" = \"x.User\".\"Id\"
+ORDER BY \"x.User\".\"SecondName\"" (0723d8ff)
+2018-11-04T23:49:42.4334572+02:00 0HLI2JTFPAOQK:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 870.3009ms. (50a9e262)
+2018-11-04T23:49:42.4341357+02:00 0HLI2JTFPAOQK:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`2[[System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.DoctorModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-04T23:49:42.4894707+02:00 0HLI2JTFPAOQK:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" in 992.4399ms (afa2e885)
+2018-11-04T23:49:42.4896980+02:00 0HLI2JTFPAOQK:00000005 [INF] Request finished in 1139.0776ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-04T23:49:47.8540295+02:00 0HLI2JTFPAOQK:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/1   (ca22a1cb)
+2018-11-04T23:49:47.8574421+02:00 0HLI2JTFPAOQK:00000006 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:49:47.8866587+02:00 0HLI2JTFPAOQK:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["1"]) - Validation state: Valid (4e3479ed)
+2018-11-04T23:49:47.8902500+02:00 0HLI2JTFPAOQK:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-04T23:49:47.9034773+02:00 0HLI2JTFPAOQK:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE d.\"UserId\" = @__id_0
+LIMIT 1" (0723d8ff)
+2018-11-04T23:49:47.9686858+02:00 0HLI2JTFPAOQK:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 81.8827ms. (50a9e262)
+2018-11-04T23:49:47.9689463+02:00 0HLI2JTFPAOQK:00000006 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-04T23:49:47.9713689+02:00 0HLI2JTFPAOQK:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 113.8072ms (afa2e885)
+2018-11-04T23:49:47.9715394+02:00 0HLI2JTFPAOQK:00000006 [INF] Request finished in 117.7135ms 404 application/json; charset=utf-8 (791a596a)
+2018-11-04T23:49:54.1286815+02:00 0HLI2JTFPAOQK:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors   (ca22a1cb)
+2018-11-04T23:49:54.1296221+02:00 0HLI2JTFPAOQK:00000007 [INF] Route matched with "{action = \"GetDoctors\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:49:54.1307673+02:00 0HLI2JTFPAOQK:00000007 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.DoctorSearchParameters"]) - Validation state: Valid (4e3479ed)
+2018-11-04T23:49:54.1313132+02:00 0HLI2JTFPAOQK:00000007 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-04T23:49:54.1324406+02:00 0HLI2JTFPAOQK:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)::INT4
+FROM \"Doctors\" AS d" (0723d8ff)
+2018-11-04T23:49:54.1350545+02:00 0HLI2JTFPAOQK:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\" AS \"Id\", \"x.User\".\"FirstName\", \"x.User\".\"SecondName\", \"x.User\".\"ThirdName\", \"x.User\".\"AvatarURL\", \"x.Specialization\".\"Name\" AS \"Specialization\"
+FROM (
+    SELECT d.*
+    FROM \"Doctors\" AS d
+    LIMIT @__p_1 OFFSET @__p_0
+) AS t
+LEFT JOIN \"Specializations\" AS \"x.Specialization\" ON t.\"SpecializationId\" = \"x.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"x.User\" ON t.\"UserId\" = \"x.User\".\"Id\"
+ORDER BY \"x.User\".\"SecondName\"" (0723d8ff)
+2018-11-04T23:49:54.1352740+02:00 0HLI2JTFPAOQK:00000007 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.4293ms. (50a9e262)
+2018-11-04T23:49:54.1353790+02:00 0HLI2JTFPAOQK:00000007 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`2[[System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.DoctorModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-04T23:49:54.1356352+02:00 0HLI2JTFPAOQK:00000007 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" in 5.4659ms (afa2e885)
+2018-11-04T23:49:54.1357315+02:00 0HLI2JTFPAOQK:00000007 [INF] Request finished in 7.1558ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-04T23:50:05.6039924+02:00 0HLI2JTFPAOQK:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-04T23:50:05.6043547+02:00 0HLI2JTFPAOQK:00000008 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:50:05.6048903+02:00 0HLI2JTFPAOQK:00000008 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-04T23:50:05.6054134+02:00 0HLI2JTFPAOQK:00000008 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-04T23:50:05.6066371+02:00 0HLI2JTFPAOQK:00000008 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE d.\"UserId\" = @__id_0
+LIMIT 1" (0723d8ff)
+2018-11-04T23:50:05.7479738+02:00 0HLI2JTFPAOQK:00000008 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 143.4919ms (afa2e885)
+2018-11-04T23:50:06.6515303+02:00 0HLI2JTFPAOQK:00000008 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at InternetHospital.BusinessLogic.Services.DoctorService.Get(Int32 id) in D:\SoftServe\AcademyRep\Internet-Hospital\InternetHospital.BusinessLogic\Services\DoctorService.cs:line 24
+   at InternetHospital.WebApi.Controllers.DoctorsController.Get(Int32 id) in D:\SoftServe\AcademyRep\Internet-Hospital\InternetHospital.WebApi\Controllers\DoctorsController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-04T23:50:06.7603540+02:00 0HLI2JTFPAOQK:00000008 [INF] Request finished in 1156.4244ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-04T23:51:49.3939008+02:00 0HLI2JUSH0PCG:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:51483/  0 (ca22a1cb)
+2018-11-04T23:51:49.3939008+02:00 0HLI2JUSH0PCE:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/default/8   (ca22a1cb)
+2018-11-04T23:51:49.3939880+02:00 0HLI2JUSH0PCF:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-04T23:51:49.5666290+02:00 0HLI2JUSH0PCG:00000001 [INF] Request finished in 192.393ms 200  (791a596a)
+2018-11-04T23:51:50.1137556+02:00 0HLI2JUSH0PCF:00000001 [INF] Request finished in 706.7053ms 404  (791a596a)
+2018-11-04T23:51:50.1533720+02:00 0HLI2JUSH0PCE:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Default\"}". Executing action "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:51:50.8807838+02:00 0HLI2JUSH0PCE:00000001 [INF] Executing action method "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-04T23:51:50.9079292+02:00 0HLI2JUSH0PCE:00000001 [INF] Executed action method "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 0.5676ms. (50a9e262)
+2018-11-04T23:51:50.9250814+02:00 0HLI2JUSH0PCE:00000001 [INF] Executing ObjectResult, writing value of type '"System.String"'. (8a1b66c8)
+2018-11-04T23:51:50.9474816+02:00 0HLI2JUSH0PCE:00000001 [INF] Executed action "InternetHospital.WebApi.Controllers.DefaultController.Get (InternetHospital.WebApi)" in 778.3259ms (afa2e885)
+2018-11-04T23:51:51.0390863+02:00 0HLI2JUSH0PCE:00000001 [INF] Request finished in 1581.6547ms 200 text/plain; charset=utf-8 (791a596a)
+2018-11-04T23:52:12.1889657+02:00 0HLI2JUSH0PCG:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-04T23:52:12.2190124+02:00 0HLI2JUSH0PCG:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-04T23:52:12.2549968+02:00 0HLI2JUSH0PCG:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-04T23:52:31.2300390+02:00 0HLI2JUSH0PCG:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-04T23:52:31.2758678+02:00 0HLI2JUSH0PCG:00000002 [INF] Executed DbCommand ("9"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE d.\"UserId\" = @__id_0
+LIMIT 1" (0723d8ff)

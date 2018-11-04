@@ -1,0 +1,234 @@
+2018-11-05T00:04:00.7143890+02:00 0HLI2K5MGGQUP:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:51483/  0 (ca22a1cb)
+2018-11-05T00:04:00.8085603+02:00 0HLI2K5MGGQUP:00000001 [INF] Request finished in 91.3528ms 200  (791a596a)
+2018-11-05T00:04:00.9454081+02:00 0HLI2K5MGGQUP:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:04:02.8694121+02:00 0HLI2K5MGGQUP:00000002 [INF] Request finished in 1399.6077ms 404  (791a596a)
+2018-11-05T00:04:41.5225770+02:00 0HLI2K5MGGQUP:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/1   (ca22a1cb)
+2018-11-05T00:04:41.6373813+02:00 0HLI2K5MGGQUP:00000003 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:04:41.7839645+02:00 0HLI2K5MGGQUP:00000003 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["1"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:04:48.7081458+02:00 0HLI2K5MGGQUP:00000003 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:04:48.7743897+02:00 0HLI2K5MGGQUP:00000003 [INF] Executed DbCommand ("9"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE d.\"UserId\" = @__id_0
+LIMIT 1" (0723d8ff)
+2018-11-05T00:04:49.9139328+02:00 0HLI2K5MGGQUP:00000003 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 8118.7675ms. (50a9e262)
+2018-11-05T00:04:49.9330073+02:00 0HLI2K5MGGQUP:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-05T00:04:50.1825184+02:00 0HLI2K5MGGQUP:00000003 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 8527.0015ms (afa2e885)
+2018-11-05T00:04:50.3382216+02:00 0HLI2K5MGGQUP:00000003 [INF] Request finished in 8698.1363ms 404 application/json; charset=utf-8 (791a596a)
+2018-11-05T00:04:54.3410609+02:00 0HLI2K5MGGQUP:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-05T00:04:54.3438589+02:00 0HLI2K5MGGQUP:00000004 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:04:54.3861927+02:00 0HLI2K5MGGQUP:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:04:57.7328656+02:00 0HLI2K5MGGQUP:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:04:57.7384196+02:00 0HLI2K5MGGQUP:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE d.\"UserId\" = @__id_0
+LIMIT 1" (0723d8ff)
+2018-11-05T00:08:57.0951117+02:00 0HLI2K8EQNLS4:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:08:57.0951117+02:00 0HLI2K8EQNLS5:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:51483/  0 (ca22a1cb)
+2018-11-05T00:08:57.1564210+02:00 0HLI2K8EQNLS5:00000001 [INF] Request finished in 60.7621ms 200  (791a596a)
+2018-11-05T00:08:57.4748084+02:00 0HLI2K8EQNLS4:00000001 [INF] Request finished in 311.8596ms 404  (791a596a)
+2018-11-05T00:11:18.8074650+02:00 0HLI2K8EQNLS6:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-05T00:11:19.0368344+02:00 0HLI2K8EQNLS6:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:11:19.2060768+02:00 0HLI2K8EQNLS6:00000001 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:11:26.6470489+02:00 0HLI2K8EQNLS6:00000001 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:11:26.8383900+02:00 0HLI2K8EQNLS6:00000001 [INF] Executed DbCommand ("96"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE d.\"UserId\" = @__id_0
+LIMIT 1" (0723d8ff)
+2018-11-05T00:18:36.3708981+02:00 0HLI2KDRFL3V2:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:18:36.5547964+02:00 0HLI2KDRFL3V2:00000001 [INF] Request finished in 190.7904ms 404  (791a596a)
+2018-11-05T00:27:14.5628573+02:00 0HLI2KDRFL3V3:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-05T00:27:14.6098810+02:00 0HLI2KDRFL3V3:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:27:14.6529329+02:00 0HLI2KDRFL3V3:00000001 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:27:14.6575339+02:00 0HLI2KDRFL3V3:00000001 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:27:14.7530008+02:00 0HLI2KDRFL3V3:00000001 [INF] Executed DbCommand ("8"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\"
+FROM \"Doctors\" AS d
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+LIMIT 1" (0723d8ff)
+2018-11-05T00:27:14.9342275+02:00 0HLI2KDRFL3V3:00000001 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 318.6546ms (afa2e885)
+2018-11-05T00:27:15.6168703+02:00 0HLI2KDRFL3V3:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at InternetHospital.BusinessLogic.Services.DoctorService.Get(Int32 id) in D:\SoftServe\AcademyRep\Internet-Hospital\InternetHospital.BusinessLogic\Services\DoctorService.cs:line 24
+   at InternetHospital.WebApi.Controllers.DoctorsController.Get(Int32 id) in D:\SoftServe\AcademyRep\Internet-Hospital\InternetHospital.WebApi\Controllers\DoctorsController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-05T00:27:15.7351981+02:00 0HLI2KDRFL3V3:00000001 [INF] Request finished in 1171.4ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-05T00:28:15.3854604+02:00 0HLI2KJ817SUD:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:51483/  0 (ca22a1cb)
+2018-11-05T00:28:15.3854604+02:00 0HLI2KJ817SUE:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:28:15.4455753+02:00 0HLI2KJ817SUD:00000001 [INF] Request finished in 64.6657ms 200  (791a596a)
+2018-11-05T00:28:15.7492018+02:00 0HLI2KJ817SUE:00000001 [INF] Request finished in 364.697ms 404  (791a596a)
+2018-11-05T00:28:54.6319770+02:00 0HLI2KJJNPQB5:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-05T00:28:54.8503861+02:00 0HLI2KJJNPQB5:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:28:54.8940928+02:00 0HLI2KJJNPQB5:00000001 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:28:54.9334964+02:00 0HLI2KJJNPQB5:00000001 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:28:59.0335798+02:00 0HLI2KJJNPQB5:00000001 [INF] Executed DbCommand ("255"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-05T00:28:59.6403178+02:00 0HLI2KJJNPQB5:00000001 [INF] Executed DbCommand ("433"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-05T00:28:59.6550381+02:00 0HLI2KJJNPQB5:00000001 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4755.5917ms. (50a9e262)
+2018-11-05T00:28:59.6659786+02:00 0HLI2KJJNPQB5:00000001 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-05T00:28:59.9346577+02:00 0HLI2KJJNPQB5:00000001 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 5077.7284ms (afa2e885)
+2018-11-05T00:28:59.9420730+02:00 0HLI2KJJNPQB5:00000001 [INF] Request finished in 5317.9812ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-05T00:34:13.2297592+02:00 0HLI2KMIM9FAQ:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:34:13.2297592+02:00 0HLI2KMIM9FAP:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/   (ca22a1cb)
+2018-11-05T00:34:13.4519349+02:00 0HLI2KMIM9FAQ:00000001 [INF] Request finished in 229.523ms 404  (791a596a)
+2018-11-05T00:34:13.4842652+02:00 0HLI2KMIM9FAP:00000001 [INF] Route matched with "{action = \"GetDoctors\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:34:13.5326006+02:00 0HLI2KMIM9FAP:00000001 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.DoctorSearchParameters"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:34:13.5389753+02:00 0HLI2KMIM9FAP:00000001 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:34:13.6763894+02:00 0HLI2KMIM9FAP:00000001 [INF] Executed DbCommand ("69"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)::INT4
+FROM \"Doctors\" AS d" (0723d8ff)
+2018-11-05T00:34:13.6923318+02:00 0HLI2KMIM9FAP:00000001 [WRN] Query: '"(from Doctor <generated>_2 in DbSet<Doctor> select [<generated>_2]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2018-11-05T00:34:13.7661026+02:00 0HLI2KMIM9FAP:00000001 [INF] Executed DbCommand ("12"ms) [Parameters=["@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\" AS \"Id\", \"x.User\".\"FirstName\", \"x.User\".\"SecondName\", \"x.User\".\"ThirdName\", \"x.User\".\"AvatarURL\", \"x.Specialization\".\"Name\" AS \"Specialization\"
+FROM (
+    SELECT d.*
+    FROM \"Doctors\" AS d
+    LIMIT @__p_1 OFFSET @__p_0
+) AS t
+LEFT JOIN \"Specializations\" AS \"x.Specialization\" ON t.\"SpecializationId\" = \"x.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"x.User\" ON t.\"UserId\" = \"x.User\".\"Id\"
+ORDER BY \"x.User\".\"SecondName\"" (0723d8ff)
+2018-11-05T00:34:13.7777174+02:00 0HLI2KMIM9FAP:00000001 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 240.5014ms. (50a9e262)
+2018-11-05T00:34:13.7882356+02:00 0HLI2KMIM9FAP:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`2[[System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.DoctorModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-05T00:34:13.8718524+02:00 0HLI2KMIM9FAP:00000001 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" in 376.0264ms (afa2e885)
+2018-11-05T00:34:13.8770669+02:00 0HLI2KMIM9FAP:00000001 [INF] Request finished in 654.5251ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-05T00:35:35.9224524+02:00 0HLI2KMIM9FAR:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:35:36.0280838+02:00 0HLI2KMIM9FAR:00000001 [INF] Request finished in 87.7035ms 404  (791a596a)
+2018-11-05T00:36:00.2264299+02:00 0HLI2KMIM9FAR:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-05T00:36:00.2348098+02:00 0HLI2KMIM9FAR:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:36:00.4519041+02:00 0HLI2KMIM9FAR:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:36:00.4628909+02:00 0HLI2KMIM9FAR:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:36:00.6327972+02:00 0HLI2KMIM9FAR:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-05T00:36:00.7203413+02:00 0HLI2KMIM9FAR:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-05T00:43:02.6017728+02:00 0HLI2KRGEJR7T:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:43:02.8018048+02:00 0HLI2KRGEJR7T:00000001 [INF] Request finished in 207.9457ms 404  (791a596a)
+2018-11-05T00:43:25.0514476+02:00 0HLI2KRGEJR7T:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/dostors/1   (ca22a1cb)
+2018-11-05T00:43:25.0526780+02:00 0HLI2KRGEJR7T:00000002 [INF] Request finished in 1.3117ms 404  (791a596a)
+2018-11-05T00:43:32.1911194+02:00 0HLI2KRGEJR7T:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/dostors/1   (ca22a1cb)
+2018-11-05T00:43:32.1916514+02:00 0HLI2KRGEJR7T:00000003 [INF] Request finished in 0.9098ms 404  (791a596a)
+2018-11-05T00:43:41.8134646+02:00 0HLI2KRGEJR7T:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/dostors/1   (ca22a1cb)
+2018-11-05T00:43:41.8138143+02:00 0HLI2KRGEJR7T:00000004 [INF] Request finished in 0.9682ms 404  (791a596a)
+2018-11-05T00:43:46.4162978+02:00 0HLI2KRGEJR7T:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/dostors/8   (ca22a1cb)
+2018-11-05T00:43:46.4166350+02:00 0HLI2KRGEJR7T:00000005 [INF] Request finished in 0.9651ms 404  (791a596a)
+2018-11-05T00:43:58.9057447+02:00 0HLI2KRGEJR7T:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/dostors/8   (ca22a1cb)
+2018-11-05T00:43:58.9063384+02:00 0HLI2KRGEJR7T:00000006 [INF] Request finished in 0.6536ms 404  (791a596a)
+2018-11-05T00:44:11.0726893+02:00 0HLI2KRGEJR7T:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/dostors   (ca22a1cb)
+2018-11-05T00:44:11.0731630+02:00 0HLI2KRGEJR7T:00000007 [INF] Request finished in 1.0444ms 404  (791a596a)
+2018-11-05T00:44:26.3890747+02:00 0HLI2KRGEJR7T:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T00:44:26.3893932+02:00 0HLI2KRGEJR7T:00000008 [INF] Request finished in 0.4065ms 404  (791a596a)
+2018-11-05T00:44:37.3563018+02:00 0HLI2KRGEJR7T:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors   (ca22a1cb)
+2018-11-05T00:44:37.4315233+02:00 0HLI2KRGEJR7T:00000009 [INF] Route matched with "{action = \"GetDoctors\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:44:37.5185274+02:00 0HLI2KRGEJR7T:00000009 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.DoctorSearchParameters"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:44:37.5260001+02:00 0HLI2KRGEJR7T:00000009 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:44:37.6366759+02:00 0HLI2KRGEJR7T:00000009 [INF] Executed DbCommand ("77"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)::INT4
+FROM \"Doctors\" AS d" (0723d8ff)
+2018-11-05T00:44:37.6489144+02:00 0HLI2KRGEJR7T:00000009 [WRN] Query: '"(from Doctor <generated>_2 in DbSet<Doctor> select [<generated>_2]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2018-11-05T00:44:37.7633083+02:00 0HLI2KRGEJR7T:00000009 [INF] Executed DbCommand ("72"ms) [Parameters=["@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\" AS \"Id\", \"x.User\".\"FirstName\", \"x.User\".\"SecondName\", \"x.User\".\"ThirdName\", \"x.User\".\"AvatarURL\", \"x.Specialization\".\"Name\" AS \"Specialization\"
+FROM (
+    SELECT d.*
+    FROM \"Doctors\" AS d
+    LIMIT @__p_1 OFFSET @__p_0
+) AS t
+LEFT JOIN \"Specializations\" AS \"x.Specialization\" ON t.\"SpecializationId\" = \"x.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"x.User\" ON t.\"UserId\" = \"x.User\".\"Id\"
+ORDER BY \"x.User\".\"SecondName\"" (0723d8ff)
+2018-11-05T00:44:37.7735765+02:00 0HLI2KRGEJR7T:00000009 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 251.3453ms. (50a9e262)
+2018-11-05T00:44:37.7818795+02:00 0HLI2KRGEJR7T:00000009 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`2[[System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.DoctorModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-05T00:44:37.8527462+02:00 0HLI2KRGEJR7T:00000009 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" in 406.1805ms (afa2e885)
+2018-11-05T00:44:37.8552860+02:00 0HLI2KRGEJR7T:00000009 [INF] Request finished in 498.6494ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-05T00:44:42.4057114+02:00 0HLI2KRGEJR7T:0000000A [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/doctors/8   (ca22a1cb)
+2018-11-05T00:44:42.4097349+02:00 0HLI2KRGEJR7T:0000000A [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T00:44:42.4114710+02:00 0HLI2KRGEJR7T:0000000A [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-05T00:44:42.4224025+02:00 0HLI2KRGEJR7T:0000000A [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T00:44:42.5059960+02:00 0HLI2KRGEJR7T:0000000A [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-05T00:44:42.5564985+02:00 0HLI2KRGEJR7T:0000000A [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-05T00:44:42.5641955+02:00 0HLI2KRGEJR7T:0000000A [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 152.5741ms. (50a9e262)
+2018-11-05T00:44:42.5646751+02:00 0HLI2KRGEJR7T:0000000A [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-05T00:44:42.5714445+02:00 0HLI2KRGEJR7T:0000000A [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 161.5536ms (afa2e885)
+2018-11-05T00:44:42.5716110+02:00 0HLI2KRGEJR7T:0000000A [INF] Request finished in 166.4113ms 200 application/json; charset=utf-8 (791a596a)
