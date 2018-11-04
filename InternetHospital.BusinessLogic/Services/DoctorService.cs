@@ -8,7 +8,7 @@ namespace InternetHospital.BusinessLogic.Services
 {
     public class DoctorService : IDoctorService
     {
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
 
         public DoctorService(ApplicationContext context)
         {
@@ -17,12 +17,12 @@ namespace InternetHospital.BusinessLogic.Services
 
         public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
         {
-            var _doctors = _context.Doctors.AsQueryable();
+            var doctors = _context.Doctors.AsQueryable();
 
             if (queryParameters.SearchByName != null)
             {
                 var toLowerSearchParameter = queryParameters.SearchByName.ToLower();
-                _doctors = _doctors
+                doctors = doctors
                     .Where(x => x.User.FirstName.ToLower().Contains(toLowerSearchParameter)
                     || x.User.SecondName.ToLower().Contains(toLowerSearchParameter)
                     || x.User.ThirdName.ToLower().Contains(toLowerSearchParameter));
@@ -30,11 +30,11 @@ namespace InternetHospital.BusinessLogic.Services
 
             if (queryParameters.SearchBySpecialization != null)
             {
-                _doctors = _doctors.Where(x => x.SpecializationId == queryParameters.SearchBySpecialization);
+                doctors = doctors.Where(x => x.SpecializationId == queryParameters.SearchBySpecialization);
             }
 
-            int doctorsAmount = _doctors.Count();
-            var doctorsResult = PaginationHelper(_doctors, queryParameters.PageCount, queryParameters.Page);
+            int doctorsAmount = doctors.Count();
+            var doctorsResult = PaginationHelper(doctors, queryParameters.PageCount, queryParameters.Page);
 
             return (doctorsResult, doctorsAmount);
         }

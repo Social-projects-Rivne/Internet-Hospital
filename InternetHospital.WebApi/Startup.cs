@@ -101,6 +101,7 @@ namespace InternetHospital.WebApi
             });
 
             //Dependency injection
+            services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IDoctorService, DoctorService>();
@@ -134,6 +135,7 @@ namespace InternetHospital.WebApi
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserRegistrationModel, User>();
+                config.CreateMap<AppointmentCreationModel, Appointment>();
             });
 
             app.UseMvc();

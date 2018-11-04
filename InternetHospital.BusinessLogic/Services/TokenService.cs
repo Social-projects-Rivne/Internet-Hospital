@@ -18,8 +18,8 @@ namespace InternetHospital.BusinessLogic.Services
     public class TokenService : ITokenService
     {
         private readonly AppSettings _appSettings;
-        private ApplicationContext _context;
-        private UserManager<User> _userManager;
+        private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
         const string APPROVED = "Approved";
         const string DOCTOR = "Doctor";
         const int MAXIMUM_LOGGED_DEVICES = 5;

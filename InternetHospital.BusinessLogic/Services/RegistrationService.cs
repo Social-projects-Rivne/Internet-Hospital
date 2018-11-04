@@ -5,7 +5,6 @@ using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,9 +12,9 @@ namespace InternetHospital.BusinessLogic.Services
 {
     public class RegistrationService : IRegistrationService
     {
-        private ApplicationContext _context;
-        private UserManager<User> _userManager;
-        private RoleManager<IdentityRole<int>> _roleManager;
+        private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
 
         public RegistrationService(ApplicationContext context, UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager)
         {

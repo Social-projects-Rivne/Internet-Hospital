@@ -3,10 +3,8 @@ using InternetHospital.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace InternetHospital.DataAccess.AppContextConfiguration
 {

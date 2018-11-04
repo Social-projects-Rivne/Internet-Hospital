@@ -14,17 +14,13 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class SigninController : ControllerBase
     {
-        private ApplicationContext _context;
-        private ITokenService _tokenService;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
+        private readonly ITokenService _tokenService;
+        private readonly UserManager<User> _userManager;
 
         public SigninController(ApplicationContext context,
-            UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
+            UserManager<User> userManager, ITokenService tokenService)
         {
-            _context = context;
             _userManager = userManager;
-            _signInManager = signInManager;
             _tokenService = tokenService;
         }
 
@@ -69,7 +65,7 @@ namespace InternetHospital.WebApi.Controllers
                 access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
                 refresh_token = refreshedToken.Token
             });
-        }    
+        }
     }
 
 }
