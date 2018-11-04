@@ -14,5 +14,12 @@
     font-size: 25px
   }
   .user-avatar{
-    height:30px;
+    border: 1px solid rgba(0, 0, 0, 0.400);
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    background-clip: padding-box;
+    border-radius: 40px;
+    background-size: cover;
+    background-position: center center;
   }

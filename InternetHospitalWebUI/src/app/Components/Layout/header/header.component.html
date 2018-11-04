@@ -32,7 +32,7 @@
     <div id="DeskMenu" fxHide.xs>
         <a mat-button routerLink="/doctor-list">Doctor's List</a>
         <button *ngIf="(isLoggedIn | async)" mat-button [matMenuTriggerFor]="appMenu">
-            <img class="user-avatar" src="https://blog.circle.com/content/images/2018/04/rachel.png" />
+            <img [src]="userAvatar" class="user-avatar" />
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>

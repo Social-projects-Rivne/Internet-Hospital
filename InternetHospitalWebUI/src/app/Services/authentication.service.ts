@@ -13,6 +13,7 @@ const DOCTOR:string = 'Doctor';
 const MODERATOR:string = 'Moderator';
 const ADMIN:string = 'Admin';
 const TOKEN:string ='currentUser';
+const DEFAULT_AVATAR: string = '../../assets/img/default-avatar.png';
 
 @Injectable()
 export class  AuthenticationService  {
@@ -32,12 +33,27 @@ export class  AuthenticationService  {
                     //set flag that a user is logged in
                     this.isLoginSubject.next(true);
                     //set user role depending on the token claims
-                    this.setUserRole()                   
+                    this.setUserRole();
+                    this.AvatarURL.next(this.checkAvatarUrl());                    
                 }
                 return user;
             }));
     }
 
+    private AvatarURL = new BehaviorSubject<string>(this.checkAvatarUrl());
+    getAvatarURL() : Observable<string> {
+        return this.AvatarURL.asObservable();
+    }
+    checkAvatarUrl(): string {
+        if (localStorage.getItem(TOKEN)) {
+            let currentUser = JSON.parse(localStorage.getItem(TOKEN));
+            if (currentUser.user_avatar) {
+                return this.url + currentUser.user_avatar;
+            }
+        }
+        return DEFAULT_AVATAR;
+    }
+    
     private setUserRole()
     {
         if(this.hasPatientRole()){

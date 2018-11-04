@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   isDoctor : Observable<boolean>;
   isModerator : Observable<boolean>;
   isAdmin: Observable<boolean>;
+  userAvatar: string;
 
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
@@ -23,5 +24,7 @@ export class HeaderComponent implements OnInit {
     this.isDoctor = this.authenticationService.isDoctor();
     this.isModerator = this.authenticationService.isModerator();
     this.isAdmin = this.authenticationService.isAdmin();
+    this.authenticationService.getAvatarURL()
+      .subscribe(value => this.userAvatar = value);
   }   
 }
