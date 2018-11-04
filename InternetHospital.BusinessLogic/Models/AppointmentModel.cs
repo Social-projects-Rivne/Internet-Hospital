@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InternetHospital.BusinessLogic.Models
 {
-    class AppointmentModel
+    public class AppointmentModel
     {
         public int Id { get; set; }
         public int? UserId { get; set; }
