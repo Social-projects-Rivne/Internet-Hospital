@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
-using InternetHospital.DataAccess.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -17,7 +12,7 @@ namespace InternetHospital.WebApi.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
         public DoctorsController(ApplicationContext context, IDoctorService service)
         {
             _context = context;

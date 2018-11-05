@@ -1,16 +1,9 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
-using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
 
@@ -18,8 +11,8 @@ namespace InternetHospital.BusinessLogic.Services
 {
     public class UploadingService : IUploadingFiles
     {
-        private IHostingEnvironment _env;
-        private ApplicationContext _context;
+        private readonly IHostingEnvironment _env;
+        private readonly ApplicationContext _context;
 
         public UploadingService(IHostingEnvironment env, ApplicationContext context)
         {

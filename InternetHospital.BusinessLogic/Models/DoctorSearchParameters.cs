@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InternetHospital.BusinessLogic.Models
+﻿namespace InternetHospital.BusinessLogic.Models
 {
     public class DoctorSearchParameters
     {
@@ -12,8 +8,8 @@ namespace InternetHospital.BusinessLogic.Models
         private int _pageCount = MAX_PAGE_COUNT;
         public int PageCount
         {
-            get { return _pageCount; }
-            set { _pageCount = (value > MAX_PAGE_COUNT) ? MAX_PAGE_COUNT : value; }
+            get => _pageCount;
+            set => _pageCount = (value > MAX_PAGE_COUNT) ? MAX_PAGE_COUNT : value;
         }
         public string SearchByName { get; set; }
         public int? SearchBySpecialization { get; set; }
