@@ -30,15 +30,15 @@ namespace InternetHospital.BusinessLogic.Services
             var appointments = _context.Appointments
                 .Where(a => (a.DoctorId == doctorId) 
                             && (a.StatusId == DEFAULT_STATUS || a.StatusId == RESERVED_STATUS))
-                .Select(x => new AppointmentModel
+                .Select(a => new AppointmentModel
                 {
-                    Id = x.Id,
-                    UserId = x.UserId,
-                    UserName = x.User.FirstName + x.User.SecondName,
-                    Address = x.Address,
-                    StartTime = x.StartTime,
-                    EndTime = x.EndTime,
-                    Status = x.Status.Name
+                    Id = a.Id,
+                    UserId = a.UserId,
+                    UserName = a.User.FirstName + a.User.SecondName,
+                    Address = a.Address,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    Status = a.Status.Name
                 });
             return appointments;
         }
