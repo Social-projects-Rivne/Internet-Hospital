@@ -1,6 +1,8 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -14,14 +16,15 @@ namespace InternetHospital.WebApi.Controllers
             _appointmentService = appointmentService;
         }
 
+        [Authorize(Policy = "ApprovedDoctors")]
         [HttpGet]
         public IActionResult GetAppointments()
         {
             if (int.TryParse(User.Identity.Name, out int doctorId))
             {
-                var doctorAppointment = _appointmentService.GetDoctorAppointments(doctorId);
+                var myAppointments = _appointmentService.GetMyAppointments(doctorId).ToList();
 
-                return Ok(doctorAppointment);
+                return Ok(new { appointments=myAppointments });
             }
             else
             {
@@ -29,6 +32,15 @@ namespace InternetHospital.WebApi.Controllers
             }
         }
 
+        [HttpGet("getavailable")]
+        public IActionResult GetAvailableAppointments([FromQuery] int doctorId)
+        {
+            var availableAppointments = _appointmentService.GetAvailableAppointments(doctorId).ToList();
+
+            return Ok(availableAppointments);
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
         [HttpPost("create")]
         public IActionResult AddAppointment([FromBody] AppointmentCreationModel creationModel)
         {

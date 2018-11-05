@@ -1,11 +1,12 @@
 ﻿using InternetHospital.BusinessLogic.Models;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IAppointmentService
     {
-        IEnumerable<AppointmentModel> GetDoctorAppointments(int doctorId);
+        IQueryable<AppointmentModel> GetMyAppointments(int doctorId);
+        IQueryable<AvailableAppointmentModel> GetAvailableAppointments(int doctorId);
         (bool status, string message) AddAppointment(AppointmentCreationModel creationModel, int doctorId);
     }
 }

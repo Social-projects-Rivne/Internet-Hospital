@@ -17,7 +17,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
         {
-            var doctors = _context.Doctors.AsQueryable();
+            var doctors = _context.Doctors.Where(x=>x.IsApproved==true).AsQueryable();
 
             if (queryParameters.SearchByName != null)
             {
