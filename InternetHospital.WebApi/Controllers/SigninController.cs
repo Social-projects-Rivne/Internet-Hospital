@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Services;
-using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +16,7 @@ namespace InternetHospital.WebApi.Controllers
         private readonly ITokenService _tokenService;
         private readonly UserManager<User> _userManager;
 
-        public SigninController(ApplicationContext context,
-            UserManager<User> userManager, ITokenService tokenService)
+        public SigninController(UserManager<User> userManager, ITokenService tokenService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
