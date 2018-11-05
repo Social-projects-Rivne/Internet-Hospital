@@ -17,20 +17,20 @@ namespace InternetHospital.BusinessLogic.Services
 
         public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
         {
-            var doctors = _context.Doctors.Where(x=>x.IsApproved==true).AsQueryable();
+            var doctors = _context.Doctors.Where(d=>d.IsApproved==true).AsQueryable();
 
             if (queryParameters.SearchByName != null)
             {
                 var toLowerSearchParameter = queryParameters.SearchByName.ToLower();
                 doctors = doctors
-                    .Where(x => x.User.FirstName.ToLower().Contains(toLowerSearchParameter)
-                    || x.User.SecondName.ToLower().Contains(toLowerSearchParameter)
-                    || x.User.ThirdName.ToLower().Contains(toLowerSearchParameter));
+                    .Where(d => d.User.FirstName.ToLower().Contains(toLowerSearchParameter)
+                    || d.User.SecondName.ToLower().Contains(toLowerSearchParameter)
+                    || d.User.ThirdName.ToLower().Contains(toLowerSearchParameter));
             }
 
             if (queryParameters.SearchBySpecialization != null)
             {
-                doctors = doctors.Where(x => x.SpecializationId == queryParameters.SearchBySpecialization);
+                doctors = doctors.Where(d => d.SpecializationId == queryParameters.SearchBySpecialization);
             }
 
             int doctorsAmount = doctors.Count();
