@@ -16,7 +16,7 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
-//using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.WebApi.CustomMiddleware;
 
 namespace InternetHospital.WebApi
 {
@@ -123,7 +123,7 @@ namespace InternetHospital.WebApi
             }
 
             app.UseStaticFiles();
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseCors(options => options.AllowAnyOrigin()
                                           .AllowAnyMethod()
