@@ -14,10 +14,11 @@ import { DoctorGuard } from '../../Services/Guards/doctor.guard';
 import { ModeratorGuard } from '../../Services/Guards/moderator.guard';
 import { AdminGuard } from '../../Services/Guards/admin.guard';
 
-import { ADMIN_PANEL, DOCTOR_LIST, PAGE_404 } from '../../config';
+import { ADMIN_PANEL, DOCTOR_LIST, PAGE_404, MY_PLANS } from '../../config';
 import { SIGN_IN } from '../../config';
 import { SIGN_UP } from '../../config';
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
+import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
 
 const ROUTES: Routes = [
   {
@@ -26,6 +27,7 @@ const ROUTES: Routes = [
       { path: SIGN_UP, component: SignUpComponent },
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
+      { path: MY_PLANS, component: DoctorPlansComponent }
     ]
   },
   { path: PAGE_404, component: Page404Component },
@@ -49,5 +51,6 @@ export const ROUTING_COMPONENTS = [
   HomeComponent,
   Page404Component,
   DoctorListComponent,
-  HomeNewsComponent
+  HomeNewsComponent,
+  DoctorPlansComponent
 ];

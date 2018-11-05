@@ -29,6 +29,11 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { AddDoctorPlansComponent } from './Components/DoctorPlans/add-doctor-plans/add-doctor-plans.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +47,9 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
-    DoctorListSearchItemComponent
+    DoctorListSearchItemComponent,
+    DoctorPlansComponent,
+    AddDoctorPlansComponent
   ],
   imports: [
     BrowserModule,
@@ -53,12 +60,18 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     RoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    AdminpanelModule
+    AdminpanelModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   exports:[MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
+  entryComponents: [AddDoctorPlansComponent]
 })
 export class AppModule { }
 

@@ -1,0 +1,471 @@
+2018-11-05T20:54:30.6850408+02:00 0HLI3A0F4ETR6:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-05T20:54:31.8634424+02:00 0HLI3A0F4ETR6:00000001 [INF] Request finished in 1195.2922ms 404  (791a596a)
+2018-11-05T20:54:32.1351028+02:00 0HLI3A0F4ETR6:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/robots.txt   (ca22a1cb)
+2018-11-05T20:54:32.1404329+02:00 0HLI3A0F4ETR6:00000002 [INF] Request finished in 5.3609ms 404  (791a596a)
+2018-11-05T20:54:47.1206044+02:00 0HLI3A0F4ETR6:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appoitment   (ca22a1cb)
+2018-11-05T20:54:47.1208882+02:00 0HLI3A0F4ETR6:00000003 [INF] Request finished in 0.3294ms 404  (791a596a)
+2018-11-05T20:55:05.0501484+02:00 0HLI3A0F4ETR6:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors   (ca22a1cb)
+2018-11-05T20:55:05.1461275+02:00 0HLI3A0F4ETR6:00000004 [INF] Route matched with "{action = \"GetDoctors\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T20:55:05.2167811+02:00 0HLI3A0F4ETR6:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.DoctorSearchParameters"]) - Validation state: Valid (4e3479ed)
+2018-11-05T20:55:05.2267426+02:00 0HLI3A0F4ETR6:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T20:55:05.4811977+02:00 0HLI3A0F4ETR6:00000004 [ERR] An error occurred using the connection to database '"HospitalDB"' on server '"tcp://localhost:5432"'. (5fc3407c)
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1003
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1032
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.AuthenticateMD5(String username, Byte[] salt, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 132
+   at Npgsql.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 38
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 425
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\ConnectorPool.cs:line 246
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 300
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnection.Open() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 153
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded) in C:\projects\npgsql-entityframeworkcore-postgresql\src\EFCore.PG\Storage\Internal\NpgsqlExecutionStrategy.cs:line 51
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.QueryMethodProvider.GetResult[TResult](IEnumerable`1 valueBuffers, Boolean throwOnNullResult)
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ResultEnumerable`1.GetEnumerator()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Boolean& found)
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass15_1`1.<CompileQueryCore>b__0(QueryContext qc)
+   at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
+   at InternetHospital.BusinessLogic.Services.DoctorService.GetAll(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.BusinessLogic\Services\DoctorService.cs:line 36
+   at InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.WebApi\Controllers\DoctorsController.cs:line 26
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-05T20:55:05.4911823+02:00 0HLI3A0F4ETR6:00000004 [ERR] An exception occurred in the database while iterating the results of a query for context type '"InternetHospital.DataAccess.ApplicationContext"'."
+""Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user \"postgres\"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1003
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1032
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.AuthenticateMD5(String username, Byte[] salt, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 132
+   at Npgsql.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 38
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 425
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\ConnectorPool.cs:line 246
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 300
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnection.Open() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 153
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded) in C:\projects\npgsql-entityframeworkcore-postgresql\src\EFCore.PG\Storage\Internal\NpgsqlExecutionStrategy.cs:line 51
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.QueryMethodProvider.GetResult[TResult](IEnumerable`1 valueBuffers, Boolean throwOnNullResult)
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ResultEnumerable`1.GetEnumerator()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()" (64e2593c)
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1003
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1032
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.AuthenticateMD5(String username, Byte[] salt, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 132
+   at Npgsql.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 38
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 425
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\ConnectorPool.cs:line 246
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 300
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnection.Open() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 153
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded) in C:\projects\npgsql-entityframeworkcore-postgresql\src\EFCore.PG\Storage\Internal\NpgsqlExecutionStrategy.cs:line 51
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.QueryMethodProvider.GetResult[TResult](IEnumerable`1 valueBuffers, Boolean throwOnNullResult)
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ResultEnumerable`1.GetEnumerator()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Boolean& found)
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass15_1`1.<CompileQueryCore>b__0(QueryContext qc)
+   at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
+   at InternetHospital.BusinessLogic.Services.DoctorService.GetAll(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.BusinessLogic\Services\DoctorService.cs:line 36
+   at InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.WebApi\Controllers\DoctorsController.cs:line 26
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-05T20:55:05.5000815+02:00 0HLI3A0F4ETR6:00000004 [ERR] An exception occurred in the database while iterating the results of a query for context type '"InternetHospital.DataAccess.ApplicationContext"'."
+""Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user \"postgres\"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1003
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1032
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.AuthenticateMD5(String username, Byte[] salt, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 132
+   at Npgsql.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 38
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 425
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\ConnectorPool.cs:line 246
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 300
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnection.Open() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 153
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded) in C:\projects\npgsql-entityframeworkcore-postgresql\src\EFCore.PG\Storage\Internal\NpgsqlExecutionStrategy.cs:line 51
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.QueryMethodProvider.GetResult[TResult](IEnumerable`1 valueBuffers, Boolean throwOnNullResult)
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ResultEnumerable`1.GetEnumerator()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Boolean& found)
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass15_1`1.<CompileQueryCore>b__0(QueryContext qc)" (64e2593c)
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1003
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1032
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.AuthenticateMD5(String username, Byte[] salt, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 132
+   at Npgsql.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 38
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 425
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\ConnectorPool.cs:line 246
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 300
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnection.Open() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 153
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded) in C:\projects\npgsql-entityframeworkcore-postgresql\src\EFCore.PG\Storage\Internal\NpgsqlExecutionStrategy.cs:line 51
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.QueryMethodProvider.GetResult[TResult](IEnumerable`1 valueBuffers, Boolean throwOnNullResult)
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ResultEnumerable`1.GetEnumerator()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Boolean& found)
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass15_1`1.<CompileQueryCore>b__0(QueryContext qc)
+   at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
+   at InternetHospital.BusinessLogic.Services.DoctorService.GetAll(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.BusinessLogic\Services\DoctorService.cs:line 36
+   at InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.WebApi\Controllers\DoctorsController.cs:line 26
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-05T20:55:05.5078590+02:00 0HLI3A0F4ETR6:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" in 353.9355ms (afa2e885)
+2018-11-05T20:55:05.5402733+02:00 0HLI3A0F4ETR6:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1003
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.<>c__DisplayClass161_0.<<ReadMessage>g__ReadMessageLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 1032
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnector.AuthenticateMD5(String username, Byte[] salt, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 132
+   at Npgsql.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.Auth.cs:line 38
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\NpgsqlConnector.cs:line 425
+   at Npgsql.ConnectorPool.AllocateLong(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in C:\projects\npgsql\src\Npgsql\ConnectorPool.cs:line 246
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass32_0.<<Open>g__OpenLong|0>d.MoveNext() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 300
+--- End of stack trace from previous location where exception was thrown ---
+   at Npgsql.NpgsqlConnection.Open() in C:\projects\npgsql\src\Npgsql\NpgsqlConnection.cs:line 153
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded) in C:\projects\npgsql-entityframeworkcore-postgresql\src\EFCore.PG\Storage\Internal\NpgsqlExecutionStrategy.cs:line 51
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.QueryMethodProvider.GetResult[TResult](IEnumerable`1 valueBuffers, Boolean throwOnNullResult)
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ResultEnumerable`1.GetEnumerator()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Boolean& found)
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass15_1`1.<CompileQueryCore>b__0(QueryContext qc)
+   at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
+   at InternetHospital.BusinessLogic.Services.DoctorService.GetAll(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.BusinessLogic\Services\DoctorService.cs:line 36
+   at InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors(DoctorSearchParameters queryParameters) in C:\repos\InternetHospital\Internet-Hospital\InternetHospital.WebApi\Controllers\DoctorsController.cs:line 26
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-11-05T20:55:05.7950226+02:00 0HLI3A0F4ETR6:00000004 [INF] Request finished in 744.9085ms 500 text/html; charset=utf-8 (791a596a)
+2018-11-05T20:55:39.3384748+02:00 0HLI3A0F4ETR6:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors   (ca22a1cb)
+2018-11-05T20:55:39.3404303+02:00 0HLI3A0F4ETR6:00000005 [INF] Route matched with "{action = \"GetDoctors\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T20:55:39.3423332+02:00 0HLI3A0F4ETR6:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.DoctorSearchParameters"]) - Validation state: Valid (4e3479ed)
+2018-11-05T20:55:39.3447538+02:00 0HLI3A0F4ETR6:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T20:55:40.8910622+02:00 0HLI3A0F4ETR6:00000005 [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)::INT4
+FROM \"Doctors\" AS d
+WHERE d.\"IsApproved\" = TRUE" (0723d8ff)
+2018-11-05T20:55:40.9392958+02:00 0HLI3A0F4ETR6:00000005 [WRN] Query: '"(from Doctor d in DbSet<Doctor> where [d].IsApproved == True select [d]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results. (32148ccc)
+2018-11-05T20:55:41.0802494+02:00 0HLI3A0F4ETR6:00000005 [INF] Executed DbCommand ("70"ms) [Parameters=["@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\" AS \"Id\", \"x.User\".\"FirstName\", \"x.User\".\"SecondName\", \"x.User\".\"ThirdName\", \"x.User\".\"AvatarURL\", \"x.Specialization\".\"Name\" AS \"Specialization\"
+FROM (
+    SELECT d.*
+    FROM \"Doctors\" AS d
+    WHERE d.\"IsApproved\" = TRUE
+    LIMIT @__p_1 OFFSET @__p_0
+) AS t
+LEFT JOIN \"Specializations\" AS \"x.Specialization\" ON t.\"SpecializationId\" = \"x.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"x.User\" ON t.\"UserId\" = \"x.User\".\"Id\"
+ORDER BY \"x.User\".\"SecondName\"" (0723d8ff)
+2018-11-05T20:55:41.1002884+02:00 0HLI3A0F4ETR6:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1750.9859ms. (50a9e262)
+2018-11-05T20:55:41.1169296+02:00 0HLI3A0F4ETR6:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`2[[System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.DoctorModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-05T20:55:41.2670355+02:00 0HLI3A0F4ETR6:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetDoctors (InternetHospital.WebApi)" in 1926.4321ms (afa2e885)
+2018-11-05T20:55:41.2672505+02:00 0HLI3A0F4ETR6:00000005 [INF] Request finished in 1928.8142ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-05T20:55:50.4560389+02:00 0HLI3A0F4ETR6:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appointment   (ca22a1cb)
+2018-11-05T20:55:50.4581748+02:00 0HLI3A0F4ETR6:00000006 [INF] Request finished in 2.1019ms 404  (791a596a)
+2018-11-05T20:56:18.2434932+02:00 0HLI3A0F4ETR6:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appointments   (ca22a1cb)
+2018-11-05T20:56:18.2501278+02:00 0HLI3A0F4ETR6:00000007 [INF] Route matched with "{action = \"GetAppointments\", controller = \"Appointments\"}". Executing action "InternetHospital.WebApi.Controllers.AppointmentsController.GetAppointments (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T20:56:18.2719388+02:00 0HLI3A0F4ETR6:00000007 [INF] Authorization failed. (b15dd539)
+2018-11-05T20:56:18.2730128+02:00 0HLI3A0F4ETR6:00000007 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-11-05T20:56:18.2783856+02:00 0HLI3A0F4ETR6:00000007 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-11-05T20:56:18.2928844+02:00 0HLI3A0F4ETR6:00000007 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-11-05T20:56:18.2934269+02:00 0HLI3A0F4ETR6:00000007 [INF] Executed action "InternetHospital.WebApi.Controllers.AppointmentsController.GetAppointments (InternetHospital.WebApi)" in 43.185ms (afa2e885)
+2018-11-05T20:56:18.2935788+02:00 0HLI3A0F4ETR6:00000007 [INF] Request finished in 50.1538ms 401  (791a596a)
+2018-11-05T20:57:16.2300052+02:00 0HLI3A0F4ETR6:00000008 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Signin   (ca22a1cb)
+2018-11-05T20:57:16.2322883+02:00 0HLI3A0F4ETR6:00000008 [INF] Policy execution successful. (0204925d)
+2018-11-05T20:57:16.2346438+02:00 0HLI3A0F4ETR6:00000008 [INF] Request finished in 4.5789ms 204  (791a596a)
+2018-11-05T20:57:16.2674266+02:00 0HLI3A0F4ETR6:00000009 [INF] Request starting HTTP/1.1 POST http://localhost:44357/api/Signin application/json 57 (ca22a1cb)
+2018-11-05T20:57:16.2676764+02:00 0HLI3A0F4ETR6:00000009 [INF] Policy execution successful. (0204925d)
+2018-11-05T20:57:16.2921280+02:00 0HLI3A0F4ETR6:00000009 [INF] Route matched with "{action = \"SignIn\", controller = \"Signin\"}". Executing action "InternetHospital.WebApi.Controllers.SigninController.SignIn (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T20:57:16.3497247+02:00 0HLI3A0F4ETR6:00000009 [INF] Executing action method "InternetHospital.WebApi.Controllers.SigninController.SignIn (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.UserLoginModel"]) - Validation state: Valid (4e3479ed)
+2018-11-05T20:57:16.3714181+02:00 0HLI3A0F4ETR6:00000009 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T20:57:16.5171446+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed DbCommand ("108"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-05T20:57:16.9427181+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed DbCommand ("57"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT role.\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS role ON \"userRole\".\"RoleId\" = role.\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-11-05T20:57:17.0041260+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed DbCommand ("31"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"Description\", e.\"Name\"
+FROM \"Statuses\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-05T20:57:17.0626654+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"UserId\", e.\"Address\", e.\"DoctorsInfo\", e.\"IsApproved\", e.\"LicenseURL\", e.\"SpecializationId\"
+FROM \"Doctors\" AS e
+WHERE e.\"UserId\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-05T20:57:17.1802805+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed DbCommand ("27"ms) [Parameters=["@__user_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)::INT4
+FROM \"Tokens\" AS x
+WHERE x.\"UserId\" = @__user_Id_0" (0723d8ff)
+2018-11-05T20:57:17.5070082+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed DbCommand ("53"ms) [Parameters=["@p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Tokens\" (\"ExpiresDate\", \"Revoked\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3)
+RETURNING \"Id\";" (0723d8ff)
+2018-11-05T20:57:17.5409461+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed action method "InternetHospital.WebApi.Controllers.SigninController.SignIn (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1191.0284ms. (50a9e262)
+2018-11-05T20:57:17.5475372+02:00 0HLI3A0F4ETR6:00000009 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType3`3[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-05T20:57:17.5569742+02:00 0HLI3A0F4ETR6:00000009 [INF] Executed action "InternetHospital.WebApi.Controllers.SigninController.SignIn (InternetHospital.WebApi)" in 1264.5977ms (afa2e885)
+2018-11-05T20:57:17.5704390+02:00 0HLI3A0F4ETR6:00000009 [INF] Request finished in 1303.0438ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-05T20:57:18.0094603+02:00 0HLI3A0F4ETR6:0000000A [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T20:57:18.0099227+02:00 0HLI3A0F4ETR6:0000000A [INF] Request finished in 0.5819ms 404  (791a596a)
+2018-11-05T21:09:40.2152185+02:00 0HLI3A0F4ETR7:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appointments   (ca22a1cb)
+2018-11-05T21:09:40.2158949+02:00 0HLI3A0F4ETR7:00000001 [INF] Route matched with "{action = \"GetAppointments\", controller = \"Appointments\"}". Executing action "InternetHospital.WebApi.Controllers.AppointmentsController.GetAppointments (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T21:09:40.2165194+02:00 0HLI3A0F4ETR7:00000001 [INF] Authorization failed. (b15dd539)
+2018-11-05T21:09:40.2166313+02:00 0HLI3A0F4ETR7:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-11-05T21:09:40.2167529+02:00 0HLI3A0F4ETR7:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-11-05T21:09:40.2169658+02:00 0HLI3A0F4ETR7:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-11-05T21:09:40.2170284+02:00 0HLI3A0F4ETR7:00000001 [INF] Executed action "InternetHospital.WebApi.Controllers.AppointmentsController.GetAppointments (InternetHospital.WebApi)" in 1.0617ms (afa2e885)
+2018-11-05T21:09:40.2172286+02:00 0HLI3A0F4ETR7:00000001 [INF] Request finished in 2.1439ms 401  (791a596a)
+2018-11-05T21:10:05.5579934+02:00 0HLI3A0F4ETR7:00000002 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/GetAppointments   (ca22a1cb)
+2018-11-05T21:10:05.5610149+02:00 0HLI3A0F4ETR7:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:10:05.5676310+02:00 0HLI3A0F4ETR7:00000002 [INF] Request finished in 12.3235ms 204  (791a596a)
+2018-11-05T21:10:06.5907294+02:00 0HLI3A0F4ETR7:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appointment/GetAppointments   (ca22a1cb)
+2018-11-05T21:10:06.5908742+02:00 0HLI3A0F4ETR7:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:10:06.8454088+02:00 0HLI3A0F4ETR7:00000003 [INF] Successfully validated the token. (60169667)
+2018-11-05T21:10:06.8474302+02:00 0HLI3A0F4ETR7:00000003 [INF] Request finished in 256.6986ms 404  (791a596a)
+2018-11-05T21:10:06.8477627+02:00 0HLI3A0F4ETR8:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T21:10:06.8481424+02:00 0HLI3A0F4ETR8:00000001 [INF] Request finished in 0.3889ms 404  (791a596a)
+2018-11-05T21:12:08.7868930+02:00 0HLI3A0F4ETR9:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Signup/ConfirmEmail?userId=25&code=CfDJ8HdvrqYRDzBGnKEjWoeGZVjS0oIDzfJOBVMNd7hn0iEGRi6SHYDqGC8R9H0ZMp7a%2B2Fr%2FnzOejcwrChCyU68dGfyJBrLuvzy5hGFRJRA%2BqHCIXI6%2BfC%2FNnHCFwZuapsVUCAvUaNgldtZuJJGOk2vaxZ2wBtB3YXbiwzFnDdKPsruuSJ4v1MGoE%2BM%2BJ7ED1J7Dg%3D%3D   (ca22a1cb)
+2018-11-05T21:12:08.8045766+02:00 0HLI3A0F4ETR9:00000001 [INF] Route matched with "{action = \"ConfirmEmail\", controller = \"Signup\"}". Executing action "InternetHospital.WebApi.controllers.SignupController.ConfirmEmail (InternetHospital.WebApi)" (a44c0341)
+2018-11-05T21:12:08.8118922+02:00 0HLI3A0F4ETR9:00000001 [INF] Executing action method "InternetHospital.WebApi.controllers.SignupController.ConfirmEmail (InternetHospital.WebApi)" with arguments (["25", "CfDJ8HdvrqYRDzBGnKEjWoeGZVjS0oIDzfJOBVMNd7hn0iEGRi6SHYDqGC8R9H0ZMp7a+2Fr/nzOejcwrChCyU68dGfyJBrLuvzy5hGFRJRA+qHCIXI6+fC/NnHCFwZuapsVUCAvUaNgldtZuJJGOk2vaxZ2wBtB3YXbiwzFnDdKPsruuSJ4v1MGoE+M+J7ED1J7Dg=="]) - Validation state: Valid (4e3479ed)
+2018-11-05T21:12:08.8184170+02:00 0HLI3A0F4ETR9:00000001 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-05T21:12:09.2472285+02:00 0HLI3A0F4ETR9:00000001 [INF] Executed DbCommand ("142"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-05T21:12:09.3155169+02:00 0HLI3A0F4ETR9:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-11-05T21:12:09.3688601+02:00 0HLI3A0F4ETR9:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-05T21:12:09.5457970+02:00 0HLI3A0F4ETR9:00000001 [INF] Executed DbCommand ("12"ms) [Parameters=["@p23='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p24='?', @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Int32), @p20='?', @p21='?' (DbType = Boolean), @p22='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"AvatarURL\" = @p1, \"BirthDate\" = @p2, \"ConcurrencyStamp\" = @p3, \"Email\" = @p4, \"EmailConfirmed\" = @p5, \"FirstName\" = @p6, \"LastStatusChangeTime\" = @p7, \"LockoutEnabled\" = @p8, \"LockoutEnd\" = @p9, \"NormalizedEmail\" = @p10, \"NormalizedUserName\" = @p11, \"PassportURL\" = @p12, \"PasswordHash\" = @p13, \"PhoneNumber\" = @p14, \"PhoneNumberConfirmed\" = @p15, \"SecondName\" = @p16, \"SecurityStamp\" = @p17, \"SignUpTime\" = @p18, \"StatusId\" = @p19, \"ThirdName\" = @p20, \"TwoFactorEnabled\" = @p21, \"UserName\" = @p22
+WHERE \"Id\" = @p23 AND \"ConcurrencyStamp\" = @p24;" (0723d8ff)
+2018-11-05T21:12:09.6735706+02:00 0HLI3A0F4ETR9:00000001 [INF] Executed action method "InternetHospital.WebApi.controllers.SignupController.ConfirmEmail (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 861.5321ms. (50a9e262)
+2018-11-05T21:12:09.6737789+02:00 0HLI3A0F4ETR9:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-05T21:12:09.6764582+02:00 0HLI3A0F4ETR9:00000001 [INF] Executed action "InternetHospital.WebApi.controllers.SignupController.ConfirmEmail (InternetHospital.WebApi)" in 871.7368ms (afa2e885)
+2018-11-05T21:12:09.6809633+02:00 0HLI3A0F4ETR9:00000001 [INF] Request finished in 895.5886ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-05T21:13:43.2433408+02:00 0HLI3A0F4ETRA:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/GetAppointments   (ca22a1cb)
+2018-11-05T21:13:43.2437333+02:00 0HLI3A0F4ETRA:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:13:43.2439211+02:00 0HLI3A0F4ETRA:00000001 [INF] Request finished in 0.6609ms 204  (791a596a)
+2018-11-05T21:13:43.6613533+02:00 0HLI3A0F4ETRA:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T21:13:43.6625125+02:00 0HLI3A0F4ETRA:00000002 [INF] Request finished in 1.1797ms 404  (791a596a)
+2018-11-05T21:13:43.7318545+02:00 0HLI3A0F4ETRB:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appointment/GetAppointments   (ca22a1cb)
+2018-11-05T21:13:43.7319946+02:00 0HLI3A0F4ETRB:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:13:43.7324676+02:00 0HLI3A0F4ETRB:00000001 [INF] Successfully validated the token. (60169667)
+2018-11-05T21:13:43.7327766+02:00 0HLI3A0F4ETRB:00000001 [INF] Request finished in 0.9483ms 404  (791a596a)
+2018-11-05T21:36:29.2792631+02:00 0HLI3A0F4ETRC:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/Add   (ca22a1cb)
+2018-11-05T21:36:29.2795664+02:00 0HLI3A0F4ETRC:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:36:29.2797721+02:00 0HLI3A0F4ETRC:00000001 [INF] Request finished in 0.6003ms 204  (791a596a)
+2018-11-05T21:36:29.3147082+02:00 0HLI3A0F4ETRC:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:44357/api/Appointment/Add application/json 29 (ca22a1cb)
+2018-11-05T21:36:29.3286857+02:00 0HLI3A0F4ETRC:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:36:29.3644289+02:00 0HLI3A0F4ETRC:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-05T21:36:29.3646414+02:00 0HLI3A0F4ETRC:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-05T21:36:29.3647625+02:00 0HLI3A0F4ETRC:00000002 [INF] Request finished in 50.1266ms 404  (791a596a)
+2018-11-05T21:36:29.3673339+02:00  [INF] Connection id ""0HLI3A0F4ETRC"", Request id ""0HLI3A0F4ETRC:00000002"": the application completed without reading the entire request body. (54ac9468)
+2018-11-05T21:37:01.1528853+02:00 0HLI3A0F4ETRC:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/Add   (ca22a1cb)
+2018-11-05T21:37:01.1530788+02:00 0HLI3A0F4ETRC:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:37:01.1532415+02:00 0HLI3A0F4ETRC:00000003 [INF] Request finished in 12.1998ms 204  (791a596a)
+2018-11-05T21:37:01.1751165+02:00 0HLI3A0F4ETRC:00000004 [INF] Request starting HTTP/1.1 POST http://localhost:44357/api/Appointment/Add application/json 29 (ca22a1cb)
+2018-11-05T21:37:01.1752478+02:00 0HLI3A0F4ETRC:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:37:01.1761002+02:00 0HLI3A0F4ETRC:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-05T21:37:01.1762249+02:00 0HLI3A0F4ETRC:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-05T21:37:01.1763840+02:00 0HLI3A0F4ETRC:00000004 [INF] Request finished in 1.2705ms 404  (791a596a)
+2018-11-05T21:37:01.1782216+02:00  [INF] Connection id ""0HLI3A0F4ETRC"", Request id ""0HLI3A0F4ETRC:00000004"": the application completed without reading the entire request body. (54ac9468)
+2018-11-05T21:41:36.5107887+02:00 0HLI3A0F4ETRD:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/sergentiy@ukr.net/Avatar/sergentiy@ukr.net.jpg   (ca22a1cb)
+2018-11-05T21:41:36.5133714+02:00 0HLI3A0F4ETRD:00000001 [INF] Request finished in 2.712ms 404  (791a596a)
+2018-11-05T21:41:53.9001057+02:00 0HLI3A0F4ETRD:00000002 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/GetAppointments   (ca22a1cb)
+2018-11-05T21:41:53.9004120+02:00 0HLI3A0F4ETRD:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:41:53.9032632+02:00 0HLI3A0F4ETRD:00000002 [INF] Request finished in 3.1708ms 204  (791a596a)
+2018-11-05T21:41:54.1640369+02:00 0HLI3A0F4ETRD:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/sergentiy@ukr.net/Avatar/sergentiy@ukr.net.jpg   (ca22a1cb)
+2018-11-05T21:41:54.1645823+02:00 0HLI3A0F4ETRD:00000003 [INF] Request finished in 1.2367ms 404  (791a596a)
+2018-11-05T21:41:54.3236890+02:00 0HLI3A0F4ETRD:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Appointment/GetAppointments   (ca22a1cb)
+2018-11-05T21:41:54.3238871+02:00 0HLI3A0F4ETRD:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:41:54.3289910+02:00 0HLI3A0F4ETRD:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-05T21:41:54.3291209+02:00 0HLI3A0F4ETRD:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-05T21:41:54.3294883+02:00 0HLI3A0F4ETRD:00000004 [INF] Request finished in 5.5965ms 404  (791a596a)
+2018-11-05T21:44:56.3597735+02:00 0HLI3A0F4ETRE:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/sergentiy@ukr.net/Avatar/sergentiy@ukr.net.jpg   (ca22a1cb)
+2018-11-05T21:44:56.3620720+02:00 0HLI3A0F4ETRE:00000001 [INF] Request finished in 2.4057ms 404  (791a596a)
+2018-11-05T21:46:12.8358912+02:00 0HLI3A0F4ETRF:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T21:46:12.8370136+02:00 0HLI3A0F4ETRF:00000001 [INF] Request finished in 1.1884ms 404  (791a596a)
+2018-11-05T21:46:44.0465111+02:00 0HLI3A0F4ETRF:00000002 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/Add   (ca22a1cb)
+2018-11-05T21:46:44.0470417+02:00 0HLI3A0F4ETRF:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:46:44.0480968+02:00 0HLI3A0F4ETRF:00000002 [INF] Request finished in 1.7206ms 204  (791a596a)
+2018-11-05T21:46:44.0829922+02:00 0HLI3A0F4ETRF:00000003 [INF] Request starting HTTP/1.1 POST http://localhost:44357/api/Appointment/Add application/json 29 (ca22a1cb)
+2018-11-05T21:46:44.0866998+02:00 0HLI3A0F4ETRF:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-05T21:46:44.0898963+02:00 0HLI3A0F4ETRF:00000003 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-05T21:46:44.0900272+02:00 0HLI3A0F4ETRF:00000003 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-05T21:46:44.0902176+02:00 0HLI3A0F4ETRF:00000003 [INF] Request finished in 7.2135ms 404  (791a596a)
+2018-11-05T21:46:44.0904475+02:00  [INF] Connection id ""0HLI3A0F4ETRF"", Request id ""0HLI3A0F4ETRF:00000003"": the application completed without reading the entire request body. (54ac9468)
+2018-11-05T22:18:43.2851968+02:00 0HLI3A0F4ETRG:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Appointment/Add   (ca22a1cb)
+2018-11-05T22:18:43.2857720+02:00 0HLI3A0F4ETRG:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-05T22:18:43.2859660+02:00 0HLI3A0F4ETRG:00000001 [INF] Request finished in 0.8554ms 204  (791a596a)
+2018-11-05T22:18:43.3516886+02:00 0HLI3A0F4ETRG:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:44357/api/Appointment/Add application/json 29 (ca22a1cb)
+2018-11-05T22:18:43.3520027+02:00 0HLI3A0F4ETRG:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-05T22:18:43.3538814+02:00 0HLI3A0F4ETRG:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-05T22:18:43.3542873+02:00 0HLI3A0F4ETRG:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-05T22:18:43.3549687+02:00 0HLI3A0F4ETRG:00000002 [INF] Request finished in 3.3868ms 404  (791a596a)
+2018-11-05T22:18:43.3551340+02:00  [INF] Connection id ""0HLI3A0F4ETRG"", Request id ""0HLI3A0F4ETRG:00000002"": the application completed without reading the entire request body. (54ac9468)
+2018-11-05T22:27:08.1861233+02:00 0HLI3A0F4ETRH:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T22:27:08.1876936+02:00 0HLI3A0F4ETRH:00000001 [INF] Request finished in 1.6262ms 404  (791a596a)
+2018-11-05T22:30:43.0860235+02:00 0HLI3A0F4ETRI:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T22:30:43.0865089+02:00 0HLI3A0F4ETRI:00000001 [INF] Request finished in 0.5331ms 404  (791a596a)
+2018-11-05T23:09:48.8343045+02:00 0HLI3A0F4ETRJ:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:09:48.8351918+02:00 0HLI3A0F4ETRJ:00000001 [INF] Request finished in 1.0242ms 404  (791a596a)
+2018-11-05T23:11:35.5763738+02:00 0HLI3A0F4ETRK:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:11:35.5797231+02:00 0HLI3A0F4ETRK:00000001 [INF] Request finished in 3.3986ms 404  (791a596a)
+2018-11-05T23:14:19.4100638+02:00 0HLI3A0F4ETRL:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:14:19.4124361+02:00 0HLI3A0F4ETRL:00000001 [INF] Request finished in 2.4287ms 404  (791a596a)
+2018-11-05T23:17:42.8318019+02:00 0HLI3A0F4ETRM:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:17:42.8324546+02:00 0HLI3A0F4ETRM:00000001 [INF] Request finished in 0.6645ms 404  (791a596a)
+2018-11-05T23:24:09.0541433+02:00 0HLI3A0F4ETRN:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:24:09.0550127+02:00 0HLI3A0F4ETRN:00000001 [INF] Request finished in 2.3564ms 404  (791a596a)
+2018-11-05T23:25:14.4050959+02:00 0HLI3A0F4ETRO:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:25:14.4058385+02:00 0HLI3A0F4ETRO:00000001 [INF] Request finished in 0.8482ms 404  (791a596a)
+2018-11-05T23:25:57.1738259+02:00 0HLI3A0F4ETRO:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:25:57.1892454+02:00 0HLI3A0F4ETRO:00000002 [INF] Request finished in 15.1839ms 404  (791a596a)
+2018-11-05T23:30:52.3817291+02:00 0HLI3A0F4ETRP:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:30:52.3837074+02:00 0HLI3A0F4ETRP:00000001 [INF] Request finished in 2.0198ms 404  (791a596a)
+2018-11-05T23:31:19.1304612+02:00 0HLI3A0F4ETRP:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:31:19.1310129+02:00 0HLI3A0F4ETRP:00000002 [INF] Request finished in 2.0423ms 404  (791a596a)
+2018-11-05T23:36:16.3194647+02:00 0HLI3A0F4ETRQ:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:36:16.3199609+02:00 0HLI3A0F4ETRQ:00000001 [INF] Request finished in 0.7312ms 404  (791a596a)
+2018-11-05T23:38:22.8154258+02:00 0HLI3A0F4ETRR:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/senjust@gmail.com/Avatar/senjust@gmail.com.jpg   (ca22a1cb)
+2018-11-05T23:38:22.8160242+02:00 0HLI3A0F4ETRR:00000001 [INF] Request finished in 0.7112ms 404  (791a596a)
