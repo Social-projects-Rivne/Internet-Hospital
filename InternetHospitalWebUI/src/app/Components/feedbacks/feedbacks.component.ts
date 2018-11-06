@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { FeedBackService } from '../../Services/FeedBackService/feed-back.service';
+import { NotificationService } from '../../Services/notification.service';
+import { FeedBackType } from '../../Models/FeedBackType';
 
 @Component({
   selector: 'feedbacks',
@@ -10,9 +12,22 @@ import { FeedBackService } from '../../Services/FeedBackService/feed-back.servic
 })
 export class FeedbacksComponent implements OnInit {
 
-  constructor(private _FeedBackService:FeedBackService) { }
+  feedbackTypes:FeedBackType[];
+
+  constructor(
+    private _feedbackService:FeedBackService,
+    private _notification: NotificationService
+    ) { }
 
   ngOnInit() {
+
+   this._feedbackService.form.controls['Type'].setValue('FeedBack');
+   this._feedbackService.getFeedBackTypes().subscribe((ftypes:any)  => this.feedbackTypes = ftypes);
+  }
+
+  onSubmit(){
+    this._feedbackService.postUser();
+    this._feedbackService.form.reset();
   }
 
 }

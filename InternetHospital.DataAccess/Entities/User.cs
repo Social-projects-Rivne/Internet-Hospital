@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace InternetHospital.DataAccess.Entities
 {
-    public class User:IdentityUser<int>
+    public class User : IdentityUser<int>
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
@@ -15,6 +15,7 @@ namespace InternetHospital.DataAccess.Entities
         public DateTime SignUpTime { get; set; }
         public DateTime LastStatusChangeTime { get; set; }
         public int StatusId { get; set; }
+        public virtual ICollection<FeedBack> FeedBacks { set; get; }
 
         public virtual Doctor Doctor { get; set; }
         public virtual Status Status { get; set; }

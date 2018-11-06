@@ -7,20 +7,18 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     
-    <form #FeedBackForm="ngForm">
+    <form [formGroup]="_feedbackService.form">
       
       <div id="RadioBlock">
-        <mat-radio-group fxLayout="row" fxLayoutAlign="space-evenly center">
-            <mat-radio-button value="FeedBack">Feedback</mat-radio-button>
-            <mat-radio-button value="Request">Request</mat-radio-button>
-            <mat-radio-button value="Complaint">Complaint</mat-radio-button>
+        <mat-radio-group formControlName="Type" fxLayout="row" fxLayoutAlign="space-evenly center" >
+            <mat-radio-button *ngFor="let type of feedbackTypes" [value]="type.id" >{{type.value}}</mat-radio-button>
         </mat-radio-group>
       </div>
       
       <div class="InputContainer">
           <mat-form-field appearance="outline">
               <mat-label>Enter text here</mat-label>
-              <textarea id="FeedBackArea" matInput></textarea>
+              <textarea formControlName="Text" id="FeedBackArea" matInput></textarea>
           </mat-form-field>
       </div>
 

@@ -8,5 +8,6 @@ namespace InternetHospital.DataAccess.Entities
     {
         public int Id { set; get; }
         public string Name { set; get; }
+        public virtual ICollection<FeedBack> FeedBacks { set; get; }
     }
 }
