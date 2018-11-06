@@ -14,6 +14,9 @@ namespace InternetHospital.BusinessLogic.Services
         private const int MINIMUM_APPOINTMENT_TIME = 15;
         private const int DEFAULT_STATUS = 1;
         private const int RESERVED_STATUS = 2;
+        private const int CANCELED_STATUS = 3;
+        private const int FINISHED_STATUS = 4;
+        private const int MISSED_STATUS = 5;
 
         public AppointmentService(ApplicationContext context)
         {
@@ -28,7 +31,7 @@ namespace InternetHospital.BusinessLogic.Services
         public IQueryable<AppointmentModel> GetMyAppointments(int doctorId)
         {
             var appointments = _context.Appointments
-                .Where(a => (a.DoctorId == doctorId) 
+                .Where(a => (a.DoctorId == doctorId)
                             && (a.StatusId == DEFAULT_STATUS || a.StatusId == RESERVED_STATUS))
                 .Select(a => new AppointmentModel
                 {
@@ -95,6 +98,99 @@ namespace InternetHospital.BusinessLogic.Services
                     EndTime = a.EndTime
                 });
             return appointments;
+        }
+
+        /// <summary>
+        /// Delete doctor's appointment if it's not reserved
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="doctorId"></param>
+        /// <returns></returns>
+        public (bool status, string message) DeleteAppointment(int appointmentId, int doctorId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+            if (appointment == null)
+            {
+                return (false, "Appointment not found");
+            }
+
+            if (appointment.DoctorId != doctorId)
+            {
+                return (false, "You can delete only your appointments");
+            }
+
+            if (appointment.StatusId != DEFAULT_STATUS)
+            {
+                return (false, "This appointment is reserved. You can only cancel it");
+            }
+
+            _context.Appointments.Remove(appointment);
+            _context.SaveChanges();
+
+            return (true, "Appointment was deleted");
+        }
+
+        /// <summary>
+        /// cancel appointment if it was already reserved
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="doctorId"></param>
+        /// <returns></returns>
+        public (bool status, string message) CancelAppointment(int appointmentId, int doctorId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+            if (appointment == null)
+            {
+                return (false, "Appointment not found");
+            }
+
+            if (appointment.DoctorId != doctorId)
+            {
+                return (false, "You can cancel only your appointments");
+            }
+
+            if (appointment.StatusId != RESERVED_STATUS)
+            {
+                return (false, "You can cancel only reserved appointments");
+            }
+
+            appointment.StatusId = CANCELED_STATUS;
+            _context.SaveChanges();
+
+            return (true, "Appointment was canceled");
+        }
+
+        /// <summary>
+        /// finish appointment if patient reserved it and came to doctor
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="doctorId"></param>
+        /// <returns></returns>
+        public (bool status, string message) FinishAppointment(int appointmentId, int doctorId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+            if (appointment == null)
+            {
+                return (false, "Appointment not found");
+            }
+
+            if (appointment.DoctorId != doctorId)
+            {
+                return (false, "You can finish only your appointments");
+            }
+
+            if (appointment.StatusId != RESERVED_STATUS)
+            {
+                return (false, "You can finish only reserved appointments");
+            }
+
+            appointment.StatusId = FINISHED_STATUS;
+            _context.SaveChanges();
+
+            return (true, "Appointment was finished");
         }
 
         private bool CreateAppointment(AppointmentCreationModel model, int id)
