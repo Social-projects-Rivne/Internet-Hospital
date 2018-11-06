@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="CustomMiddleware\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
