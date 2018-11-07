@@ -44,10 +44,10 @@ namespace InternetHospital.WebApi
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             //configure entity framework
-            services.AddEntityFrameworkNpgsql()
+            services.AddEntityFrameworkSqlServer()
                     .AddDbContext<ApplicationContext>(opt =>
                     {
-                        opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), 
+                        opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection"), 
                                       m => m.MigrationsAssembly("InternetHospital.WebApi"));
                     });
 

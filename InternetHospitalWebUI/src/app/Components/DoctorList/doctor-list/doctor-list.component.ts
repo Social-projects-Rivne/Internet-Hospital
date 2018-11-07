@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { PaginationService } from '../../../Services/pagination.service'
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
@@ -15,7 +15,7 @@ export class DoctorListComponent implements OnInit {
   private filter: Filter;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  
   ngOnInit() {
     this.filter = new Filter();
     this.service.getDoctors();
@@ -42,5 +42,6 @@ export class DoctorListComponent implements OnInit {
     else {
       this.service.getDoctors();
     }
+    window.scroll(0,0);
   }
 }
