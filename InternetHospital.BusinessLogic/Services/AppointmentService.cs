@@ -13,6 +13,7 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly ApplicationContext _context;
         private const int MINIMUM_APPOINTMENT_TIME = 15;
         private const int MINIMUM_TIME_BEFORE_APPOINTMENT = 10;
+        private const int TIME_FOR_FINISHING_APPOINTMENT = 12;
         private const int DEFAULT_STATUS = 1;
         private const int RESERVED_STATUS = 2;
         private const int CANCELED_STATUS = 3;
@@ -83,7 +84,7 @@ namespace InternetHospital.BusinessLogic.Services
             }
 
             var ifUnfinished = _context.Appointments.Any(a => a.DoctorId == doctorId
-                                                              && (DateTime.Now - a.EndTime).TotalHours > 12
+                                                              && (DateTime.Now - a.EndTime).TotalHours > TIME_FOR_FINISHING_APPOINTMENT
                                                               && (a.StatusId == RESERVED_STATUS));
             if (ifUnfinished)
             {
