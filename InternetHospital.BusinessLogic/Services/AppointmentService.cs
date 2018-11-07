@@ -12,6 +12,7 @@ namespace InternetHospital.BusinessLogic.Services
     {
         private readonly ApplicationContext _context;
         private const int MINIMUM_APPOINTMENT_TIME = 15;
+        private const int MINIMUM_TIME_BEFORE_APPOINTMENT = 10;
         private const int DEFAULT_STATUS = 1;
         private const int RESERVED_STATUS = 2;
         private const int CANCELED_STATUS = 3;
@@ -55,6 +56,8 @@ namespace InternetHospital.BusinessLogic.Services
         /// <returns></returns>
         public (bool status, string message) AddAppointment(AppointmentCreationModel creationModel, int doctorId)
         {
+            DeleteUncommittedAppointments(doctorId);
+
             if (DateTime.Now > creationModel.StartTime)
             {
                 return (false, "You don't have a time machine");
@@ -79,6 +82,14 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You already have an appointment for this time");
             }
 
+            var ifUnfinished = _context.Appointments.Any(a => a.DoctorId == doctorId
+                                                              && (DateTime.Now - a.EndTime).TotalHours > 12
+                                                              && (a.StatusId == RESERVED_STATUS));
+            if (ifUnfinished)
+            {
+                return (false, "You have out of date appointments. Please close it before creating new");
+            }
+
             return CreateAppointment(creationModel, doctorId) ? (true, "Appointment has been successfully created") : (false, "Error adding an appointment");
         }
 
@@ -90,7 +101,9 @@ namespace InternetHospital.BusinessLogic.Services
         public IQueryable<AvailableAppointmentModel> GetAvailableAppointments(int doctorId)
         {
             var appointments = _context.Appointments
-                .Where(a => (a.DoctorId == doctorId) && (a.StatusId == DEFAULT_STATUS))
+                .Where(a => (a.DoctorId == doctorId) 
+                            && (a.StatusId == DEFAULT_STATUS)
+                            && (a.StartTime - DateTime.Now).TotalMinutes > MINIMUM_TIME_BEFORE_APPOINTMENT)
                 .Select(a => new AvailableAppointmentModel
                 {
                     Id = a.Id,
@@ -211,6 +224,16 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 return false;
             }
+        }
+
+        private void DeleteUncommittedAppointments(int doctorId)
+        {
+            var uncommittedAppointments = _context.Appointments
+                .Where(a => a.DoctorId == doctorId
+                            && a.StatusId == DEFAULT_STATUS
+                            && DateTime.Now > a.StartTime);
+            _context.RemoveRange(uncommittedAppointments);
+            _context.SaveChanges();
         }
     }
 }
