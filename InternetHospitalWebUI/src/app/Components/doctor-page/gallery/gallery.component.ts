@@ -12,7 +12,6 @@ export class GalleryComponent implements OnInit {
 
   @Input() images: string[];
   startIndex = 0;
-  lockScrolling = 'lock_scroll';
 
   constructor(private dialog: MatDialog, private overlay: Overlay) { }
 
@@ -35,9 +34,7 @@ export class GalleryComponent implements OnInit {
   }
 
   openDialog(img) {
-    const strategy = this.overlay.scrollStrategies.reposition();
-    const dom: any = document.querySelector('body');
-    dom.classList.toggle(this.lockScrolling);
+    const strategy = this.overlay.scrollStrategies.block();
     this.dialog.open(ImageModalDialogComponent, {
       panelClass: 'custom-dialog-container',
       scrollStrategy: strategy,
