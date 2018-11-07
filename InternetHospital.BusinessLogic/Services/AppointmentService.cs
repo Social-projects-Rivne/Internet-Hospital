@@ -37,7 +37,8 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     Id = a.Id,
                     UserId = a.UserId,
-                    UserName = a.User.FirstName + a.User.SecondName,
+                    UserFirstName = a.User.FirstName,
+                    UserSecondName = a.User.SecondName,
                     Address = a.Address,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
@@ -70,10 +71,10 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 return (false, "Your appointment can't be bigger then one day");
             }
-            var isUnique = _context.Appointments.Any(a => a.DoctorId == doctorId
+            var isReserved = _context.Appointments.Any(a => a.DoctorId == doctorId
                                                        && ((creationModel.StartTime >= a.StartTime && creationModel.StartTime < a.EndTime)
                                                            || (creationModel.EndTime > a.StartTime && creationModel.EndTime <= a.EndTime)));
-            if (isUnique)
+            if (isReserved)
             {
                 return (false, "You already have an appointment for this time");
             }
