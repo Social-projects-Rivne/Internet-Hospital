@@ -62,5 +62,74 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest(new { message = "Wrong claims" });
             }
         }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("cancel")]
+        public IActionResult CancelAppointment([FromBody] AppointmentEditingModel model)
+        {
+            if (int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                var (status, message) = _appointmentService.CancelAppointment(model.Id, doctorId);
+
+                if (status)
+                {
+                    return Ok(new { message });
+                }
+                else
+                {
+                    return BadRequest(new { message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("delete")]
+        public IActionResult DeleteAppointment([FromBody] AppointmentEditingModel model)
+        {
+            if (int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                var (status, message) = _appointmentService.DeleteAppointment(model.Id, doctorId);
+
+                if (status)
+                {
+                    return Ok(new { message });
+                }
+                else
+                {
+                    return BadRequest(new { message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("finish")]
+        public IActionResult FinishAppointment([FromBody] AppointmentEditingModel model)
+        {
+            if (int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                var (status, message) = _appointmentService.FinishAppointment(model.Id, doctorId);
+
+                if (status)
+                {
+                    return Ok(new { message });
+                }
+                else
+                {
+                    return BadRequest(new { message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+        }
     }
 }
