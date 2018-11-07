@@ -13,20 +13,20 @@ mat-dialog-content{
 }
 
 #slider{
-    background-color: red;
     width: 640px;
     overflow: hidden;
     display: inline-block;
 
     #img-line{
-        background-color: black;
         width: 1408px;
         position: relative;
         transition: all ease 0.5s;
 
         img{
-            height: 128px;
-            width: 128px;
+            height: auto;
+            width: auto;
+            max-width: 128px;
+            max-height: 128px;
         }
     }
 }
