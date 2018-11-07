@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetHospital.BusinessLogic.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,10 @@ namespace InternetHospital.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            var FeedBack = new FeedBackModel
+            {
+                Text = Request.Form[Text];
+            }
         }
 
         // PUT: api/FeedBack/5

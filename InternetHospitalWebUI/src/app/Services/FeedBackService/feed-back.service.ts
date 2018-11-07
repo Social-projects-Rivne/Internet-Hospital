@@ -23,12 +23,11 @@ export class FeedBackService {
       Type: '',
     });
   }
-  postUser() {
+  CreateFeedBack() {
     let formData = new FormData();
     
     formData.append("Type", this.form.value['Type']);
-    formData.append("Email", this.form.value['Type']);
-    //add current user id
+    formData.append("Text", this.form.value['Text']);
 
     return this.http.post(this.url, formData);
   }

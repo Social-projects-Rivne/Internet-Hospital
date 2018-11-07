@@ -4,6 +4,7 @@ using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,9 +34,9 @@ namespace InternetHospital.BusinessLogic.Services
             return feedback;
         }
 
-        public ICollection<FeedBackType> GetTypes()
+        public IQueryable<FeedBackType> GetTypes()
         {
-           
+            return _context.FeedBackTypes.AsQueryable();
         }
     }
 }

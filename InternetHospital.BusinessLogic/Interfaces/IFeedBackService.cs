@@ -1,6 +1,7 @@
 ﻿using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InternetHospital.BusinessLogic.Interfaces
@@ -8,6 +9,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface IFeedBackService
     {
         FeedBack FeedBackPOST(FeedBackModel model);
-        ICollection<FeedBackType> GetTypes();
+        IQueryable<FeedBackType> GetTypes();
     }
 }

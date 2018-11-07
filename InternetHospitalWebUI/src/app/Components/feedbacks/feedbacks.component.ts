@@ -20,13 +20,14 @@ export class FeedbacksComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
-   this._feedbackService.form.controls['Type'].setValue('FeedBack');
    this._feedbackService.getFeedBackTypes().subscribe((ftypes:any)  => this.feedbackTypes = ftypes);
   }
 
   onSubmit(){
-    this._feedbackService.postUser();
+    this._feedbackService.CreateFeedBack();
+    this._feedbackService.form.reset();
+  }
+  onCencel(){
     this._feedbackService.form.reset();
   }
 
