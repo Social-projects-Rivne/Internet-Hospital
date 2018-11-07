@@ -1,0 +1,39 @@
+<mat-card class="mat-elevation-z8" style="display: inline-block; margin: 10px; width: 750px;">
+  <h1 style="margin-bottom: 0">{{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}<span style="float:right; font-size: 12px; vertical-align: top"><span style="color: green">Loys</span>/<span style="color: red">Disloys</span></span></h1>
+  <h6 style="vertical-align: top; margin-top: 0;">{{doctor?.specialization}}</h6>
+  <div style="text-align: center">
+    <img style="width: 98%; height: auto;" src="http://ste.india.com/sites/default/files/2017/08/04/614293-trump.jpg">
+  </div>
+  <app-gallery [images]="tempImgs"></app-gallery>
+</mat-card>
+<div style="display: inline-block; vertical-align: top">PLACE FOR APPOINTMENT</div>
+<div class="mat-elevation-z8" style="margin: 10px">
+  <mat-card>
+  <h3>About </h3>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed repellendus officia officiis? 
+    Eius dolores officiis est, perspiciatis cumque voluptas atque assumenda provident ullam cum 
+    deserunt nobis iste amet doloribus, cupiditate veniam placeat. Dolore officiis ullam libero 
+    laborum sed quae dignissimos nihil numquam reprehenderit recusandae, et animi odit sit eaque 
+    earum labore dolores veritatis repellendus eos iste debitis, temporibus, asperiores consectetur! 
+    Odit, nostrum. Deleniti ipsa hic sit expedita esse asperiores, a magni quam soluta ut ab 
+    perspiciatis reprehenderit velit qui accusamus in reiciendis quisquam omnis quibusdam 
+    temporibus similique maxime nobis enim. Qui aliquam obcaecati eius odio ab omnis modi 
+    earum dolorem nesciunt repudiandae inventore sequi provident eaque eos a iure molestias, 
+    asperiores exercitationem! Autem amet accusamus voluptate quia cupiditate nostrum inventore 
+    hic qui aperiam tempora provident rerum architecto, excepturi iste. Inventore fugiat placeat 
+    dignissimos tempore mollitia, consequatur ipsa iste, asperiores sapiente optio nam quas non 
+    ipsum, minima explicabo libero impedit totam voluptatum doloremque voluptates consectetur 
+    quisquam blanditiis odio quidem. Rerum explicabo reprehenderit odio voluptate facere eveniet 
+    fugiat voluptas laboriosam corrupti? Quibusdam quos ex, possimus perferendis sint ab provident 
+    maxime! Explicabo totam neque assumenda magnam dignissimos aspernatur ullam perspiciatis sequi 
+    repellat, inventore at provident aliquid! Numquam velit vitae illo officiis repellendus sapiente.
+  </p>
+</mat-card>
+</div>
+<div>
+  <app-feedback-item [isPositive]="true"></app-feedback-item>
+  <app-feedback-item [isPositive]="false"></app-feedback-item>
+
+  <h6 style="text-align: center">PAGINATION</h6>
+</div>

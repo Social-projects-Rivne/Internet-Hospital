@@ -1,0 +1,32 @@
+#slider::after{
+  
+}
+
+button{
+    width: 40px;
+    min-width: 40px;
+    padding: 0;
+}
+
+mat-dialog-content{
+    padding: 0;
+}
+
+#slider{
+    background-color: red;
+    width: 640px;
+    overflow: hidden;
+    display: inline-block;
+
+    #img-line{
+        background-color: black;
+        width: 1408px;
+        position: relative;
+        transition: all ease 0.5s;
+
+        img{
+            height: 128px;
+            width: 128px;
+        }
+    }
+}

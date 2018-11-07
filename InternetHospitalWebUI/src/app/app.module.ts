@@ -29,11 +29,17 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { DoctorPageComponent } from './Components/doctor-page/doctor-page.component';
+import { FeedbackItemComponent } from './Components/doctor-page/feedback-item/feedback-item.component';
+import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
+import { ImageModalDialogComponent } from './Components/doctor-page/gallery/image-modal-dialog.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ROUTING_COMPONENTS, 
+    ROUTING_COMPONENTS,
     HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
@@ -42,8 +48,13 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
-    DoctorListSearchItemComponent
+    DoctorListSearchItemComponent,
+    DoctorPageComponent,
+    FeedbackItemComponent,
+    GalleryComponent,
+    ImageModalDialogComponent
   ],
+  entryComponents: [ ImageModalDialogComponent ],
   imports: [
     BrowserModule,
     MaterialModule,
@@ -53,10 +64,11 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     RoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    AdminpanelModule
+    AdminpanelModule,
+    OverlayModule
   ],
-  exports:[MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
+  exports: [MaterialModule],
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

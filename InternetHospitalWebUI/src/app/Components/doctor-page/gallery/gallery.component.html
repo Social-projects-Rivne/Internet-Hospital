@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-button (click)="previous()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+  <div id="slider">
+    <div id="img-line" [style.left]="startIndex * 128 + 'px'">
+      <a *ngFor="let img of images" (click)="openDialog(img)">
+        <img [src]="img">
+      </a>
+    </div>
+  </div>
+  <button mat-button (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+</div>

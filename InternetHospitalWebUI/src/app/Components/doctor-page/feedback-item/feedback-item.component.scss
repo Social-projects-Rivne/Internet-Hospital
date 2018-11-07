@@ -1,0 +1,25 @@
+.feedback-container{
+    margin: 10px;
+    border-left: 20px solid;
+
+    .content-mark{
+        display: inline-block; 
+        width: 20px; 
+        background-color: red;
+    }
+
+    .feedback-title-container {
+        width: calc(100% - 250px);
+        display: inline-block; 
+    }
+
+    .feedback-marks-container{
+        display: inline-block; 
+        vertical-align:top; 
+        text-align: right;
+        width: 250px;
+        span{
+            vertical-align: top;
+        }
+    }
+}

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
-using InternetHospital.DataAccess.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -17,7 +12,7 @@ namespace InternetHospital.WebApi.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
         public DoctorsController(ApplicationContext context, IDoctorService service)
         {
             _context = context;
@@ -56,8 +51,9 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("specializations")]
         public ICollection<SpecializationModel> GetSpecializations()
         {
-            var specizalizations = _context.Specializations.Where(s => s.Doctors.Count > 0).OrderBy(s => s).Select(s => new SpecializationModel { Id = s.Id, Specialization = s.Name }).ToList();
-            return specizalizations;
+            var specializations = _context.Specializations.Where(s => s.Doctors.Count > 0).OrderBy(s => s)
+                                                            .Select(s => new SpecializationModel { Id = s.Id, Specialization = s.Name }).ToList();
+            return specializations;
         }
     }
 }

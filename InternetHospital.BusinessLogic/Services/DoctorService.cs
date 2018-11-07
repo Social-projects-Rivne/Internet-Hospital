@@ -20,26 +20,25 @@ namespace InternetHospital.BusinessLogic.Services
         public DoctorDetailedModel Get(int id)
         {
             DoctorDetailedModel returnedModel = null;
-            DateTime dt = DateTime.Now;
-            var serchedDoctor = _context.Doctors.Include(d => d.User).Include(d => d.Specialization).Include(d => d.Diplomas)
+            var searchedDoctor = _context.Doctors.Include(d => d.User).Include(d => d.Specialization).Include(d => d.Diplomas)
                 .FirstOrDefault(d => d.UserId == id && d.User != null);
-            var firstVar = DateTime.Now - dt;
-            dt = DateTime.Now;
-            if (serchedDoctor != null)
+            if (searchedDoctor != null && searchedDoctor.IsApproved == true)
             {
                 returnedModel = new DoctorDetailedModel
                 {
-                    Id = serchedDoctor.UserId,
-                    FirstName = serchedDoctor.User.FirstName,
-                    SecondName = serchedDoctor.User.SecondName,
-                    ThirdName = serchedDoctor.User.ThirdName,
-                    BirthDate = serchedDoctor.User.BirthDate,
-                    Address = serchedDoctor.Address,
-                    Specialization = serchedDoctor.Specialization.Name,
-                    DoctorsInfo = serchedDoctor.DoctorsInfo,
-                    AvatarURL = serchedDoctor.User.AvatarURL,
-                    LicenseURL = serchedDoctor.LicenseURL,
-                    DiplomaURL = serchedDoctor.Diplomas.Where(d => d.IsValid == true).Select(d => d.DiplomaURL).ToArray(),
+                    Id = searchedDoctor.UserId,
+                    FirstName = searchedDoctor.User.FirstName,
+                    SecondName = searchedDoctor.User.SecondName,
+                    ThirdName = searchedDoctor.User.ThirdName,
+                    PhoneNumber = searchedDoctor.User.PhoneNumber,
+                    BirthDate = searchedDoctor.User.BirthDate,
+                    Address = searchedDoctor.Address,
+                    Specialization = searchedDoctor.Specialization.Name,
+                    DoctorsInfo = searchedDoctor.DoctorsInfo,
+                    AvatarURL = searchedDoctor.User.AvatarURL,
+                    LicenseURL = searchedDoctor.LicenseURL,
+                    DiplomasURL = searchedDoctor.Diplomas.Where(d => d.IsValid == true).Select(d => d.DiplomaURL)
+                        .ToArray()
                 };
             }
             return returnedModel;

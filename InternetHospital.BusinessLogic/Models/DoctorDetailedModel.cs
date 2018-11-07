@@ -12,11 +12,12 @@ namespace InternetHospital.BusinessLogic.Models
         public string ThirdName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string AvatarURL { get; set; }
+        public string PhoneNumber { get; set; }
         public string Specialization { get; set; }
         public string DoctorsInfo { get; set; }
         public string Address { get; set; }
         public string LicenseURL { get; set; }
-        public string[] DiplomaURL { get; set; }
+        public string[] DiplomasURL { get; set; }
 
     }
 }

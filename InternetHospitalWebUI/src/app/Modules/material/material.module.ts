@@ -17,7 +17,7 @@ import { MatToolbarModule,
           MatCardModule,
           MatPaginatorModule,
           MatDividerModule,
-          MatTableModule } from '@angular/material';
+          MatTableModule, } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule} from '@angular/material/menu';
 
