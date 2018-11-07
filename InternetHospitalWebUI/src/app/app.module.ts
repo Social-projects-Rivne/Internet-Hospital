@@ -17,7 +17,7 @@ import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-
 import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
 
 import { AuthenticationService } from './Services/authentication.service';
-import { InterceptorService  } from './Services/interceptor.service';
+import { InterceptorService } from './Services/interceptor.service';
 
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
@@ -30,15 +30,16 @@ import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-li
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
 import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarModule, DateAdapter, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
-import { AddDoctorPlansComponent } from './Components/DoctorPlans/add-doctor-plans/add-doctor-plans.component';
+import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ROUTING_COMPONENTS, 
+    ROUTING_COMPONENTS,
     HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
@@ -49,7 +50,6 @@ import { AddDoctorPlansComponent } from './Components/DoctorPlans/add-doctor-pla
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
     DoctorPlansComponent,
-    AddDoctorPlansComponent
   ],
   imports: [
     BrowserModule,
@@ -65,13 +65,22 @@ import { AddDoctorPlansComponent } from './Components/DoctorPlans/add-doctor-pla
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }, {
+        dateFormatter: {
+          provide: CalendarDateFormatter,
+          useClass: CustomDateFormatter
+        },
+        eventTitleFormatter: {
+          provide: CalendarEventTitleFormatter,
+          useClass: CustomEventTitleFormatter
+        }
+      },
+    )
   ],
-  exports:[MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
+  exports: [MaterialModule],
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [AddDoctorPlansComponent]
 })
 export class AppModule { }
 

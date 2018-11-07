@@ -1,9 +1,10 @@
 export class Appointment {
     id: number;
-    doctorid: number;
     userId: number;
+    userFirstName: string;
+    userSecondName: string;
     address: string;
-    statusId: number;
+    status: string;
     startTime: Date;
     endTime: Date;
 } 
