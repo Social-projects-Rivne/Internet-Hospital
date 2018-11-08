@@ -15,7 +15,7 @@ export class DoctorplansService {
     deleteAppointment(appointmentId:number | string)
     {
         let specUrl = HOST_URL + "/api/Appointments/delete";;
-       return this.http.post(specUrl,{ id:appointmentId});
+       return this.http.post(specUrl,{ id: appointmentId});
     }
   
     cancelAppointment(appointmentId:number | string)
@@ -29,7 +29,7 @@ export class DoctorplansService {
       return this.http.get<Appointment[]>(specUrl);
     }
   
-    addAppointment(start:Date,end:Date){
+    addAppointment(start:Date, end:Date){
       let specUrl = HOST_URL + "/api/Appointments/create";
       return this.http.post(specUrl, {starttime:this.datePipe.transform(start,"short"), 
                                 endtime: this.datePipe.transform(end,"short")})

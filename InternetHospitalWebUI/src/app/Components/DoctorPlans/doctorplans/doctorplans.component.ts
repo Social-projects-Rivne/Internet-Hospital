@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } fr
 import { CalendarEvent, CalendarView, CalendarEventAction } from 'angular-calendar';
 import { Appointment } from '../Appointment';
 import { DoctorplansService } from '../doctorplans.service';
-import { MatDialogConfig, MatDialog } from '@angular/material';
 import { Subject } from 'rxjs';
 import { isSameMonth, isSameDay } from 'date-fns';
 import { NotificationService } from 'src/app/Services/notification.service';
@@ -25,13 +24,9 @@ export class DoctorPlansComponent implements OnInit {
   events: CalendarEvent[] = [];
   refresh: Subject<any> = new Subject();
   activeDayIsOpen: boolean = false;
-
-
-
   loginForm: FormGroup;
 
   constructor(private doctorplansService: DoctorplansService,
-    private dialog: MatDialog,
     private notification: NotificationService,
     private formBuilder: FormBuilder) { }
 
@@ -58,10 +53,6 @@ export class DoctorPlansComponent implements OnInit {
       });
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    //console.log(action + event.title);
-  }
-
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (this.activeDayIsOpen = true)
@@ -80,7 +71,6 @@ export class DoctorPlansComponent implements OnInit {
     let title;
     this.Appointments.forEach(element => {
       let actions: CalendarEventAction[] = [];
-      console.log(element.status);
       if (element.status === "Reserved") {
         title = "Reserved by";
         actions.push(this.getUserAction(element.id, element.userFirstName, element.userSecondName));
@@ -92,7 +82,6 @@ export class DoctorPlansComponent implements OnInit {
         actions.push(this.deleteAction);
         color = COLORS.green;
       }
-
       this.events.push({
         id: element.id,
         title: title,

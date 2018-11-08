@@ -27,7 +27,7 @@ const ROUTES: Routes = [
       { path: SIGN_UP, component: SignUpComponent },
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
-      { path: MY_PLANS, component: DoctorPlansComponent }
+      { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] }
     ]
   },
   { path: PAGE_404, component: Page404Component },
