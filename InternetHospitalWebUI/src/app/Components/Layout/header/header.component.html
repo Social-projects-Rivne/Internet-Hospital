@@ -24,7 +24,7 @@
         <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">My plans</button>
         <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
-        <button mat-menu-item *ngIf="(isLoggedIn | async)" >Settings</button>
+        <button mat-menu-item *ngIf="(isLoggedIn | async)">Settings</button>
         <button mat-menu-item *ngIf="(isLoggedIn | async)" [routerLink]="['/sign-in']">Sign out</button>
     </mat-menu>
 
@@ -37,7 +37,7 @@
         </button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
-        
+
     </div>
 
 </mat-toolbar>

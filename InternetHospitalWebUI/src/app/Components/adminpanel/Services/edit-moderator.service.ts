@@ -12,9 +12,11 @@ import { compareValidator } from '../../../Directives/compare-validator.directiv
 export class EditModeratorService {
 
   url = HOST_URL + '/somelink';
-  httpOptions = { headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })};
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -41,4 +43,3 @@ export class EditModeratorService {
     return this.http.put<Moder>(this.url, body, this.httpOptions);
   }
 }
-

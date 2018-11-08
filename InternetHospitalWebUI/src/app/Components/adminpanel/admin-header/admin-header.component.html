@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="fix-nav">
-  
+
   <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
@@ -12,7 +12,7 @@
       </span>
     </button>
   </div>
-  
+
   <!-- Space -->
   <span class="example-fill-remaining-space"></span>
 
@@ -24,7 +24,7 @@
     <br><a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
     <br><a mat-button routerLink="/sign-in">Sign out</a>
   </mat-menu>
-  
+
   <!-- Desktop Menu -->
   <div id="DeskMenu" fxHide.xs>
     <a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
@@ -33,7 +33,7 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
   </div>
-  
+
   <mat-menu #appMenu="matMenu" [overlapTrigger]="false" xPosition="before">
     <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>

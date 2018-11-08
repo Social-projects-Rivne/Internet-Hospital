@@ -15,7 +15,7 @@ export class DoctorListComponent implements OnInit {
   private filter: Filter;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
   ngOnInit() {
     this.filter = new Filter();
     this.service.getDoctors();
@@ -42,6 +42,6 @@ export class DoctorListComponent implements OnInit {
     else {
       this.service.getDoctors();
     }
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 }

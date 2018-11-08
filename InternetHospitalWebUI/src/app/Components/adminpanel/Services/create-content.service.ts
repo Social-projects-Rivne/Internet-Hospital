@@ -12,7 +12,7 @@ export class CreateContentService {
   constructor() { }
 
   form: FormGroup = new FormGroup({
-    Id: new FormControl({value: '', disabled: true}),
+    Id: new FormControl({ value: '', disabled: true }),
     Title: new FormControl('', Validators.required),
     Source: new FormControl('', Validators.required),
     Images: new FormControl('', Validators.required),

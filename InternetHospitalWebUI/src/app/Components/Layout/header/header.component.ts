@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../Services/authentication.service';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,10 +11,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService) { }
 
-  isLoggedIn : Observable<boolean>;
-  isPatient : Observable<boolean>;
-  isDoctor : Observable<boolean>;
-  isModerator : Observable<boolean>;
+  isLoggedIn: Observable<boolean>;
+  isPatient: Observable<boolean>;
+  isDoctor: Observable<boolean>;
+  isModerator: Observable<boolean>;
   isAdmin: Observable<boolean>;
   userAvatar: string;
 
@@ -26,5 +26,5 @@ export class HeaderComponent implements OnInit {
     this.isAdmin = this.authenticationService.isAdmin();
     this.authenticationService.getAvatarURL()
       .subscribe(value => this.userAvatar = value);
-  }   
+  }
 }

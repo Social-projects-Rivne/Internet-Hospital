@@ -5,8 +5,8 @@
       <mat-card-title>Registration</mat-card-title>
     </mat-card-header>
 
-    <form fxLayout="row" fxFlexAlign="space-evenly center" [formGroup]="service.form" 
-    #signUpForm="ngForm" class="normal-form" (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data">
+    <form fxLayout="row" fxFlexAlign="space-evenly center" [formGroup]="service.form" #signUpForm="ngForm" class="normal-form"
+      (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data">
 
       <mat-divider></mat-divider>
 
@@ -26,18 +26,18 @@
         <div class="controles-row">
           <mat-form-field>
             <input required type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password">
-            <mat-error>Passwords don't match.</mat-error>          
+            <mat-error>Passwords don't match.</mat-error>
           </mat-form-field>
         </div>
         <div style="margin-top:-15px;">
-            <mat-radio-group formControlName="Role" id="group">
-                <mat-radio-button class="marginten" value="Patient">Patient</mat-radio-button>
-                <mat-radio-button class="marginten" value="Doctor">Doctor</mat-radio-button>
-              </mat-radio-group>
+          <mat-radio-group formControlName="Role" id="group">
+            <mat-radio-button class="marginten" value="Patient">Patient</mat-radio-button>
+            <mat-radio-button class="marginten" value="Doctor">Doctor</mat-radio-button>
+          </mat-radio-group>
         </div>
         <div>
           <input id="Image" formControlName="Image" #Image type="file" accept="image/*" (change)="handleFileInput($event.target.files)"
-          class="inputfile" name="Image">
+            class="inputfile" name="Image">
           <label class="mi-text-header" for="Image"><i class="fas fa-upload"></i><strong> Choose profile photo</strong></label>
         </div>
         <div>

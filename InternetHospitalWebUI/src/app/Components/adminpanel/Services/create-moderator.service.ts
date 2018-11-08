@@ -13,9 +13,11 @@ import { compareValidator } from '../../../Directives/compare-validator.directiv
 export class CreateModeratorService {
 
   url = HOST_URL + '/api/Signup';
-  httpOptions = { headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })};
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 

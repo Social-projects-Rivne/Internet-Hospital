@@ -19,6 +19,6 @@ export class HomeNewsComponent implements OnInit {
 
   getHomeImages(): void {
     this.homeService.getHomeImages()
-        .subscribe(homeImages => this.homeImages = homeImages);
+      .subscribe(homeImages => this.homeImages = homeImages);
   }
 }

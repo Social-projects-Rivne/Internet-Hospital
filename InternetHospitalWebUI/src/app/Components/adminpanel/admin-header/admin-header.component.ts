@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from '../../../Services/authentication.service';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-header',
@@ -38,4 +38,3 @@ export class AdminHeaderComponent implements OnInit {
     dom.classList.toggle(this.pushRightClass);
   }
 }
-

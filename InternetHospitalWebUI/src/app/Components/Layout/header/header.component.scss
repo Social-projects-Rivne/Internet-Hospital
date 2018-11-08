@@ -1,25 +1,30 @@
 .example-fill-remaining-space {
-    flex: 1 1 auto;
-  }
-  #HeaderButton{
-    padding: 5px;
-  }
-  .color_blue{
-    color:#6ed3cf
-  }
-  .color_red{
-    color:#e62030;
-  }
-  .header{
-    font-size: 25px
-  }
-  .user-avatar{
-    border: 1px solid rgba(0, 0, 0, 0.400);
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    background-clip: padding-box;
-    border-radius: 40px;
-    background-size: cover;
-    background-position: center center;
-  }
+  flex: 1 1 auto;
+}
+
+#HeaderButton {
+  padding: 5px;
+}
+
+.color_blue {
+  color: #6ed3cf;
+}
+
+.color_red {
+  color: #e62030;
+}
+
+.header {
+  font-size: 25px;
+}
+
+.user-avatar {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-clip: padding-box;
+  border-radius: 40px;
+  background-size: cover;
+  background-position: center center;
+}
