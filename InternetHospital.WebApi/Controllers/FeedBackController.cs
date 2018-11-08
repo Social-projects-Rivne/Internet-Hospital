@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -12,40 +15,43 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class FeedBackController : ControllerBase
     {
-        // GET: api/FeedBack
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private IFeedBackService _feedBackService;
+        private UserManager<User> _userManager;
+
+        FeedBackController(IFeedBackService feedBackService,
+             UserManager<User> userManager)
         {
-            return new string[] { "value1", "value2" };
+            _feedBackService = feedBackService;
+            _userManager = userManager;
         }
 
-        // GET: api/FeedBack/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/FeedBack
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] string value)
         {
-            var FeedBack = new FeedBackModel
+            var FeedBackModel = new FeedBackModel
             {
-                Text = Request.Form[Text];
+                TypeId = Convert.ToInt32(Request.Form["Type"]),
+                Text = Request.Form["Text"],
+                UserId  = (await _userManager.FindByNameAsync(User.Identity.Name)).Id
+            };
+            
+            if (
+                FeedBackModel.Text != null
+                && FeedBackModel.TypeId != null
+                && FeedBackModel.UserId != null
+               )
+            {
+              return Ok(_feedBackService.FeedBackPOST(FeedBackModel));
             }
+            else
+            {
+                return NotFound(new { message = "The form isn't valid or there is no currently logined users" });
+            }
+
+
         }
 
-        // PUT: api/FeedBack/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
