@@ -20,7 +20,7 @@ export class DoctorplansService {
   
     cancelAppointment(appointmentId:number | string)
     {
-      let specUrl = HOST_URL + "/api/Appointments/cancel";;
+      let specUrl = HOST_URL + "/api/Appointments/cancel";
        return this.http.post(specUrl,{ id:appointmentId});
     }
   
