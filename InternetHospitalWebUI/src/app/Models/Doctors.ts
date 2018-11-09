@@ -3,6 +3,6 @@ export class Doctor {
     firstName: string;
     secondName: string;
     thirdName: string;
-    avatarUrl: string;
+    avatarURL: string;
     specialization: string;
 }

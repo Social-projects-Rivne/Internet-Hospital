@@ -5,8 +5,6 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using InternetHospital.BusinessLogic.Interfaces;
-using InternetHospital.DataAccess;
-using Microsoft.AspNetCore.Routing;
 
 namespace InternetHospital.WebApi.controllers
 {
@@ -14,18 +12,15 @@ namespace InternetHospital.WebApi.controllers
     [ApiController]
     public class SignupController : ControllerBase
     {
-        private UserManager<User> _userManager;
-        private RoleManager<IdentityRole<int>> _roleManager;
-        private IMailService _mailService;
-        private IRegistrationService _registrationService;
-        private IUploadingFiles _uploadingFiles;
+        private readonly UserManager<User> _userManager;
+        private readonly IMailService _mailService;
+        private readonly IRegistrationService _registrationService;
+        private readonly IUploadingFiles _uploadingFiles;
 
-        public SignupController(UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager,
-            IMailService mailService, IRegistrationService registrationService,
-            IUploadingFiles uploadingFiles)
+        public SignupController(UserManager<User> userManager, IMailService mailService, 
+            IRegistrationService registrationService, IUploadingFiles uploadingFiles)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _mailService = mailService;
             _registrationService = registrationService;
             _uploadingFiles = uploadingFiles;
@@ -101,7 +96,7 @@ namespace InternetHospital.WebApi.controllers
             else
             {
                 ModelState.AddModelError("", "Wrong form!");
-                return BadRequest(ModelState);
+                return BadRequest( new { message = ModelState.Root.Errors[0].ErrorMessage });
             }            
         }
 

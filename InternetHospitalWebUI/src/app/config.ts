@@ -6,6 +6,7 @@ export const DOCTOR_LIST = 'doctor-list';
 export const PAGE_404 = '404';
 export const FEEDBACKS = 'feedbacks';
 export const API_DOCTORS = '/api/Doctors';
+export const MY_PLANS = 'my-plans';
 //notification config
 export const TIME_DURATION = 3000;
 export const HORIZONTAL_ALIGN = 'right';

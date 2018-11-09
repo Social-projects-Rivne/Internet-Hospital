@@ -17,7 +17,7 @@ import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-
 import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
 
 import { AuthenticationService } from './Services/authentication.service';
-import { InterceptorService  } from './Services/interceptor.service';
+import { InterceptorService } from './Services/interceptor.service';
 
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
@@ -29,12 +29,18 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
+import { CalendarModule, DateAdapter, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
+import { DatePipe } from '@angular/common';
 import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ROUTING_COMPONENTS, 
+    ROUTING_COMPONENTS,
     HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
@@ -44,7 +50,8 @@ import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
     DoctorListComponent,
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
-    FeedbacksComponent
+    FeedbacksComponent,
+    DoctorPlansComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,10 +62,25 @@ import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
     RoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    AdminpanelModule
+    AdminpanelModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }, {
+        dateFormatter: {
+          provide: CalendarDateFormatter,
+          useClass: CustomDateFormatter
+        },
+        eventTitleFormatter: {
+          provide: CalendarEventTitleFormatter,
+          useClass: CustomEventTitleFormatter
+        }
+      },
+    )
   ],
-  exports:[MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
+  exports: [MaterialModule],
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

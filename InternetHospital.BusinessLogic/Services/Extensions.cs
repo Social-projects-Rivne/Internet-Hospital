@@ -9,8 +9,8 @@ namespace InternetHospital.BusinessLogic.Services
     {
         public static async Task<User> FindByNameOrEmailAsync(this UserManager<User> userManager, string usernameOrEmail)
         {
-            var emailValdiator = new EmailAddressAttribute();
-            if (emailValdiator.IsValid(usernameOrEmail))
+            var emailValidator = new EmailAddressAttribute();
+            if (emailValidator.IsValid(usernameOrEmail))
             {
                 return await userManager.FindByEmailAsync(usernameOrEmail);
             }

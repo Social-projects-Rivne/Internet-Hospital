@@ -3,28 +3,81 @@ using System;
 using InternetHospital.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20181023074534_ThirdMigration")]
-    partial class ThirdMigration
+    [Migration("20181106142818_Changed_EntityFramework_provider_to_Azure")]
+    partial class Changed_EntityFramework_provider_to_Azure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
+
+                    b.Property<int>("DoctorId");
+
+                    b.Property<DateTime>("EndTime");
+
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<int>("StatusId");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.AppointmentStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppointmentStatuses");
+
+                    b.HasData(
+                        new { Id = 1, Description = "Appointment is created. No one signed up", Name = "Open" },
+                        new { Id = 2, Description = "Patient signed up for appointment", Name = "Reserved" },
+                        new { Id = 3, Description = "Doctor canceled an appointment", Name = "Canceled" },
+                        new { Id = 4, Description = "Patient has been accepted", Name = "Finished" },
+                        new { Id = 5, Description = "Appointment is missed by patient", Name = "Missed" }
+                    );
+                });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Diploma", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DiplomaURL");
 
@@ -65,7 +118,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("ExpiresDate");
 
@@ -85,7 +139,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Specialization", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
 
@@ -135,7 +190,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Status", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
 
@@ -146,10 +202,10 @@ namespace InternetHospital.WebApi.Migrations
                     b.ToTable("Statuses");
 
                     b.HasData(
-                        new { Id = 1, Description = "Banned user who is violated our rules", Name = "Banned" },
-                        new { Id = 2, Description = "New user who is registered in our system", Name = "New" },
+                        new { Id = 1, Description = "Banned user who has violated our rules", Name = "Banned" },
+                        new { Id = 2, Description = "New user registered in our system", Name = "New" },
                         new { Id = 3, Description = "Approved user with checked data", Name = "Approved" },
-                        new { Id = 4, Description = "Not approved user whose data was invalid", Name = "Not approved" },
+                        new { Id = 4, Description = "Not approved, because user`s data was invalid", Name = "Not approved" },
                         new { Id = 5, Description = "Deleted user by Admin or Moderator", Name = "Deleted" }
                     );
                 });
@@ -157,7 +213,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount");
 
@@ -217,7 +274,8 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("StatusId");
 
@@ -227,7 +285,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -242,7 +301,8 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -250,7 +310,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType");
 
@@ -268,7 +329,8 @@ namespace InternetHospital.WebApi.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType");
 
@@ -326,6 +388,23 @@ namespace InternetHospital.WebApi.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Appointment", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternetHospital.DataAccess.Entities.AppointmentStatus", "Status")
+                        .WithMany("Appointments")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
+                        .WithMany("Appointments")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Diploma", b =>

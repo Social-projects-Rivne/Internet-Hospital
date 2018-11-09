@@ -20,5 +20,6 @@ namespace InternetHospital.DataAccess.Entities
         public virtual Doctor Doctor { get; set; }
         public virtual Status Status { get; set; }
         public virtual ICollection<RefreshToken> Tokens { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }

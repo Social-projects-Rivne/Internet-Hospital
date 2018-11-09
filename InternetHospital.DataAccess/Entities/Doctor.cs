@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternetHospital.DataAccess.Entities
 {
@@ -16,5 +14,6 @@ namespace InternetHospital.DataAccess.Entities
         public virtual User User { get; set; }
         public virtual Specialization Specialization { get; set; }
         public virtual ICollection<Diploma> Diplomas { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
