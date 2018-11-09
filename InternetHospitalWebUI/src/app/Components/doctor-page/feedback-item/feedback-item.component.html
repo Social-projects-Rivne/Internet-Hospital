@@ -1,18 +1,16 @@
 <mat-card class="feedback-container mat-elevation-z8" [style.border-left-color]="isPositive ? 'green' : 'red'">
   <mat-card-title>
+    <div class="feedback-date">DATE</div>
     <div class="feedback-marks-container">
-      <span style="color: red; display: inline-block;">
-        <mat-icon>thumb_down</mat-icon> 1000
-      </span>
-      <span style="color: green; display: inline-block;">
+      <span class="marks positive">
         <mat-icon>thumb_up</mat-icon> 1000
+      </span>
+      <span class="marks negative">
+        <mat-icon>thumb_down</mat-icon> 1000
       </span>
     </div>
   </mat-card-title>
-  <p #feedback_text class="body" [@bodyExpand]="isExpanded ? 'expanded' : 'collapsed'">
-    {{isExpanded ? tempText : ((tempText | slice : 0 : 40) + "...")}}
+  <p class="body">
+    {{tempText}}
   </p>
-  <button mat-icon-button class="expand-button" (click)="isExpanded = !isExpanded">
-    <mat-icon>{{isExpanded ? "keyboard_arrow_up" : "keyboard_arrow_down"}}</mat-icon>
-  </button>
 </mat-card>

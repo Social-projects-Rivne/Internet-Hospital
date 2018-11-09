@@ -31,8 +31,6 @@ export class DoctorPageComponent implements OnInit {
     const id = this.activateRoute.snapshot.params['id'];
     this.service.getDoctor(id).subscribe((data: any) => {
         this.doctor = data;
-        console.log(data);
-        console.log(this.doctor);
       });
   }
 

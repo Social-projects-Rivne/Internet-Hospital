@@ -1,35 +1,41 @@
 .feedback-container{
-    margin: 10px;
     border-left: 20px solid;
     position: relative;
+    margin-top: 10px;
 
-    .content-mark{
-        display: inline-block; 
-        width: 20px; 
-        background-color: red;
+    .feedback-date {
+        margin-right: 10px;
+        text-align: left;
+        display: inline-block;
+        vertical-align: top;
+        width: calc(40% - 10px);
     }
 
     .feedback-marks-container{
-        display: inline-block; 
         vertical-align:top; 
         text-align: right;
-        width: 100%;
-        span{
-            vertical-align: top;
+        display: inline-block;
+        width: 60%;
+
+        .marks{
+            display: inline-block;
+        }
+
+        .positive{
+            color: green;  
+            margin-right: 5px
+        }
+
+        .negative{
+            color: red;
+        }
+
+        mat-icon{
+            vertical-align: middle;
         }
     }
 
-    .expand-button{
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        bottom: 24px;
-        right: 11px;
-    }
-
     .body{
-        text-align: justify; 
-        overflow: hidden;
-        margin-bottom: 40px;
+        text-align: justify;
     }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, HostListener, AfterContentChecked } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ImageModalDialogComponent } from './image-modal-dialog.component';
 import { Overlay } from '@angular/cdk/overlay';
+
+const SUM_OF_WIDTH_OF_SWITCH_BUTTONS = 80;
 
 @Component({
   selector: 'app-gallery',
@@ -9,19 +11,32 @@ import { Overlay } from '@angular/cdk/overlay';
   styleUrls: ['./gallery.component.scss']
 })
 
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements AfterContentChecked {
 
   @Input() images: string[];
   startIndex = 0;
   widthOf1Image = 134;
+  amountOfPicsOnScreen = 1;
+  width: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const currWidth = document.getElementById('gallery-container').offsetWidth;
+    this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
+                                              / this.widthOf1Image);
+
+  }
 
   constructor(private dialog: MatDialog, private overlay: Overlay) { }
 
-  ngOnInit() {
+  ngAfterContentChecked() {
+    const currWidth = document.getElementById('gallery-container').offsetWidth;
+    this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
+                                              / this.widthOf1Image);
   }
 
   next() {
-    if (Math.abs(--this.startIndex) === this.images.length - 4) {
+    if (Math.abs(--this.startIndex) === this.images.length - this.amountOfPicsOnScreen + 1) {
       this.startIndex = 0;
     }
     console.log(this.startIndex);
@@ -30,7 +45,7 @@ export class GalleryComponent implements OnInit {
   previous() {
     ++this.startIndex;
     if (this.startIndex > 0) {
-      this.startIndex = -this.images.length + 5;
+      this.startIndex = -this.images.length + this.amountOfPicsOnScreen;
     }
     console.log(this.startIndex);
   }

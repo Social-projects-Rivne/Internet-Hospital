@@ -10,7 +10,7 @@ namespace InternetHospital.BusinessLogic.Services
 {
     public class DoctorService : IDoctorService
     {
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
 
         public DoctorService(ApplicationContext context)
         {
@@ -21,9 +21,9 @@ namespace InternetHospital.BusinessLogic.Services
         {
             DoctorDetailedModel returnedDoctor = null;
             var searchedDoctor = _context.Doctors.Include(d => d.User)
-                                                     .Include(d => d.Specialization)
-                                                     .Include(d => d.Diplomas)
-                                                        .FirstOrDefault(d => d.UserId == id && d.User != null);
+                                                 .Include(d => d.Specialization)
+                                                 .Include(d => d.Diplomas)
+                                                     .FirstOrDefault(d => d.UserId == id && d.User != null);
             if (searchedDoctor != null && searchedDoctor.IsApproved == true)
             {
                 returnedDoctor = new DoctorDetailedModel

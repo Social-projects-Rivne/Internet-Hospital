@@ -5,6 +5,7 @@ export class DoctorDetails {
     lastName: string;
     birthDate: Date;
     address: string;
+    phone: string;
     specialization: string;
     doctorInfo: string;
     avatarURL: string;
