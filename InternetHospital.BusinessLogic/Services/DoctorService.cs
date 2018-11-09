@@ -1,4 +1,5 @@
-﻿using InternetHospital.BusinessLogic.Interfaces;
+﻿using System.Collections.Generic;
+using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
@@ -15,9 +16,9 @@ namespace InternetHospital.BusinessLogic.Services
             _context = context;
         }
 
-        public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)
+        public (IEnumerable<DoctorModel> doctors, int count) GetFilteredDoctors(DoctorSearchParameters queryParameters)
         {
-            var doctors = _context.Doctors.Where(d=>d.IsApproved==true).AsQueryable();
+            var doctors = _context.Doctors.Where(d => d.IsApproved == true).AsQueryable();
 
             if (queryParameters.SearchByName != null)
             {
@@ -33,10 +34,26 @@ namespace InternetHospital.BusinessLogic.Services
                 doctors = doctors.Where(d => d.SpecializationId == queryParameters.SearchBySpecialization);
             }
 
-            int doctorsAmount = doctors.Count();
-            var doctorsResult = PaginationHelper(doctors, queryParameters.PageCount, queryParameters.Page);
+            var doctorsAmount = doctors.Count();
+            var doctorsResult = PaginationHelper(doctors, queryParameters.PageCount, queryParameters.Page)
+                .OrderBy(x => x.SecondName)
+                .ToList(); ;
 
             return (doctorsResult, doctorsAmount);
+        }
+
+        public ICollection<SpecializationModel> GetAvailableSpecialization()
+        {
+            var specializations = _context.Specializations
+                .Where(s => s.Doctors.Count > 0)
+                .OrderBy(s => s)
+                .Select(s => new SpecializationModel
+                {
+                    Id = s.Id,
+                    Specialization = s.Name
+                }).ToList();
+
+            return specializations;
         }
 
         private IQueryable<DoctorModel> PaginationHelper(IQueryable<Doctor> doctors, int pageCount, int page)
