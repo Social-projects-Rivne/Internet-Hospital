@@ -20,7 +20,7 @@ namespace InternetHospital.BusinessLogic.Services
             _context = context;
         }
 
-        public FeedBack FeedBackPOST(FeedBackModel model)
+        public void FeedBackCreate(FeedBackModel model)
         {
             FeedBack feedback = new FeedBack
             {
@@ -29,14 +29,13 @@ namespace InternetHospital.BusinessLogic.Services
                 UserId = model.UserId,
                 FeedBackId = model.TypeId
             };
-            _context.FeedBacks.AddAsync(feedback);
+            _context.FeedBacks.Add(feedback);
             _context.SaveChanges();
-            return feedback;
         }
 
-        public IQueryable<FeedBackType> GetTypes()
+        public List<FeedBackType> GetTypes()
         {
-            return _context.FeedBackTypes.AsQueryable();
+            return _context.FeedBackTypes.ToList();
         }
     }
 }

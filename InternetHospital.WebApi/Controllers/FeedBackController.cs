@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Services;
+using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -33,22 +35,22 @@ namespace InternetHospital.WebApi.Controllers
             {
                 TypeId = Convert.ToInt32(Request.Form["Type"]),
                 Text = Request.Form["Text"],
-                UserId  = (await _userManager.FindByNameAsync(User.Identity.Name)).Id
+                UserId = (await _userManager.FindByNameAsync(User.Identity.Name)).Id
             };
-            
+
             if (
-                FeedBackModel.Text != null
-                && FeedBackModel.TypeId != null
-                && FeedBackModel.UserId != null
+                !String.IsNullOrEmpty(FeedBackModel.Text)
+                && !String.IsNullOrEmpty(FeedBackModel.TypeId.ToString())
+                && !String.IsNullOrEmpty(FeedBackModel.UserId.ToString())
                )
             {
-              return Ok(_feedBackService.FeedBackPOST(FeedBackModel));
+                _feedBackService.FeedBackCreate(FeedBackModel);
+                return Ok();
             }
             else
             {
                 return NotFound(new { message = "The form isn't valid or there is no currently logined users" });
             }
-
 
         }
 

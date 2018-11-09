@@ -8,7 +8,7 @@ namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IFeedBackService
     {
-        FeedBack FeedBackPOST(FeedBackModel model);
-        IQueryable<FeedBackType> GetTypes();
+        void FeedBackCreate(FeedBackModel model);
+        List<FeedBackType> GetTypes();
     }
 }
