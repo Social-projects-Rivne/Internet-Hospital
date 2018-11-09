@@ -56,3 +56,13 @@ body {
         }
     }
 }
+
+
+.custom-dialog-container {
+    height: 85vh;
+    width: 100%;
+    
+    mat-dialog-container {
+        padding: 0;
+    }
+}

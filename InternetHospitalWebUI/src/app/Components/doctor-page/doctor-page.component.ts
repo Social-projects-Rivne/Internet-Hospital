@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DoctorDetails } from '../../Models/doctor-details';
 import { DoctorService } from '../../Services/doctor.service';
 import { ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-page',
@@ -24,14 +25,14 @@ export class DoctorPageComponent implements OnInit {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxPoDovI6jqh_ibsuW_SqhI2GoesEQrITQUc1OJDwb9o9zXJNR',
     'https://amp.businessinsider.com/images/5b84699464dce81e008b55e2-750-375.jpg'
   ];
-  constructor(private activateRoute: ActivatedRoute, private service: DoctorService) { }
+  constructor(private activateRoute: ActivatedRoute, private service: DoctorService, private router: Router) { }
 
   ngOnInit() {
     const id = this.activateRoute.snapshot.params['id'];
     this.service.getDoctor(id).subscribe((data: any) => {
         this.doctor = data;
         console.log(data);
-    console.log(this.doctor);
+        console.log(this.doctor);
       });
   }
 

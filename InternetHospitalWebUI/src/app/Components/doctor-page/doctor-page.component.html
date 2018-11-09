@@ -31,9 +31,9 @@
   </p>
 </mat-card>
 </div>
-<div>
-  <app-feedback-item [isPositive]="true"></app-feedback-item>
-  <app-feedback-item [isPositive]="false"></app-feedback-item>
-
-  <h6 style="text-align: center">PAGINATION</h6>
+<div fxLayout="row">
+  <app-feedback-item fxFlex="33.3" [isPositive]="true"></app-feedback-item>
+  <app-feedback-item fxFlex="33.3" [isPositive]="false"></app-feedback-item>
+  <app-feedback-item fxFlex="33.3" [isPositive]="false"></app-feedback-item>
 </div>
+<h6 style="text-align: center">PAGINATION</h6>

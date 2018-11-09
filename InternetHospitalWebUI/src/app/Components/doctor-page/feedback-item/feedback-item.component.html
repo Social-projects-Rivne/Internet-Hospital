@@ -1,36 +1,18 @@
-<mat-card class="feedback-container mat-elevation-z8" [style.border-left-color]="isPositive ? 'lightgreen' : 'pink'">
+<mat-card class="feedback-container mat-elevation-z8" [style.border-left-color]="isPositive ? 'green' : 'red'">
   <mat-card-title>
-    <div class="feedback-title-container">
-      <span>Title</span>
-    </div>
     <div class="feedback-marks-container">
-      <span style="color: red">
+      <span style="color: red; display: inline-block;">
         <mat-icon>thumb_down</mat-icon> 1000
       </span>
-      <span style="color: green">
+      <span style="color: green; display: inline-block;">
         <mat-icon>thumb_up</mat-icon> 1000
       </span>
     </div>
   </mat-card-title>
-  <div class="body">
-    <p style="text-align: justify">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident sed sequi ex ipsam.
-      Cumque voluptate debitis laboriosam quia, officia repellendus quisquam quasi nisi voluptatum
-      voluptatem, accusamus doloremque, ad facere. Alias optio cumque maxime corporis repudiandae
-      adipisci iure, quod aut hic molestiae sapiente qui blanditiis delectus perspiciatis sunt,
-      commodi possimus aliquam, quos illo mollitia praesentium earum. Nesciunt quasi, ipsa nam
-      aliquam porro illum alias quas, laboriosam velit minus voluptatem animi officiis inventore,
-      illo quisquam? Natus ipsa consequuntur tempora odio molestias voluptatem esse laborum, facilis
-      exercitationem quibusdam ad cumque maiores cum consequatur quos suscipit pariatur, laboriosam
-      voluptas labore! Repellendus ad sapiente beatae magnam quibusdam blanditiis voluptate eveniet
-      saepe quis ipsum earum non tempora cupiditate quidem voluptas, doloremque expedita ea assumenda
-      iste maxime sed ipsam temporibus dolorum nulla. Tempora distinctio natus, sequi quas ad eaque.
-      Ducimus explicabo modi illum tempore animi, eaque asperiores sint enim odit dicta beatae cumque
-      nostrum. Ad corrupti hic voluptatem quia fugiat natus velit dolorem deleniti eum magni, reiciendis
-      eligendi dolor corporis maxime voluptatibus illum ea! Tempore, quas aliquam! Minus, ad officiis,
-      corporis magnam consequatur deserunt autem quia earum at esse, quibusdam iure! Recusandae aliquam
-      excepturi dolorum, hic officiis libero, quos eius voluptatibus, quasi molestias enim dignissimos.
-      Magni, animi!
-    </p>
-  </div>
+  <p #feedback_text class="body" [@bodyExpand]="isExpanded ? 'expanded' : 'collapsed'">
+    {{isExpanded ? tempText : ((tempText | slice : 0 : 40) + "...")}}
+  </p>
+  <button mat-icon-button class="expand-button" (click)="isExpanded = !isExpanded">
+    <mat-icon>{{isExpanded ? "keyboard_arrow_up" : "keyboard_arrow_down"}}</mat-icon>
+  </button>
 </mat-card>

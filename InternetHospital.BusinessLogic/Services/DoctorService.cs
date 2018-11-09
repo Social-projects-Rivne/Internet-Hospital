@@ -19,12 +19,14 @@ namespace InternetHospital.BusinessLogic.Services
 
         public DoctorDetailedModel Get(int id)
         {
-            DoctorDetailedModel returnedModel = null;
-            var searchedDoctor = _context.Doctors.Include(d => d.User).Include(d => d.Specialization).Include(d => d.Diplomas)
-                .FirstOrDefault(d => d.UserId == id && d.User != null);
+            DoctorDetailedModel returnedDoctor = null;
+            var searchedDoctor = _context.Doctors.Include(d => d.User)
+                                                     .Include(d => d.Specialization)
+                                                     .Include(d => d.Diplomas)
+                                                        .FirstOrDefault(d => d.UserId == id && d.User != null);
             if (searchedDoctor != null && searchedDoctor.IsApproved == true)
             {
-                returnedModel = new DoctorDetailedModel
+                returnedDoctor = new DoctorDetailedModel
                 {
                     Id = searchedDoctor.UserId,
                     FirstName = searchedDoctor.User.FirstName,
@@ -37,11 +39,11 @@ namespace InternetHospital.BusinessLogic.Services
                     DoctorsInfo = searchedDoctor.DoctorsInfo,
                     AvatarURL = searchedDoctor.User.AvatarURL,
                     LicenseURL = searchedDoctor.LicenseURL,
-                    DiplomasURL = searchedDoctor.Diplomas.Where(d => d.IsValid == true).Select(d => d.DiplomaURL)
-                        .ToArray()
+                    DiplomasURL = searchedDoctor.Diplomas.Where(d => d.IsValid == true)
+                                                             .Select(d => d.DiplomaURL).ToArray()
                 };
             }
-            return returnedModel;
+            return returnedDoctor;
         }
 
         public (IQueryable<DoctorModel> doctors, int count) GetAll(DoctorSearchParameters queryParameters)

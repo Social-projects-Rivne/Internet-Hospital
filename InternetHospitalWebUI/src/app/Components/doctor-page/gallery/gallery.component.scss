@@ -5,20 +5,39 @@ button{
 }
 
 #slider{
-    width: 640px;
+    width: 706px;
     overflow: hidden;
     display: inline-block;
 
     #img-line{
-        width: 1408px;
+        width: 1474px;
         position: relative;
         transition: all ease 0.5s;
+        vertical-align: middle;
 
-        img{
-            height: auto;
-            width: auto;
-            max-width: 128px;
-            max-height: 128px;
+        .img-container{
+            display: inline-block;
+            vertical-align: middle;
+            height: 128px;
+            width: 128px;
+            border: white 3px solid;
+            position: relative;
+            
+            img{
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                position: absolute;
+                max-width: 128px;
+                max-height: 128px;
+                width: auto;
+                margin: auto;
+            }
+        }
+
+        .img-container:hover{
+            cursor: pointer;
         }
     }
 }

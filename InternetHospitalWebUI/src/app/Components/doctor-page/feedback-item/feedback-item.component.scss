@@ -1,6 +1,7 @@
 .feedback-container{
     margin: 10px;
     border-left: 20px solid;
+    position: relative;
 
     .content-mark{
         display: inline-block; 
@@ -8,18 +9,27 @@
         background-color: red;
     }
 
-    .feedback-title-container {
-        width: calc(100% - 250px);
-        display: inline-block; 
-    }
-
     .feedback-marks-container{
         display: inline-block; 
         vertical-align:top; 
         text-align: right;
-        width: 250px;
+        width: 100%;
         span{
             vertical-align: top;
         }
+    }
+
+    .expand-button{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        bottom: 24px;
+        right: 11px;
+    }
+
+    .body{
+        text-align: justify; 
+        overflow: hidden;
+        margin-bottom: 40px;
     }
 }

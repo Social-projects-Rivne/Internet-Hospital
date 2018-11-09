@@ -8,10 +8,12 @@ import { Overlay } from '@angular/cdk/overlay';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
+
 export class GalleryComponent implements OnInit {
 
   @Input() images: string[];
   startIndex = 0;
+  widthOf1Image = 134;
 
   constructor(private dialog: MatDialog, private overlay: Overlay) { }
 
@@ -33,13 +35,21 @@ export class GalleryComponent implements OnInit {
     console.log(this.startIndex);
   }
 
-  openDialog(img) {
+  openDialog(i) {
     const strategy = this.overlay.scrollStrategies.block();
+    const data = new ImageData();
+    data.images = this.images;
+    data.selected = i;
     this.dialog.open(ImageModalDialogComponent, {
       panelClass: 'custom-dialog-container',
       scrollStrategy: strategy,
       autoFocus: true,
-      data: img
+      data: data
     });
   }
+}
+
+export class ImageData {
+  images: string[];
+  selected: number;
 }
