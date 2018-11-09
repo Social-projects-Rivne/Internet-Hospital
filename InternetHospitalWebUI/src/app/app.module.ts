@@ -29,6 +29,9 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { UpdatePatientComponent } from './Components/PatientProfile/update-patient/update-patient.component';
+import { DateValidatorDirective } from './Directives/date-validator.directive';
+import {NgxMaskModule} from 'ngx-mask'
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
-    DoctorListSearchItemComponent
+    DoctorListSearchItemComponent,
+    UpdatePatientComponent,
+    DateValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,8 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     RoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    AdminpanelModule
+    AdminpanelModule,
+    NgxMaskModule.forRoot()
   ],
   exports:[MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 

@@ -21,7 +21,8 @@ export class  AuthenticationService  {
     constructor(private http: HttpClient, private router: Router) {   }
 
     url = HOST_URL;
-    jwtHelper = new JwtHelperService();   
+    jwtHelper = new JwtHelperService();  
+    token = TOKEN; 
 
     //get an access token
     login(username: string, password: string):Observable<ICurrentUser> {

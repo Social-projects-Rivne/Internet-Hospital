@@ -7,6 +7,7 @@ import { ImageValidationService } from '../../../Services/image-validation.servi
 import { NotificationService } from '../../../Services/notification.service';
 import { first } from 'rxjs/operators';
 import { SIGN_IN } from './../../../config'
+import { ImageHandlingService } from '../../../Services/image-handling.service';
 
 const MIN_HEIGHT: number = 150;
 const MAX_HEIGHT: number = 3000;
@@ -23,13 +24,10 @@ export class SignUpComponent implements OnInit {
   constructor(private service: RegistrationService,
      private validation: ImageValidationService,
      private router: Router,
-     private notification: NotificationService
+     private notification: NotificationService,
+     private imageHandling: ImageHandlingService 
     ) { }
 
-  defaultImage: string = '../../../assets/img/default.png';
-  imageUrl: string = this.defaultImage;
-  fileToUpload: File = null;
-  isImageValid: boolean = false;
   ngOnInit() {
     this.service.form.controls['Role'].setValue('Patient');
   }
@@ -38,49 +36,8 @@ export class SignUpComponent implements OnInit {
     this.service.form.reset();
   }
 
-  handleFileInput(file : FileList){
-	this.imageUrl = this.defaultImage;
-    this.fileToUpload = file.item(0);
-
-    var reader = new FileReader();
-    reader.onload = (event: any) => {
-      if(event.target.readyState === FileReader.DONE)
-      {
-        if (this.validation.isImageFile(event.target.result) == false )
-        {
-          this.fileToUpload = null;
-          this.imageUrl = this.defaultImage;
-          this.notification.error("Only image file is acceptable!");
-          return;
-        }
-        var img = new Image();
-        img.onload = () =>
-        {
-            if(this.validation.hasImageValidSize(MAX_HEIGHT, MAX_WIDTH, MIN_HEIGHT, MIN_WIDTH, img.height, img.width))
-            {
-              this.imageUrl = event.target.result;
-              this.isImageValid = true; 
-            }
-            else
-            {
-                this.service.form.invalid;
-                this.fileToUpload = null;
-                this.imageUrl = this.defaultImage;
-                this.isImageValid = false;
-                this.notification.error("Image is invalid! It might be too big or too small.");
-            }
-        }
-		img.src = event.target.result;
-      }
-    }
-	if (this.fileToUpload != null) 
-	{
-		reader.readAsDataURL(this.fileToUpload);
-	}
-  }
-
   onSubmit(form: NgForm) {    
-    this.service.postUser(form.value, this.fileToUpload)
+    this.service.postUser(form.value, this.imageHandling.fileToUpload)
         .pipe(first())
         .subscribe(
             data => {      

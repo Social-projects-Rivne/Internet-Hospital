@@ -5,6 +5,12 @@ export const SIGN_UP = 'sign-up';
 export const DOCTOR_LIST = 'doctor-list';
 export const PAGE_404 = '404';
 export const API_DOCTORS = '/api/Doctors';
+export const SETTINGS_PATIENT = 'settings-patient';
+export const API_PATIENT_UPDATE = '/api/Patient/update';
+export const PATIENT_UPDATE_AVATAR = '/api/Patient/updateAvatar';
+export const LOCALE_PHONE = '+380';
+export const PASSPORT_AGE = 14;
+
 //notification config
 export const TIME_DURATION = 3000;
 export const HORIZONTAL_ALIGN = 'right';

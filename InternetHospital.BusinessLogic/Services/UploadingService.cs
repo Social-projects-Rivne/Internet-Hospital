@@ -14,6 +14,12 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly IHostingEnvironment _env;
         private readonly ApplicationContext _context;
 
+        const int MIN_HEIGHT = 150;
+        const int MAX_HEIGHT = 3000;
+        const int MIN_WIDTH = 150;
+        const int MAX_WIDTH = 3000;
+        const int IMAGE_MAX_LENGTH = 20;
+
         public UploadingService(IHostingEnvironment env, ApplicationContext context)
         {
             _env = env;
@@ -22,12 +28,6 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<User> UploadAvatar(IFormFile image, User user)
         {
-            const int MIN_HEIGHT = 150;
-            const int MAX_HEIGHT = 3000;
-            const int MIN_WIDTH = 150;
-            const int MAX_WIDTH = 3000;
-            const int IMAGE_MAX_LENGTH = 20;
-
             bool isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH) 
                 && ImageValidation.IsImage(image);
 
@@ -61,6 +61,48 @@ namespace InternetHospital.BusinessLogic.Services
             user.AvatarURL = pathFile; 
             await _context.SaveChangesAsync();
 
+            return user;
+        }
+
+        public async Task<User> UploadPassport(IFormFileCollection images, User user)
+        {
+            bool isValiImage = false;
+            foreach (var image in images)
+            {
+                isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH)
+                    && ImageValidation.IsImage(image);
+
+                if (!isValiImage)
+                {
+                    return null;
+                }
+            }
+
+            string webRootPath = _env.WebRootPath;
+            string folderName = "Images";
+            string passportFolder = "Passport";
+            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, passportFolder);
+
+            if (!Directory.Exists(fileDestDir))
+            {
+                Directory.CreateDirectory(fileDestDir);
+            }
+
+            string pathFile = string.Empty;
+            for (int i = 0; i < images.Count; i++)
+            {
+                var fileExtesion = Path.GetExtension(images[i].FileName);
+                var fileName = $"Passport_{i + 1}" + fileExtesion;
+                var fileFullPath = Path.Combine(fileDestDir, fileName);
+
+                using (var stream = new FileStream(fileFullPath, FileMode.Create))
+                {
+                    await images[i].CopyToAsync(stream);
+                }
+
+                pathFile += $"/{folderName}/{user.UserName}/{passportFolder}/{fileName} ";
+            }
+            user.PassportURL = pathFile;
             return user;
         }
     }
