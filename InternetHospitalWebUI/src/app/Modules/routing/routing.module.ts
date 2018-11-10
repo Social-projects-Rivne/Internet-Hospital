@@ -7,6 +7,7 @@ import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.
 import { HomeComponent } from '../../Components/Home/home/home.component';
 import { Page404Component } from '../../Components/page404/page404.component';
 import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
+import { UpdatePatientComponent } from '../../Components/PatientProfile/update-patient/update-patient.component';
 
 import { AuthGuard } from '../../Services/Guards/auth.guard';
 import { PatientGuard } from '../../Services/Guards/patient.guard';
@@ -20,7 +21,8 @@ import { ADMIN_PANEL,
           MY_PLANS, 
           DOCTOR_PAGE,
           SIGN_IN,
-          SIGN_UP } from '../../config';
+          SIGN_UP,
+          SETTINGS_PATIENT} from '../../config';
 
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
@@ -34,6 +36,7 @@ const ROUTES: Routes = [
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
       { path: DOCTOR_PAGE + ':id', component: DoctorPageComponent },
+      { path: SETTINGS_PATIENT, component: UpdatePatientComponent},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] }
     ]
   },

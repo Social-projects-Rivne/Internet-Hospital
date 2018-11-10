@@ -24,7 +24,8 @@
         <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-plans']">My plans</button>
         <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
-        <button mat-menu-item *ngIf="(isLoggedIn | async)" >Settings</button>
+        <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">Settings</button>
+        <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/settings-patient']">Settings</button>        
         <button mat-menu-item *ngIf="(isLoggedIn | async)" [routerLink]="['/sign-in']">Sign out</button>
     </mat-menu>
 
@@ -46,6 +47,7 @@
     <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-plans']">My plans</button>
     <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
-    <button mat-menu-item>Settings</button>
+    <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">Settings</button>
+    <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/settings-patient']">Settings</button>
     <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
 </mat-menu>

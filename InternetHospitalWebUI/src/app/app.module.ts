@@ -37,6 +37,10 @@ import { ImageModalDialogComponent } from './Components/doctor-page/gallery/imag
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
 
+import { UpdatePatientComponent } from './Components/PatientProfile/update-patient/update-patient.component';
+import { DateValidatorDirective } from './Directives/date-validator.directive';
+import { NgxMaskModule } from 'ngx-mask';
+
 import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
 import { CalendarModule, DateAdapter, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -63,6 +67,8 @@ import { DatePipe } from '@angular/common';
     GalleryComponent,
     ImageModalDialogComponent,
     FeedbacksComponent,
+    UpdatePatientComponent,
+    DateValidatorDirective,
     DoctorPlansComponent
   ],
   entryComponents: [ ImageModalDialogComponent ],
@@ -77,6 +83,7 @@ import { DatePipe } from '@angular/common';
     FlexLayoutModule,
     AdminpanelModule,
     OverlayModule,
+    NgxMaskModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
