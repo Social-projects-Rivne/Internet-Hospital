@@ -9,7 +9,7 @@ export class FeedbacksComponent implements OnInit {
   startDate = new Date();
   endDate = new Date();
   filterShow = 'row';
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -21,6 +21,5 @@ export class FeedbacksComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.filterShow = document.getElementById('filter-form').offsetWidth < 700 ? 'column' : 'row';
-    console.log(this.filterShow);
   }
 }
