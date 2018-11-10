@@ -21,7 +21,7 @@
         <button mat-menu-item *ngIf="!(isLoggedIn | async)" [routerLink]="['/sign-in']">Sign In</button>
         <button mat-menu-item *ngIf="!(isLoggedIn | async)" [routerLink]="['/sign-up']">Sign Up</button>
         <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/']">My history</button>
-        <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">My plans</button>
+        <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-plans']">My plans</button>
         <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">Settings</button>
@@ -44,7 +44,7 @@
 </mat-toolbar>
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false" xPosition="before">
     <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/']">My history</button>
-    <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">My plans</button>
+    <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-plans']">My plans</button>
     <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">Settings</button>

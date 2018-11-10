@@ -20,6 +20,8 @@ import { MatToolbarModule,
           MatTableModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule} from '@angular/material/menu';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const MAT_MODULS = [
     CommonModule,
@@ -42,7 +44,9 @@ const MAT_MODULS = [
     MatPaginatorModule,
     MatMenuModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonToggleModule,
+    MatExpansionModule
   ]
 
 @NgModule({

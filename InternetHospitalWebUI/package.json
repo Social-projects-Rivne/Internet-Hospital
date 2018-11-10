@@ -24,8 +24,12 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@auth0/angular-jwt": "^2.0.0",
+    "angular-calendar": "^0.26.4",
+    "angularx-flatpickr": "^6.1.0",
     "core-js": "^2.5.4",
     "ngx-mask": "^6.5.18",
+    "date-fns": "^1.29.0",
+    "flatpickr": "^4.5.2",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
