@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ImageData } from './gallery.component';
+import { GalleryModel } from '../../../Models/GalleryModel';
 
 @Component({
   selector: 'app-image-modal-dialog',
@@ -9,7 +9,7 @@ import { ImageData } from './gallery.component';
 })
 export class ImageModalDialogComponent {
   constructor(public dialogRef: MatDialogRef<ImageModalDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ImageData) {
+    @Inject(MAT_DIALOG_DATA) public data: GalleryModel) {
     console.log({ data });
   }
 
