@@ -13,12 +13,12 @@ export class DoctorListItemComponent implements OnInit {
   @Input()
   doctor: Doctor;
   urlAvatar: string;
-  doctorInf = 0;
+  doctorId = 0;
   constructor() { }
 
   ngOnInit() {
     this.urlAvatar = this.doctor.avatarURL ? HOST_URL + this.doctor.avatarURL : DEFAULT_IMAGE;
-    this.doctorInf = this.doctor.id;
+    this.doctorId = this.doctor.id;
   }
 
 }

@@ -18,6 +18,5 @@ namespace InternetHospital.BusinessLogic.Models
         public string Address { get; set; }
         public string LicenseURL { get; set; }
         public string[] DiplomasURL { get; set; }
-
     }
 }

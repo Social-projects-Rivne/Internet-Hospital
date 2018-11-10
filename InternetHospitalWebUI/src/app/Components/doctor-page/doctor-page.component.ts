@@ -23,17 +23,15 @@ export class DoctorPageComponent implements OnInit {
     this.service.getDoctor(id).subscribe(
       (data: any) => {
         this.doctor = data;
-        console.log(data);
       },
-      error => {
-            console.log(error);
-            this.router.navigate([`/${DOCTOR_LIST}`]);
+      _ => {
+        this.router.navigate([`/${DOCTOR_LIST}`]);
       });
-      this.showLikeRow = window.outerWidth > MIN_WIDTH_FOR_ROW ? true : false;
+      this.showLikeRow = window.innerWidth > MIN_WIDTH_FOR_ROW;
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.showLikeRow = window.outerWidth > MIN_WIDTH_FOR_ROW ? true : false;
+  @HostListener('window:resize')
+  onResize() {
+    this.showLikeRow = window.innerWidth > MIN_WIDTH_FOR_ROW;
   }
 }

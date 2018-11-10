@@ -21,8 +21,8 @@ export class GalleryComponent implements AfterContentChecked {
   amountOfPicsOnScreen = 1;
   width: number;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  @HostListener('window:resize')
+  onResize() {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
                                               / WIDTH_OF_1_IMG);

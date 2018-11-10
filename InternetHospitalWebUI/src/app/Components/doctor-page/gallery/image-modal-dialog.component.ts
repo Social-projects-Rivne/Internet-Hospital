@@ -10,7 +10,6 @@ import { GalleryModel } from '../../../Models/GalleryModel';
 export class ImageModalDialogComponent {
   constructor(public dialogRef: MatDialogRef<ImageModalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GalleryModel) {
-    console.log({ data });
   }
 
   change(dIndex) {

@@ -1,54 +1,76 @@
 .main-info{
     margin-top: 10px;
-}
 
-.doctor-info {
-    margin: 10px; 
-    vertical-align: middle;
-    text-align: left;
-
-    .info-name{
-        width: calc(50% - 10px);
-        margin-right: 10px;
-        display: inline-block;
-        vertical-align: top;
-    }
-    
-    .info-value{
-        width: 50%;
-        display: inline-block;
-        vertical-align: top;
-    }
-}
-
-.doctor-rating {
-    vertical-align: bottom;
-    text-align: center;
-    height: 100%;
-
-    .marks{
-        display: inline-block; 
-        width: 50%; 
-        vertical-align: middle;
+    .doctor-name {
+        margin-bottom: 0;
         font-size: 1.7em;
-        mat-icon{
-            vertical-align: middle;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .doctor-photo-container {
+        text-align: center;
+
+        img{
+            width: 100%; 
+            height: auto;
         }
     }
 
-    .negative{
-        color: red; 
+    .doctor-info {
+        margin: 10px; 
+        vertical-align: middle;
+        text-align: left;
+    
+        .info-name{
+            width: calc(50% - 10px);
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        .info-value{
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+        }
     }
-
-    .positive{
-        color: green;
+    
+    .doctor-rating {
+        vertical-align: bottom;
+        text-align: center;
+        height: 100%;
+    
+        .marks{
+            display: inline-block; 
+            width: 50%; 
+            vertical-align: middle;
+            font-size: 1.7em;
+    
+            mat-icon{
+                vertical-align: middle;
+            }
+        }
+    
+        .negative{
+            color: red; 
+        }
+    
+        .positive{
+            color: green;
+        }
     }
 }
 
+
+
 .additional-info {
     vertical-align: top;
-    text-align: justify; 
     margin-top: 10px;
+
+    p {
+        text-align: justify; 
+    }
 }
 
 :host{

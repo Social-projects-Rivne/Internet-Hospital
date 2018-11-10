@@ -1,8 +1,8 @@
 <div [fxLayout]="showLikeRow ? 'row' : 'column'">
   <mat-card fxFlex="40%" class="mat-elevation-z8 main-info">
-    <h3 style="margin-bottom: 0">{{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}</h3>
-    <div style="text-align: center">
-      <img style="width: 100%; height: auto;" [src]="doctor?.avatarURL">
+    <p class="doctor-name">{{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}</p>
+    <div class="doctor-photo-container">
+      <img [src]="doctor?.avatarURL">
     </div>
     <div class="doctor-info">
       <p><span class="info-name">Specialization:</span><span class="info-value">{{doctor?.specialization}}</span></p>
@@ -12,10 +12,10 @@
     </div>
     <div class="doctor-rating">
       <span class="marks negative">
-        <mat-icon style="vertical-align: middle">thumb_down</mat-icon> 1000
+        <mat-icon>thumb_down</mat-icon> 1000
       </span>
       <span class="marks positive">
-        <mat-icon style="vertical-align: middle">thumb_up</mat-icon> 1000
+        <mat-icon>thumb_up</mat-icon> 1000
       </span>
     </div>
   </mat-card>

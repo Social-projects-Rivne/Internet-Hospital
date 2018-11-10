@@ -1,11 +1,13 @@
 <div id="gallery-container">
-  <button class="left" mat-button (click)="previous()"><mat-icon>keyboard_arrow_left</mat-icon></button>
-  <div (window:resize)="onResize($event)" id="slider" [style.width]="amountOfPicsOnScreen * widthOf1Image + 'px'">
+  <button class="left" mat-button (click)="previous()" [disabled]="startIndex === 0"><mat-icon>keyboard_arrow_left</mat-icon></button>
+  <div id="slider" [style.width]="amountOfPicsOnScreen * widthOf1Image + 'px'">
     <div id="img-line" [style.width]="images.length * widthOf1Image + 'px'" [style.left]="startIndex * widthOf1Image + 'px'">
       <div class="img-container" *ngFor="let img of images; index as i" (click)="openDialog(i)">
         <img [src]="img">
       </div>
     </div>
   </div>
-  <button class="right" mat-button (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  <button class="right" mat-button (click)="next()" [disabled]="-startIndex === images.length - amountOfPicsOnScreen">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
 </div>
