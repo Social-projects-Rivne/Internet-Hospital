@@ -1,9 +1,24 @@
-#GlobalDiv{
+  #GlobalDiv {
     background-color: #e1e8f0;
     height: 100vh;
   }
 
-  .marginbtn{
+  .form-fieldStrech {
+    width: 100%;
+  }
+
+  .mat-form-fieldStrech {
+      width: 100%;
+  }
+
+  .form-width {
+    background-origin: padding-box;
+    width: 40%;
+    min-width: 320px;
+    margin: auto;
+  }
+  
+  .marginbtn {
       margin-top: 10px;
       margin-left: 5px;
       margin-right: 5px;
@@ -19,9 +34,9 @@
   }
 
   .inner-div {
-    margin-top:20px
+    margin-top:20px;
   }   
-  
+
   .upload-photos {
       font-size: 1.2em;
       font-weight: 700;
@@ -32,7 +47,7 @@
       border-radius: 5px;
   }
   
-  .mat-card-title{
+  .mat-card-title {
       font-size: 2em;
   }
 
@@ -49,3 +64,5 @@
     padding: 5px;
     border-radius: 5px;
   }
+
+  
