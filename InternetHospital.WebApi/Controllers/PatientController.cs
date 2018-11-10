@@ -36,7 +36,7 @@ namespace InternetHospital.WebApi.Controllers
             {
                 var patient = _context.Users.FirstOrDefault(p => p.Id == int.Parse(patientId));
                 _uploadingFiles.UploadAvatar(file, patient);
-                return Ok(new { message = "Avatar was updated!" });
+                return Ok();
             }
             return BadRequest(new { message = "Cannot change avatar!" });
         }
@@ -45,7 +45,6 @@ namespace InternetHospital.WebApi.Controllers
         [Authorize]
         public async Task<ActionResult> UpdatePatientProfile([FromForm(Name = "PassportURL")]IFormFileCollection files)
         {
-            var FirstName = Request.Form["FirstName"];
             if (files == null)
             {
                 ModelState.AddModelError("Files", "Files didn't upload");
@@ -80,7 +79,7 @@ namespace InternetHospital.WebApi.Controllers
                 if (userWithPassport != null)
                 {
                     await _context.SaveChangesAsync();
-                    return Ok(new { message = "Updating completed" });
+                    return Ok();
                 }
                 else
                 {

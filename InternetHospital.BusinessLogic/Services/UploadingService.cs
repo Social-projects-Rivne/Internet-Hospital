@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -28,10 +30,10 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<User> UploadAvatar(IFormFile image, User user)
         {
-            bool isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH) 
+            bool isValidImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH) 
                 && ImageValidation.IsImage(image);
 
-            if (!isValiImage)
+            if (!isValidImage)
             {
                 return null;
             }
@@ -66,13 +68,13 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<User> UploadPassport(IFormFileCollection images, User user)
         {
-            bool isValiImage = false;
+            bool isValidImage = false;
             foreach (var image in images)
             {
-                isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH)
+                isValidImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH)
                     && ImageValidation.IsImage(image);
 
-                if (!isValiImage)
+                if (!isValidImage)
                 {
                     return null;
                 }
@@ -88,7 +90,7 @@ namespace InternetHospital.BusinessLogic.Services
                 Directory.CreateDirectory(fileDestDir);
             }
 
-            string pathFile = string.Empty;
+            string[] pathFile = new string[images.Count];
             for (int i = 0; i < images.Count; i++)
             {
                 var fileExtesion = Path.GetExtension(images[i].FileName);
@@ -99,10 +101,11 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     await images[i].CopyToAsync(stream);
                 }
-
-                pathFile += $"/{folderName}/{user.UserName}/{passportFolder}/{fileName} ";
+                pathFile[i] = $"/{folderName}/{user.UserName}/{passportFolder}/{fileName}";
             }
-            user.PassportURL = pathFile;
+            string json = JsonConvert.SerializeObject(pathFile);
+            user.PassportURL = json;
+
             return user;
         }
     }
