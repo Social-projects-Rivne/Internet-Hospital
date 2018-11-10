@@ -4,6 +4,8 @@ import { DoctorsService } from '../../Services/doctors.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCTOR_LIST } from '../../config';
 
+const MIN_WIDTH_FOR_ROW = 900;
+
 @Component({
   selector: 'app-doctor-page',
   templateUrl: './doctor-page.component.html',
@@ -27,11 +29,11 @@ export class DoctorPageComponent implements OnInit {
             console.log(error);
             this.router.navigate([`/${DOCTOR_LIST}`]);
       });
-      this.showLikeRow = window.outerWidth > 900 ? true : false;
+      this.showLikeRow = window.outerWidth > MIN_WIDTH_FOR_ROW ? true : false;
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.showLikeRow = window.outerWidth > 900 ? true : false;
+    this.showLikeRow = window.outerWidth > MIN_WIDTH_FOR_ROW ? true : false;
   }
 }

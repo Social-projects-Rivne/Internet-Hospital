@@ -5,6 +5,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { GalleryModel } from '../../../Models/GalleryModel';
 
 const SUM_OF_WIDTH_OF_SWITCH_BUTTONS = 80;
+const WIDTH_OF_1_IMG = 134;
 
 @Component({
   selector: 'app-gallery',
@@ -16,7 +17,7 @@ export class GalleryComponent implements AfterContentChecked {
 
   @Input() images: string[];
   startIndex = 0;
-  widthOf1Image = 134;
+  widthOf1Image = WIDTH_OF_1_IMG;
   amountOfPicsOnScreen = 1;
   width: number;
 
@@ -24,7 +25,7 @@ export class GalleryComponent implements AfterContentChecked {
   onResize(event) {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
-                                              / this.widthOf1Image);
+                                              / WIDTH_OF_1_IMG);
 
   }
 
@@ -33,7 +34,7 @@ export class GalleryComponent implements AfterContentChecked {
   ngAfterContentChecked() {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
-                                              / this.widthOf1Image);
+                                              / WIDTH_OF_1_IMG);
   }
 
   next() {
