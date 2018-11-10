@@ -29,6 +29,9 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { UpdatePatientComponent } from './Components/PatientProfile/update-patient/update-patient.component';
+import { DateValidatorDirective } from './Directives/date-validator.directive';
+import {NgxMaskModule} from 'ngx-mask';
 import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
 import { CalendarModule, DateAdapter, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -49,7 +52,9 @@ import { DatePipe } from '@angular/common';
     DoctorListComponent,
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
-    DoctorPlansComponent,
+    UpdatePatientComponent,
+    DateValidatorDirective,
+    DoctorPlansComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     FlexLayoutModule,
     AdminpanelModule,
+    NgxMaskModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
