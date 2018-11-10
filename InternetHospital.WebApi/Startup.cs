@@ -16,7 +16,7 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
-//using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.WebApi.CustomMiddleware;
 
 namespace InternetHospital.WebApi
 {
@@ -44,10 +44,10 @@ namespace InternetHospital.WebApi
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             //configure entity framework
-            services.AddEntityFrameworkNpgsql()
+            services.AddEntityFrameworkSqlServer()
                     .AddDbContext<ApplicationContext>(opt =>
                     {
-                        opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), 
+                        opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection"), 
                                       m => m.MigrationsAssembly("InternetHospital.WebApi"));
                     });
 
@@ -101,6 +101,7 @@ namespace InternetHospital.WebApi
             });
 
             //Dependency injection
+            services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IDoctorService, DoctorService>();
@@ -122,7 +123,7 @@ namespace InternetHospital.WebApi
             }
 
             app.UseStaticFiles();
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseCors(options => options.AllowAnyOrigin()
                                           .AllowAnyMethod()
@@ -134,6 +135,7 @@ namespace InternetHospital.WebApi
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserRegistrationModel, User>();
+                config.CreateMap<AppointmentCreationModel, Appointment>();
             });
 
             app.UseMvc();

@@ -17,7 +17,7 @@ import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-
 import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
 
 import { AuthenticationService } from './Services/authentication.service';
-import { InterceptorService  } from './Services/interceptor.service';
+import { InterceptorService } from './Services/interceptor.service';
 
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
@@ -29,12 +29,20 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+
 import { DoctorPageComponent } from './Components/doctor-page/doctor-page.component';
 import { FeedbackItemComponent } from './Components/doctor-page/feedbacks/feedback-item/feedback-item.component';
 import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
 import { ImageModalDialogComponent } from './Components/doctor-page/gallery/image-modal-dialog.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
+
+import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
+import { CalendarModule, DateAdapter, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -54,7 +62,8 @@ import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks
     FeedbackItemComponent,
     GalleryComponent,
     ImageModalDialogComponent,
-    FeedbacksComponent
+    FeedbacksComponent,
+    DoctorPlansComponent
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [
@@ -67,10 +76,25 @@ import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks
     HttpClientModule,
     FlexLayoutModule,
     AdminpanelModule,
-    OverlayModule
+    OverlayModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }, {
+        dateFormatter: {
+          provide: CalendarDateFormatter,
+          useClass: CustomDateFormatter
+        },
+        eventTitleFormatter: {
+          provide: CalendarEventTitleFormatter,
+          useClass: CustomEventTitleFormatter
+        }
+      },
+    )
   ],
   exports: [MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard,
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Services;
-using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,17 +13,12 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class SigninController : ControllerBase
     {
-        private ApplicationContext _context;
-        private ITokenService _tokenService;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
+        private readonly ITokenService _tokenService;
+        private readonly UserManager<User> _userManager;
 
-        public SigninController(ApplicationContext context,
-            UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
+        public SigninController(UserManager<User> userManager, ITokenService tokenService)
         {
-            _context = context;
             _userManager = userManager;
-            _signInManager = signInManager;
             _tokenService = tokenService;
         }
 
@@ -61,7 +55,7 @@ namespace InternetHospital.WebApi.Controllers
             var refreshedToken = _tokenService.RefreshTokenValidation(refresh.RefreshToken);
             if (refreshedToken == null)
             {
-                return BadRequest("invalid_grant");
+                return BadRequest(new { message = "invalid_grant" });
             }
             var user = await _userManager.FindByIdAsync(refreshedToken.UserId.ToString());
             return Ok(new
@@ -69,7 +63,7 @@ namespace InternetHospital.WebApi.Controllers
                 access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
                 refresh_token = refreshedToken.Token
             });
-        }    
+        }
     }
 
 }

@@ -1,8 +1,8 @@
 ﻿namespace InternetHospital.BusinessLogic.Models
 {
-    public class SpecializationModel
+    public class AppointmentEditingModel
     {
         public int Id { get; set; }
-        public string Specialization { get; set; }
+        public string Message { get; set; }
     }
 }

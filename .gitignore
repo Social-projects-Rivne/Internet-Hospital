@@ -298,3 +298,4 @@ __pycache__/
 # System Files
 .DS_Store
 Thumbs.db
+/InternetHospital.WebApi/Logs

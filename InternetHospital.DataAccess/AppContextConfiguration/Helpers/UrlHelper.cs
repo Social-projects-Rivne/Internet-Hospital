@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InternetHospital.DataAccess.AppContextConfiguration.Helpers
+﻿namespace InternetHospital.DataAccess.AppContextConfiguration.Helpers
 {
     public static class UrlHelper
     {
