@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Doctor } from 'src/app/Models/Doctors';
-import { HOST_URL, DOCTOR_PAGE } from '../../../../config';
+import { HOST_URL } from '../../../../config';
 
 const DEFAULT_IMAGE: string = '/assets/img/default-avatar.png';
 
@@ -13,12 +13,12 @@ export class DoctorListItemComponent implements OnInit {
   @Input()
   doctor: Doctor;
   urlAvatar: string;
-  doctorinf = DOCTOR_PAGE;
+  doctorInf = 0;
   constructor() { }
 
   ngOnInit() {
     this.urlAvatar = this.doctor.avatarURL ? HOST_URL + this.doctor.avatarURL : DEFAULT_IMAGE;
-    this.doctorinf += this.doctor.id;
+    this.doctorInf = this.doctor.id;
   }
 
 }
