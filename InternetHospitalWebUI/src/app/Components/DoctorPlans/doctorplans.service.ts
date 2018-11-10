@@ -12,10 +12,9 @@ export class DoctorplansService {
   constructor(private http: HttpClient,
     private datePipe: DatePipe) { }
 
-    deleteAppointment(appointmentId:number | string)
-    {
-        let specUrl = HOST_URL + "/api/Appointments/delete";;
-       return this.http.post(specUrl,{ id: appointmentId});
+    deleteAppointment(appointmentId: number | string) {
+        const specUrl = HOST_URL + '/api/Appointments/delete';
+        return this.http.request('delete', specUrl, { body: { id: appointmentId } });
     }
   
     cancelAppointment(appointmentId:number | string)

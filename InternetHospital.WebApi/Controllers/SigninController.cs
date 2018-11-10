@@ -55,7 +55,7 @@ namespace InternetHospital.WebApi.Controllers
             var refreshedToken = _tokenService.RefreshTokenValidation(refresh.RefreshToken);
             if (refreshedToken == null)
             {
-                return BadRequest("invalid_grant");
+                return BadRequest(new { message = "invalid_grant" });
             }
             var user = await _userManager.FindByIdAsync(refreshedToken.UserId.ToString());
             return Ok(new
