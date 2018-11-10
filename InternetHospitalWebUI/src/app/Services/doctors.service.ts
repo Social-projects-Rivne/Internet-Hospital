@@ -27,6 +27,11 @@ export class DoctorsService {
       .set("pagecount", this.paginationService.pageSize.toString())
   };
 
+  getDoctor(id: number) {
+    const doctorsUrl = `${this.url}/${id}`;
+    return this.http.get(doctorsUrl, this.httpOptions);
+  }
+
   constructor(private http: HttpClient,
     private paginationService: PaginationService) { }
 

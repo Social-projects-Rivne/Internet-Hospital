@@ -1,8 +1,8 @@
-<div fxLayout="row">
+<div [fxLayout]="showLikeRow ? 'row' : 'column'">
   <mat-card fxFlex="40%" class="mat-elevation-z8 main-info">
     <h3 style="margin-bottom: 0">{{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}</h3>
     <div style="text-align: center">
-      <img style="width: 100%; height: auto;" src="https://myblue.bluecrossma.com/sites/g/files/csphws1086/files/inline-images/Doctor%20Image%20Desktop.png">
+      <img style="width: 100%; height: auto;" [src]="doctor?.avatarURL">
     </div>
     <div class="doctor-info">
       <p><span class="info-name">Specialization:</span><span class="info-value">{{doctor?.specialization}}</span></p>
@@ -19,38 +19,15 @@
       </span>
     </div>
   </mat-card>
-  <div fxFlex="60%" style="margin: 10px; vertical-align: top;">PLACE FOR APPOINTMENT</div>
+  <div fxFlex="60%" style="margin-top: 10px; margin-left: 10px; vertical-align: top;">PLACE FOR APPOINTMENT</div>
 </div>
 <mat-card class="mat-elevation-z8 additional-info">
   <h3>About</h3>
   <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed repellendus officia officiis?
-    Eius dolores officiis est, perspiciatis cumque voluptas atque assumenda provident ullam cum
-    deserunt nobis iste amet doloribus, cupiditate veniam placeat. Dolore officiis ullam libero
-    laborum sed quae dignissimos nihil numquam reprehenderit recusandae, et animi odit sit eaque
-    earum labore dolores veritatis repellendus eos iste debitis, temporibus, asperiores consectetur!
-    Odit, nostrum. Deleniti ipsa hic sit expedita esse asperiores, a magni quam soluta ut ab
-    perspiciatis reprehenderit velit qui accusamus in reiciendis quisquam omnis quibusdam
-    temporibus similique maxime nobis enim. Qui aliquam obcaecati eius odio ab omnis modi
-    earum dolorem nesciunt repudiandae inventore sequi provident eaque eos a iure molestias,
-    asperiores exercitationem! Autem amet accusamus voluptate quia cupiditate nostrum inventore
-    hic qui aperiam tempora provident rerum architecto, excepturi iste. Inventore fugiat placeat
-    dignissimos tempore mollitia, consequatur ipsa iste, asperiores sapiente optio nam quas non
-    ipsum, minima explicabo libero impedit totam voluptatum doloremque voluptates consectetur
-    quisquam blanditiis odio quidem. Rerum explicabo reprehenderit odio voluptate facere eveniet
-    fugiat voluptas laboriosam corrupti? Quibusdam quos ex, possimus perferendis sint ab provident
-    maxime! Explicabo totam neque assumenda magnam dignissimos aspernatur ullam perspiciatis sequi
-    repellat, inventore at provident aliquid! Numquam velit vitae illo officiis repellendus sapiente.
+    {{doctor?.doctorsInfo}}
   </p>
   <h3>Diplomas and certificates</h3>
-  <app-gallery [images]="tempImgs"></app-gallery>
+  <app-gallery [images]="doctor?.diplomasURL"></app-gallery>
 </mat-card>
-<h2 style="margin: 10px;">Feedbacks:</h2>
-<div class="feedbacks-container">
-  <app-feedback-item class="feedback-item" [isPositive]="true"></app-feedback-item>
-  <app-feedback-item class="feedback-item" [isPositive]="false"></app-feedback-item>
-  <app-feedback-item class="feedback-item" [isPositive]="false"></app-feedback-item>
-  <app-feedback-item class="feedback-item" [isPositive]="true"></app-feedback-item>
-
-</div>
+<app-feedbacks></app-feedbacks>
 <h6 style="text-align: center">PAGINATION</h6>

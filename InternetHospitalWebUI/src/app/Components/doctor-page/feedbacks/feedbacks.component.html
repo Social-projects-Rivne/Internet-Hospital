@@ -1,0 +1,31 @@
+<h3>Feedbacks:</h3>
+<form id="filter-form" enctype="multipart/form-data" [fxLayout]="filterShow">
+    <mat-form-field>
+      <input matInput [matDatepicker]="fromPicker" placeholder="From">
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker startView="month" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="toPicker" placeholder="To">
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker startView="month" [startAt]="endDate"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Sort by">
+        <mat-option value="0">default</mat-option>
+        <mat-option value="1">date</mat-option>
+        <mat-option value="2">likes</mat-option>
+        <mat-option value="3">dislikes</mat-option>
+        <mat-option value="4">sum of likes and dislikes</mat-option>
+        <mat-option value="5">type (positive first)</mat-option>
+        <mat-option value="6">type (negative first)</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Filter</button>
+</form>
+<div class="feedbacks-container">
+  <app-feedback-item class="feedback-item" [isPositive]="true"></app-feedback-item>
+  <app-feedback-item class="feedback-item" [isPositive]="false"></app-feedback-item>
+  <app-feedback-item class="feedback-item" [isPositive]="false"></app-feedback-item>
+  <app-feedback-item class="feedback-item" [isPositive]="true"></app-feedback-item>
+</div>

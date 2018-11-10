@@ -4596,3 +4596,839 @@ ORDER BY t0.\"UserId\"" (0723d8ff)
 2018-11-09T23:32:21.5915265+02:00 0HLI6B9C4TCNQ:00000008 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
 2018-11-09T23:32:21.5917981+02:00 0HLI6B9C4TCNQ:00000008 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 5.8843ms (afa2e885)
 2018-11-09T23:32:21.5918960+02:00 0HLI6B9C4TCNQ:00000008 [INF] Request finished in 7.4874ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:41:02.5875179+02:00 0HLI6B9C4TCNR:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:41:02.5877488+02:00 0HLI6B9C4TCNR:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:41:02.5879379+02:00 0HLI6B9C4TCNR:00000001 [INF] Request finished in 0.5917ms 204  (791a596a)
+2018-11-09T23:41:02.8529687+02:00 0HLI6B9C4TCNR:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:41:02.8532008+02:00 0HLI6B9C4TCNR:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:41:02.8542971+02:00 0HLI6B9C4TCNR:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:41:02.8544313+02:00 0HLI6B9C4TCNR:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:41:02.8545951+02:00 0HLI6B9C4TCNR:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:41:02.8551927+02:00 0HLI6B9C4TCNR:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:41:02.8557591+02:00 0HLI6B9C4TCNR:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:41:03.1571328+02:00 0HLI6B9C4TCNR:00000002 [INF] Executed DbCommand ("261"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:41:03.1901769+02:00 0HLI6B9C4TCNR:00000002 [INF] Executed DbCommand ("32"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:41:03.1903999+02:00 0HLI6B9C4TCNR:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 335.0883ms. (50a9e262)
+2018-11-09T23:41:03.1905231+02:00 0HLI6B9C4TCNR:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:41:03.1907823+02:00 0HLI6B9C4TCNR:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 336.1099ms (afa2e885)
+2018-11-09T23:41:03.1909094+02:00 0HLI6B9C4TCNR:00000002 [INF] Request finished in 338.0098ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:42:04.1547328+02:00 0HLI6B9C4TCNS:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:42:04.1549151+02:00 0HLI6B9C4TCNS:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:42:04.1550426+02:00 0HLI6B9C4TCNS:00000001 [INF] Request finished in 0.435ms 204  (791a596a)
+2018-11-09T23:42:04.3289976+02:00 0HLI6B9C4TCNS:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:42:04.3291839+02:00 0HLI6B9C4TCNS:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:42:04.3308411+02:00 0HLI6B9C4TCNS:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:42:04.3310483+02:00 0HLI6B9C4TCNS:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:42:04.3312275+02:00 0HLI6B9C4TCNS:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:42:04.3317115+02:00 0HLI6B9C4TCNS:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:42:04.3322752+02:00 0HLI6B9C4TCNS:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:42:04.3352696+02:00 0HLI6B9C4TCNS:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:42:04.3371577+02:00 0HLI6B9C4TCNS:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:42:04.3373271+02:00 0HLI6B9C4TCNS:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.5377ms. (50a9e262)
+2018-11-09T23:42:04.3374380+02:00 0HLI6B9C4TCNS:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:42:04.3376661+02:00 0HLI6B9C4TCNS:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.3643ms (afa2e885)
+2018-11-09T23:42:04.3377857+02:00 0HLI6B9C4TCNS:00000002 [INF] Request finished in 8.8686ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:43:17.1309233+02:00 0HLI6B9C4TCNT:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:43:17.1310899+02:00 0HLI6B9C4TCNT:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:43:17.1312020+02:00 0HLI6B9C4TCNT:00000001 [INF] Request finished in 0.3552ms 204  (791a596a)
+2018-11-09T23:43:17.3445847+02:00 0HLI6B9C4TCNT:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:43:17.3449340+02:00 0HLI6B9C4TCNT:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:43:17.3465158+02:00 0HLI6B9C4TCNT:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:43:17.3466713+02:00 0HLI6B9C4TCNT:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:43:17.3468695+02:00 0HLI6B9C4TCNT:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:43:17.3480332+02:00 0HLI6B9C4TCNT:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:43:17.3489257+02:00 0HLI6B9C4TCNT:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:43:17.3518878+02:00 0HLI6B9C4TCNT:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:43:17.3541927+02:00 0HLI6B9C4TCNT:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:43:17.3543628+02:00 0HLI6B9C4TCNT:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 6.2301ms. (50a9e262)
+2018-11-09T23:43:17.3544808+02:00 0HLI6B9C4TCNT:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:43:17.3547117+02:00 0HLI6B9C4TCNT:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 7.7696ms (afa2e885)
+2018-11-09T23:43:17.3548191+02:00 0HLI6B9C4TCNT:00000002 [INF] Request finished in 10.3117ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:43:43.3293773+02:00 0HLI6B9C4TCNT:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:43:43.3295329+02:00 0HLI6B9C4TCNT:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:43:43.3297543+02:00 0HLI6B9C4TCNT:00000003 [INF] Request finished in 0.3217ms 204  (791a596a)
+2018-11-09T23:43:43.5796358+02:00 0HLI6B9C4TCNT:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:43:43.5798083+02:00 0HLI6B9C4TCNT:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:43:43.5810526+02:00 0HLI6B9C4TCNT:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:43:43.5811757+02:00 0HLI6B9C4TCNT:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:43:43.5814780+02:00 0HLI6B9C4TCNT:00000004 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:43:43.5818526+02:00 0HLI6B9C4TCNT:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:43:43.5824629+02:00 0HLI6B9C4TCNT:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:43:43.5848685+02:00 0HLI6B9C4TCNT:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:43:43.5876407+02:00 0HLI6B9C4TCNT:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:43:43.5878906+02:00 0HLI6B9C4TCNT:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.9068ms. (50a9e262)
+2018-11-09T23:43:43.5880785+02:00 0HLI6B9C4TCNT:00000004 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:43:43.5886983+02:00 0HLI6B9C4TCNT:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 7.136ms (afa2e885)
+2018-11-09T23:43:43.5888104+02:00 0HLI6B9C4TCNT:00000004 [INF] Request finished in 9.244ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:44:57.4880673+02:00 0HLI6B9C4TCNU:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:44:57.4882552+02:00 0HLI6B9C4TCNU:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:44:57.4883748+02:00 0HLI6B9C4TCNU:00000001 [INF] Request finished in 0.3769ms 204  (791a596a)
+2018-11-09T23:44:57.7471920+02:00 0HLI6B9C4TCNU:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:44:57.7474849+02:00 0HLI6B9C4TCNU:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:44:57.7498080+02:00 0HLI6B9C4TCNU:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:44:57.7500492+02:00 0HLI6B9C4TCNU:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:44:57.7504297+02:00 0HLI6B9C4TCNU:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:44:57.7508994+02:00 0HLI6B9C4TCNU:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:44:57.7519553+02:00 0HLI6B9C4TCNU:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:44:57.7546210+02:00 0HLI6B9C4TCNU:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:44:57.7567123+02:00 0HLI6B9C4TCNU:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:44:57.7568777+02:00 0HLI6B9C4TCNU:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.8784ms. (50a9e262)
+2018-11-09T23:44:57.7570009+02:00 0HLI6B9C4TCNU:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:44:57.7572377+02:00 0HLI6B9C4TCNU:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.7232ms (afa2e885)
+2018-11-09T23:44:57.7573427+02:00 0HLI6B9C4TCNU:00000002 [INF] Request finished in 10.2095ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:45:15.6688067+02:00 0HLI6B9C4TCNU:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:45:15.6690483+02:00 0HLI6B9C4TCNU:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:45:15.6691904+02:00 0HLI6B9C4TCNU:00000003 [INF] Request finished in 0.4551ms 204  (791a596a)
+2018-11-09T23:45:15.8321182+02:00 0HLI6B9C4TCNU:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:45:15.8325149+02:00 0HLI6B9C4TCNU:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:45:15.8342478+02:00 0HLI6B9C4TCNU:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:45:15.8343639+02:00 0HLI6B9C4TCNU:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:45:15.8344886+02:00 0HLI6B9C4TCNU:00000004 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:45:15.8349683+02:00 0HLI6B9C4TCNU:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:45:15.8357601+02:00 0HLI6B9C4TCNU:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:45:15.8383314+02:00 0HLI6B9C4TCNU:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:45:15.8401855+02:00 0HLI6B9C4TCNU:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:45:15.8403422+02:00 0HLI6B9C4TCNU:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.3009ms. (50a9e262)
+2018-11-09T23:45:15.8404457+02:00 0HLI6B9C4TCNU:00000004 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:45:15.8408598+02:00 0HLI6B9C4TCNU:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.2834ms (afa2e885)
+2018-11-09T23:45:15.8409577+02:00 0HLI6B9C4TCNU:00000004 [INF] Request finished in 9.3122ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:45:34.3683366+02:00 0HLI6B9C4TCNU:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:45:34.3685734+02:00 0HLI6B9C4TCNU:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:45:34.3687040+02:00 0HLI6B9C4TCNU:00000005 [INF] Request finished in 0.4192ms 204  (791a596a)
+2018-11-09T23:45:34.5285696+02:00 0HLI6B9C4TCNU:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:45:34.5293216+02:00 0HLI6B9C4TCNU:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:45:34.5302562+02:00 0HLI6B9C4TCNU:00000006 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:45:34.5303557+02:00 0HLI6B9C4TCNU:00000006 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:45:34.5304899+02:00 0HLI6B9C4TCNU:00000006 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:45:34.5309810+02:00 0HLI6B9C4TCNU:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:45:34.5313939+02:00 0HLI6B9C4TCNU:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:45:34.5337075+02:00 0HLI6B9C4TCNU:00000006 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:45:34.5357530+02:00 0HLI6B9C4TCNU:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:45:34.5359346+02:00 0HLI6B9C4TCNU:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.8683ms. (50a9e262)
+2018-11-09T23:45:34.5360498+02:00 0HLI6B9C4TCNU:00000006 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:45:34.5362129+02:00 0HLI6B9C4TCNU:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 5.6656ms (afa2e885)
+2018-11-09T23:45:34.5363175+02:00 0HLI6B9C4TCNU:00000006 [INF] Request finished in 8.1107ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:48:58.3132716+02:00 0HLI6B9C4TCNV:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:48:58.3134828+02:00 0HLI6B9C4TCNV:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:48:58.3136221+02:00 0HLI6B9C4TCNV:00000001 [INF] Request finished in 0.4875ms 204  (791a596a)
+2018-11-09T23:48:58.5124511+02:00 0HLI6B9C4TCNV:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:48:58.5129584+02:00 0HLI6B9C4TCNV:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:48:58.5140988+02:00 0HLI6B9C4TCNV:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:48:58.5143811+02:00 0HLI6B9C4TCNV:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:48:58.5145539+02:00 0HLI6B9C4TCNV:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:48:58.5150048+02:00 0HLI6B9C4TCNV:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:48:58.5157793+02:00 0HLI6B9C4TCNV:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:48:58.5183825+02:00 0HLI6B9C4TCNV:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:48:58.5204707+02:00 0HLI6B9C4TCNV:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:48:58.5206444+02:00 0HLI6B9C4TCNV:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.5658ms. (50a9e262)
+2018-11-09T23:48:58.5207656+02:00 0HLI6B9C4TCNV:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:48:58.5214422+02:00 0HLI6B9C4TCNV:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.7985ms (afa2e885)
+2018-11-09T23:48:58.5215713+02:00 0HLI6B9C4TCNV:00000002 [INF] Request finished in 9.2057ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:49:49.8006406+02:00 0HLI6B9C4TCNV:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:49:49.8009390+02:00 0HLI6B9C4TCNV:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:49:49.8011853+02:00 0HLI6B9C4TCNV:00000003 [INF] Request finished in 0.6106ms 204  (791a596a)
+2018-11-09T23:49:50.1843789+02:00 0HLI6B9C4TCNV:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:49:50.1846272+02:00 0HLI6B9C4TCNV:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:49:50.1855446+02:00 0HLI6B9C4TCNV:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:49:50.1856464+02:00 0HLI6B9C4TCNV:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:49:50.1971997+02:00 0HLI6B9C4TCNV:00000004 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:49:50.1976935+02:00 0HLI6B9C4TCNV:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:49:50.1982817+02:00 0HLI6B9C4TCNV:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:49:50.2007163+02:00 0HLI6B9C4TCNV:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:49:50.2026707+02:00 0HLI6B9C4TCNV:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:49:50.2028496+02:00 0HLI6B9C4TCNV:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.0696ms. (50a9e262)
+2018-11-09T23:49:50.2029664+02:00 0HLI6B9C4TCNV:00000004 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:49:50.2034129+02:00 0HLI6B9C4TCNV:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.1271ms (afa2e885)
+2018-11-09T23:49:50.2035313+02:00 0HLI6B9C4TCNV:00000004 [INF] Request finished in 19.6805ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:50:34.1633337+02:00 0HLI6B9C4TCNV:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:50:34.1634900+02:00 0HLI6B9C4TCNV:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:50:34.1636401+02:00 0HLI6B9C4TCNV:00000005 [INF] Request finished in 0.4148ms 204  (791a596a)
+2018-11-09T23:50:35.0407719+02:00 0HLI6B9C4TCNV:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:50:35.0410127+02:00 0HLI6B9C4TCNV:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:50:35.0419569+02:00 0HLI6B9C4TCNV:00000006 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:50:35.0420603+02:00 0HLI6B9C4TCNV:00000006 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:50:35.0422111+02:00 0HLI6B9C4TCNV:00000006 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:50:35.0427500+02:00 0HLI6B9C4TCNV:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:50:35.0432328+02:00 0HLI6B9C4TCNV:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:50:35.0460377+02:00 0HLI6B9C4TCNV:00000006 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:50:35.0480055+02:00 0HLI6B9C4TCNV:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:50:35.0481694+02:00 0HLI6B9C4TCNV:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.3388ms. (50a9e262)
+2018-11-09T23:50:35.0484461+02:00 0HLI6B9C4TCNV:00000006 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:50:35.0488712+02:00 0HLI6B9C4TCNV:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.583ms (afa2e885)
+2018-11-09T23:50:35.0489837+02:00 0HLI6B9C4TCNV:00000006 [INF] Request finished in 8.2729ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:51:18.9270120+02:00 0HLI6B9C4TCNV:00000007 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:51:18.9273539+02:00 0HLI6B9C4TCNV:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:51:18.9276487+02:00 0HLI6B9C4TCNV:00000007 [INF] Request finished in 0.8293ms 204  (791a596a)
+2018-11-09T23:51:19.1548117+02:00 0HLI6B9C4TCNV:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:51:19.1550280+02:00 0HLI6B9C4TCNV:00000008 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:51:19.1562020+02:00 0HLI6B9C4TCNV:00000008 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:51:19.1563366+02:00 0HLI6B9C4TCNV:00000008 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:51:19.1565375+02:00 0HLI6B9C4TCNV:00000008 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:51:19.1569682+02:00 0HLI6B9C4TCNV:00000008 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:51:19.1576330+02:00 0HLI6B9C4TCNV:00000008 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:51:19.1602417+02:00 0HLI6B9C4TCNV:00000008 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:51:19.1620422+02:00 0HLI6B9C4TCNV:00000008 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:51:19.1621941+02:00 0HLI6B9C4TCNV:00000008 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.147ms. (50a9e262)
+2018-11-09T23:51:19.1624523+02:00 0HLI6B9C4TCNV:00000008 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:51:19.1628139+02:00 0HLI6B9C4TCNV:00000008 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.2068ms (afa2e885)
+2018-11-09T23:51:19.1629118+02:00 0HLI6B9C4TCNV:00000008 [INF] Request finished in 8.2011ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:52:25.8948790+02:00 0HLI6B9C4TCO0:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:52:25.8950444+02:00 0HLI6B9C4TCO0:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:52:25.8952110+02:00 0HLI6B9C4TCO0:00000001 [INF] Request finished in 0.4172ms 204  (791a596a)
+2018-11-09T23:52:26.1728600+02:00 0HLI6B9C4TCO0:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:52:26.1730870+02:00 0HLI6B9C4TCO0:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:52:26.1738634+02:00 0HLI6B9C4TCO0:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:52:26.1739447+02:00 0HLI6B9C4TCO0:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:52:26.1741552+02:00 0HLI6B9C4TCO0:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:52:26.1747737+02:00 0HLI6B9C4TCO0:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:52:26.1752123+02:00 0HLI6B9C4TCO0:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:52:26.1773305+02:00 0HLI6B9C4TCO0:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:52:26.1791245+02:00 0HLI6B9C4TCO0:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:52:26.1793081+02:00 0HLI6B9C4TCO0:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.4708ms. (50a9e262)
+2018-11-09T23:52:26.1795426+02:00 0HLI6B9C4TCO0:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:52:26.1799428+02:00 0HLI6B9C4TCO0:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 5.6502ms (afa2e885)
+2018-11-09T23:52:26.1800435+02:00 0HLI6B9C4TCO0:00000002 [INF] Request finished in 7.2612ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:53:27.9122665+02:00 0HLI6B9C4TCO1:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:53:27.9124868+02:00 0HLI6B9C4TCO1:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:53:27.9126869+02:00 0HLI6B9C4TCO1:00000001 [INF] Request finished in 0.6256ms 204  (791a596a)
+2018-11-09T23:53:28.1284744+02:00 0HLI6B9C4TCO1:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:53:28.1286678+02:00 0HLI6B9C4TCO1:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:53:28.1297857+02:00 0HLI6B9C4TCO1:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:53:28.1298931+02:00 0HLI6B9C4TCO1:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:53:28.1302673+02:00 0HLI6B9C4TCO1:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:53:28.1307899+02:00 0HLI6B9C4TCO1:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:53:28.1312967+02:00 0HLI6B9C4TCO1:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:53:28.1336135+02:00 0HLI6B9C4TCO1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:53:28.1355785+02:00 0HLI6B9C4TCO1:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:53:28.1357411+02:00 0HLI6B9C4TCO1:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.8714ms. (50a9e262)
+2018-11-09T23:53:28.1359176+02:00 0HLI6B9C4TCO1:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:53:28.1362160+02:00 0HLI6B9C4TCO1:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 5.7758ms (afa2e885)
+2018-11-09T23:53:28.1363435+02:00 0HLI6B9C4TCO1:00000002 [INF] Request finished in 7.9528ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:54:33.6366117+02:00 0HLI6B9C4TCO2:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:54:33.6368126+02:00 0HLI6B9C4TCO2:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:54:33.6369417+02:00 0HLI6B9C4TCO2:00000001 [INF] Request finished in 0.4014ms 204  (791a596a)
+2018-11-09T23:54:33.8438108+02:00 0HLI6B9C4TCO2:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:54:33.8439589+02:00 0HLI6B9C4TCO2:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:54:33.8452939+02:00 0HLI6B9C4TCO2:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:54:33.8454186+02:00 0HLI6B9C4TCO2:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:54:33.8455710+02:00 0HLI6B9C4TCO2:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:54:33.8459499+02:00 0HLI6B9C4TCO2:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:54:33.8464449+02:00 0HLI6B9C4TCO2:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:54:33.8500015+02:00 0HLI6B9C4TCO2:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:54:33.8518891+02:00 0HLI6B9C4TCO2:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:54:33.8522053+02:00 0HLI6B9C4TCO2:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 6.1792ms. (50a9e262)
+2018-11-09T23:54:33.8523368+02:00 0HLI6B9C4TCO2:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:54:33.8527291+02:00 0HLI6B9C4TCO2:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 7.0863ms (afa2e885)
+2018-11-09T23:54:33.8528330+02:00 0HLI6B9C4TCO2:00000002 [INF] Request finished in 9.2104ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:55:01.5782356+02:00 0HLI6B9C4TCO2:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:55:01.5784010+02:00 0HLI6B9C4TCO2:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:55:01.5785123+02:00 0HLI6B9C4TCO2:00000003 [INF] Request finished in 0.3497ms 204  (791a596a)
+2018-11-09T23:55:01.7630739+02:00 0HLI6B9C4TCO2:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:55:01.7635054+02:00 0HLI6B9C4TCO2:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:55:01.7646391+02:00 0HLI6B9C4TCO2:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:55:01.7649565+02:00 0HLI6B9C4TCO2:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:55:01.7653343+02:00 0HLI6B9C4TCO2:00000004 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:55:01.7657638+02:00 0HLI6B9C4TCO2:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:55:01.7662544+02:00 0HLI6B9C4TCO2:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:55:01.7743939+02:00 0HLI6B9C4TCO2:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:55:01.7763739+02:00 0HLI6B9C4TCO2:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:55:01.7765366+02:00 0HLI6B9C4TCO2:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 10.6942ms. (50a9e262)
+2018-11-09T23:55:01.7766534+02:00 0HLI6B9C4TCO2:00000004 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:55:01.7768871+02:00 0HLI6B9C4TCO2:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 11.4703ms (afa2e885)
+2018-11-09T23:55:01.7769913+02:00 0HLI6B9C4TCO2:00000004 [INF] Request finished in 14.0258ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:56:03.0692259+02:00 0HLI6B9C4TCO3:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:56:03.0693897+02:00 0HLI6B9C4TCO3:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:56:03.0695141+02:00 0HLI6B9C4TCO3:00000001 [INF] Request finished in 0.4227ms 204  (791a596a)
+2018-11-09T23:56:03.2549564+02:00 0HLI6B9C4TCO3:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:56:03.2551770+02:00 0HLI6B9C4TCO3:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:56:03.2574937+02:00 0HLI6B9C4TCO3:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:56:03.2576177+02:00 0HLI6B9C4TCO3:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:56:03.2577791+02:00 0HLI6B9C4TCO3:00000002 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:56:03.2582876+02:00 0HLI6B9C4TCO3:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:56:03.2589511+02:00 0HLI6B9C4TCO3:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:56:03.2613878+02:00 0HLI6B9C4TCO3:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:56:03.2635198+02:00 0HLI6B9C4TCO3:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:56:03.2636943+02:00 0HLI6B9C4TCO3:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.3309ms. (50a9e262)
+2018-11-09T23:56:03.2638218+02:00 0HLI6B9C4TCO3:00000002 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:56:03.2642300+02:00 0HLI6B9C4TCO3:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 6.3596ms (afa2e885)
+2018-11-09T23:56:03.2643476+02:00 0HLI6B9C4TCO3:00000002 [INF] Request finished in 9.9932ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:56:27.9450413+02:00 0HLI6B9C4TCO3:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:56:27.9453638+02:00 0HLI6B9C4TCO3:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:56:27.9454905+02:00 0HLI6B9C4TCO3:00000003 [INF] Request finished in 0.5048ms 204  (791a596a)
+2018-11-09T23:56:28.1396040+02:00 0HLI6B9C4TCO3:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:56:28.1399032+02:00 0HLI6B9C4TCO3:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:56:28.1412501+02:00 0HLI6B9C4TCO3:00000004 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:56:28.1413665+02:00 0HLI6B9C4TCO3:00000004 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:56:28.1414976+02:00 0HLI6B9C4TCO3:00000004 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:56:28.1418572+02:00 0HLI6B9C4TCO3:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:56:28.1425010+02:00 0HLI6B9C4TCO3:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:56:28.1472256+02:00 0HLI6B9C4TCO3:00000004 [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:56:28.1497954+02:00 0HLI6B9C4TCO3:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:56:28.1500552+02:00 0HLI6B9C4TCO3:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 8.0676ms. (50a9e262)
+2018-11-09T23:56:28.1502225+02:00 0HLI6B9C4TCO3:00000004 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:56:28.1509725+02:00 0HLI6B9C4TCO3:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 9.3794ms (afa2e885)
+2018-11-09T23:56:28.1511055+02:00 0HLI6B9C4TCO3:00000004 [INF] Request finished in 11.6973ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:57:03.2041534+02:00 0HLI6B9C4TCO3:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:57:03.2043153+02:00 0HLI6B9C4TCO3:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:57:03.2044273+02:00 0HLI6B9C4TCO3:00000005 [INF] Request finished in 0.3675ms 204  (791a596a)
+2018-11-09T23:57:03.3771847+02:00 0HLI6B9C4TCO3:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:57:03.3774353+02:00 0HLI6B9C4TCO3:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:57:03.3791753+02:00 0HLI6B9C4TCO3:00000006 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:57:03.3792866+02:00 0HLI6B9C4TCO3:00000006 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:57:03.3794264+02:00 0HLI6B9C4TCO3:00000006 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:57:03.3798614+02:00 0HLI6B9C4TCO3:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:57:03.3802778+02:00 0HLI6B9C4TCO3:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:57:03.3824986+02:00 0HLI6B9C4TCO3:00000006 [INF] Executed DbCommand ("2"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:57:03.3842757+02:00 0HLI6B9C4TCO3:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:57:03.3844297+02:00 0HLI6B9C4TCO3:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.4992ms. (50a9e262)
+2018-11-09T23:57:03.3845402+02:00 0HLI6B9C4TCO3:00000006 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:57:03.3847451+02:00 0HLI6B9C4TCO3:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 5.2531ms (afa2e885)
+2018-11-09T23:57:03.3848374+02:00 0HLI6B9C4TCO3:00000006 [INF] Request finished in 7.95ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-09T23:57:16.2040761+02:00 0HLI6B9C4TCO3:00000007 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/8   (ca22a1cb)
+2018-11-09T23:57:16.2047909+02:00 0HLI6B9C4TCO3:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:57:16.2049382+02:00 0HLI6B9C4TCO3:00000007 [INF] Request finished in 0.928ms 204  (791a596a)
+2018-11-09T23:57:16.3447987+02:00 0HLI6B9C4TCO3:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/8 application/json  (ca22a1cb)
+2018-11-09T23:57:16.3452794+02:00 0HLI6B9C4TCO3:00000008 [INF] Policy execution successful. (0204925d)
+2018-11-09T23:57:16.3493121+02:00 0HLI6B9C4TCO3:00000008 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-09T23:57:16.3494428+02:00 0HLI6B9C4TCO3:00000008 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-09T23:57:16.3495817+02:00 0HLI6B9C4TCO3:00000008 [INF] Route matched with "{action = \"Get\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" (a44c0341)
+2018-11-09T23:57:16.3649845+02:00 0HLI6B9C4TCO3:00000008 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-11-09T23:57:16.3655947+02:00 0HLI6B9C4TCO3:00000008 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-09T23:57:16.3690076+02:00 0HLI6B9C4TCO3:00000008 [INF] Executed DbCommand ("3"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT d.\"UserId\", d.\"Address\", d.\"DoctorsInfo\", d.\"IsApproved\", d.\"LicenseURL\", d.\"SpecializationId\", \"d.Specialization\".\"Id\", \"d.Specialization\".\"Description\", \"d.Specialization\".\"Name\", \"d.User\".\"Id\", \"d.User\".\"AccessFailedCount\", \"d.User\".\"AvatarURL\", \"d.User\".\"BirthDate\", \"d.User\".\"ConcurrencyStamp\", \"d.User\".\"Email\", \"d.User\".\"EmailConfirmed\", \"d.User\".\"FirstName\", \"d.User\".\"LastStatusChangeTime\", \"d.User\".\"LockoutEnabled\", \"d.User\".\"LockoutEnd\", \"d.User\".\"NormalizedEmail\", \"d.User\".\"NormalizedUserName\", \"d.User\".\"PassportURL\", \"d.User\".\"PasswordHash\", \"d.User\".\"PhoneNumber\", \"d.User\".\"PhoneNumberConfirmed\", \"d.User\".\"SecondName\", \"d.User\".\"SecurityStamp\", \"d.User\".\"SignUpTime\", \"d.User\".\"StatusId\", \"d.User\".\"ThirdName\", \"d.User\".\"TwoFactorEnabled\", \"d.User\".\"UserName\"
+FROM \"Doctors\" AS d
+LEFT JOIN \"Specializations\" AS \"d.Specialization\" ON d.\"SpecializationId\" = \"d.Specialization\".\"Id\"
+INNER JOIN \"AspNetUsers\" AS \"d.User\" ON d.\"UserId\" = \"d.User\".\"Id\"
+WHERE (d.\"UserId\" = @__id_0) AND d.\"UserId\" IS NOT NULL
+ORDER BY d.\"UserId\"
+LIMIT 1" (0723d8ff)
+2018-11-09T23:57:16.3709920+02:00 0HLI6B9C4TCO3:00000008 [INF] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"d.Diplomas\".\"Id\", \"d.Diplomas\".\"DiplomaURL\", \"d.Diplomas\".\"DoctorId\", \"d.Diplomas\".\"IsValid\"
+FROM \"Diplomas\" AS \"d.Diplomas\"
+INNER JOIN (
+    SELECT DISTINCT t.*
+    FROM (
+        SELECT d0.\"UserId\"
+        FROM \"Doctors\" AS d0
+        LEFT JOIN \"Specializations\" AS \"d.Specialization0\" ON d0.\"SpecializationId\" = \"d.Specialization0\".\"Id\"
+        INNER JOIN \"AspNetUsers\" AS \"d.User0\" ON d0.\"UserId\" = \"d.User0\".\"Id\"
+        WHERE (d0.\"UserId\" = @__id_0) AND d0.\"UserId\" IS NOT NULL
+        ORDER BY d0.\"UserId\"
+        LIMIT 1
+    ) AS t
+) AS t0 ON \"d.Diplomas\".\"DoctorId\" = t0.\"UserId\"
+ORDER BY t0.\"UserId\"" (0723d8ff)
+2018-11-09T23:57:16.3712656+02:00 0HLI6B9C4TCO3:00000008 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 6.073ms. (50a9e262)
+2018-11-09T23:57:16.3714053+02:00 0HLI6B9C4TCO3:00000008 [INF] Executing ObjectResult, writing value of type '"InternetHospital.BusinessLogic.Models.DoctorDetailedModel"'. (8a1b66c8)
+2018-11-09T23:57:16.3715731+02:00 0HLI6B9C4TCO3:00000008 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.Get (InternetHospital.WebApi)" in 21.9265ms (afa2e885)
+2018-11-09T23:57:16.3716796+02:00 0HLI6B9C4TCO3:00000008 [INF] Request finished in 26.9263ms 200 application/json; charset=utf-8 (791a596a)

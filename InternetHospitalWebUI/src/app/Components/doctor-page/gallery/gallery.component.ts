@@ -2,6 +2,7 @@ import { Component, Input, HostListener, AfterContentChecked } from '@angular/co
 import { MatDialog } from '@angular/material';
 import { ImageModalDialogComponent } from './image-modal-dialog.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { GalleryModel } from '../../../Models/GalleryModel';
 
 const SUM_OF_WIDTH_OF_SWITCH_BUTTONS = 80;
 
@@ -39,7 +40,6 @@ export class GalleryComponent implements AfterContentChecked {
     if (Math.abs(--this.startIndex) === this.images.length - this.amountOfPicsOnScreen + 1) {
       this.startIndex = 0;
     }
-    console.log(this.startIndex);
   }
 
   previous() {
@@ -47,12 +47,11 @@ export class GalleryComponent implements AfterContentChecked {
     if (this.startIndex > 0) {
       this.startIndex = -this.images.length + this.amountOfPicsOnScreen;
     }
-    console.log(this.startIndex);
   }
 
   openDialog(i) {
     const strategy = this.overlay.scrollStrategies.block();
-    const data = new ImageData();
+    const data = new GalleryModel();
     data.images = this.images;
     data.selected = i;
     this.dialog.open(ImageModalDialogComponent, {
@@ -62,9 +61,4 @@ export class GalleryComponent implements AfterContentChecked {
       data: data
     });
   }
-}
-
-export class ImageData {
-  images: string[];
-  selected: number;
 }

@@ -17,9 +17,9 @@ import { MatToolbarModule,
           MatCardModule,
           MatPaginatorModule,
           MatDividerModule,
-          MatTableModule, } from '@angular/material';
+          MatTableModule,
+          MatMenuModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatMenuModule} from '@angular/material/menu';
 
 const MAT_MODULS = [
     CommonModule,

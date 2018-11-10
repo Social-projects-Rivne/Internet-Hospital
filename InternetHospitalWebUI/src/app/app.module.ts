@@ -30,10 +30,11 @@ import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-li
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
 import { DoctorPageComponent } from './Components/doctor-page/doctor-page.component';
-import { FeedbackItemComponent } from './Components/doctor-page/feedback-item/feedback-item.component';
+import { FeedbackItemComponent } from './Components/doctor-page/feedbacks/feedback-item/feedback-item.component';
 import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
 import { ImageModalDialogComponent } from './Components/doctor-page/gallery/image-modal-dialog.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     DoctorPageComponent,
     FeedbackItemComponent,
     GalleryComponent,
-    ImageModalDialogComponent
+    ImageModalDialogComponent,
+    FeedbacksComponent
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [
