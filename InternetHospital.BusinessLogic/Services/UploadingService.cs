@@ -7,7 +7,6 @@ using System.IO;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
 using Newtonsoft.Json;
-using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
