@@ -4,6 +4,8 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -14,6 +16,35 @@ namespace InternetHospital.BusinessLogic.Services
         public DoctorService(ApplicationContext context)
         {
             _context = context;
+        }
+
+        public DoctorDetailedModel Get(int id)
+        {
+            DoctorDetailedModel returnedDoctor = null;
+            var searchedDoctor = _context.Doctors.Include(d => d.User)
+                                                 .Include(d => d.Specialization)
+                                                 .Include(d => d.Diplomas)
+                                                     .FirstOrDefault(d => d.UserId == id && d.User != null);
+            if (searchedDoctor != null && searchedDoctor.IsApproved == true)
+            {
+                returnedDoctor = new DoctorDetailedModel
+                {
+                    Id = searchedDoctor.UserId,
+                    FirstName = searchedDoctor.User.FirstName,
+                    SecondName = searchedDoctor.User.SecondName,
+                    ThirdName = searchedDoctor.User.ThirdName,
+                    PhoneNumber = searchedDoctor.User.PhoneNumber,
+                    BirthDate = searchedDoctor.User.BirthDate,
+                    Address = searchedDoctor.Address,
+                    Specialization = searchedDoctor.Specialization.Name,
+                    DoctorsInfo = searchedDoctor.DoctorsInfo,
+                    AvatarURL = searchedDoctor.User.AvatarURL,
+                    LicenseURL = searchedDoctor.LicenseURL,
+                    DiplomasURL = searchedDoctor.Diplomas.Where(d => d.IsValid == true)
+                                                             .Select(d => d.DiplomaURL).ToArray()
+                };
+            }
+            return returnedDoctor;
         }
 
         public (IEnumerable<DoctorModel> doctors, int count) GetFilteredDoctors(DoctorSearchParameters queryParameters)

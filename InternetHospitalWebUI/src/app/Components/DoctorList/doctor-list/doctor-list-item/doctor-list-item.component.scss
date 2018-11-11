@@ -3,6 +3,16 @@ mat-card {
     width: 100%;
 }
 
+.doctor-card{
+    position: relative;
+}
+
+.doctor-link{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 .mat-card-image {
     flex: 1 1 100%; 
     box-sizing: border-box; 

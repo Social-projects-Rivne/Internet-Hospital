@@ -39,7 +39,7 @@
       </div>
       <div>
         <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid || isImageValid == false">Submit</button>
-        <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        <button type="reset" mat-raised-button color="warn">Clear</button>
       </div>
     </form>
     <button mat-raised-button class="return-button" (click)="returnToManagementPage()">Return</button>

@@ -17,11 +17,11 @@ import { MatToolbarModule,
           MatCardModule,
           MatPaginatorModule,
           MatDividerModule,
-          MatTableModule } from '@angular/material';
+          MatTableModule,
+          MatMenuModule,
+          MatButtonToggleModule,
+          MatExpansionModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatMenuModule} from '@angular/material/menu';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 const MAT_MODULS = [
     CommonModule,

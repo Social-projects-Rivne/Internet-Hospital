@@ -16,6 +16,20 @@ namespace InternetHospital.WebApi.Controllers
             _doctorService = service;
         }
 
+        [HttpGet("{id}", Name = "Get")]
+        public IActionResult Get([FromRoute] int id)
+        {
+            var doctor = _doctorService.Get(id);
+            if (doctor != null)
+            {
+                return Ok(doctor);
+            }
+            else
+            {
+                return NotFound(new { message = "Couldn't find such doctor" });
+            }
+        }
+
         // GET: api/Doctors
         [HttpGet]
         public IActionResult GetDoctors([FromQuery] DoctorSearchParameters queryParameters)

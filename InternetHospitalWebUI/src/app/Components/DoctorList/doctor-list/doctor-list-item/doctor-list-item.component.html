@@ -1,5 +1,5 @@
 <div class="container" fxLayout="row" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
-  <mat-card>
+  <mat-card class="doctor-card">
     <div fxFlex="20%">
       <img [src]="urlAvatar" class="user-avatar">
     </div>
@@ -9,5 +9,6 @@
     <div fxFlex="40%">
       <mat-card-content class="mat-display-1">{{doctor.specialization}}</mat-card-content>
     </div>
+    <a class="doctor-link" [routerLink]="doctorId"  mat-raised-button color="primary">Profile</a>
   </mat-card>
 </div>

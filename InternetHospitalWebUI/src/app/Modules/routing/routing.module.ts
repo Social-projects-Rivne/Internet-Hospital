@@ -15,12 +15,18 @@ import { DoctorGuard } from '../../Services/Guards/doctor.guard';
 import { ModeratorGuard } from '../../Services/Guards/moderator.guard';
 import { AdminGuard } from '../../Services/Guards/admin.guard';
 
-import { ADMIN_PANEL, DOCTOR_LIST, PAGE_404, MY_PLANS } from '../../config';
-import { SIGN_IN } from '../../config';
-import { SIGN_UP } from '../../config';
-import { SETTINGS_PATIENT } from '../../config';
+import { ADMIN_PANEL, 
+          DOCTOR_LIST, 
+          PAGE_404, 
+          MY_PLANS, 
+          DOCTOR_PAGE,
+          SIGN_IN,
+          SIGN_UP,
+          SETTINGS_PATIENT} from '../../config';
+
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
+import { DoctorPageComponent } from '../../Components/doctor-page/doctor-page.component';
 
 const ROUTES: Routes = [
   {
@@ -29,6 +35,7 @@ const ROUTES: Routes = [
       { path: SIGN_UP, component: SignUpComponent },
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
+      { path: DOCTOR_PAGE + ':id', component: DoctorPageComponent },
       { path: SETTINGS_PATIENT, component: UpdatePatientComponent},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] }
     ]
