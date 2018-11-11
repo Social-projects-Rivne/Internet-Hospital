@@ -3,17 +3,19 @@
   <mat-card id="FatherCard">
 
     <mat-card-header>
-      <mat-card-title>Request</mat-card-title>
+      <mat-card-title>Leave us a feedback</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     
-    <form [formGroup]="_feedbackService.form">
+    <form [formGroup]="_feedbackService.form" div fxLayout="column" fxLayoutAlign="center center">
       
-      <div id="RadioBlock">
-        <mat-radio-group formControlName="Type" fxLayout="row" fxLayoutAlign="space-evenly center" >
-            <mat-radio-button *ngFor="let type of feedbackTypes" [value]="type.id" >{{type.value}}</mat-radio-button>
-        </mat-radio-group>
-      </div>
+      <mat-form-field id="SelectComp">
+            <mat-select formControlName="TypeId" [(ngModel)]="selectedValue">
+              <mat-option formControlName="TypeId" *ngFor="let item of feedbackTypes" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+      </mat-form-field>
       
       <div class="InputContainer">
           <mat-form-field appearance="outline">
@@ -22,9 +24,9 @@
           </mat-form-field>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-          <button mat-button [routerLink]="['/']" >Back</button>
-          <button mat-raised-button color="primary">Submit</button>
+      <div id="buttonbar" fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-button [routerLink]="['/']" (click)="onCencel()">Back</button>
+          <button mat-raised-button color="primary" (click)="onSubmit()" >Submit</button>
       </div>
 
     </form>

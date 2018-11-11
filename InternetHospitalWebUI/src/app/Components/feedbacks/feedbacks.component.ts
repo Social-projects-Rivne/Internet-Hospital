@@ -24,7 +24,7 @@ export class FeedbacksComponent implements OnInit {
   }
 
   onSubmit(){
-    this._feedbackService.CreateFeedBack();
+    this._feedbackService.CreateFeedBack().subscribe(data=>console.log(data));
     this._feedbackService.form.reset();
   }
   onCencel(){

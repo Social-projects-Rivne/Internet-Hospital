@@ -21,39 +21,35 @@ namespace InternetHospital.WebApi.Controllers
         private IFeedBackService _feedBackService;
         private UserManager<User> _userManager;
 
-        FeedBackController(IFeedBackService feedBackService,
+        public FeedBackController(IFeedBackService feedBackService,
              UserManager<User> userManager)
         {
             _feedBackService = feedBackService;
             _userManager = userManager;
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string value)
+        [HttpPost("Create")]
+        public IActionResult CreateFeedBack([FromBody]FeedBackCreationModel feedBackCreationModel)
         {
-            var FeedBackModel = new FeedBackModel
-            {
-                TypeId = Convert.ToInt32(Request.Form["Type"]),
-                Text = Request.Form["Text"],
-                UserId = (await _userManager.FindByNameAsync(User.Identity.Name)).Id
-            };
 
-            if (
-                !String.IsNullOrEmpty(FeedBackModel.Text)
-                && !String.IsNullOrEmpty(FeedBackModel.TypeId.ToString())
-                && !String.IsNullOrEmpty(FeedBackModel.UserId.ToString())
-               )
+            var LoginedUser = _userManager.FindByNameAsync(User.Identity.Name).Id;
+
+            if (feedBackCreationModel != null)
             {
-                _feedBackService.FeedBackCreate(FeedBackModel);
+                _feedBackService.FeedBackCreate(feedBackCreationModel, LoginedUser);
                 return Ok();
             }
             else
             {
                 return NotFound(new { message = "The form isn't valid or there is no currently logined users" });
             }
-
         }
 
+        [HttpGet("feedbacktypes")]
+        public ICollection<FeedBackType> GetFeedBacks()
+        {
+            return _feedBackService.GetFeedBackTypes();
+        }
 
     }
 }

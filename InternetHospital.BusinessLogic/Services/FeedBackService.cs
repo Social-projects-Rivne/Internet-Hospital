@@ -13,27 +13,28 @@ namespace InternetHospital.BusinessLogic.Services
     public class FeedBackService : IFeedBackService
     {
 
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
 
         public FeedBackService(ApplicationContext context)
         {
             _context = context;
         }
 
-        public void FeedBackCreate(FeedBackModel model)
+        public void FeedBackCreate(FeedBackCreationModel model, int userId)
         {
             FeedBack feedback = new FeedBack
             {
                 DateTime = DateTime.Now,
                 Text = model.Text,
-                UserId = model.UserId,
+                UserId = userId,
                 FeedBackId = model.TypeId
             };
-            _context.FeedBacks.Add(feedback);
-            _context.SaveChanges();
+
+             _context.FeedBacks.Add(feedback);
+             _context.SaveChanges();
         }
 
-        public List<FeedBackType> GetTypes()
+        public List<FeedBackType> GetFeedBackTypes()
         {
             return _context.FeedBackTypes.ToList();
         }

@@ -7,14 +7,22 @@
     min-width: 300px;
     width: 50%;
 }
-#RadioBlock{
-    margin-top:15px;
+#SelectComp{
+    margin-top:20px;
+    min-width: 100px;
+    width: 90%;
+}
+
+#buttonbar{
+    min-width: 100px;
+    width: 90%;
 }
 
 .InputContainer {
     display: flex;
     flex-direction: column;
-    margin-top:10px;
+    min-width: 100px;
+    width: 90%;
 }
   
 .InputContainer > * {

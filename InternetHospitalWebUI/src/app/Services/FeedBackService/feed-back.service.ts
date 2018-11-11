@@ -8,7 +8,7 @@ import { HOST_URL } from 'src/app/config';
 })
 export class FeedBackService {
 
-  url = HOST_URL + '/api/FeedBack';
+  url = HOST_URL + '/api/feedback/';
 
   constructor(private http: HttpClient) { }
 
@@ -20,21 +20,20 @@ export class FeedBackService {
   initializeFormGroup() {
     this.form.setValue({
       Text: '',
-      Type: '',
+      TypeId: 0,
     });
   }
   CreateFeedBack() {
-    let formData = new FormData();
-    
-    formData.append("Type", this.form.value['Type']);
-    formData.append("Text", this.form.value['Text']);
+    alert(this.form.value['TypeId']);
+    alert(this.form.value['Text']);
 
-    return this.http.post(this.url, formData);
+    const typeUrl = this.url + 'create';
+    return this.http.post(typeUrl, {Text:this.form.value['Text'], TypeId:1});
   }
 
   getFeedBackTypes(){
-    const typesURL = this.url + 'api/FeedBackTypes';
-    return this.http.get(typesURL);
+    const typeUrl = this.url + 'FeedBackTypes';
+    return this.http.get(typeUrl);
   }
 
 }
