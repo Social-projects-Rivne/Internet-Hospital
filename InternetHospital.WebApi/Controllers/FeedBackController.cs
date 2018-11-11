@@ -32,11 +32,12 @@ namespace InternetHospital.WebApi.Controllers
         public IActionResult CreateFeedBack([FromBody]FeedBackCreationModel feedBackCreationModel)
         {
 
-            var LoginedUser = _userManager.FindByNameAsync(User.Identity.Name).Id;
+            int userId;
+            Int32.TryParse(User.Identity.Name,out userId);
 
             if (feedBackCreationModel != null)
             {
-                _feedBackService.FeedBackCreate(feedBackCreationModel, LoginedUser);
+                _feedBackService.FeedBackCreate(feedBackCreationModel, userId);
                 return Ok();
             }
             else

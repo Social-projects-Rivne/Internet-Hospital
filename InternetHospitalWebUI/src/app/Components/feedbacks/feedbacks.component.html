@@ -7,11 +7,11 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     
-    <form [formGroup]="_feedbackService.form" div fxLayout="column" fxLayoutAlign="center center">
+    <form [formGroup]="_feedbackService.form" div fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
       
       <mat-form-field id="SelectComp">
             <mat-select formControlName="TypeId" [(ngModel)]="selectedValue">
-              <mat-option formControlName="TypeId" *ngFor="let item of feedbackTypes" [value]="item.id">
+              <mat-option  *ngFor="let item of feedbackTypes" [value]="item.id">
                 {{item.name}}
               </mat-option>
             </mat-select>
@@ -20,13 +20,13 @@
       <div class="InputContainer">
           <mat-form-field appearance="outline">
               <mat-label>Enter text here</mat-label>
-              <textarea formControlName="Text" id="FeedBackArea" matInput></textarea>
+              <textarea required formControlName="Text" id="FeedBackArea" matInput ></textarea>
           </mat-form-field>
       </div>
 
       <div id="buttonbar" fxLayout="row" fxLayoutAlign="space-between center">
           <button mat-button [routerLink]="['/']" (click)="onCencel()">Back</button>
-          <button mat-raised-button color="primary" (click)="onSubmit()" >Submit</button>
+          <button mat-raised-button type="submit">Submit</button>
       </div>
 
     </form>

@@ -14,25 +14,20 @@ export class FeedBackService {
 
   form: FormGroup = new FormGroup({
     Text: new FormControl('', Validators.required),
-    Type: new FormControl('', Validators.required),
+    TypeId: new FormControl('', Validators.required),
   });
 
-  initializeFormGroup() {
-    this.form.setValue({
-      Text: '',
-      TypeId: 0,
-    });
-  }
+  
   CreateFeedBack() {
-    alert(this.form.value['TypeId']);
-    alert(this.form.value['Text']);
+    //alert(this.form.value['TypeId']);
+    //alert(this.form.value['Text']);
 
     const typeUrl = this.url + 'create';
-    return this.http.post(typeUrl, {Text:this.form.value['Text'], TypeId:1});
+    return this.http.post(typeUrl, {Text:this.form.value['Text'], TypeId:this.form.value['TypeId']});
   }
 
   getFeedBackTypes(){
-    const typeUrl = this.url + 'FeedBackTypes';
+    const typeUrl = this.url + 'feedbacktypes';
     return this.http.get(typeUrl);
   }
 

@@ -27,7 +27,7 @@ namespace InternetHospital.BusinessLogic.Services
                 DateTime = DateTime.Now,
                 Text = model.Text,
                 UserId = userId,
-                FeedBackId = model.TypeId
+                TypeId = model.TypeId
             };
 
              _context.FeedBacks.Add(feedback);
