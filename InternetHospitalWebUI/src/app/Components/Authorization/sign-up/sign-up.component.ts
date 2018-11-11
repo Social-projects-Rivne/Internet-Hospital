@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {    
-    this.service.postUser(form.value, this.imageHandling.fileToUpload)
+    this.service.postUser(this.imageHandling.fileToUpload)
         .pipe(first())
         .subscribe(
             data => {      
