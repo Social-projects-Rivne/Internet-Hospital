@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using AutoFixture;
 using FluentAssertions;
 using Xunit;
@@ -16,34 +15,30 @@ namespace InternetHospital.UnitTests.Appointments
     /// </summary>
     public class AppointmentServiceUnitTests
     {
-        [Theory]
-        [InlineData(1)]
-        public void ShouldGetMyAppointments(int doctorId)
+        [Fact]
+        public void ShouldGetMyAppointments()
         {
             // arrange
             const int ALLOWED_STATUS_ID = 1;
 
             // get in memory db options
             var options = DbContextHelper.GetDbOptions(nameof(ShouldGetMyAppointments));
-            
+
             // create fixture 
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
 
             // create test appointment for test case
             var fixtureAppointment = fixture.Build<Appointment>()
-                                            .With(a => a.DoctorId, doctorId)
                                             .With(a => a.StatusId, ALLOWED_STATUS_ID)
-                                            .With(a => a.Status, 
-                                                  new AppointmentStatus
-                                                  {
-                                                      Id = ALLOWED_STATUS_ID
-                                                  })
+                                            .With(a => a.Status, new AppointmentStatus
+                                            {
+                                                Id = ALLOWED_STATUS_ID
+                                            })
                                             .With(a => a.UserId, 1)
-                                            .With(a => a.User, 
-                                                  new User
-                                                  {
-                                                      Id = 1
-                                                  })
+                                            .With(a => a.User, new User
+                                            {
+                                                Id = 1
+                                            })
                                             .Create();
 
             var expectedData = GetExpectedAppointments(fixtureAppointment);
@@ -51,9 +46,12 @@ namespace InternetHospital.UnitTests.Appointments
             // add data to in memory database
             using (var context = new ApplicationContext(options))
             {
-                context.AddRange(fixtureAppointment);
+                context.Appointments.Add(fixtureAppointment);
                 context.SaveChanges();
             }
+
+            // doctor id should be existing
+            var doctorId = fixtureAppointment.DoctorId;
 
             // use a clean instance of the context to run the test
             using (var context = new ApplicationContext(options))
@@ -62,8 +60,7 @@ namespace InternetHospital.UnitTests.Appointments
                 var appointmentService = new AppointmentService(context);
 
                 // act
-                var appointments = appointmentService.GetMyAppointments(doctorId)
-                                                     .ToList();
+                var appointments = appointmentService.GetMyAppointments(doctorId);
 
                 // assert
                 appointments.Should().BeEquivalentTo(expectedData);
