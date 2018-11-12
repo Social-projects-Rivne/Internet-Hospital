@@ -12755,3 +12755,1041 @@ LIMIT 1" (0723d8ff)
 2018-11-12T05:32:50.4836134+02:00 0HLI894J6711K:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
 2018-11-12T05:32:50.4840131+02:00 0HLI894J6711K:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.895ms (afa2e885)
 2018-11-12T05:32:50.4841386+02:00 0HLI894J6711K:00000002 [INF] Request finished in 19.6565ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:06.6769959+02:00 0HLI8ID854LCS:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:06.6769737+02:00 0HLI8ID854LCQ:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/values   (ca22a1cb)
+2018-11-12T13:38:06.6769737+02:00 0HLI8ID854LCT:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:38:06.6769959+02:00 0HLI8ID854LCR:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:06.7702840+02:00 0HLI8ID854LCT:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:06.7702840+02:00 0HLI8ID854LCR:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:06.7745127+02:00 0HLI8ID854LCS:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:06.8656344+02:00 0HLI8ID854LCS:00000001 [INF] Request finished in 195.0047ms 204  (791a596a)
+2018-11-12T13:38:06.8656339+02:00 0HLI8ID854LCT:00000001 [INF] Request finished in 196.0082ms 204  (791a596a)
+2018-11-12T13:38:06.8656344+02:00 0HLI8ID854LCR:00000001 [INF] Request finished in 196.0343ms 204  (791a596a)
+2018-11-12T13:38:07.1634968+02:00 0HLI8ID854LCS:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:38:07.1638134+02:00 0HLI8ID854LCS:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:07.1841825+02:00 0HLI8ID854LCT:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:07.1843587+02:00 0HLI8ID854LCT:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:08.2326283+02:00 0HLI8ID854LCQ:00000001 [INF] Request finished in 1561.8126ms 404  (791a596a)
+2018-11-12T13:38:09.7885640+02:00 0HLI8ID854LCT:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-12T13:38:09.7885640+02:00 0HLI8ID854LCS:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-12T13:38:09.7894097+02:00 0HLI8ID854LCT:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-12T13:38:09.7894097+02:00 0HLI8ID854LCS:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-12T13:38:09.8089876+02:00 0HLI8ID854LCS:00000002 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:09.8089881+02:00 0HLI8ID854LCT:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:09.8203502+02:00 0HLI8ID854LCS:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:09.8208844+02:00 0HLI8ID854LCT:00000002 [INF] Authorization failed. (b15dd539)
+2018-11-12T13:38:09.8248818+02:00 0HLI8ID854LCT:00000002 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-11-12T13:38:09.8428117+02:00 0HLI8ID854LCS:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:09.8530529+02:00 0HLI8ID854LCT:00000002 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-11-12T13:38:09.8601864+02:00 0HLI8ID854LCT:00000002 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-11-12T13:38:09.8650631+02:00 0HLI8ID854LCT:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 51.0211ms (afa2e885)
+2018-11-12T13:38:09.8652453+02:00 0HLI8ID854LCT:00000002 [INF] Request finished in 2681.1016ms 401  (791a596a)
+2018-11-12T13:38:09.9101877+02:00 0HLI8ID854LCR:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:09.9104480+02:00 0HLI8ID854LCR:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:09.9111729+02:00 0HLI8ID854LCR:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-12T13:38:09.9112830+02:00 0HLI8ID854LCR:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-12T13:38:09.9140427+02:00 0HLI8ID854LCR:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:09.9146212+02:00 0HLI8ID854LCR:00000002 [INF] Authorization failed. (b15dd539)
+2018-11-12T13:38:09.9147334+02:00 0HLI8ID854LCR:00000002 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-11-12T13:38:09.9148691+02:00 0HLI8ID854LCR:00000002 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-11-12T13:38:09.9151170+02:00 0HLI8ID854LCR:00000002 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-11-12T13:38:09.9152134+02:00 0HLI8ID854LCR:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 1.0811ms (afa2e885)
+2018-11-12T13:38:09.9152966+02:00 0HLI8ID854LCR:00000002 [INF] Request finished in 5.1622ms 401  (791a596a)
+2018-11-12T13:38:10.0434735+02:00 0HLI8ID854LCQ:00000002 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Signin/refresh   (ca22a1cb)
+2018-11-12T13:38:10.0436600+02:00 0HLI8ID854LCQ:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:10.0437923+02:00 0HLI8ID854LCQ:00000002 [INF] Request finished in 0.3251ms 204  (791a596a)
+2018-11-12T13:38:10.0645052+02:00 0HLI8ID854LCT:00000003 [INF] Request starting HTTP/1.1 POST http://localhost:44357/api/Signin/refresh application/json 55 (ca22a1cb)
+2018-11-12T13:38:10.0646563+02:00 0HLI8ID854LCT:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:10.0652771+02:00 0HLI8ID854LCT:00000003 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\Microsoft.IdentityModel.Tokens\Validators.cs:line 274
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 1178
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 735
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken) in C:\agent2\_work\56\s\src\System.IdentityModel.Tokens.Jwt\JwtSecurityTokenHandler.cs:line 719
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-11-12T13:38:10.0653833+02:00 0HLI8ID854LCT:00000003 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '[PII is hidden]', Current time: '[PII is hidden]'." (48071232)
+2018-11-12T13:38:10.2852550+02:00 0HLI8ID854LCT:00000003 [INF] Route matched with "{action = \"Refresh\", controller = \"Signin\"}". Executing action "InternetHospital.WebApi.Controllers.SigninController.Refresh (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:10.5796350+02:00 0HLI8ID854LCS:00000002 [INF] Executed DbCommand ("391"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:38:10.5880314+02:00 0HLI8ID854LCS:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 762.2522ms. (50a9e262)
+2018-11-12T13:38:10.5984535+02:00 0HLI8ID854LCS:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:38:10.5989579+02:00 0HLI8ID854LCT:00000003 [INF] Executing action method "InternetHospital.WebApi.Controllers.SigninController.Refresh (InternetHospital.WebApi)" with arguments (["InternetHospital.BusinessLogic.Models.RefreshTokenModel"]) - Validation state: Valid (4e3479ed)
+2018-11-12T13:38:10.6083023+02:00 0HLI8ID854LCT:00000003 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:10.6142133+02:00 0HLI8ID854LCS:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 804.8928ms (afa2e885)
+2018-11-12T13:38:10.6159592+02:00 0HLI8ID854LCS:00000002 [INF] Request finished in 3452.4879ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:10.7732799+02:00 0HLI8ID854LCT:00000003 [INF] Executed DbCommand ("150"ms) [Parameters=["@__token_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT x.\"Id\", x.\"ExpiresDate\", x.\"Revoked\", x.\"Token\", x.\"UserId\"
+FROM \"Tokens\" AS x
+WHERE x.\"Token\" = @__token_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:11.2021609+02:00 0HLI8ID854LCT:00000003 [INF] Executed DbCommand ("107"ms) [Parameters=["@p1='?' (DbType = Int32), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"Tokens\" SET \"Token\" = @p0
+WHERE \"Id\" = @p1;" (0723d8ff)
+2018-11-12T13:38:11.2974384+02:00 0HLI8ID854LCT:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:11.9678956+02:00 0HLI8ID854LCT:00000003 [INF] Executed DbCommand ("178"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT role.\"Name\"
+FROM \"AspNetUserRoles\" AS \"userRole\"
+INNER JOIN \"AspNetRoles\" AS role ON \"userRole\".\"RoleId\" = role.\"Id\"
+WHERE \"userRole\".\"UserId\" = @__userId_0" (0723d8ff)
+2018-11-12T13:38:12.0255523+02:00 0HLI8ID854LCT:00000003 [INF] Executed DbCommand ("43"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"Description\", e.\"Name\"
+FROM \"Statuses\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:12.0423275+02:00 0HLI8ID854LCT:00000003 [INF] Executed action method "InternetHospital.WebApi.Controllers.SigninController.Refresh (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1443.2254ms. (50a9e262)
+2018-11-12T13:38:12.0457409+02:00 0HLI8ID854LCT:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`2[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:12.0511984+02:00 0HLI8ID854LCT:00000003 [INF] Executed action "InternetHospital.WebApi.Controllers.SigninController.Refresh (InternetHospital.WebApi)" in 1765.8298ms (afa2e885)
+2018-11-12T13:38:12.0577737+02:00 0HLI8ID854LCT:00000003 [INF] Request finished in 1993.3081ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:12.0700390+02:00 0HLI8ID854LCR:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:12.0701909+02:00 0HLI8ID854LCR:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:12.0702178+02:00 0HLI8ID854LCQ:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:12.0702741+02:00 0HLI8ID854LCR:00000003 [INF] Request finished in 0.2777ms 204  (791a596a)
+2018-11-12T13:38:12.0703458+02:00 0HLI8ID854LCQ:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:12.0704252+02:00 0HLI8ID854LCQ:00000003 [INF] Request finished in 0.2133ms 204  (791a596a)
+2018-11-12T13:38:12.1012693+02:00 0HLI8ID854LCS:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:12.1015786+02:00 0HLI8ID854LCS:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:12.1236877+02:00 0HLI8ID854LCS:00000003 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:12.1250854+02:00 0HLI8ID854LCS:00000003 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:12.1255607+02:00 0HLI8ID854LCS:00000003 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:12.1265182+02:00 0HLI8ID854LCS:00000003 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:12.1283801+02:00 0HLI8ID854LCS:00000003 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:12.1402448+02:00 0HLI8ID854LCS:00000003 [INF] Executed DbCommand ("0"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:12.1410470+02:00 0HLI8ID854LCS:00000003 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 14.3654ms. (50a9e262)
+2018-11-12T13:38:12.1411989+02:00 0HLI8ID854LCS:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:12.1430050+02:00 0HLI8ID854LCS:00000003 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 17.7817ms (afa2e885)
+2018-11-12T13:38:12.1431385+02:00 0HLI8ID854LCS:00000003 [INF] Request finished in 42.1968ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:12.1532769+02:00 0HLI8ID854LCT:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:12.1535602+02:00 0HLI8ID854LCT:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:12.1538197+02:00 0HLI8ID854LCT:00000004 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:12.1540949+02:00 0HLI8ID854LCT:00000004 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:12.1541896+02:00 0HLI8ID854LCT:00000004 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:12.1548611+02:00 0HLI8ID854LCT:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:12.1553556+02:00 0HLI8ID854LCT:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:12.1589187+02:00 0HLI8ID854LCT:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:12.1591103+02:00 0HLI8ID854LCT:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.1826ms. (50a9e262)
+2018-11-12T13:38:12.1591905+02:00 0HLI8ID854LCT:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:12.1595258+02:00 0HLI8ID854LCT:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 5.227ms (afa2e885)
+2018-11-12T13:38:12.1597021+02:00 0HLI8ID854LCT:00000004 [INF] Request finished in 6.6478ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:12.1845823+02:00 0HLI8ID854LCR:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/62449e29-519f-43d3-b4a6-b543ffac278e.jpg   (ca22a1cb)
+2018-11-12T13:38:12.1864507+02:00 0HLI8ID854LCR:00000004 [INF] Request finished in 1.8709ms 404  (791a596a)
+2018-11-12T13:38:15.8448571+02:00 0HLI8ID854LCQ:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:15.8450986+02:00 0HLI8ID854LCQ:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:15.8453665+02:00 0HLI8ID854LCQ:00000004 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:15.8455812+02:00 0HLI8ID854LCQ:00000004 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:15.8456724+02:00 0HLI8ID854LCQ:00000004 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:15.8460833+02:00 0HLI8ID854LCQ:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:15.8466499+02:00 0HLI8ID854LCQ:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:15.8485170+02:00 0HLI8ID854LCS:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:38:15.8486825+02:00 0HLI8ID854LCS:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:15.8487764+02:00 0HLI8ID854LCS:00000004 [INF] Request finished in 0.2884ms 204  (791a596a)
+2018-11-12T13:38:15.8491860+02:00 0HLI8ID854LCQ:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:15.8494049+02:00 0HLI8ID854LCQ:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.2375ms. (50a9e262)
+2018-11-12T13:38:15.8494949+02:00 0HLI8ID854LCQ:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:15.8496510+02:00 0HLI8ID854LCQ:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 4.0102ms (afa2e885)
+2018-11-12T13:38:15.8497517+02:00 0HLI8ID854LCQ:00000004 [INF] Request finished in 5.0367ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:15.9174598+02:00 0HLI8ID854LCT:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:15.9176399+02:00 0HLI8ID854LCT:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:15.9180542+02:00 0HLI8ID854LCT:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:15.9182820+02:00 0HLI8ID854LCT:00000005 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:15.9184207+02:00 0HLI8ID854LCT:00000005 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:15.9188610+02:00 0HLI8ID854LCT:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:15.9195731+02:00 0HLI8ID854LCT:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:15.9216202+02:00 0HLI8ID854LCT:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:15.9218455+02:00 0HLI8ID854LCT:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.9128ms. (50a9e262)
+2018-11-12T13:38:15.9219402+02:00 0HLI8ID854LCT:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:15.9220627+02:00 0HLI8ID854LCT:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.7239ms (afa2e885)
+2018-11-12T13:38:15.9221484+02:00 0HLI8ID854LCT:00000005 [INF] Request finished in 4.75ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:16.2254522+02:00 0HLI8ID854LCR:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:38:16.2257880+02:00 0HLI8ID854LCR:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:16.2266012+02:00 0HLI8ID854LCR:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:16.2267543+02:00 0HLI8ID854LCR:00000005 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:16.2271234+02:00 0HLI8ID854LCR:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:16.2276597+02:00 0HLI8ID854LCR:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:16.2291620+02:00 0HLI8ID854LCR:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:38:16.2293216+02:00 0HLI8ID854LCR:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.0518ms. (50a9e262)
+2018-11-12T13:38:16.2294415+02:00 0HLI8ID854LCR:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:38:16.2296092+02:00 0HLI8ID854LCR:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 2.7891ms (afa2e885)
+2018-11-12T13:38:16.2297031+02:00 0HLI8ID854LCR:00000005 [INF] Request finished in 5.1366ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:16.2512992+02:00 0HLI8ID854LCS:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/62449e29-519f-43d3-b4a6-b543ffac278e.jpg   (ca22a1cb)
+2018-11-12T13:38:16.2523838+02:00 0HLI8ID854LCS:00000005 [INF] Request finished in 1.0965ms 404  (791a596a)
+2018-11-12T13:38:51.2893898+02:00 0HLI8ID854LCQ:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/updateAvatar   (ca22a1cb)
+2018-11-12T13:38:51.2895173+02:00 0HLI8ID854LCQ:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:51.2896001+02:00 0HLI8ID854LCQ:00000005 [INF] Request finished in 0.2781ms 204  (791a596a)
+2018-11-12T13:38:51.3634808+02:00 0HLI8ID854LCT:00000006 [INF] Request starting HTTP/1.1 PUT http://localhost:44357/api/Patient/updateAvatar multipart/form-data; boundary=----WebKitFormBoundaryhu6CKExaAvY6aioY 264271 (ca22a1cb)
+2018-11-12T13:38:51.3636083+02:00 0HLI8ID854LCT:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:51.3639181+02:00 0HLI8ID854LCT:00000006 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:51.4346385+02:00 0HLI8ID854LCT:00000006 [INF] Route matched with "{action = \"UpdateAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:51.4347964+02:00 0HLI8ID854LCT:00000006 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:51.9266690+02:00 0HLI8ID854LCT:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" with arguments (["Microsoft.AspNetCore.Http.Internal.FormFile"]) - Validation state: Valid (4e3479ed)
+2018-11-12T13:38:51.9309630+02:00 0HLI8ID854LCT:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:51.9330741+02:00 0HLI8ID854LCT:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:52.9394651+02:00 0HLI8ID854LCT:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:53.0429999+02:00 0HLI8ID854LCT:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:53.4277090+02:00 0HLI8ID854LCT:00000006 [INF] Executed DbCommand ("97"ms) [Parameters=["@p23='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p24='?', @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Int32), @p20='?', @p21='?' (DbType = Boolean), @p22='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"AvatarURL\" = @p1, \"BirthDate\" = @p2, \"ConcurrencyStamp\" = @p3, \"Email\" = @p4, \"EmailConfirmed\" = @p5, \"FirstName\" = @p6, \"LastStatusChangeTime\" = @p7, \"LockoutEnabled\" = @p8, \"LockoutEnd\" = @p9, \"NormalizedEmail\" = @p10, \"NormalizedUserName\" = @p11, \"PassportURL\" = @p12, \"PasswordHash\" = @p13, \"PhoneNumber\" = @p14, \"PhoneNumberConfirmed\" = @p15, \"SecondName\" = @p16, \"SecurityStamp\" = @p17, \"SignUpTime\" = @p18, \"StatusId\" = @p19, \"ThirdName\" = @p20, \"TwoFactorEnabled\" = @p21, \"UserName\" = @p22
+WHERE \"Id\" = @p23 AND \"ConcurrencyStamp\" = @p24;" (0723d8ff)
+2018-11-12T13:38:53.4543803+02:00 0HLI8ID854LCT:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1527.5666ms. (50a9e262)
+2018-11-12T13:38:53.4545275+02:00 0HLI8ID854LCT:00000006 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:53.4546927+02:00 0HLI8ID854LCT:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" in 2019.9739ms (afa2e885)
+2018-11-12T13:38:53.4551786+02:00 0HLI8ID854LCT:00000006 [INF] Request finished in 2092.0276ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:58.6049393+02:00 0HLI8ID854LCR:00000006 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:58.6052422+02:00 0HLI8ID854LCR:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:58.6055640+02:00 0HLI8ID854LCR:00000006 [INF] Request finished in 1.9298ms 204  (791a596a)
+2018-11-12T13:38:58.6102786+02:00 0HLI8ID854LCS:00000006 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:58.6103916+02:00 0HLI8ID854LCS:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:58.6104778+02:00 0HLI8ID854LCS:00000006 [INF] Request finished in 0.2406ms 204  (791a596a)
+2018-11-12T13:38:58.6180977+02:00 0HLI8ID854LCQ:00000006 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:38:58.6182155+02:00 0HLI8ID854LCQ:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:58.6183221+02:00 0HLI8ID854LCQ:00000006 [INF] Request finished in 0.2427ms 204  (791a596a)
+2018-11-12T13:38:58.8526130+02:00 0HLI8ID854LCT:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:58.8530639+02:00 0HLI8ID854LCT:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:58.8534496+02:00 0HLI8ID854LCT:00000007 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:58.8535849+02:00 0HLI8ID854LCT:00000007 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:58.8536596+02:00 0HLI8ID854LCT:00000007 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:58.8541042+02:00 0HLI8ID854LCT:00000007 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:58.8544805+02:00 0HLI8ID854LCT:00000007 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:58.8564773+02:00 0HLI8ID854LCT:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:58.8567000+02:00 0HLI8ID854LCT:00000007 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.5241ms. (50a9e262)
+2018-11-12T13:38:58.8567773+02:00 0HLI8ID854LCT:00000007 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:58.8569355+02:00 0HLI8ID854LCT:00000007 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.293ms (afa2e885)
+2018-11-12T13:38:58.8570362+02:00 0HLI8ID854LCT:00000007 [INF] Request finished in 4.4902ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:58.8571518+02:00 0HLI8ID854LCR:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:38:58.8572368+02:00 0HLI8ID854LCR:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:58.8574740+02:00 0HLI8ID854LCR:00000007 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:58.8575973+02:00 0HLI8ID854LCR:00000007 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:58.8578128+02:00 0HLI8ID854LCR:00000007 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:58.8581835+02:00 0HLI8ID854LCR:00000007 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:58.8597145+02:00 0HLI8ID854LCR:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:38:58.8598416+02:00 0HLI8ID854LCR:00000007 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.975ms. (50a9e262)
+2018-11-12T13:38:58.8599384+02:00 0HLI8ID854LCR:00000007 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:38:58.8600839+02:00 0HLI8ID854LCR:00000007 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 2.4319ms (afa2e885)
+2018-11-12T13:38:58.8601940+02:00 0HLI8ID854LCR:00000007 [INF] Request finished in 3.0318ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:58.9325250+02:00 0HLI8ID854LCS:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:38:58.9326270+02:00 0HLI8ID854LCS:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:38:58.9328408+02:00 0HLI8ID854LCS:00000007 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:38:58.9329483+02:00 0HLI8ID854LCS:00000007 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:38:58.9330148+02:00 0HLI8ID854LCS:00000007 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:38:58.9332444+02:00 0HLI8ID854LCS:00000007 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:38:58.9338524+02:00 0HLI8ID854LCS:00000007 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:38:58.9358112+02:00 0HLI8ID854LCS:00000007 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:38:58.9360040+02:00 0HLI8ID854LCS:00000007 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.7029ms. (50a9e262)
+2018-11-12T13:38:58.9360936+02:00 0HLI8ID854LCS:00000007 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:38:58.9362118+02:00 0HLI8ID854LCS:00000007 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.2234ms (afa2e885)
+2018-11-12T13:38:58.9362967+02:00 0HLI8ID854LCS:00000007 [INF] Request finished in 3.8097ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:38:58.9467189+02:00 0HLI8ID854LCQ:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/22fe7751-2832-43be-8daf-cf696ee1ac46.jpg   (ca22a1cb)
+2018-11-12T13:38:59.1112524+02:00 0HLI8ID854LCQ:00000007 [INF] Sending file. Request path: '"/Images/testuser@gmail.com/Avatar/22fe7751-2832-43be-8daf-cf696ee1ac46.jpg"'. Physical path: '"C:\SoftServe Academy\Project\Internet-Hospital v6\Internet-Hospital\InternetHospital.WebApi\wwwroot\Images\testuser@gmail.com\Avatar\22fe7751-2832-43be-8daf-cf696ee1ac46.jpg"' (27b0a520)
+2018-11-12T13:38:59.1123856+02:00 0HLI8ID854LCQ:00000007 [INF] Request finished in 164.9866ms 200 image/jpeg (791a596a)
+2018-11-12T13:39:33.8833159+02:00 0HLI8IE262HFT:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:33.8833163+02:00 0HLI8IE262HFS:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:33.8833159+02:00 0HLI8IE262HFU:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:39:33.9178127+02:00 0HLI8IE262HFS:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:33.9178127+02:00 0HLI8IE262HFT:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:33.9178174+02:00 0HLI8IE262HFU:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:33.9231700+02:00 0HLI8IE262HFU:00000001 [INF] Request finished in 46.4178ms 204  (791a596a)
+2018-11-12T13:39:33.9231700+02:00 0HLI8IE262HFS:00000001 [INF] Request finished in 46.4178ms 204  (791a596a)
+2018-11-12T13:39:33.9231700+02:00 0HLI8IE262HFT:00000001 [INF] Request finished in 46.4178ms 204  (791a596a)
+2018-11-12T13:39:33.9442370+02:00 0HLI8IE262HFS:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:39:33.9442843+02:00 0HLI8IE262HFT:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:33.9445804+02:00 0HLI8IE262HFS:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:33.9445804+02:00 0HLI8IE262HFT:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:34.0644604+02:00 0HLI8IE262HFS:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:34.0644604+02:00 0HLI8IE262HFT:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:34.2690498+02:00 0HLI8IE262HFS:00000002 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:34.2690498+02:00 0HLI8IE262HFT:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:34.2813719+02:00 0HLI8IE262HFS:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:39:34.2822560+02:00 0HLI8IE262HFT:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:39:34.2849273+02:00 0HLI8IE262HFS:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:34.2851804+02:00 0HLI8IE262HFT:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:39:34.2874681+02:00 0HLI8IE262HFT:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:34.3133903+02:00 0HLI8IE262HFT:00000002 [INF] Executed DbCommand ("4"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:34.3198858+02:00 0HLI8IE262HFT:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 29.681ms. (50a9e262)
+2018-11-12T13:39:34.3313874+02:00 0HLI8IE262HFT:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:39:34.3465626+02:00 0HLI8IE262HFU:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:34.3469743+02:00 0HLI8IE262HFU:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:34.3476908+02:00 0HLI8IE262HFU:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:34.3495852+02:00 0HLI8IE262HFT:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 74.4135ms (afa2e885)
+2018-11-12T13:39:34.3503771+02:00 0HLI8IE262HFU:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:34.3508135+02:00 0HLI8IE262HFU:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:39:34.3511852+02:00 0HLI8IE262HFU:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:39:34.3515913+02:00 0HLI8IE262HFU:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:34.3580780+02:00 0HLI8IE262HFT:00000002 [INF] Request finished in 413.8362ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:34.3877261+02:00 0HLI8IE262HFT:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/22fe7751-2832-43be-8daf-cf696ee1ac46.jpg   (ca22a1cb)
+2018-11-12T13:39:34.4121216+02:00 0HLI8IE262HFS:00000002 [INF] Executed DbCommand ("85"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:39:34.4154701+02:00 0HLI8IE262HFS:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 133.9535ms. (50a9e262)
+2018-11-12T13:39:34.4159518+02:00 0HLI8IE262HFS:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:39:34.4203981+02:00 0HLI8IE262HFT:00000003 [INF] The file "/Images/testuser@gmail.com/Avatar/22fe7751-2832-43be-8daf-cf696ee1ac46.jpg" was not modified (f1f8d725)
+2018-11-12T13:39:34.4211490+02:00 0HLI8IE262HFS:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 151.6388ms (afa2e885)
+2018-11-12T13:39:34.4213619+02:00 0HLI8IE262HFS:00000002 [INF] Request finished in 477.1731ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:34.4229585+02:00 0HLI8IE262HFT:00000003 [INF] Request finished in 35.2439ms 304 image/jpeg (791a596a)
+2018-11-12T13:39:34.4934309+02:00 0HLI8IE262HFU:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:34.4937966+02:00 0HLI8IE262HFU:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 142.535ms. (50a9e262)
+2018-11-12T13:39:34.4939194+02:00 0HLI8IE262HFU:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:39:34.4940897+02:00 0HLI8IE262HFU:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 143.6145ms (afa2e885)
+2018-11-12T13:39:34.4941887+02:00 0HLI8IE262HFU:00000002 [INF] Request finished in 147.9178ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:42.4525273+02:00 0HLI8IE262HFT:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/updateAvatar   (ca22a1cb)
+2018-11-12T13:39:42.4528157+02:00 0HLI8IE262HFT:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:42.4531195+02:00 0HLI8IE262HFT:00000004 [INF] Request finished in 0.75ms 204  (791a596a)
+2018-11-12T13:39:42.5025147+02:00 0HLI8IE262HFS:00000003 [INF] Request starting HTTP/1.1 PUT http://localhost:44357/api/Patient/updateAvatar multipart/form-data; boundary=----WebKitFormBoundaryGP2O8TR5xtMIQ4DK 282379 (ca22a1cb)
+2018-11-12T13:39:42.5027067+02:00 0HLI8IE262HFS:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:42.5029336+02:00 0HLI8IE262HFS:00000003 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:42.5360438+02:00 0HLI8IE262HFS:00000003 [INF] Route matched with "{action = \"UpdateAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:42.5362857+02:00 0HLI8IE262HFS:00000003 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:39:42.6189045+02:00 0HLI8IE262HFS:00000003 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" with arguments (["Microsoft.AspNetCore.Http.Internal.FormFile"]) - Validation state: Valid (4e3479ed)
+2018-11-12T13:39:42.6217760+02:00 0HLI8IE262HFS:00000003 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:42.6238944+02:00 0HLI8IE262HFS:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:42.7480419+02:00 0HLI8IE262HFS:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:42.7768802+02:00 0HLI8IE262HFS:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:42.9515642+02:00 0HLI8IE262HFS:00000003 [INF] Executed DbCommand ("11"ms) [Parameters=["@p23='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p24='?', @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Int32), @p20='?', @p21='?' (DbType = Boolean), @p22='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"AvatarURL\" = @p1, \"BirthDate\" = @p2, \"ConcurrencyStamp\" = @p3, \"Email\" = @p4, \"EmailConfirmed\" = @p5, \"FirstName\" = @p6, \"LastStatusChangeTime\" = @p7, \"LockoutEnabled\" = @p8, \"LockoutEnd\" = @p9, \"NormalizedEmail\" = @p10, \"NormalizedUserName\" = @p11, \"PassportURL\" = @p12, \"PasswordHash\" = @p13, \"PhoneNumber\" = @p14, \"PhoneNumberConfirmed\" = @p15, \"SecondName\" = @p16, \"SecurityStamp\" = @p17, \"SignUpTime\" = @p18, \"StatusId\" = @p19, \"ThirdName\" = @p20, \"TwoFactorEnabled\" = @p21, \"UserName\" = @p22
+WHERE \"Id\" = @p23 AND \"ConcurrencyStamp\" = @p24;" (0723d8ff)
+2018-11-12T13:39:42.9925437+02:00 0HLI8IE262HFS:00000003 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 373.5222ms. (50a9e262)
+2018-11-12T13:39:42.9959412+02:00 0HLI8IE262HFS:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:39:42.9995205+02:00 0HLI8IE262HFS:00000003 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" in 463.2838ms (afa2e885)
+2018-11-12T13:39:43.0100148+02:00 0HLI8IE262HFS:00000003 [INF] Request finished in 509.0259ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:47.7761246+02:00 0HLI8IE262HFU:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:47.7764531+02:00 0HLI8IE262HFU:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:47.7765559+02:00 0HLI8IE262HFU:00000003 [INF] Request finished in 0.6225ms 204  (791a596a)
+2018-11-12T13:39:47.7775389+02:00 0HLI8IE262HFT:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:47.7776422+02:00 0HLI8IE262HFT:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:47.7777348+02:00 0HLI8IE262HFT:00000005 [INF] Request finished in 0.2278ms 204  (791a596a)
+2018-11-12T13:39:47.7853337+02:00 0HLI8IE262HFS:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:39:47.7854386+02:00 0HLI8IE262HFS:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:47.7855265+02:00 0HLI8IE262HFS:00000004 [INF] Request finished in 0.2239ms 204  (791a596a)
+2018-11-12T13:39:48.0576683+02:00 0HLI8IE262HFU:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:48.0580101+02:00 0HLI8IE262HFU:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:48.0583766+02:00 0HLI8IE262HFU:00000004 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:48.0586458+02:00 0HLI8IE262HFU:00000004 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:48.0587294+02:00 0HLI8IE262HFU:00000004 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:39:48.0589598+02:00 0HLI8IE262HFU:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:39:48.0593152+02:00 0HLI8IE262HFU:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:48.0615075+02:00 0HLI8IE262HFU:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:48.0617183+02:00 0HLI8IE262HFU:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.699ms. (50a9e262)
+2018-11-12T13:39:48.0618403+02:00 0HLI8IE262HFU:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:39:48.0620058+02:00 0HLI8IE262HFU:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.3011ms (afa2e885)
+2018-11-12T13:39:48.0621052+02:00 0HLI8IE262HFU:00000004 [INF] Request finished in 4.4974ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:48.0623130+02:00 0HLI8IE262HFT:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:39:48.0623992+02:00 0HLI8IE262HFT:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:48.0626471+02:00 0HLI8IE262HFT:00000006 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:48.0627819+02:00 0HLI8IE262HFT:00000006 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:48.0630136+02:00 0HLI8IE262HFT:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:39:48.0634919+02:00 0HLI8IE262HFT:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:48.0648931+02:00 0HLI8IE262HFT:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:39:48.0650433+02:00 0HLI8IE262HFT:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.9682ms. (50a9e262)
+2018-11-12T13:39:48.0651354+02:00 0HLI8IE262HFT:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:39:48.0652860+02:00 0HLI8IE262HFT:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 2.4546ms (afa2e885)
+2018-11-12T13:39:48.0653859+02:00 0HLI8IE262HFT:00000006 [INF] Request finished in 3.0839ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:48.1511858+02:00 0HLI8IE262HFS:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:39:48.1514192+02:00 0HLI8IE262HFS:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:39:48.1516697+02:00 0HLI8IE262HFS:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:39:48.1518007+02:00 0HLI8IE262HFS:00000005 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:39:48.1518766+02:00 0HLI8IE262HFS:00000005 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:39:48.1521006+02:00 0HLI8IE262HFS:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:39:48.1524389+02:00 0HLI8IE262HFS:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:39:48.1544204+02:00 0HLI8IE262HFS:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:39:48.1546401+02:00 0HLI8IE262HFS:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.475ms. (50a9e262)
+2018-11-12T13:39:48.1547331+02:00 0HLI8IE262HFS:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:39:48.1548633+02:00 0HLI8IE262HFS:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.0122ms (afa2e885)
+2018-11-12T13:39:48.1549844+02:00 0HLI8IE262HFS:00000005 [INF] Request finished in 3.8071ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:39:48.1873445+02:00 0HLI8IE262HFU:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/36240fb2-40be-435f-9448-06ed0ae92298.jpg   (ca22a1cb)
+2018-11-12T13:39:48.2277562+02:00 0HLI8IE262HFU:00000005 [INF] Sending file. Request path: '"/Images/testuser@gmail.com/Avatar/36240fb2-40be-435f-9448-06ed0ae92298.jpg"'. Physical path: '"C:\SoftServe Academy\Project\Internet-Hospital v6\Internet-Hospital\InternetHospital.WebApi\wwwroot\Images\testuser@gmail.com\Avatar\36240fb2-40be-435f-9448-06ed0ae92298.jpg"' (27b0a520)
+2018-11-12T13:39:48.2279192+02:00 0HLI8IE262HFU:00000005 [INF] Request finished in 40.5563ms 200 image/jpeg (791a596a)
+2018-11-12T13:43:26.7950634+02:00 0HLI8IG7J3VHN:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:43:26.7950634+02:00 0HLI8IG7J3VHL:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:43:26.7950634+02:00 0HLI8IG7J3VHM:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:43:26.8296763+02:00 0HLI8IG7J3VHN:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:43:26.8298687+02:00 0HLI8IG7J3VHM:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:43:26.8305326+02:00 0HLI8IG7J3VHL:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:43:26.8352899+02:00 0HLI8IG7J3VHL:00000001 [INF] Request finished in 49.9348ms 204  (791a596a)
+2018-11-12T13:43:26.8352899+02:00 0HLI8IG7J3VHN:00000001 [INF] Request finished in 49.9348ms 204  (791a596a)
+2018-11-12T13:43:26.8352899+02:00 0HLI8IG7J3VHM:00000001 [INF] Request finished in 49.9344ms 204  (791a596a)
+2018-11-12T13:43:26.8557152+02:00 0HLI8IG7J3VHM:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:43:26.8561603+02:00 0HLI8IG7J3VHM:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:43:26.8568946+02:00 0HLI8IG7J3VHL:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:43:26.8570844+02:00 0HLI8IG7J3VHL:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:43:26.9807895+02:00 0HLI8IG7J3VHL:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:43:26.9807895+02:00 0HLI8IG7J3VHM:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:43:27.1085862+02:00 0HLI8IG7J3VHM:00000002 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:43:27.1085879+02:00 0HLI8IG7J3VHL:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:43:27.1232746+02:00 0HLI8IG7J3VHM:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:43:27.1236091+02:00 0HLI8IG7J3VHL:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:43:27.1265561+02:00 0HLI8IG7J3VHL:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:43:27.1296823+02:00 0HLI8IG7J3VHL:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:43:27.1341670+02:00 0HLI8IG7J3VHM:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:43:27.1690623+02:00 0HLI8IG7J3VHL:00000002 [INF] Executed DbCommand ("15"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:43:27.1797375+02:00 0HLI8IG7J3VHL:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 44.6463ms. (50a9e262)
+2018-11-12T13:43:27.1998291+02:00 0HLI8IG7J3VHL:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:43:27.2250657+02:00 0HLI8IG7J3VHL:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 110.7842ms (afa2e885)
+2018-11-12T13:43:27.2257377+02:00 0HLI8IG7J3VHN:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:43:27.2259330+02:00 0HLI8IG7J3VHN:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:43:27.2270829+02:00 0HLI8IG7J3VHN:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:43:27.2308529+02:00 0HLI8IG7J3VHN:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:43:27.2313363+02:00 0HLI8IG7J3VHN:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:43:27.2317736+02:00 0HLI8IG7J3VHN:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:43:27.2330016+02:00 0HLI8IG7J3VHN:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:43:27.2346119+02:00 0HLI8IG7J3VHL:00000002 [INF] Request finished in 377.6861ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:43:27.3540763+02:00 0HLI8IG7J3VHL:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/36240fb2-40be-435f-9448-06ed0ae92298.jpg   (ca22a1cb)
+2018-11-12T13:43:27.3626334+02:00 0HLI8IG7J3VHL:00000003 [INF] The file "/Images/testuser@gmail.com/Avatar/36240fb2-40be-435f-9448-06ed0ae92298.jpg" was not modified (f1f8d725)
+2018-11-12T13:43:27.3653137+02:00 0HLI8IG7J3VHL:00000003 [INF] Request finished in 11.2426ms 304 image/jpeg (791a596a)
+2018-11-12T13:43:27.3714603+02:00 0HLI8IG7J3VHN:00000002 [INF] Executed DbCommand ("3"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:43:27.3718145+02:00 0HLI8IG7J3VHN:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 139.8692ms. (50a9e262)
+2018-11-12T13:43:27.3721657+02:00 0HLI8IG7J3VHN:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:43:27.3725868+02:00 0HLI8IG7J3VHN:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 141.636ms (afa2e885)
+2018-11-12T13:43:27.3727335+02:00 0HLI8IG7J3VHN:00000002 [INF] Request finished in 147.0683ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:43:28.6529008+02:00 0HLI8IG7J3VHM:00000002 [INF] Executed DbCommand ("1,467"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:43:28.6560893+02:00 0HLI8IG7J3VHM:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1532.6986ms. (50a9e262)
+2018-11-12T13:43:28.6563265+02:00 0HLI8IG7J3VHM:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:43:28.6599788+02:00 0HLI8IG7J3VHM:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 1550.8605ms (afa2e885)
+2018-11-12T13:43:28.6601230+02:00 0HLI8IG7J3VHM:00000002 [INF] Request finished in 1804.5015ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:44:21.6982034+02:00 0HLI8IG7J3VHL:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/updateAvatar   (ca22a1cb)
+2018-11-12T13:44:21.6984406+02:00 0HLI8IG7J3VHL:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:21.6985874+02:00 0HLI8IG7J3VHL:00000004 [INF] Request finished in 0.5354ms 204  (791a596a)
+2018-11-12T13:44:21.7514696+02:00 0HLI8IG7J3VHN:00000003 [INF] Request starting HTTP/1.1 PUT http://localhost:44357/api/Patient/updateAvatar multipart/form-data; boundary=----WebKitFormBoundary8Uj0vpYUtYaT4V39 264271 (ca22a1cb)
+2018-11-12T13:44:21.7526481+02:00 0HLI8IG7J3VHN:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:21.7530517+02:00 0HLI8IG7J3VHN:00000003 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:44:21.7895765+02:00 0HLI8IG7J3VHN:00000003 [INF] Route matched with "{action = \"UpdateAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:44:21.7897173+02:00 0HLI8IG7J3VHN:00000003 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:44:21.8683933+02:00 0HLI8IG7J3VHN:00000003 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" with arguments (["Microsoft.AspNetCore.Http.Internal.FormFile"]) - Validation state: Valid (4e3479ed)
+2018-11-12T13:44:21.8713718+02:00 0HLI8IG7J3VHN:00000003 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:44:21.8734787+02:00 0HLI8IG7J3VHN:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:44:22.0249115+02:00 0HLI8IG7J3VHN:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:44:22.0551241+02:00 0HLI8IG7J3VHN:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:44:22.2255337+02:00 0HLI8IG7J3VHN:00000003 [INF] Executed DbCommand ("72"ms) [Parameters=["@p23='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p24='?', @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Int32), @p20='?', @p21='?' (DbType = Boolean), @p22='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"AvatarURL\" = @p1, \"BirthDate\" = @p2, \"ConcurrencyStamp\" = @p3, \"Email\" = @p4, \"EmailConfirmed\" = @p5, \"FirstName\" = @p6, \"LastStatusChangeTime\" = @p7, \"LockoutEnabled\" = @p8, \"LockoutEnd\" = @p9, \"NormalizedEmail\" = @p10, \"NormalizedUserName\" = @p11, \"PassportURL\" = @p12, \"PasswordHash\" = @p13, \"PhoneNumber\" = @p14, \"PhoneNumberConfirmed\" = @p15, \"SecondName\" = @p16, \"SecurityStamp\" = @p17, \"SignUpTime\" = @p18, \"StatusId\" = @p19, \"ThirdName\" = @p20, \"TwoFactorEnabled\" = @p21, \"UserName\" = @p22
+WHERE \"Id\" = @p23 AND \"ConcurrencyStamp\" = @p24;" (0723d8ff)
+2018-11-12T13:44:22.4892219+02:00 0HLI8IG7J3VHN:00000003 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 620.6891ms. (50a9e262)
+2018-11-12T13:44:22.4922636+02:00 0HLI8IG7J3VHN:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:44:22.4970004+02:00 0HLI8IG7J3VHN:00000003 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" in 707.3032ms (afa2e885)
+2018-11-12T13:44:22.5056127+02:00 0HLI8IG7J3VHN:00000003 [INF] Request finished in 754.7514ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:44:27.1357503+02:00 0HLI8IG7J3VHM:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:44:27.1359342+02:00 0HLI8IG7J3VHM:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:27.1361057+02:00 0HLI8IG7J3VHM:00000003 [INF] Request finished in 0.6451ms 204  (791a596a)
+2018-11-12T13:44:27.1375308+02:00 0HLI8IG7J3VHL:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:44:27.1376452+02:00 0HLI8IG7J3VHL:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:27.1378137+02:00 0HLI8IG7J3VHL:00000005 [INF] Request finished in 0.3144ms 204  (791a596a)
+2018-11-12T13:44:27.1541725+02:00 0HLI8IG7J3VHN:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:44:27.1542894+02:00 0HLI8IG7J3VHN:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:27.1544673+02:00 0HLI8IG7J3VHN:00000004 [INF] Request finished in 0.3302ms 204  (791a596a)
+2018-11-12T13:44:27.3672508+02:00 0HLI8IG7J3VHM:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:44:27.3676071+02:00 0HLI8IG7J3VHM:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:27.3680952+02:00 0HLI8IG7J3VHM:00000004 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:44:27.3682586+02:00 0HLI8IG7J3VHL:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:44:27.3683696+02:00 0HLI8IG7J3VHL:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:27.3683845+02:00 0HLI8IG7J3VHM:00000004 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:44:27.3685249+02:00 0HLI8IG7J3VHM:00000004 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:44:27.3686098+02:00 0HLI8IG7J3VHL:00000006 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:44:27.3687779+02:00 0HLI8IG7J3VHM:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:44:27.3691465+02:00 0HLI8IG7J3VHM:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:44:27.3713733+02:00 0HLI8IG7J3VHM:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:44:27.3713853+02:00 0HLI8IG7J3VHL:00000006 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:44:27.3715730+02:00 0HLI8IG7J3VHM:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.737ms. (50a9e262)
+2018-11-12T13:44:27.3716562+02:00 0HLI8IG7J3VHM:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:44:27.3716571+02:00 0HLI8IG7J3VHL:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:44:27.3718158+02:00 0HLI8IG7J3VHM:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.354ms (afa2e885)
+2018-11-12T13:44:27.3718981+02:00 0HLI8IG7J3VHM:00000004 [INF] Request finished in 4.7223ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:44:27.3721519+02:00 0HLI8IG7J3VHL:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:44:27.3758145+02:00 0HLI8IG7J3VHL:00000006 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:44:27.3759706+02:00 0HLI8IG7J3VHL:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 4.2572ms. (50a9e262)
+2018-11-12T13:44:27.3760623+02:00 0HLI8IG7J3VHL:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:44:27.3762607+02:00 0HLI8IG7J3VHL:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 4.8153ms (afa2e885)
+2018-11-12T13:44:27.3763640+02:00 0HLI8IG7J3VHL:00000006 [INF] Request finished in 8.1535ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:44:27.5041834+02:00 0HLI8IG7J3VHN:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:44:27.5042862+02:00 0HLI8IG7J3VHN:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:44:27.5045123+02:00 0HLI8IG7J3VHN:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:44:27.5046326+02:00 0HLI8IG7J3VHN:00000005 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:44:27.5046979+02:00 0HLI8IG7J3VHN:00000005 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:44:27.5049125+02:00 0HLI8IG7J3VHN:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:44:27.5052722+02:00 0HLI8IG7J3VHN:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:44:27.5089126+02:00 0HLI8IG7J3VHN:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:44:27.5094037+02:00 0HLI8IG7J3VHN:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.366ms. (50a9e262)
+2018-11-12T13:44:27.5095312+02:00 0HLI8IG7J3VHN:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:44:27.5096882+02:00 0HLI8IG7J3VHN:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 5.0099ms (afa2e885)
+2018-11-12T13:44:27.5097868+02:00 0HLI8IG7J3VHN:00000005 [INF] Request finished in 5.6332ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:44:27.5748956+02:00 0HLI8IG7J3VHM:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/b0fdfcfb-0789-4017-9b2e-c4c8953bd747.jpg   (ca22a1cb)
+2018-11-12T13:44:27.6062287+02:00 0HLI8IG7J3VHM:00000005 [INF] Sending file. Request path: '"/Images/testuser@gmail.com/Avatar/b0fdfcfb-0789-4017-9b2e-c4c8953bd747.jpg"'. Physical path: '"C:\SoftServe Academy\Project\Internet-Hospital v6\Internet-Hospital\InternetHospital.WebApi\wwwroot\Images\testuser@gmail.com\Avatar\b0fdfcfb-0789-4017-9b2e-c4c8953bd747.jpg"' (27b0a520)
+2018-11-12T13:44:27.6067176+02:00 0HLI8IG7J3VHM:00000005 [INF] Request finished in 31.8109ms 200 image/jpeg (791a596a)
+2018-11-12T13:52:51.0935885+02:00 0HLI8ILFP1NDQ:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:52:51.0935885+02:00 0HLI8ILFP1NDP:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:52:51.1264021+02:00 0HLI8ILFP1NDQ:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:52:51.1264021+02:00 0HLI8ILFP1NDP:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:52:51.1314930+02:00 0HLI8ILFP1NDQ:00000001 [INF] Request finished in 46.2791ms 204  (791a596a)
+2018-11-12T13:52:51.1314930+02:00 0HLI8ILFP1NDP:00000001 [INF] Request finished in 46.2791ms 204  (791a596a)
+2018-11-12T13:52:51.1487687+02:00 0HLI8ILFP1NDQ:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:52:51.1491706+02:00 0HLI8ILFP1NDQ:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:52:51.2574390+02:00 0HLI8ILFP1NDQ:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:52:51.3566750+02:00 0HLI8ILFP1NDQ:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:52:51.3675047+02:00 0HLI8ILFP1NDQ:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:52:51.3797210+02:00 0HLI8ILFP1NDQ:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:52:51.3831351+02:00 0HLI8ILFP1NDQ:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:52:51.4692829+02:00 0HLI8ILFP1NDQ:00000002 [INF] Executed DbCommand ("4"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:52:51.4766203+02:00 0HLI8ILFP1NDQ:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 91.542ms. (50a9e262)
+2018-11-12T13:52:51.4858333+02:00 0HLI8ILFP1NDQ:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:52:51.5028013+02:00 0HLI8ILFP1NDP:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:52:51.5031337+02:00 0HLI8ILFP1NDP:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:52:51.5041364+02:00 0HLI8ILFP1NDP:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:52:51.5047789+02:00 0HLI8ILFP1NDP:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:52:51.5052141+02:00 0HLI8ILFP1NDP:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:52:51.5055056+02:00 0HLI8ILFP1NDQ:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 142.8631ms (afa2e885)
+2018-11-12T13:52:51.5057599+02:00 0HLI8ILFP1NDP:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:52:51.5061875+02:00 0HLI8ILFP1NDP:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:52:51.5082563+02:00 0HLI8ILFP1NDP:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:52:51.5086527+02:00 0HLI8ILFP1NDP:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.7976ms. (50a9e262)
+2018-11-12T13:52:51.5090337+02:00 0HLI8ILFP1NDP:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:52:51.5094915+02:00 0HLI8ILFP1NDP:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 4.6109ms (afa2e885)
+2018-11-12T13:52:51.5108325+02:00 0HLI8ILFP1NDQ:00000002 [INF] Request finished in 362.1192ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:52:51.5108376+02:00 0HLI8ILFP1NDP:00000002 [INF] Request finished in 8.4292ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:52:51.5282315+02:00 0HLI8ILFP1NDQ:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/b0fdfcfb-0789-4017-9b2e-c4c8953bd747.jpg   (ca22a1cb)
+2018-11-12T13:52:51.5356709+02:00 0HLI8ILFP1NDQ:00000003 [INF] The file "/Images/testuser@gmail.com/Avatar/b0fdfcfb-0789-4017-9b2e-c4c8953bd747.jpg" was not modified (f1f8d725)
+2018-11-12T13:52:51.5379907+02:00 0HLI8ILFP1NDQ:00000003 [INF] Request finished in 9.7685ms 304 image/jpeg (791a596a)
+2018-11-12T13:53:09.1353100+02:00 0HLI8ILFP1NDP:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:09.1355460+02:00 0HLI8ILFP1NDP:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:09.1356445+02:00 0HLI8ILFP1NDQ:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:53:09.1357119+02:00 0HLI8ILFP1NDQ:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:09.1357265+02:00 0HLI8ILFP1NDP:00000003 [INF] Request finished in 0.4595ms 204  (791a596a)
+2018-11-12T13:53:09.1357678+02:00 0HLI8ILFP1NDQ:00000004 [INF] Request finished in 0.1595ms 204  (791a596a)
+2018-11-12T13:53:09.1390886+02:00 0HLI8ILFP1NDR:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:09.1391974+02:00 0HLI8ILFP1NDR:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:09.1392929+02:00 0HLI8ILFP1NDR:00000001 [INF] Request finished in 0.2427ms 204  (791a596a)
+2018-11-12T13:53:09.3929656+02:00 0HLI8ILFP1NDP:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:09.3932946+02:00 0HLI8ILFP1NDP:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:09.3938872+02:00 0HLI8ILFP1NDP:00000004 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:09.3940690+02:00 0HLI8ILFP1NDP:00000004 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:09.3941462+02:00 0HLI8ILFP1NDP:00000004 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:53:09.3943791+02:00 0HLI8ILFP1NDP:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:53:09.3947491+02:00 0HLI8ILFP1NDP:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:09.3970305+02:00 0HLI8ILFP1NDP:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:09.3972267+02:00 0HLI8ILFP1NDP:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.7903ms. (50a9e262)
+2018-11-12T13:53:09.3973095+02:00 0HLI8ILFP1NDP:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:53:09.3974516+02:00 0HLI8ILFP1NDP:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.3369ms (afa2e885)
+2018-11-12T13:53:09.3976060+02:00 0HLI8ILFP1NDP:00000004 [INF] Request finished in 4.6822ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:09.3976990+02:00 0HLI8ILFP1NDQ:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:53:09.3977873+02:00 0HLI8ILFP1NDQ:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:09.3980527+02:00 0HLI8ILFP1NDQ:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:09.4008375+02:00 0HLI8ILFP1NDQ:00000005 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:09.4019123+02:00 0HLI8ILFP1NDQ:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:53:09.4065276+02:00 0HLI8ILFP1NDQ:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:09.4645333+02:00 0HLI8ILFP1NDR:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:09.4646809+02:00 0HLI8ILFP1NDR:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:09.4649412+02:00 0HLI8ILFP1NDR:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:09.4650777+02:00 0HLI8ILFP1NDR:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:09.4651904+02:00 0HLI8ILFP1NDR:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:53:09.4654403+02:00 0HLI8ILFP1NDR:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:53:09.4658316+02:00 0HLI8ILFP1NDR:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:09.5322145+02:00 0HLI8ILFP1NDQ:00000005 [INF] Executed DbCommand ("80"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:53:09.5364039+02:00 0HLI8ILFP1NDQ:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 134.3656ms. (50a9e262)
+2018-11-12T13:53:09.5365972+02:00 0HLI8ILFP1NDQ:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:53:09.5413882+02:00 0HLI8ILFP1NDQ:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 140.4503ms (afa2e885)
+2018-11-12T13:53:09.5414898+02:00 0HLI8ILFP1NDQ:00000005 [INF] Request finished in 143.7928ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:09.6035872+02:00 0HLI8ILFP1NDR:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:09.6037937+02:00 0HLI8ILFP1NDR:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 138.2931ms. (50a9e262)
+2018-11-12T13:53:09.6038824+02:00 0HLI8ILFP1NDR:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:53:09.6040437+02:00 0HLI8ILFP1NDR:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 138.9126ms (afa2e885)
+2018-11-12T13:53:09.6041337+02:00 0HLI8ILFP1NDR:00000002 [INF] Request finished in 139.7707ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:16.3602027+02:00 0HLI8ILFP1NDP:00000005 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/updateAvatar   (ca22a1cb)
+2018-11-12T13:53:16.3615775+02:00 0HLI8ILFP1NDP:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:16.3618446+02:00 0HLI8ILFP1NDP:00000005 [INF] Request finished in 1.5859ms 204  (791a596a)
+2018-11-12T13:53:16.4332591+02:00 0HLI8ILFP1NDQ:00000006 [INF] Request starting HTTP/1.1 PUT http://localhost:44357/api/Patient/updateAvatar multipart/form-data; boundary=----WebKitFormBoundaryEuyTSZu54jCvPAXE 282379 (ca22a1cb)
+2018-11-12T13:53:16.4337101+02:00 0HLI8ILFP1NDQ:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:16.4339994+02:00 0HLI8ILFP1NDQ:00000006 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:16.4598548+02:00 0HLI8ILFP1NDQ:00000006 [INF] Route matched with "{action = \"UpdateAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:16.4600042+02:00 0HLI8ILFP1NDQ:00000006 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:53:16.5443702+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" with arguments (["Microsoft.AspNetCore.Http.Internal.FormFile"]) - Validation state: Valid (4e3479ed)
+2018-11-12T13:53:16.5479831+02:00 0HLI8ILFP1NDQ:00000006 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:16.5571796+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:16.7590327+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:16.7871568+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:16.9363296+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executed DbCommand ("50"ms) [Parameters=["@p23='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p24='?', @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Int32), @p20='?', @p21='?' (DbType = Boolean), @p22='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"AvatarURL\" = @p1, \"BirthDate\" = @p2, \"ConcurrencyStamp\" = @p3, \"Email\" = @p4, \"EmailConfirmed\" = @p5, \"FirstName\" = @p6, \"LastStatusChangeTime\" = @p7, \"LockoutEnabled\" = @p8, \"LockoutEnd\" = @p9, \"NormalizedEmail\" = @p10, \"NormalizedUserName\" = @p11, \"PassportURL\" = @p12, \"PasswordHash\" = @p13, \"PhoneNumber\" = @p14, \"PhoneNumberConfirmed\" = @p15, \"SecondName\" = @p16, \"SecurityStamp\" = @p17, \"SignUpTime\" = @p18, \"StatusId\" = @p19, \"ThirdName\" = @p20, \"TwoFactorEnabled\" = @p21, \"UserName\" = @p22
+WHERE \"Id\" = @p23 AND \"ConcurrencyStamp\" = @p24;" (0723d8ff)
+2018-11-12T13:53:17.0066262+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 462.0666ms. (50a9e262)
+2018-11-12T13:53:17.0091256+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:53:17.0138083+02:00 0HLI8ILFP1NDQ:00000006 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" in 553.8407ms (afa2e885)
+2018-11-12T13:53:17.0234569+02:00 0HLI8ILFP1NDQ:00000006 [INF] Request finished in 590.9487ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:21.6599076+02:00 0HLI8ILFP1NDR:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:21.6600479+02:00 0HLI8ILFP1NDR:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:21.6601435+02:00 0HLI8ILFP1NDR:00000003 [INF] Request finished in 0.2807ms 204  (791a596a)
+2018-11-12T13:53:21.6610113+02:00 0HLI8ILFP1NDP:00000006 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:21.6611466+02:00 0HLI8ILFP1NDP:00000006 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:21.6612959+02:00 0HLI8ILFP1NDP:00000006 [INF] Request finished in 0.3711ms 204  (791a596a)
+2018-11-12T13:53:21.6675159+02:00 0HLI8ILFP1NDQ:00000007 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:53:21.6676285+02:00 0HLI8ILFP1NDQ:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:21.6677160+02:00 0HLI8ILFP1NDQ:00000007 [INF] Request finished in 0.2393ms 204  (791a596a)
+2018-11-12T13:53:21.9101660+02:00 0HLI8ILFP1NDR:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:21.9119281+02:00 0HLI8ILFP1NDR:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:21.9122460+02:00 0HLI8ILFP1NDR:00000004 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:21.9124315+02:00 0HLI8ILFP1NDR:00000004 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:21.9125182+02:00 0HLI8ILFP1NDR:00000004 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:53:21.9129013+02:00 0HLI8ILFP1NDR:00000004 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:53:21.9134641+02:00 0HLI8ILFP1NDR:00000004 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:21.9166052+02:00 0HLI8ILFP1NDR:00000004 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:21.9177073+02:00 0HLI8ILFP1NDR:00000004 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.6758ms. (50a9e262)
+2018-11-12T13:53:21.9179497+02:00 0HLI8ILFP1NDR:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:53:21.9182825+02:00 0HLI8ILFP1NDR:00000004 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 5.7659ms (afa2e885)
+2018-11-12T13:53:21.9183797+02:00 0HLI8ILFP1NDP:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:53:21.9184002+02:00 0HLI8ILFP1NDR:00000004 [INF] Request finished in 8.3067ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:21.9184710+02:00 0HLI8ILFP1NDP:00000007 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:21.9193504+02:00 0HLI8ILFP1NDP:00000007 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:21.9197643+02:00 0HLI8ILFP1NDP:00000007 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:21.9199994+02:00 0HLI8ILFP1NDP:00000007 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:53:21.9206889+02:00 0HLI8ILFP1NDP:00000007 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:21.9237216+02:00 0HLI8ILFP1NDP:00000007 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:53:21.9238684+02:00 0HLI8ILFP1NDP:00000007 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 3.7525ms. (50a9e262)
+2018-11-12T13:53:21.9239572+02:00 0HLI8ILFP1NDP:00000007 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:53:21.9241091+02:00 0HLI8ILFP1NDP:00000007 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 4.2943ms (afa2e885)
+2018-11-12T13:53:21.9242076+02:00 0HLI8ILFP1NDP:00000007 [INF] Request finished in 5.8299ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:21.9861919+02:00 0HLI8ILFP1NDQ:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:53:21.9863199+02:00 0HLI8ILFP1NDQ:00000008 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:53:21.9866852+02:00 0HLI8ILFP1NDQ:00000008 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:53:21.9868324+02:00 0HLI8ILFP1NDQ:00000008 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:53:21.9869228+02:00 0HLI8ILFP1NDQ:00000008 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:53:21.9872965+02:00 0HLI8ILFP1NDQ:00000008 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:53:21.9877305+02:00 0HLI8ILFP1NDQ:00000008 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:53:21.9903758+02:00 0HLI8ILFP1NDQ:00000008 [INF] Executed DbCommand ("1"ms) [Parameters=["@__Parse_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT p.\"Id\", p.\"AccessFailedCount\", p.\"AvatarURL\", p.\"BirthDate\", p.\"ConcurrencyStamp\", p.\"Email\", p.\"EmailConfirmed\", p.\"FirstName\", p.\"LastStatusChangeTime\", p.\"LockoutEnabled\", p.\"LockoutEnd\", p.\"NormalizedEmail\", p.\"NormalizedUserName\", p.\"PassportURL\", p.\"PasswordHash\", p.\"PhoneNumber\", p.\"PhoneNumberConfirmed\", p.\"SecondName\", p.\"SecurityStamp\", p.\"SignUpTime\", p.\"StatusId\", p.\"ThirdName\", p.\"TwoFactorEnabled\", p.\"UserName\"
+FROM \"AspNetUsers\" AS p
+WHERE p.\"Id\" = @__Parse_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:53:21.9914949+02:00 0HLI8ILFP1NDQ:00000008 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.1075ms. (50a9e262)
+2018-11-12T13:53:21.9916217+02:00 0HLI8ILFP1NDQ:00000008 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:53:21.9917761+02:00 0HLI8ILFP1NDQ:00000008 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 4.855ms (afa2e885)
+2018-11-12T13:53:21.9918858+02:00 0HLI8ILFP1NDQ:00000008 [INF] Request finished in 5.7407ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:53:22.0167164+02:00 0HLI8ILFP1NDR:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/cf5aed50-30f6-4350-855a-75f751a61896.jpg   (ca22a1cb)
+2018-11-12T13:53:22.0606499+02:00 0HLI8ILFP1NDR:00000005 [INF] Sending file. Request path: '"/Images/testuser@gmail.com/Avatar/cf5aed50-30f6-4350-855a-75f751a61896.jpg"'. Physical path: '"C:\SoftServe Academy\Project\Internet-Hospital v6\Internet-Hospital\InternetHospital.WebApi\wwwroot\Images\testuser@gmail.com\Avatar\cf5aed50-30f6-4350-855a-75f751a61896.jpg"' (27b0a520)
+2018-11-12T13:53:22.0608180+02:00 0HLI8ILFP1NDR:00000005 [INF] Request finished in 44.1211ms 200 image/jpeg (791a596a)
+2018-11-12T13:55:16.6437501+02:00 0HLI8IMR54BTL:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:55:16.6437501+02:00 0HLI8IMR54BTK:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:55:16.6437637+02:00 0HLI8IMR54BTJ:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:55:16.6785844+02:00 0HLI8IMR54BTL:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:55:16.6785844+02:00 0HLI8IMR54BTK:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:55:16.6785844+02:00 0HLI8IMR54BTJ:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:55:16.6841247+02:00 0HLI8IMR54BTK:00000001 [INF] Request finished in 47.112ms 204  (791a596a)
+2018-11-12T13:55:16.6841247+02:00 0HLI8IMR54BTL:00000001 [INF] Request finished in 47.112ms 204  (791a596a)
+2018-11-12T13:55:16.6841247+02:00 0HLI8IMR54BTJ:00000001 [INF] Request finished in 47.1512ms 204  (791a596a)
+2018-11-12T13:55:16.7040261+02:00 0HLI8IMR54BTL:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:55:16.7049289+02:00 0HLI8IMR54BTJ:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:55:16.7049383+02:00 0HLI8IMR54BTL:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:55:16.7050603+02:00 0HLI8IMR54BTJ:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:55:16.8360289+02:00 0HLI8IMR54BTJ:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:55:16.8360289+02:00 0HLI8IMR54BTL:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:55:16.9504514+02:00 0HLI8IMR54BTL:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:55:16.9504514+02:00 0HLI8IMR54BTJ:00000002 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:55:16.9632202+02:00 0HLI8IMR54BTJ:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:55:16.9640172+02:00 0HLI8IMR54BTL:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:55:16.9659833+02:00 0HLI8IMR54BTL:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:55:16.9670636+02:00 0HLI8IMR54BTJ:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:55:16.9756140+02:00 0HLI8IMR54BTL:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:55:16.9980093+02:00 0HLI8IMR54BTL:00000002 [INF] Executed DbCommand ("4"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:55:17.0187107+02:00 0HLI8IMR54BTL:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 47.2984ms. (50a9e262)
+2018-11-12T13:55:17.0187525+02:00 0HLI8IMR54BTJ:00000002 [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:55:17.0224645+02:00 0HLI8IMR54BTJ:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 59.0638ms. (50a9e262)
+2018-11-12T13:55:17.0336214+02:00 0HLI8IMR54BTJ:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:55:17.0336214+02:00 0HLI8IMR54BTL:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:55:17.0492370+02:00 0HLI8IMR54BTL:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 97.0251ms (afa2e885)
+2018-11-12T13:55:17.0492370+02:00 0HLI8IMR54BTJ:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 93.6741ms (afa2e885)
+2018-11-12T13:55:17.0519535+02:00 0HLI8IMR54BTK:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:55:17.0520751+02:00 0HLI8IMR54BTK:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:55:17.0526635+02:00 0HLI8IMR54BTK:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:55:17.0536129+02:00 0HLI8IMR54BTK:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:55:17.0540058+02:00 0HLI8IMR54BTK:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:55:17.0543612+02:00 0HLI8IMR54BTK:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:55:17.0547695+02:00 0HLI8IMR54BTK:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:55:17.0555960+02:00 0HLI8IMR54BTJ:00000002 [INF] Request finished in 350.638ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:55:17.0581556+02:00 0HLI8IMR54BTK:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:55:17.0583911+02:00 0HLI8IMR54BTL:00000002 [INF] Request finished in 354.4183ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:55:17.0586078+02:00 0HLI8IMR54BTK:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.177ms. (50a9e262)
+2018-11-12T13:55:17.0589214+02:00 0HLI8IMR54BTK:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:55:17.0593438+02:00 0HLI8IMR54BTK:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 5.6328ms (afa2e885)
+2018-11-12T13:55:17.0595367+02:00 0HLI8IMR54BTK:00000002 [INF] Request finished in 7.5515ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:55:17.0915259+02:00 0HLI8IMR54BTJ:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/cf5aed50-30f6-4350-855a-75f751a61896.jpg   (ca22a1cb)
+2018-11-12T13:55:17.1034846+02:00 0HLI8IMR54BTJ:00000003 [INF] The file "/Images/testuser@gmail.com/Avatar/cf5aed50-30f6-4350-855a-75f751a61896.jpg" was not modified (f1f8d725)
+2018-11-12T13:55:17.1058325+02:00 0HLI8IMR54BTJ:00000003 [INF] Request finished in 14.4272ms 304 image/jpeg (791a596a)
+2018-11-12T13:59:32.2941876+02:00 0HLI8IMR54BTM:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:32.2947292+02:00 0HLI8IMR54BTM:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:32.2949143+02:00 0HLI8IMR54BTM:00000001 [INF] Request finished in 0.8371ms 204  (791a596a)
+2018-11-12T13:59:32.2950048+02:00 0HLI8IMR54BTN:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:32.2950692+02:00 0HLI8IMR54BTN:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:32.2951213+02:00 0HLI8IMR54BTN:00000001 [INF] Request finished in 0.1314ms 204  (791a596a)
+2018-11-12T13:59:32.2984078+02:00 0HLI8IMR54BTO:00000001 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:59:32.2985213+02:00 0HLI8IMR54BTO:00000001 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:32.2986088+02:00 0HLI8IMR54BTO:00000001 [INF] Request finished in 0.2406ms 204  (791a596a)
+2018-11-12T13:59:32.5718419+02:00 0HLI8IMR54BTM:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:32.5723364+02:00 0HLI8IMR54BTM:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:32.5727162+02:00 0HLI8IMR54BTM:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:32.5729875+02:00 0HLI8IMR54BTM:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:32.5730942+02:00 0HLI8IMR54BTM:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:59:32.5734326+02:00 0HLI8IMR54BTM:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:59:32.5739100+02:00 0HLI8IMR54BTM:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:32.5761704+02:00 0HLI8IMR54BTM:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:32.5765540+02:00 0HLI8IMR54BTM:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.0233ms. (50a9e262)
+2018-11-12T13:59:32.5766850+02:00 0HLI8IMR54BTM:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:59:32.5769141+02:00 0HLI8IMR54BTM:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 3.8681ms (afa2e885)
+2018-11-12T13:59:32.5770404+02:00 0HLI8IMR54BTM:00000002 [INF] Request finished in 5.2718ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:32.5804670+02:00 0HLI8IMR54BTN:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:59:32.5805877+02:00 0HLI8IMR54BTN:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:32.5808155+02:00 0HLI8IMR54BTN:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:32.5840173+02:00 0HLI8IMR54BTN:00000002 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:32.5842716+02:00 0HLI8IMR54BTN:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:59:32.5846629+02:00 0HLI8IMR54BTN:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:32.5861344+02:00 0HLI8IMR54BTN:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:59:32.5863178+02:00 0HLI8IMR54BTN:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.978ms. (50a9e262)
+2018-11-12T13:59:32.5864497+02:00 0HLI8IMR54BTN:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:59:32.5866660+02:00 0HLI8IMR54BTN:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 2.5625ms (afa2e885)
+2018-11-12T13:59:32.5867620+02:00 0HLI8IMR54BTN:00000002 [INF] Request finished in 6.5608ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:32.6303041+02:00 0HLI8IMR54BTO:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:32.6304978+02:00 0HLI8IMR54BTO:00000002 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:32.6311105+02:00 0HLI8IMR54BTO:00000002 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:32.6312624+02:00 0HLI8IMR54BTO:00000002 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:32.6313495+02:00 0HLI8IMR54BTO:00000002 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:59:32.6317249+02:00 0HLI8IMR54BTO:00000002 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:59:32.6332097+02:00 0HLI8IMR54BTO:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:32.6353366+02:00 0HLI8IMR54BTO:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:32.6356037+02:00 0HLI8IMR54BTO:00000002 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.8003ms. (50a9e262)
+2018-11-12T13:59:32.6357484+02:00 0HLI8IMR54BTO:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:59:32.6359161+02:00 0HLI8IMR54BTO:00000002 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 4.59ms (afa2e885)
+2018-11-12T13:59:32.6360535+02:00 0HLI8IMR54BTO:00000002 [INF] Request finished in 5.7877ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:32.6985566+02:00 0HLI8IMR54BTM:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/cf5aed50-30f6-4350-855a-75f751a61896.jpg   (ca22a1cb)
+2018-11-12T13:59:32.7008014+02:00 0HLI8IMR54BTM:00000003 [INF] The file "/Images/testuser@gmail.com/Avatar/cf5aed50-30f6-4350-855a-75f751a61896.jpg" was not modified (f1f8d725)
+2018-11-12T13:59:32.7010574+02:00 0HLI8IMR54BTM:00000003 [INF] Request finished in 2.51ms 304 image/jpeg (791a596a)
+2018-11-12T13:59:37.4249408+02:00 0HLI8IMR54BTN:00000003 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/updateAvatar   (ca22a1cb)
+2018-11-12T13:59:37.4252788+02:00 0HLI8IMR54BTN:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:37.4253671+02:00 0HLI8IMR54BTN:00000003 [INF] Request finished in 0.5038ms 204  (791a596a)
+2018-11-12T13:59:37.4839099+02:00 0HLI8IMR54BTO:00000003 [INF] Request starting HTTP/1.1 PUT http://localhost:44357/api/Patient/updateAvatar multipart/form-data; boundary=----WebKitFormBoundaryNyNYdFf5H8MK297O 160378 (ca22a1cb)
+2018-11-12T13:59:37.4843225+02:00 0HLI8IMR54BTO:00000003 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:37.4847415+02:00 0HLI8IMR54BTO:00000003 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:37.5064801+02:00 0HLI8IMR54BTO:00000003 [INF] Route matched with "{action = \"UpdateAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:37.5066261+02:00 0HLI8IMR54BTO:00000003 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:59:37.5868969+02:00 0HLI8IMR54BTO:00000003 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" with arguments (["Microsoft.AspNetCore.Http.Internal.FormFile"]) - Validation state: Valid (4e3479ed)
+2018-11-12T13:59:37.5895315+02:00 0HLI8IMR54BTO:00000003 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:37.5966547+02:00 0HLI8IMR54BTO:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:37.7071527+02:00 0HLI8IMR54BTO:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedUserName\" = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:37.7344696+02:00 0HLI8IMR54BTO:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"AccessFailedCount\", u.\"AvatarURL\", u.\"BirthDate\", u.\"ConcurrencyStamp\", u.\"Email\", u.\"EmailConfirmed\", u.\"FirstName\", u.\"LastStatusChangeTime\", u.\"LockoutEnabled\", u.\"LockoutEnd\", u.\"NormalizedEmail\", u.\"NormalizedUserName\", u.\"PassportURL\", u.\"PasswordHash\", u.\"PhoneNumber\", u.\"PhoneNumberConfirmed\", u.\"SecondName\", u.\"SecurityStamp\", u.\"SignUpTime\", u.\"StatusId\", u.\"ThirdName\", u.\"TwoFactorEnabled\", u.\"UserName\"
+FROM \"AspNetUsers\" AS u
+WHERE u.\"NormalizedEmail\" = @__normalizedEmail_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:37.9739825+02:00 0HLI8IMR54BTO:00000003 [INF] Executed DbCommand ("133"ms) [Parameters=["@p23='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p24='?', @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Int32), @p20='?', @p21='?' (DbType = Boolean), @p22='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AspNetUsers\" SET \"AccessFailedCount\" = @p0, \"AvatarURL\" = @p1, \"BirthDate\" = @p2, \"ConcurrencyStamp\" = @p3, \"Email\" = @p4, \"EmailConfirmed\" = @p5, \"FirstName\" = @p6, \"LastStatusChangeTime\" = @p7, \"LockoutEnabled\" = @p8, \"LockoutEnd\" = @p9, \"NormalizedEmail\" = @p10, \"NormalizedUserName\" = @p11, \"PassportURL\" = @p12, \"PasswordHash\" = @p13, \"PhoneNumber\" = @p14, \"PhoneNumberConfirmed\" = @p15, \"SecondName\" = @p16, \"SecurityStamp\" = @p17, \"SignUpTime\" = @p18, \"StatusId\" = @p19, \"ThirdName\" = @p20, \"TwoFactorEnabled\" = @p21, \"UserName\" = @p22
+WHERE \"Id\" = @p23 AND \"ConcurrencyStamp\" = @p24;" (0723d8ff)
+2018-11-12T13:59:38.9372170+02:00 0HLI8IMR54BTO:00000003 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1350.1759ms. (50a9e262)
+2018-11-12T13:59:38.9373625+02:00 0HLI8IMR54BTO:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:59:38.9390756+02:00 0HLI8IMR54BTO:00000003 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.UpdateAvatar (InternetHospital.WebApi)" in 1432.4901ms (afa2e885)
+2018-11-12T13:59:38.9395403+02:00 0HLI8IMR54BTO:00000003 [INF] Request finished in 1456.0002ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:42.1693815+02:00 0HLI8IMR54BTM:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:42.1695061+02:00 0HLI8IMR54BTM:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:42.1696004+02:00 0HLI8IMR54BTM:00000004 [INF] Request finished in 0.363ms 204  (791a596a)
+2018-11-12T13:59:42.1701542+02:00 0HLI8IMR54BTN:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:42.1702604+02:00 0HLI8IMR54BTN:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:42.1703479+02:00 0HLI8IMR54BTN:00000004 [INF] Request finished in 0.2329ms 204  (791a596a)
+2018-11-12T13:59:42.1852172+02:00 0HLI8IMR54BTO:00000004 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:59:42.1853213+02:00 0HLI8IMR54BTO:00000004 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:42.1854024+02:00 0HLI8IMR54BTO:00000004 [INF] Request finished in 0.2231ms 204  (791a596a)
+2018-11-12T13:59:42.4695283+02:00 0HLI8IMR54BTM:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:42.4696584+02:00 0HLI8IMR54BTM:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:42.4711786+02:00 0HLI8IMR54BTM:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:42.4742271+02:00 0HLI8IMR54BTM:00000005 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:42.4743334+02:00 0HLI8IMR54BTM:00000005 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:59:42.4745356+02:00 0HLI8IMR54BTN:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Doctors/specializations   (ca22a1cb)
+2018-11-12T13:59:42.4745680+02:00 0HLI8IMR54BTM:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:59:42.4746329+02:00 0HLI8IMR54BTN:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:42.4748693+02:00 0HLI8IMR54BTN:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:42.4749456+02:00 0HLI8IMR54BTM:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:42.4749968+02:00 0HLI8IMR54BTN:00000005 [INF] Route matched with "{action = \"GetSpecializations\", controller = \"Doctors\"}". Executing action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:42.4751952+02:00 0HLI8IMR54BTN:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:59:42.4755246+02:00 0HLI8IMR54BTN:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:42.4769476+02:00 0HLI8IMR54BTN:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"Name\" AS \"Specialization\"
+FROM \"Specializations\" AS s
+WHERE (
+    SELECT COUNT(*)::INT4
+    FROM \"Doctors\" AS d
+    WHERE s.\"Id\" = d.\"SpecializationId\"
+) > 0
+ORDER BY s.\"Id\"" (0723d8ff)
+2018-11-12T13:59:42.4770782+02:00 0HLI8IMR54BTN:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.8222ms. (50a9e262)
+2018-11-12T13:59:42.4771622+02:00 0HLI8IMR54BTN:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[InternetHospital.BusinessLogic.Models.SpecializationModel, InternetHospital.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-11-12T13:59:42.4773610+02:00 0HLI8IMR54BTN:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.DoctorsController.GetSpecializations (InternetHospital.WebApi)" in 2.3052ms (afa2e885)
+2018-11-12T13:59:42.4774617+02:00 0HLI8IMR54BTN:00000005 [INF] Request finished in 2.9388ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:42.7832289+02:00 0HLI8IMR54BTM:00000005 [INF] Executed DbCommand ("306"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:42.7834845+02:00 0HLI8IMR54BTM:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 308.8606ms. (50a9e262)
+2018-11-12T13:59:42.7836023+02:00 0HLI8IMR54BTM:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:59:42.7837294+02:00 0HLI8IMR54BTM:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 309.4323ms (afa2e885)
+2018-11-12T13:59:42.7838139+02:00 0HLI8IMR54BTM:00000005 [INF] Request finished in 314.7259ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:42.7965325+02:00 0HLI8IMR54BTO:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44357/api/Patient/getAvatar   (ca22a1cb)
+2018-11-12T13:59:42.7969651+02:00 0HLI8IMR54BTO:00000005 [INF] Policy execution successful. (0204925d)
+2018-11-12T13:59:42.7973363+02:00 0HLI8IMR54BTO:00000005 [INF] Successfully validated the token. (60169667)
+2018-11-12T13:59:42.7974847+02:00 0HLI8IMR54BTO:00000005 [INF] Route matched with "{action = \"GetAvatar\", controller = \"Patient\"}". Executing action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" (a44c0341)
+2018-11-12T13:59:42.7975607+02:00 0HLI8IMR54BTO:00000005 [INF] Authorization was successful. (0d575a54)
+2018-11-12T13:59:42.7978035+02:00 0HLI8IMR54BTO:00000005 [INF] Executing action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" - Validation state: Valid (dad538d7)
+2018-11-12T13:59:42.7980906+02:00 0HLI8IMR54BTO:00000005 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"ApplicationContext"' using provider '"Npgsql.EntityFrameworkCore.PostgreSQL"' with options: "MigrationsAssembly=InternetHospital.WebApi " (9958f5bb)
+2018-11-12T13:59:42.7997904+02:00 0HLI8IMR54BTO:00000005 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT e.\"Id\", e.\"AccessFailedCount\", e.\"AvatarURL\", e.\"BirthDate\", e.\"ConcurrencyStamp\", e.\"Email\", e.\"EmailConfirmed\", e.\"FirstName\", e.\"LastStatusChangeTime\", e.\"LockoutEnabled\", e.\"LockoutEnd\", e.\"NormalizedEmail\", e.\"NormalizedUserName\", e.\"PassportURL\", e.\"PasswordHash\", e.\"PhoneNumber\", e.\"PhoneNumberConfirmed\", e.\"SecondName\", e.\"SecurityStamp\", e.\"SignUpTime\", e.\"StatusId\", e.\"ThirdName\", e.\"TwoFactorEnabled\", e.\"UserName\"
+FROM \"AspNetUsers\" AS e
+WHERE e.\"Id\" = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-11-12T13:59:42.8000618+02:00 0HLI8IMR54BTO:00000005 [INF] Executed action method "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.1977ms. (50a9e262)
+2018-11-12T13:59:42.8001583+02:00 0HLI8IMR54BTO:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-11-12T13:59:42.8003106+02:00 0HLI8IMR54BTO:00000005 [INF] Executed action "InternetHospital.WebApi.Controllers.PatientController.GetAvatar (InternetHospital.WebApi)" in 2.7729ms (afa2e885)
+2018-11-12T13:59:42.8010085+02:00 0HLI8IMR54BTO:00000005 [INF] Request finished in 4.4846ms 200 application/json; charset=utf-8 (791a596a)
+2018-11-12T13:59:42.8218525+02:00 0HLI8IMR54BTN:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44357/Images/testuser@gmail.com/Avatar/132ed8fc-70f8-451c-bb92-824d05d5d493.jpg   (ca22a1cb)
+2018-11-12T13:59:44.2030556+02:00 0HLI8IMR54BTN:00000006 [INF] Sending file. Request path: '"/Images/testuser@gmail.com/Avatar/132ed8fc-70f8-451c-bb92-824d05d5d493.jpg"'. Physical path: '"C:\SoftServe Academy\Project\Internet-Hospital v6\Internet-Hospital\InternetHospital.WebApi\wwwroot\Images\testuser@gmail.com\Avatar\132ed8fc-70f8-451c-bb92-824d05d5d493.jpg"' (27b0a520)
+2018-11-12T13:59:44.2033995+02:00 0HLI8IMR54BTN:00000006 [INF] Request finished in 1382.6751ms 200 image/jpeg (791a596a)

@@ -1,12 +1,10 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersProfileService } from '../../../Services/users-profile.service';
 import { ImageValidationService } from '../../../Services/image-validation.service';
 import { NotificationService } from '../../../Services/notification.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { HOST_URL } from '../../../config';
 import { IllnessHistory } from 'src/app/Models/Illness-history';
-import { toDate } from '@angular/common/src/i18n/format_date';
-
 
 
 @Component({

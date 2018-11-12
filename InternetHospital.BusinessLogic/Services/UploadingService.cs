@@ -19,13 +19,11 @@ namespace InternetHospital.BusinessLogic.Services
     public class UploadingService : IUploadingFiles
     {
         private IHostingEnvironment _env;
-        private ApplicationContext _context;
         private UserManager<User> _userManager;
 
-        public UploadingService(IHostingEnvironment env, ApplicationContext context, UserManager<User> userManager)
+        public UploadingService(IHostingEnvironment env, UserManager<User> userManager)
         {
             _env = env;
-            _context = context;
             _userManager = userManager;
 
         }
@@ -36,7 +34,6 @@ namespace InternetHospital.BusinessLogic.Services
             const int MAX_HEIGHT = 3000;
             const int MIN_WIDTH = 150;
             const int MAX_WIDTH = 3000;
-            const int IMAGE_MAX_LENGTH = 20;
 
             bool isValiImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH) 
                 && ImageValidation.IsImage(image);
@@ -55,8 +52,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 Directory.CreateDirectory(fileDestDir);
             }
-
-            int fileNameLength = user.UserName.Length < IMAGE_MAX_LENGTH ? user.UserName.Length : IMAGE_MAX_LENGTH;
+            
             var fileExtesion = Path.GetExtension(image.FileName);
             var fileName = Guid.NewGuid().ToString() + fileExtesion;
             var fileFullPath = Path.Combine(fileDestDir, fileName);
@@ -69,7 +65,7 @@ namespace InternetHospital.BusinessLogic.Services
             string pathFile = $"/{folderName}/{user.UserName}/{avatarFolder}/{fileName}";
 
             user.AvatarURL = pathFile;
-            var result = await _userManager.UpdateAsync(user);
+            await _userManager.UpdateAsync(user);
 
             return user;
         }

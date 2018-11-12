@@ -6,9 +6,8 @@ export const DOCTOR_LIST = 'doctor-list';
 export const PAGE_404 = '404';
 export const API_DOCTORS = '/api/Doctors';
 export const USERS_PROFILE = 'users-profile';
-export const API_PATIENT_UPDATE = '/api/Patient/update';
 export const PATIENT_UPDATE_AVATAR = '/api/Patient/updateAvatar';
-export const PATIENT_GET_AVARAR = '/api/Patient/getAvatar';
+export const PATIENT_GET_AVATAR = '/api/Patient/getAvatar';
 // notification config
 export const TIME_DURATION = 3000;
 export const HORIZONTAL_ALIGN = 'right';

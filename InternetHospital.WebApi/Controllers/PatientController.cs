@@ -32,27 +32,27 @@ namespace InternetHospital.WebApi.Controllers
         [Authorize]
         public async Task<ActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
         {
-            //var patient = _userManager.GetUserAsync()
             var patientId = User.Identity?.Name;
             if (patientId != null && file != null)
             {
-                var patient = _context.Users.FirstOrDefault(p => p.Id == int.Parse(patientId));
-                var result = await _uploadingFiles.UploadAvatar(file, patient);
-                return Ok(new {
-                    patient.AvatarURL
-                    /*message = "Avatar was updated!"*/ });
+                var patient = await _userManager.FindByIdAsync(patientId);                
+                await _uploadingFiles.UploadAvatar(file, patient);
+                return Ok(new
+                {
+                    message = "Avatar was updated!"
+                });
             }
             return BadRequest(new { message = "Cannot change avatar!" });
         }
 
         [HttpGet("getAvatar")]
         [Authorize]
-        public IActionResult GetAvatar()
+        public async Task<IActionResult> GetAvatar()
         {
             var patientId = User.Identity?.Name;
             if (patientId != null)
             {
-                var patient = _context.Users.FirstOrDefault(p => p.Id == int.Parse(patientId));
+                var patient = await _userManager.FindByIdAsync(patientId);
                 return Ok(new
                 {
                     patient.AvatarURL
