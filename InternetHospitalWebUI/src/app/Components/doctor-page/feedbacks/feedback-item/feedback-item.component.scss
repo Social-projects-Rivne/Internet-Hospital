@@ -1,0 +1,41 @@
+.feedback-container{
+    border-left: 20px solid;
+    position: relative;
+    margin-top: 10px;
+
+    .feedback-date {
+        margin-right: 10px;
+        text-align: left;
+        display: inline-block;
+        vertical-align: top;
+        width: calc(40% - 10px);
+    }
+
+    .feedback-marks-container{
+        vertical-align:top; 
+        text-align: right;
+        display: inline-block;
+        width: 60%;
+
+        .marks{
+            display: inline-block;
+        }
+
+        .positive{
+            color: green;  
+            margin-right: 5px
+        }
+
+        .negative{
+            color: red;
+        }
+
+        mat-icon{
+            vertical-align: middle;
+        }
+    }
+
+    .body{
+        text-align: justify;
+    }
+}

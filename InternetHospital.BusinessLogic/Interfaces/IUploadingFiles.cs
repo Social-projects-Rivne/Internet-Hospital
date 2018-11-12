@@ -7,5 +7,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface IUploadingFiles
     {
         Task<User> UploadAvatar(IFormFile image, User user);
+        Task<User> UploadPassport(IFormFileCollection images, User user);
     }
 }

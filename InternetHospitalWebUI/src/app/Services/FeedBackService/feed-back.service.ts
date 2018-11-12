@@ -22,7 +22,6 @@ export class FeedBackService {
   });
 
   CreateFeedBack() {
-
     const typeUrl = this.url + 'create';
     return this.http.post(typeUrl, {Text: this.form.value['Text'], TypeId: this.form.value['TypeId']});
   }

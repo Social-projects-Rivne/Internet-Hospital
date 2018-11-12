@@ -1,0 +1,68 @@
+  #GlobalDiv {
+    background-color: #e1e8f0;
+    height: 100vh;
+  }
+
+  .form-fieldStrech {
+    width: 100%;
+  }
+
+  .mat-form-fieldStrech {
+      width: 100%;
+  }
+
+  .form-width {
+    background-origin: padding-box;
+    width: 40%;
+    min-width: 320px;
+    margin: auto;
+  }
+  
+  .marginbtn {
+      margin-top: 10px;
+      margin-left: 5px;
+      margin-right: 5px;
+  }
+  
+  .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+  }
+
+  .inner-div {
+    margin-top:20px;
+  }   
+
+  .upload-photos {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: white;
+      background-color: #e62739;
+      display: inline-block;
+      padding: 5px;
+      border-radius: 5px;
+  }
+  
+  .mat-card-title {
+      font-size: 2em;
+  }
+
+  .upload-passport {
+      margin-top: 10px;
+  }
+
+  .upload-succeded {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(0, 190, 0);
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  

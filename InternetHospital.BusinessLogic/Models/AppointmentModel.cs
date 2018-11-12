@@ -13,4 +13,13 @@ namespace InternetHospital.BusinessLogic.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
     }
+
+    public enum AppointmentStatuses
+    {
+        DEFAULT_STATUS = 1,
+        RESERVED_STATUS,
+        CANCELED_STATUS,
+        FINISHED_STATUS,
+        MISSED_STATUS
+    };
 }

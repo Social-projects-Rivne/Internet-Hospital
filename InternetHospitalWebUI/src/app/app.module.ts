@@ -26,16 +26,29 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
-import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
+// tslint:disable-next-line:max-line-length
+import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+
+import { DoctorPageComponent } from './Components/doctor-page/doctor-page.component';
+import { FeedbackItemComponent } from './Components/doctor-page/feedbacks/feedback-item/feedback-item.component';
+import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
+import { ImageModalDialogComponent } from './Components/doctor-page/gallery/image-modal-dialog.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
+
+import { UpdatePatientComponent } from './Components/PatientProfile/update-patient/update-patient.component';
+import { DateValidatorDirective } from './Directives/date-validator.directive';
+import { NgxMaskModule } from 'ngx-mask';
+
 import { DoctorPlansComponent } from './Components/DoctorPlans/doctorplans/doctorplans.component';
 import { CalendarModule, DateAdapter, CalendarDateFormatter, CalendarEventTitleFormatter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
 import { DatePipe } from '@angular/common';
-import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
+
 
 @NgModule({
   declarations: [
@@ -50,9 +63,16 @@ import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
     DoctorListComponent,
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
+    DoctorPageComponent,
+    FeedbackItemComponent,
+    GalleryComponent,
+    ImageModalDialogComponent,
     FeedbacksComponent,
-    DoctorPlansComponent,
+    UpdatePatientComponent,
+    DateValidatorDirective,
+    DoctorPlansComponent
   ],
+  entryComponents: [ ImageModalDialogComponent ],
   imports: [
     BrowserModule,
     MaterialModule,
@@ -63,6 +83,8 @@ import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
     HttpClientModule,
     FlexLayoutModule,
     AdminpanelModule,
+    OverlayModule,
+    NgxMaskModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

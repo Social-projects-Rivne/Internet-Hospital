@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { HOST_URL } from 'src/app/config';
 
 @Component({
-  selector: 'app-feedbacks',
+  selector: 'app-systemfeedbacks',
   templateUrl: './feedbacks.component.html',
   styleUrls: ['./feedbacks.component.scss'],
   providers: [FeedBackService]
