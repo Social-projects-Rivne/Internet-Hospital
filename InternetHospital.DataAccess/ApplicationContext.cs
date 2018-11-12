@@ -25,9 +25,11 @@ namespace InternetHospital.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new DoctorConfiguration());
-            builder.ApplyConfiguration(new StatusConfiguration());
-            builder.ApplyConfiguration(new AppointmenStatusConfiguration());
-            builder.ApplyConfiguration(new SpecializationConfiguration());
+
+            // TODO: rewrite to do not use json configs
+            // builder.ApplyConfiguration(new StatusConfiguration());
+            // builder.ApplyConfiguration(new AppointmenStatusConfiguration());
+            // builder.ApplyConfiguration(new SpecializationConfiguration());
             base.OnModelCreating(builder);
         }
     }
