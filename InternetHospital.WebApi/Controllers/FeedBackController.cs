@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class FeedBackController : ControllerBase
@@ -35,27 +36,22 @@ namespace InternetHospital.WebApi.Controllers
             int userId;
             Int32.TryParse(User.Identity.Name, out userId);
 
-            if (feedBackCreationModel.Text.Length <= 10)
-            {
-                return NotFound(new { message = "The text not in correct format" });
-            }
-            if (feedBackCreationModel.TypeId == 0)
-            {
-                return NotFound(new { message = "Feedback format is invalid" });
-            }
-            if (feedBackCreationModel == null)
-            {
-                return NotFound(new { message = "The form is empty" });
-            }
-
             if (feedBackCreationModel != null)
             {
-                _feedBackService.FeedBackCreate(feedBackCreationModel, userId);
-                return Ok();
+                if (feedBackCreationModel.Text.Length <= 10)
+                    return NotFound(new { message = "The text not in correct format" });
+                if (feedBackCreationModel.TypeId == 0)
+                    return NotFound(new { message = "Feedback format is invalid" });
+                else
+                {
+                    _feedBackService.FeedBackCreate(feedBackCreationModel, userId);
+                    return Ok(new { message = "Thank you for your feedback" });
+                }
             }
             else
             {
-                return NotFound(new { message = "The form isn't valid or there is no currently logined users" });
+              //  ModelState.AddModelError("", "Wrong form!");
+                return BadRequest(new { message = "Wrong form!" });
             }
         }
 

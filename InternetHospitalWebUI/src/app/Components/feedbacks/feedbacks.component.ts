@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { FeedBackService } from '../../Services/FeedBackService/feed-back.service';
 import { FeedBackType } from '../../Models/FeedBackType';
-import { NotificationService } from '../../Services/notification.service'
+import { NotificationService } from '../../Services/notification.service';
+import { Router } from '@angular/router';
+import { HOST_URL } from 'src/app/config';
 
 @Component({
   selector: 'app-feedbacks',
@@ -16,7 +18,8 @@ export class FeedbacksComponent implements OnInit {
 
   constructor(
     private _feedbackService: FeedBackService,
-    private _notification: NotificationService
+    private _notification: NotificationService,
+    private _router: Router
     ) { }
 
   ngOnInit() {
@@ -27,6 +30,7 @@ export class FeedbacksComponent implements OnInit {
     this._feedbackService.CreateFeedBack().subscribe(
         data => {
           this._notification.success(data['message']);
+          this._router.navigate(['/']);
         },
         error => {
           this._notification.error(error);

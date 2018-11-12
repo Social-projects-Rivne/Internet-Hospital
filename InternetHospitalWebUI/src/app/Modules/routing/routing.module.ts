@@ -29,7 +29,7 @@ const ROUTES: Routes = [
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
-      { path: FEEDBACKS, component: FeedbacksComponent },
+      { path: FEEDBACKS, component: FeedbacksComponent, canDeactivate: [AuthGuard] },
     ]
   },
   { path: PAGE_404, component: Page404Component },
