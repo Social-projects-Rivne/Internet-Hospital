@@ -5,8 +5,8 @@ import { Doctor } from '../Models/Doctors';
 import { PaginationService } from './pagination.service';
 import { Specialization } from '../Models/Specialization';
 
-const searchbyname = "searchbyname";
-const searchbyspecialization = "searchbyspecialization";
+const searchbyname = 'searchbyname';
+const searchbyspecialization = 'searchbyspecialization';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class DoctorsService {
   doctorsAmount: number;
 
   url = HOST_URL + API_DOCTORS;
-  
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -26,6 +26,11 @@ export class DoctorsService {
       .set("page", this.paginationService.pageIndex.toString())
       .set("pagecount", this.paginationService.pageSize.toString())
   };
+
+  getDoctor(id: number) {
+    const doctorsUrl = `${this.url}/${id}`;
+    return this.http.get(doctorsUrl, this.httpOptions);
+  }
 
   constructor(private http: HttpClient,
     private paginationService: PaginationService) { }

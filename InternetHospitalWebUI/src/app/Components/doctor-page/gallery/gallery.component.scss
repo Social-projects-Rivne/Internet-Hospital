@@ -1,0 +1,56 @@
+#gallery-container{
+    position: relative;
+    text-align: center;
+    height: 134px;
+
+    button{
+        min-width: 40px;
+        width: 40px;
+        padding: 0;
+        position: absolute;
+        height: 128px;
+        top: 3px;
+    }
+    
+    .left{
+        left: 0;
+    }
+    
+    .right{
+        right: 0;
+    }
+
+    #slider{
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: middle;
+    
+        #img-line{
+            position: relative;
+            transition: all ease 0.5s;
+    
+            .img-container{
+                display: inline-block;
+                height: 128px;
+                width: 128px;
+                border: white 3px solid;
+                position: relative;
+                background-color: black;
+                
+                img{
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    position: absolute;
+                    width: 128px;
+                    margin: auto;
+                }
+            }
+    
+            .img-container:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
