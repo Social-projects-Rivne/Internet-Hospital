@@ -7,13 +7,14 @@ using System.IO;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class UploadingService : IUploadingFiles
     {
         private readonly IHostingEnvironment _env;
-        private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
 
         const int MIN_HEIGHT = 150;
