@@ -34,14 +34,15 @@ export class RegistrationService {
     });
   }
 
-  postUser(user: User, fileToUpload: File) {    
+  postUser(fileToUpload: File) {    
         let formData = new FormData();
-        
+        let form = this.form.controls;
+
         formData.append("Image", fileToUpload);
-        formData.append("Email", user.Email);
-        formData.append("Password", user.Password);
-        formData.append("ConfirmPassword", user.ConfirmPassword);    
-        formData.append("Role", user.Role);    
+        formData.append("Email", form.Email.value);
+        formData.append("Password", form.Password.value);
+        formData.append("ConfirmPassword", form.ConfirmPassword.value);    
+        formData.append("Role", form.Role.value);    
     
          return this.http.post(this.url, formData);
       }

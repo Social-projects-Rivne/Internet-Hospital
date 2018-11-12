@@ -1,0 +1,142 @@
+<div class="container">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <div fxFlex="100%">
+            <mat-card class="navigation-doctor-plan">
+                <div class="container">
+                    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+                        <mat-card-title>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</mat-card-title>
+                    </div>
+                    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+                        <div fxFlex="20%">
+                            <mat-button-toggle-group>
+                                <mat-button-toggle class="btn btn-primary"
+                                    mwlCalendarPreviousView
+                                    [view]="view"
+                                    [(viewDate)]="viewDate"
+                                    (viewDateChange)="activeDayIsOpen = false">
+                                    Previous
+                                </mat-button-toggle>
+                                <mat-button-toggle
+                                    class="btn btn-outline-secondary"
+                                    mwlCalendarToday
+                                    [(viewDate)]="viewDate">
+                                    Today
+                                </mat-button-toggle>
+                                <mat-button-toggle
+                                    class="btn btn-primary"
+                                    mwlCalendarNextView
+                                    [view]="view"
+                                    [(viewDate)]="viewDate"
+                                    (viewDateChange)="activeDayIsOpen = false">
+                                    Next
+                                </mat-button-toggle>
+                              </mat-button-toggle-group>
+                        </div>
+                        <div fxFlex="60%"></div>
+                        <div fxFlex="20%">
+                            <mat-button-toggle-group>
+                                <mat-button-toggle
+                                    class="btn btn-primary"
+                                    (click)="view = CalendarView.Month"
+                                    [class.active]="view === CalendarView.Month">
+                                    Month
+                                  </mat-button-toggle>
+                                  <mat-button-toggle
+                                    class="btn btn-primary"
+                                    (click)="view = CalendarView.Week"
+                                    [class.active]="view === CalendarView.Week">
+                                    Week
+                                  </mat-button-toggle>
+                              </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>                       
+            </mat-card> 
+        </div>        
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <div fxFlex="100%">
+            <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Create plan
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <form class="example-container" id="FatherForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                      <mat-card>
+                        <mat-card-content id="divider">
+                            <mat-form-field id="mat-form-fieldStrech">
+                              <mat-label>Start</mat-label>
+                              <input 
+                              matInput 
+                              formControlName="start" 
+                              type="text" 
+                              mwlFlatpickr 
+                              [altInput]="true" 
+                              [convertModelValue]="true"
+                              [enableTime]="true" 
+                              [minuteIncrement]="5" 
+                              [time24hr]="true" 
+                              dateFormat="Y-m-dTH:i" 
+                              altFormat="F j, Y H:i"
+                              placeholder="Not set">
+                            </mat-form-field>
+                            <mat-form-field id="mat-form-fieldStrech">
+                              <mat-label>End</mat-label>
+                              <input 
+                              matInput 
+                              formControlName="end" 
+                              type="text" 
+                              mwlFlatpickr 
+                              [altInput]="true" 
+                              [convertModelValue]="true"
+                              [enableTime]="true" 
+                              [minuteIncrement]="5" 
+                              [time24hr]="true" 
+                              dateFormat="Y-m-dTH:i" 
+                              altFormat="F j, Y H:i"
+                              placeholder="Not set">
+                            </mat-form-field>
+                        </mat-card-content>
+                        <section class="RightFloat">
+                          <button id="SignInBtn" mat-raised-button type="submit">CREATE</button>
+                        </section>
+                      </mat-card>
+                    </form>
+                </mat-expansion-panel>                
+              </mat-accordion>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <div fxFlex="100%">
+        <div class="row text-center"  style="margin-top:20px">            
+          <br>
+          <div [ngSwitch]="view" style="margin: 40px">
+            <mwl-calendar-month-view
+              *ngSwitchCase="CalendarView.Month"
+              [viewDate]="viewDate"
+              [events]="events"
+              [refresh]="refresh"
+              [activeDayIsOpen]="activeDayIsOpen"
+              (dayClicked)="dayClicked($event.day)"
+              (eventClicked)="handleEvent('Clicked', $event.event)"
+              (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view
+              *ngSwitchCase="CalendarView.Week"
+              [viewDate]="viewDate"
+              [events]="events"
+              [refresh]="refresh"
+              [dayStartHour]="6"
+              [dayEndHour]="20"
+              [hourSegments]="12"
+              (eventClicked)="handleEvent('Clicked', $event.event)"
+              (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-week-view>
+          </div>
+        </div>
+    </div>
+    </div>
+    </div>
+  

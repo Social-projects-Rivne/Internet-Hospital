@@ -1,0 +1,65 @@
+<div id="GlobalDiv" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Update Your profile</mat-card-title>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <form fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="space-evenly center" [formGroup]="service.form"
+      #updateForm="ngForm" class="normal-form form-width" (ngSubmit)="onSubmit(updateForm)" enctype="multipart/form-data">
+
+
+      <div fxLayout="column" fxLayoutAlign="space-around center" class="inner-div">
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <input required formControlName="FirstName" matInput placeholder="First Name">
+            <mat-error>First Name is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <input required formControlName="SecondName" matInput placeholder="Second Name">
+            <mat-error>Second Name is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <input required formControlName="ThirdName" matInput placeholder="Third Name">
+            <mat-error>Third Name is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <input required type="date" formControlName="BirthDate" matInput placeholder="Birthday">
+            <mat-error>
+              Invalid date. <span *ngIf="service.form.get('BirthDate').dirty && service.form.get('BirthDate').errors?.date">Unappropriate years!</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <input type="text" required formControlName="PhoneNumber" matInput [dropSpecialCharacters]="false" prefix="{{locale}} " mask="(00) 000-00-00" [showMaskTyped]="true" placeholder="Phone number">
+            <mat-error>Invalid number.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="upload-passport">
+          <input id="PassportURL" formControlName="PassportURL" #PassportURL type="file" accept="image/*" (change)="imageHandling.handlePassportInput($event.target, service.form)"
+            class="inputfile" multiple name="PassportURL">
+          <label *ngIf="!imageHandling.isPassportUploaded" class="upload-photos mi-text-header" for="PassportURL">
+            <i class="fas fa-upload"></i> 
+            <strong> Upload passport photos</strong>
+          </label>
+          <label *ngIf="imageHandling.isPassportUploaded" class="upload-succeded mi-text-header" for="PassportURL">
+              <i class="fas fa-check"></i>
+              <strong> Upload succeded</strong>  
+          </label>
+        </div>
+        <div div fxLayout="row" fxLayoutAlign="space-around center">
+          <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="imageHandling.isPassportUploaded == false || service.form.invalid">Submit</button>
+          <button class="marginbtn" mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

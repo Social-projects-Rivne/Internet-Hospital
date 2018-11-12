@@ -4,6 +4,7 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
@@ -14,11 +15,6 @@ namespace InternetHospital.BusinessLogic.Services
         private const int MINIMUM_APPOINTMENT_TIME = 15;
         private const int MINIMUM_TIME_BEFORE_APPOINTMENT = 10;
         private const int TIME_FOR_FINISHING_APPOINTMENT = 12;
-        private const int DEFAULT_STATUS = 1;
-        private const int RESERVED_STATUS = 2;
-        private const int CANCELED_STATUS = 3;
-        private const int FINISHED_STATUS = 4;
-        private const int MISSED_STATUS = 5;
 
         public AppointmentService(ApplicationContext context)
         {
@@ -29,12 +25,15 @@ namespace InternetHospital.BusinessLogic.Services
         /// Get all open and reserved appointments for current doctor
         /// </summary>
         /// <param name="doctorId"></param>
-        /// <returns></returns>
-        public IQueryable<AppointmentModel> GetMyAppointments(int doctorId)
+        /// <returns>
+        /// returns a list of doctor's appointments
+        /// </returns>
+        public IEnumerable<AppointmentModel> GetMyAppointments(int doctorId)
         {
             var appointments = _context.Appointments
                 .Where(a => (a.DoctorId == doctorId)
-                            && (a.StatusId == DEFAULT_STATUS || a.StatusId == RESERVED_STATUS))
+                            && (a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS 
+                                || a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS))
                 .Select(a => new AppointmentModel
                 {
                     Id = a.Id,
@@ -46,7 +45,7 @@ namespace InternetHospital.BusinessLogic.Services
                     EndTime = a.EndTime,
                     Status = a.Status.Name
                 });
-            return appointments;
+            return appointments.ToList();
         }
 
         /// <summary>
@@ -54,7 +53,9 @@ namespace InternetHospital.BusinessLogic.Services
         /// </summary>
         /// <param name="creationModel"></param>
         /// <param name="doctorId"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// returns status and message of appointment creation
+        /// </returns>
         public (bool status, string message) AddAppointment(AppointmentCreationModel creationModel, int doctorId)
         {
             DeleteUncommittedAppointments(doctorId);
@@ -85,7 +86,7 @@ namespace InternetHospital.BusinessLogic.Services
 
             var ifUnfinished = _context.Appointments.Any(a => a.DoctorId == doctorId
                                                               && (DateTime.Now - a.EndTime).TotalHours > TIME_FOR_FINISHING_APPOINTMENT
-                                                              && (a.StatusId == RESERVED_STATUS));
+                                                              && (a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS));
             if (ifUnfinished)
             {
                 return (false, "You have out of date appointments. Please close it before creating new");
@@ -98,12 +99,14 @@ namespace InternetHospital.BusinessLogic.Services
         /// Get all available appointments of selected doctor 
         /// </summary>
         /// <param name="doctorId"></param>
-        /// <returns></returns>
-        public IQueryable<AvailableAppointmentModel> GetAvailableAppointments(int doctorId)
+        /// <returns>
+        /// returns a list of appointments what can be reserved by patient
+        /// </returns>
+        public IEnumerable<AvailableAppointmentModel> GetAvailableAppointments(int doctorId)
         {
             var appointments = _context.Appointments
-                .Where(a => (a.DoctorId == doctorId) 
-                            && (a.StatusId == DEFAULT_STATUS)
+                .Where(a => (a.DoctorId == doctorId)
+                            && (a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS)
                             && (a.StartTime - DateTime.Now).TotalMinutes > MINIMUM_TIME_BEFORE_APPOINTMENT)
                 .Select(a => new AvailableAppointmentModel
                 {
@@ -112,7 +115,7 @@ namespace InternetHospital.BusinessLogic.Services
                     StartTime = a.StartTime,
                     EndTime = a.EndTime
                 });
-            return appointments;
+            return appointments.ToList();
         }
 
         /// <summary>
@@ -120,7 +123,9 @@ namespace InternetHospital.BusinessLogic.Services
         /// </summary>
         /// <param name="appointmentId"></param>
         /// <param name="doctorId"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// returns status and message about deleting an appointment
+        /// </returns>
         public (bool status, string message) DeleteAppointment(int appointmentId, int doctorId)
         {
             var appointment = _context.Appointments
@@ -135,7 +140,7 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can delete only your appointments");
             }
 
-            if (appointment.StatusId != DEFAULT_STATUS)
+            if (appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
             {
                 return (false, "This appointment is reserved. You can only cancel it");
             }
@@ -151,7 +156,9 @@ namespace InternetHospital.BusinessLogic.Services
         /// </summary>
         /// <param name="appointmentId"></param>
         /// <param name="doctorId"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// returns status and message of appointment cancellation
+        /// </returns>
         public (bool status, string message) CancelAppointment(int appointmentId, int doctorId)
         {
             var appointment = _context.Appointments
@@ -166,12 +173,12 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can cancel only your appointments");
             }
 
-            if (appointment.StatusId != RESERVED_STATUS)
+            if (appointment.StatusId != (int) AppointmentStatuses.RESERVED_STATUS)
             {
                 return (false, "You can cancel only reserved appointments");
             }
 
-            appointment.StatusId = CANCELED_STATUS;
+            appointment.StatusId = (int) AppointmentStatuses.CANCELED_STATUS;
             _context.SaveChanges();
 
             return (true, "Appointment was canceled");
@@ -182,7 +189,9 @@ namespace InternetHospital.BusinessLogic.Services
         /// </summary>
         /// <param name="appointmentId"></param>
         /// <param name="doctorId"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// returns status and message of appointment finishing
+        /// </returns>
         public (bool status, string message) FinishAppointment(int appointmentId, int doctorId)
         {
             var appointment = _context.Appointments
@@ -197,12 +206,12 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can finish only your appointments");
             }
 
-            if (appointment.StatusId != RESERVED_STATUS)
+            if (appointment.StatusId != (int) AppointmentStatuses.RESERVED_STATUS)
             {
                 return (false, "You can finish only reserved appointments");
             }
 
-            appointment.StatusId = FINISHED_STATUS;
+            appointment.StatusId = (int) AppointmentStatuses.FINISHED_STATUS;
             _context.SaveChanges();
 
             return (true, "Appointment was finished");
@@ -213,7 +222,7 @@ namespace InternetHospital.BusinessLogic.Services
             try
             {
                 var appointment = Mapper.Map<Appointment>(model);
-                appointment.StatusId = DEFAULT_STATUS;
+                appointment.StatusId = (int) AppointmentStatuses.DEFAULT_STATUS;
                 appointment.DoctorId = id;
                 if (model.Address == null)
                     appointment.Address = _context.Doctors.FirstOrDefault(d => d.UserId == id)?.Address;
@@ -227,14 +236,22 @@ namespace InternetHospital.BusinessLogic.Services
             }
         }
 
-        private void DeleteUncommittedAppointments(int doctorId)
+        private bool DeleteUncommittedAppointments(int doctorId)
         {
-            var uncommittedAppointments = _context.Appointments
-                .Where(a => a.DoctorId == doctorId
-                            && a.StatusId == DEFAULT_STATUS
-                            && DateTime.Now > a.StartTime);
-            _context.RemoveRange(uncommittedAppointments);
-            _context.SaveChanges();
+            try
+            {
+                var uncommittedAppointments = _context.Appointments
+                    .Where(a => a.DoctorId == doctorId
+                                && a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS
+                                && DateTime.Now > a.StartTime);
+                _context.RemoveRange(uncommittedAppointments);
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

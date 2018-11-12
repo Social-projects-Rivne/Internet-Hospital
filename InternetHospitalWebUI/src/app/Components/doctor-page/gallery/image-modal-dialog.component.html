@@ -1,0 +1,12 @@
+<mat-dialog-content>
+    <button class="left" mat-button (click)="change(-1)">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <img [src]="data.images[data.selected]">
+    <div class="image-number">
+        <span>{{data.selected + 1}}/{{data.images.length}}</span>
+    </div>
+    <button class="right" mat-button (click)="change(1)">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+</mat-dialog-content>
