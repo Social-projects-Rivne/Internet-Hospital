@@ -30,8 +30,15 @@ namespace InternetHospital.BusinessLogic.Services
                 TypeId = model.TypeId
             };
 
-             _context.FeedBacks.Add(feedback);
-             _context.SaveChanges();
+            _context.FeedBacks.Add(feedback);
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<FeedBackType> GetFeedBackTypes()

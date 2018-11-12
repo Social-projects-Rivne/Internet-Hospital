@@ -3,15 +3,15 @@
   <mat-card id="FatherCard">
 
     <mat-card-header>
-      <mat-card-title>Leave us a feedback</mat-card-title>
+      <mat-card-title>Leave feedback</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     
     <form [formGroup]="_feedbackService.form" div fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
       
       <mat-form-field id="SelectComp">
-            <mat-select formControlName="TypeId" [(ngModel)]="selectedValue">
-              <mat-option  *ngFor="let item of feedbackTypes" [value]="item.id">
+            <mat-select placeholder="Select type" required formControlName="TypeId" [(value)]="selected">
+              <mat-option *ngFor="let item of feedbackTypes" [value]="item.id">
                 {{item.name}}
               </mat-option>
             </mat-select>

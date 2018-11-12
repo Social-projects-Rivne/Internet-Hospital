@@ -33,7 +33,20 @@ namespace InternetHospital.WebApi.Controllers
         {
 
             int userId;
-            Int32.TryParse(User.Identity.Name,out userId);
+            Int32.TryParse(User.Identity.Name, out userId);
+
+            if (feedBackCreationModel.Text.Length <= 10)
+            {
+                return NotFound(new { message = "The text not in correct format" });
+            }
+            if (feedBackCreationModel.TypeId == 0)
+            {
+                return NotFound(new { message = "Feedback format is invalid" });
+            }
+            if (feedBackCreationModel == null)
+            {
+                return NotFound(new { message = "The form is empty" });
+            }
 
             if (feedBackCreationModel != null)
             {
