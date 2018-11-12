@@ -1,0 +1,58 @@
+<div class="profile">
+  <mat-card fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="40px">
+    <div class="profile-top" fxLayout="row" fxFlex="50%">
+      <div class="patient-photo" fxLayoutAlign="center center" fxFlex>
+
+        <form enctype="multipart/form-data">
+          <input style="display: none" type="file" (change)="getAvatar($event.target.files)" name="Image" #Image>
+          <img [src]="imageToShow" alt="Avatar" (click)="Image.click()">
+        </form>
+
+      </div>
+      <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="20px" fxFlex>
+        <div>First name: {{firstName}}</div>
+        <div>Secon name: {{secondName}}</div>
+        <div>Last name: {{lastName}}</div>
+      </div>
+    </div>
+    <div class="pation-additional-info">
+      Additional info about me:
+      <p>{{tempText}}</p>
+    </div>
+    <div class="profile-bottom" fxLayout="column" fxFlex="50%" fxLayoutGap="0.5%" >
+      <div class="without_paginator" fxLayout="row" fxLayoutGap="1%">
+        <div class="patient-history-search-filter" fxFlex="30%">
+          <app-doctor-list-search-item [specializations]="doctorService.specializations"></app-doctor-list-search-item>
+        </div>
+        <div class="patient-history" fxFlex>
+          <mat-list>
+            <div class="history-items" *ngFor="let IllnessHistory of tempHistory" fxLayoutGap="0.5%" fxLayout="row">
+              <mat-expansion-panel fxFlex>
+                <mat-expansion-panel-header>
+                  <div fxLayout="row">
+                    <mat-list-item>
+                      <div>{{IllnessHistory.dateTime}}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <div>{{IllnessHistory.doctorName}}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <div>{{IllnessHistory.diagnosis}}</div>
+                    </mat-list-item>
+                  </div>
+                </mat-expansion-panel-header>
+                <div>
+                  Symptoms: {{IllnessHistory.symptoms}}
+                </div>
+                <div>
+                  Treatment: {{IllnessHistory.treatment}}
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </mat-list>
+        </div>
+      </div>
+      <mat-paginator></mat-paginator>
+    </div>
+  </mat-card>
+</div>

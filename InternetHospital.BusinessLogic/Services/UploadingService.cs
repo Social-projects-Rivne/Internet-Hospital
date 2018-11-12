@@ -20,11 +20,14 @@ namespace InternetHospital.BusinessLogic.Services
     {
         private IHostingEnvironment _env;
         private ApplicationContext _context;
+        private UserManager<User> _userManager;
 
-        public UploadingService(IHostingEnvironment env, ApplicationContext context)
+        public UploadingService(IHostingEnvironment env, ApplicationContext context, UserManager<User> userManager)
         {
             _env = env;
             _context = context;
+            _userManager = userManager;
+
         }
 
         public async Task<User> UploadAvatar(IFormFile image, User user)
@@ -55,7 +58,7 @@ namespace InternetHospital.BusinessLogic.Services
 
             int fileNameLength = user.UserName.Length < IMAGE_MAX_LENGTH ? user.UserName.Length : IMAGE_MAX_LENGTH;
             var fileExtesion = Path.GetExtension(image.FileName);
-            var fileName = user.UserName.Substring(0, fileNameLength) + fileExtesion;
+            var fileName = Guid.NewGuid().ToString() + fileExtesion;
             var fileFullPath = Path.Combine(fileDestDir, fileName);
 
             using (var stream = new FileStream(fileFullPath, FileMode.Create))
@@ -64,9 +67,9 @@ namespace InternetHospital.BusinessLogic.Services
             }
 
             string pathFile = $"/{folderName}/{user.UserName}/{avatarFolder}/{fileName}";
-            _context.Users.Update(user);
-            user.AvatarURL = pathFile; 
-            await _context.SaveChangesAsync();
+
+            user.AvatarURL = pathFile;
+            var result = await _userManager.UpdateAsync(user);
 
             return user;
         }

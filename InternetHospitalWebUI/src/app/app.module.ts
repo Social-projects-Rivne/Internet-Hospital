@@ -6,6 +6,7 @@ import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -21,19 +22,22 @@ import { InterceptorService  } from './Services/interceptor.service';
 
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
+import {NgxMaskModule} from 'ngx-mask';
+
 import { AuthGuard } from './Services/Guards/auth.guard';
 import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
-import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component'
+import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { UsersProfileComponent } from './Components/PatientProfile/patient-profile/users-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ROUTING_COMPONENTS, 
+    ROUTING_COMPONENTS,
     HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
@@ -42,7 +46,8 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     Page404Component,
     DoctorListComponent,
     DoctorListItemComponent,
-    DoctorListSearchItemComponent
+    DoctorListSearchItemComponent,
+    UsersProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,10 +58,12 @@ import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
     RoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    AdminpanelModule
+    AdminpanelModule,
+    NgxMaskModule.forRoot(),
+    MatExpansionModule,
   ],
-  exports:[MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, 
+  exports: [MaterialModule],
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

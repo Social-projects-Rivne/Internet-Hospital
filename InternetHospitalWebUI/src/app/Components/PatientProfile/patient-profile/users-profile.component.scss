@@ -1,0 +1,31 @@
+.profile {
+    min-height: 100%;
+    overflow: auto;
+    padding-bottom: 350px;
+}
+.profile-top {
+    height: auto + 100px;
+}
+
+.profile-top, .profile-bottom {
+    margin-top: 5%;
+    min-height: 50%;
+}
+
+.patient-photo {
+    img {
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+    }
+}
+// .history-items{
+//     mat-expansion-panel{
+//         width: -webkit-fill-available;
+//     }
+// }
+// .collapsed{
+//     border: 1px solid gray;
+//     padding: 20px;
+    
+// }
