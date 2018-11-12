@@ -37,10 +37,7 @@ namespace InternetHospital.WebApi.Controllers
             {
                 var patient = await _userManager.FindByIdAsync(patientId);                
                 await _uploadingFiles.UploadAvatar(file, patient);
-                return Ok(new
-                {
-                    message = "Avatar was updated!"
-                });
+                return Ok();
             }
             return BadRequest(new { message = "Cannot change avatar!" });
         }

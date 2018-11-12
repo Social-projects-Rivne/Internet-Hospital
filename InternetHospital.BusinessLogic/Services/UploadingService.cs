@@ -25,7 +25,6 @@ namespace InternetHospital.BusinessLogic.Services
         {
             _env = env;
             _userManager = userManager;
-
         }
 
         public async Task<User> UploadAvatar(IFormFile image, User user)
