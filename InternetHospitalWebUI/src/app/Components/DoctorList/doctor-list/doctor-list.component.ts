@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
-import { PaginationService } from '../../../Services/pagination.service'
+import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Filter } from '../../../Models/Filter';
 
@@ -37,7 +37,7 @@ export class DoctorListComponent implements OnInit {
     this.pagService.change(event);
     this.service.httpOptions.params = this.service.httpOptions.params.set("page", this.pagService.pageIndex.toString());
     if (this.filter.isWithParams == true) {
-      this.service.getDoctors(this.filter.searchKey, +this.filter.selectedSpecialization);
+      this.service.getDoctors(this.filter.searchKey, + this.filter.selectedSpecialization);
     }
     else {
       this.service.getDoctors();

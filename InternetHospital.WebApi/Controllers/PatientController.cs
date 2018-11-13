@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -15,27 +17,49 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private IUploadingFiles _uploadingFiles;
-        private ApplicationContext _context;
+        private readonly IUploadingFiles _uploadingFiles;
+        private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public PatientController(IUploadingFiles uploadingFiles, ApplicationContext context)
+        public PatientController(IUploadingFiles uploadingFiles, ApplicationContext context, 
+            UserManager<User> userManager)
         {
             _uploadingFiles = uploadingFiles;
             _context = context;
+            _userManager = userManager;
         }
 
         [HttpPut("updateAvatar")]
         [Authorize]
-        public ActionResult UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
+        public async Task<ActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
         {
             var patientId = User.Identity?.Name;
             if (patientId != null && file != null)
             {
-                var patient = _context.Users.FirstOrDefault(p => p.Id == int.Parse(patientId));
-                _uploadingFiles.UploadAvatar(file, patient);
+                var patient = await _userManager.FindByIdAsync(patientId);                
+                await _uploadingFiles.UploadAvatar(file, patient);
                 return Ok();
             }
             return BadRequest(new { message = "Cannot change avatar!" });
+        }
+
+        [HttpGet("getAvatar")]
+        [Authorize]
+        public async Task<IActionResult> GetAvatar()
+        {
+            var patientId = User.Identity?.Name;
+            if (patientId != null)
+            {
+                var patient = await _userManager.FindByIdAsync(patientId);
+                return Ok(new
+                {
+                    patient.AvatarURL
+                });
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("update")]

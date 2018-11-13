@@ -7,7 +7,9 @@ import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.
 import { HomeComponent } from '../../Components/Home/home/home.component';
 import { Page404Component } from '../../Components/page404/page404.component';
 import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
+
 import { FeedbacksComponent } from '../../Components/feedbacks/feedbacks.component';
+import { UsersProfileComponent } from '../../Components/PatientProfile/patient-profile/users-profile.component';
 import { UpdatePatientComponent } from '../../Components/PatientProfile/update-patient/update-patient.component';
 
 import { AuthGuard } from '../../Services/Guards/auth.guard';
@@ -24,6 +26,7 @@ import { ADMIN_PANEL,
           SIGN_IN,
           SIGN_UP,
           SETTINGS_PATIENT,
+          feature/26_Implement_Feedbacks,
           FEEDBACKS,
 } from '../../config';
 
@@ -38,6 +41,7 @@ const ROUTES: Routes = [
       { path: SIGN_UP, component: SignUpComponent },
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
+      { path: USERS_PROFILE, component: UsersProfileComponent},
       { path: DOCTOR_PAGE + ':id', component: DoctorPageComponent },
       { path: SETTINGS_PATIENT, component: UpdatePatientComponent},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
