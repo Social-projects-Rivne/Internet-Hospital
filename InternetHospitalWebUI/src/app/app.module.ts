@@ -27,8 +27,9 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
-// tslint:disable-next-line:max-line-length
-import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
+// tslint:disable-next-line:import-spacing
+import { DoctorListSearchItemComponent }
+from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
 import { UsersProfileComponent } from './Components/PatientProfile/patient-profile/users-profile.component';
