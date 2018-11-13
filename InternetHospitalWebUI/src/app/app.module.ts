@@ -6,6 +6,7 @@ import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -30,6 +31,7 @@ import { AdminGuard } from './Services/Guards/admin.guard';
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
+import { UsersProfileComponent } from './Components/PatientProfile/patient-profile/users-profile.component';
 
 import { DoctorPageComponent } from './Components/doctor-page/doctor-page.component';
 import { FeedbackItemComponent } from './Components/doctor-page/feedbacks/feedback-item/feedback-item.component';
@@ -63,6 +65,7 @@ import { DatePipe } from '@angular/common';
     DoctorListComponent,
     DoctorListItemComponent,
     DoctorListSearchItemComponent,
+    UsersProfileComponent,
     DoctorPageComponent,
     FeedbackItemComponent,
     GalleryComponent,
@@ -85,6 +88,7 @@ import { DatePipe } from '@angular/common';
     AdminpanelModule,
     OverlayModule,
     NgxMaskModule.forRoot(),
+    MatExpansionModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

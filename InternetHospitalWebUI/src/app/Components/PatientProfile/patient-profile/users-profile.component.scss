@@ -1,0 +1,21 @@
+.profile {
+    min-height: 100%;
+    overflow: auto;
+    padding-bottom: 350px;
+}
+.profile-top {
+    height: auto + 100px;
+}
+
+.profile-top, .profile-bottom {
+    margin-top: 5%;
+    min-height: 50%;
+}
+
+.patient-photo {
+    img {
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+    }
+}
