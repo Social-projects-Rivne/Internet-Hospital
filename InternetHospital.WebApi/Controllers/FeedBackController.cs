@@ -30,33 +30,16 @@ namespace InternetHospital.WebApi.Controllers
         [HttpPost("Create")]
         public IActionResult CreateFeedBack([FromBody]FeedBackCreationModel feedBackCreationModel)
         {
-            const int MIN_TEXT_LENGTH = 10;
-            const int WRONG_TYPE_ID = 0;
-            if (int.TryParse(User.Identity.Name, out int userId))
+            if (int.TryParse(User.Identity.Name, out int userid)
+                || feedBackCreationModel != null)
             {
-                feedBackCreationModel.UserId = userId;
-
-                if (feedBackCreationModel != null)
-                {
-                    if (feedBackCreationModel.Text.Length <= MIN_TEXT_LENGTH)
-                        return NotFound(new { message = "The text not in correct format" });
-                    if (feedBackCreationModel.TypeId == WRONG_TYPE_ID)
-                        return NotFound(new { message = "Feedback format is invalid" });
-                    else
-                    {
-                        _feedBackService.FeedBackCreate(feedBackCreationModel);
-                        return Ok();
-                    }
-                }
-                else
-                {
-                    return BadRequest(new { message = "Wrong form!" });
-                }
-
+                feedBackCreationModel.UserId = userid;
+                var feedback = _feedBackService.FeedBackCreate(feedBackCreationModel);
+                return feedback == null ? (IActionResult)BadRequest( new { message = "Not valid feedback" }) : Ok();
             }
             else
             {
-                return BadRequest(new { message = "Unauthorised user!" });
+                return NotFound( new  { message = "Form not valid" });
             }
         }
 

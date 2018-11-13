@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using InternetHospital.BusinessLogic.FluentValidators;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
@@ -22,11 +24,13 @@ namespace InternetHospital.BusinessLogic.Services
 
         public FeedBack FeedBackCreate(FeedBackCreationModel model)
         {
-            var feedback = Mapper.Map<FeedBack>(model);
-
-            _context.FeedBacks.Add(feedback);
+            FeedbackValidator validations = new FeedbackValidator();
             try
             {
+                validations.ValidateAndThrow(model);
+                var feedback = Mapper.Map<FeedBackCreationModel, FeedBack>(model);
+                feedback.DateTime = DateTime.Now;
+                _context.FeedBacks.Add(feedback);
                 _context.SaveChanges();
                 return feedback;
             }
@@ -35,7 +39,7 @@ namespace InternetHospital.BusinessLogic.Services
                 return null;
             }
         }
-
+            
         public List<FeedBackType> GetFeedBackTypes()
         {
             return _context.FeedBackTypes.ToList();
