@@ -17,9 +17,9 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private IUploadingFiles _uploadingFiles;
-        private ApplicationContext _context;
-        private UserManager<User> _userManager;
+        private readonly IUploadingFiles _uploadingFiles;
+        private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
 
         public PatientController(IUploadingFiles uploadingFiles, ApplicationContext context, 
             UserManager<User> userManager)

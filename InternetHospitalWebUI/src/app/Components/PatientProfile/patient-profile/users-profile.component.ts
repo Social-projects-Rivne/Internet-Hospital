@@ -5,7 +5,10 @@ import { NotificationService } from '../../../Services/notification.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { HOST_URL } from '../../../config';
 import { IllnessHistory } from 'src/app/Models/Illness-history';
+import { ICurrentUser } from '../../../Models/CurrentUser';
+import { LocalStorageService } from '../../../Services/local-storage.service';
 
+const TOKEN = 'currentUser';
 
 @Component({
   selector: 'app-users-profile',
@@ -15,7 +18,7 @@ import { IllnessHistory } from 'src/app/Models/Illness-history';
 export class UsersProfileComponent implements OnInit {
 
   constructor(private imageService: UsersProfileService, private imageValidator: ImageValidationService,
-    private notification: NotificationService, private doctorService: DoctorsService) {
+    private notification: NotificationService, private doctorService: DoctorsService, private storage: LocalStorageService) {
   }
   firstName = 'Vasul';
   secondName = 'Pochtarenko';
@@ -23,11 +26,15 @@ export class UsersProfileComponent implements OnInit {
   today = new Date();
   date = this.today.getDate() + '/' + this.today.getMonth() + '/' + this.today.getFullYear();
 
+  user: ICurrentUser;
+  token = TOKEN;
+
+
   tempHistory: IllnessHistory[] = [
-    {dateTime: this.date, doctorName: 'Aloha1', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
-    {dateTime: this.date, doctorName: 'Aloha2', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
-    {dateTime: this.date, doctorName: 'Aloha3', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
-    {dateTime: this.date, doctorName: 'Aloha4', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' }
+    { dateTime: this.date, doctorName: 'Aloha1', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
+    { dateTime: this.date, doctorName: 'Aloha2', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
+    { dateTime: this.date, doctorName: 'Aloha3', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
+    { dateTime: this.date, doctorName: 'Aloha4', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' }
   ];
 
   tempText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nulla harum architecto velit saepe cumque amet voluptas rem repellat dignissimos dicta, quasi a, recusandae, nesciunt dolores aperiam eius tempore ad.';
@@ -55,8 +62,16 @@ export class UsersProfileComponent implements OnInit {
 
     reader.onload = (event) => {
       if (this.imageValidator.isImageFile(event.target.result)) {
-        this.imageService.updateAvatar(this.fileAvatar);
-        this.imageToShow = event.target.result;
+        this.imageService.updateAvatar(this.fileAvatar).subscribe((shit: any) => {
+          this.imageToShow = event.target.result;
+
+          this.user = JSON.parse(localStorage.getItem(this.token));
+
+          this.imageService.getImage().subscribe((data: any) => {
+            this.user.user_avatar = data.avatarURL;
+            this.storage.setItem(this.token, JSON.stringify(this.user), data.avatarURL);
+          });
+        });
       } else {
         this.notification.error('Only image file is acceptable!');
       }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable} from 'rxjs';
-import { UsersProfileService } from '../../../Services/users-profile.service';
 import { HOST_URL } from '../../../config';
+import { LocalStorageService } from '../../../Services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ import { HOST_URL } from '../../../config';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private usersProfileService: UsersProfileService) { }
+  constructor(private authenticationService: AuthenticationService, private storage: LocalStorageService) { }
 
   isLoggedIn: Observable<boolean>;
   isPatient: Observable<boolean>;
@@ -26,7 +26,11 @@ export class HeaderComponent implements OnInit {
     this.isDoctor = this.authenticationService.isDoctor();
     this.isModerator = this.authenticationService.isModerator();
     this.isAdmin = this.authenticationService.isAdmin();
-    this.usersProfileService.getImage()
-      .subscribe((data: any) => { this.userAvatar = HOST_URL + data.avatarURL; });
+    this.authenticationService.getAvatarURL()
+      .subscribe(value => this.userAvatar = value);
+
+    this.storage.watchStorage().subscribe((data: any) => {
+      this.userAvatar = HOST_URL + data;
+    });
   }
 }

@@ -18,7 +18,7 @@ export class UsersProfileService {
     updateAvatar(fileAvatar: File = null) {
         const formData = new FormData();
         formData.append('Image', fileAvatar);
-        return this.http.put(HOST_URL + PATIENT_UPDATE_AVATAR, formData).subscribe();
+        return this.http.put(HOST_URL + PATIENT_UPDATE_AVATAR, formData);
       }
 
 }

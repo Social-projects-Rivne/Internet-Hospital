@@ -22,8 +22,6 @@ import { InterceptorService } from './Services/interceptor.service';
 
 import { CompareValidatorDirective } from './Directives/compare-validator.directive';
 
-import {NgxMaskModule} from 'ngx-mask';
-
 import { AuthGuard } from './Services/Guards/auth.guard';
 import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
