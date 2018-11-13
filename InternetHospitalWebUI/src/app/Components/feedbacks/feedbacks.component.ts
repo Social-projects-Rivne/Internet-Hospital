@@ -29,7 +29,7 @@ export class FeedbacksComponent implements OnInit {
   onSubmit() {
     this._feedbackService.CreateFeedBack().subscribe(
         data => {
-          this._notification.success(data['message']);
+          this._notification.success('Thanks for your feedback');
           this._router.navigate(['/']);
         },
         error => {
@@ -37,7 +37,7 @@ export class FeedbacksComponent implements OnInit {
         });
     this._feedbackService.form.reset();
   }
-  onCencel() {
+  onCancel() {
     this._feedbackService.form.reset();
   }
 

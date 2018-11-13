@@ -1,4 +1,5 @@
-﻿using InternetHospital.BusinessLogic.Interfaces;
+﻿using AutoMapper;
+using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
@@ -12,7 +13,6 @@ namespace InternetHospital.BusinessLogic.Services
 {
     public class FeedBackService : IFeedBackService
     {
-
         private readonly ApplicationContext _context;
 
         public FeedBackService(ApplicationContext context)
@@ -20,24 +20,19 @@ namespace InternetHospital.BusinessLogic.Services
             _context = context;
         }
 
-        public void FeedBackCreate(FeedBackCreationModel model, int userId)
+        public FeedBack FeedBackCreate(FeedBackCreationModel model)
         {
-            FeedBack feedback = new FeedBack
-            {
-                DateTime = DateTime.Now,
-                Text = model.Text,
-                UserId = userId,
-                TypeId = model.TypeId
-            };
+            var feedback = Mapper.Map<FeedBack>(model);
 
             _context.FeedBacks.Add(feedback);
             try
             {
                 _context.SaveChanges();
+                return feedback;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                return null;
             }
         }
 

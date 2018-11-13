@@ -13,12 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class FeedBackController : ControllerBase
     {
-
         private IFeedBackService _feedBackService;
         private UserManager<User> _userManager;
 
@@ -32,26 +30,33 @@ namespace InternetHospital.WebApi.Controllers
         [HttpPost("Create")]
         public IActionResult CreateFeedBack([FromBody]FeedBackCreationModel feedBackCreationModel)
         {
-
-            int userId;
-            Int32.TryParse(User.Identity.Name, out userId);
-
-            if (feedBackCreationModel != null)
+            const int MIN_TEXT_LENGTH = 10;
+            const int WRONG_TYPE_ID = 0;
+            if (int.TryParse(User.Identity.Name, out int userId))
             {
-                if (feedBackCreationModel.Text.Length <= 10)
-                    return NotFound(new { message = "The text not in correct format" });
-                if (feedBackCreationModel.TypeId == 0)
-                    return NotFound(new { message = "Feedback format is invalid" });
+                feedBackCreationModel.UserId = userId;
+
+                if (feedBackCreationModel != null)
+                {
+                    if (feedBackCreationModel.Text.Length <= MIN_TEXT_LENGTH)
+                        return NotFound(new { message = "The text not in correct format" });
+                    if (feedBackCreationModel.TypeId == WRONG_TYPE_ID)
+                        return NotFound(new { message = "Feedback format is invalid" });
+                    else
+                    {
+                        _feedBackService.FeedBackCreate(feedBackCreationModel);
+                        return Ok();
+                    }
+                }
                 else
                 {
-                    _feedBackService.FeedBackCreate(feedBackCreationModel, userId);
-                    return Ok(new { message = "Thank you for your feedback" });
+                    return BadRequest(new { message = "Wrong form!" });
                 }
+
             }
             else
             {
-              //  ModelState.AddModelError("", "Wrong form!");
-                return BadRequest(new { message = "Wrong form!" });
+                return BadRequest(new { message = "Unauthorised user!" });
             }
         }
 

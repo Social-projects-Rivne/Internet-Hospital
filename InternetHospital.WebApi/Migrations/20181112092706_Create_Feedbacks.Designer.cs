@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20181109110539_Updated_database_for_feedbacks")]
-    partial class Updated_database_for_feedbacks
+    [Migration("20181112092706_Create_Feedbacks")]
+    partial class Create_Feedbacks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,8 +122,6 @@ namespace InternetHospital.WebApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateTime");
-
-                    b.Property<int>("FeedBackId");
 
                     b.Property<string>("Text");
 

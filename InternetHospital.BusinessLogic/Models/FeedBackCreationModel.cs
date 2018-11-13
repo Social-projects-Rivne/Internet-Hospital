@@ -8,5 +8,6 @@ namespace InternetHospital.BusinessLogic.Models
     {
         public string Text { get; set; }
         public int TypeId { set; get; }
+        public int UserId { set; get; }
     }
 }

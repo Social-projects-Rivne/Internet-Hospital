@@ -121,8 +121,6 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<int>("FeedBackId");
-
                     b.Property<string>("Text");
 
                     b.Property<int>("TypeId");

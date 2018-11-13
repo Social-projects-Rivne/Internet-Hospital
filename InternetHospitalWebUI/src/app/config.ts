@@ -15,7 +15,6 @@ export const API_PATIENT_UPDATE = '/api/Patient/update';
 export const PATIENT_UPDATE_AVATAR = '/api/Patient/updateAvatar';
 export const LOCALE_PHONE = '+380';
 export const PASSPORT_AGE = 14;
-export const MY_PLANS = 'my-plans';
 
 //notification config
 export const TIME_DURATION = 3000;

@@ -1,24 +1,24 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace InternetHospital.WebApi.Migrations
 {
-    public partial class FeedBack_Improve_Migration : Migration
+    public partial class Create_Feedbacks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "feedBackTypes",
+                name: "FeedBackTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_feedBackTypes", x => x.Id);
+                    table.PrimaryKey("PK_FeedBackTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,10 +26,9 @@ namespace InternetHospital.WebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
                     TypeId = table.Column<int>(nullable: false),
-                    FeedBackId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false)
                 },
@@ -37,9 +36,9 @@ namespace InternetHospital.WebApi.Migrations
                 {
                     table.PrimaryKey("PK_FeedBacks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FeedBacks_feedBackTypes_TypeId",
+                        name: "FK_FeedBacks_FeedBackTypes_TypeId",
                         column: x => x.TypeId,
-                        principalTable: "feedBackTypes",
+                        principalTable: "FeedBackTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -67,7 +66,7 @@ namespace InternetHospital.WebApi.Migrations
                 name: "FeedBacks");
 
             migrationBuilder.DropTable(
-                name: "feedBackTypes");
+                name: "FeedBackTypes");
         }
     }
 }

@@ -137,6 +137,7 @@ namespace InternetHospital.WebApi
             {
                 config.CreateMap<UserRegistrationModel, User>();
                 config.CreateMap<AppointmentCreationModel, Appointment>();
+                config.CreateMap<FeedBackCreationModel, FeedBack>();
             });
 
             app.UseMvc();
