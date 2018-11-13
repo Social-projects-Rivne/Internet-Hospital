@@ -7,13 +7,15 @@ using System.IO;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class UploadingService : IUploadingFiles
     {
         private readonly IHostingEnvironment _env;
-        private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
 
         const int MIN_HEIGHT = 150;
         const int MAX_HEIGHT = 3000;
@@ -21,10 +23,10 @@ namespace InternetHospital.BusinessLogic.Services
         const int MAX_WIDTH = 3000;
         const int IMAGE_MAX_LENGTH = 20;
 
-        public UploadingService(IHostingEnvironment env, ApplicationContext context)
+        public UploadingService(IHostingEnvironment env, UserManager<User> userManager)
         {
             _env = env;
-            _context = context;
+            _userManager = userManager;
         }
 
         public async Task<User> UploadAvatar(IFormFile image, User user)
@@ -46,10 +48,9 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 Directory.CreateDirectory(fileDestDir);
             }
-
-            int fileNameLength = user.UserName.Length < IMAGE_MAX_LENGTH ? user.UserName.Length : IMAGE_MAX_LENGTH;
+            
             var fileExtesion = Path.GetExtension(image.FileName);
-            var fileName = user.UserName.Substring(0, fileNameLength) + fileExtesion;
+            var fileName = Guid.NewGuid().ToString() + fileExtesion;
             var fileFullPath = Path.Combine(fileDestDir, fileName);
 
             using (var stream = new FileStream(fileFullPath, FileMode.Create))
@@ -58,9 +59,9 @@ namespace InternetHospital.BusinessLogic.Services
             }
 
             string pathFile = $"/{folderName}/{user.UserName}/{avatarFolder}/{fileName}";
-            _context.Users.Update(user);
-            user.AvatarURL = pathFile; 
-            await _context.SaveChangesAsync();
+
+            user.AvatarURL = pathFile;
+            await _userManager.UpdateAsync(user);
 
             return user;
         }
