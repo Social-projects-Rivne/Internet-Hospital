@@ -1,0 +1,27 @@
+<div id="globaldiv" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card id="fathercard">
+    <mat-card-header>
+      <mat-card-title>Leave feedback</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <form [formGroup]="_feedbackService.form" div fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
+      <mat-form-field id="selectcomp">
+        <mat-select placeholder="Select type" required formControlName="TypeId">
+          <mat-option *ngFor="let item of feedbackTypes" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="inputcontainer">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter text here</mat-label>
+          <textarea required formControlName="Text" id="feedbackarea" matInput _feedbackService.form.invalid></textarea>
+        </mat-form-field>
+      </div>
+      <div id="buttonbar" fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button [routerLink]="['/']" (click)="onCancel()">Back</button>
+        <button mat-raised-button type="submit" [disabled]="_feedbackService.form.invalid">Submit</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

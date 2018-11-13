@@ -26,6 +26,10 @@ export class CustomDateFormatter extends CalendarDateFormatter {
         event.start,
         'HH:mm',
         this.locale
+      )} - ${new DatePipe(this.locale).transform(
+        event.end,
+        'HH:mm',
+        this.locale
       )}</b> ${event.title}`;
     }
   
@@ -34,6 +38,6 @@ export class CustomDateFormatter extends CalendarDateFormatter {
         event.start,
         'HH:mm',
         this.locale
-      )}</b> ${event.title}`;
+      )}</b>`;
     }
 }

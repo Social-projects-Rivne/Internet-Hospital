@@ -7,6 +7,8 @@ import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.
 import { HomeComponent } from '../../Components/Home/home/home.component';
 import { Page404Component } from '../../Components/page404/page404.component';
 import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
+
+import { FeedbacksComponent } from '../../Components/feedbacks/feedbacks.component';
 import { UsersProfileComponent } from '../../Components/PatientProfile/patient-profile/users-profile.component';
 import { UpdatePatientComponent } from '../../Components/PatientProfile/update-patient/update-patient.component';
 
@@ -16,15 +18,17 @@ import { DoctorGuard } from '../../Services/Guards/doctor.guard';
 import { ModeratorGuard } from '../../Services/Guards/moderator.guard';
 import { AdminGuard } from '../../Services/Guards/admin.guard';
 
-import { ADMIN_PANEL, 
-          DOCTOR_LIST, 
-          PAGE_404, 
-          MY_PLANS, 
+import { ADMIN_PANEL,
+          DOCTOR_LIST,
+          PAGE_404,
+          MY_PLANS,
           DOCTOR_PAGE,
           SIGN_IN,
           SIGN_UP,
           SETTINGS_PATIENT,
-          USERS_PROFILE, } from '../../config';
+          USERS_PROFILE,
+          FEEDBACKS,
+} from '../../config';
 
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
@@ -40,7 +44,8 @@ const ROUTES: Routes = [
       { path: USERS_PROFILE, component: UsersProfileComponent},
       { path: DOCTOR_PAGE + ':id', component: DoctorPageComponent },
       { path: SETTINGS_PATIENT, component: UpdatePatientComponent},
-      { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] }
+      { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
+      { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
     ]
   },
   { path: PAGE_404, component: Page404Component },
@@ -65,5 +70,6 @@ export const ROUTING_COMPONENTS = [
   Page404Component,
   DoctorListComponent,
   HomeNewsComponent,
-  DoctorPlansComponent
+  DoctorPlansComponent,
+  FeedbacksComponent,
 ];

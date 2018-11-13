@@ -15,7 +15,9 @@ namespace InternetHospital.DataAccess
         public DbSet<RefreshToken> Tokens { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        
+        public DbSet<FeedBack> FeedBacks { set; get; }
+        public DbSet<FeedBackType> FeedBackTypes { set; get; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
         {

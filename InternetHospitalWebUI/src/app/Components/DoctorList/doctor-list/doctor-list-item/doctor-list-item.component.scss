@@ -3,14 +3,8 @@ mat-card {
     width: 100%;
 }
 
-.doctor-card{
-    position: relative;
-}
-
-.doctor-link{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+.marginTen{
+    margin:10px;
 }
 
 .mat-card-image {
@@ -26,6 +20,12 @@ mat-card {
     padding-left: 5px;
     margin-top: 10px;
     word-wrap: break-word;
+}
+
+.doctor-link{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 .user-avatar {
