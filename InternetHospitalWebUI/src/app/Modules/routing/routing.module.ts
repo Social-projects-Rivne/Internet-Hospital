@@ -7,6 +7,7 @@ import { SignInComponent } from '../../Components/Authorization/sign-in/sign-in.
 import { HomeComponent } from '../../Components/Home/home/home.component';
 import { Page404Component } from '../../Components/page404/page404.component';
 import { DoctorListComponent } from '../../Components/DoctorList/doctor-list/doctor-list.component';
+
 import { FeedbacksComponent } from '../../Components/feedbacks/feedbacks.component';
 import { UsersProfileComponent } from '../../Components/PatientProfile/patient-profile/users-profile.component';
 import { UpdatePatientComponent } from '../../Components/PatientProfile/update-patient/update-patient.component';
