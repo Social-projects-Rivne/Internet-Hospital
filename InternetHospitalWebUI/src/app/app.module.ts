@@ -27,7 +27,6 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
-// tslint:disable-next-line:import-spacing
 import { DoctorListSearchItemComponent }
 from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 

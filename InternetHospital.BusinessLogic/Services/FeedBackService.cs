@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Castle.Core.Logging;
 using FluentValidation;
 using InternetHospital.BusinessLogic.FluentValidators;
 using InternetHospital.BusinessLogic.Interfaces;
@@ -18,10 +17,10 @@ namespace InternetHospital.BusinessLogic.Services
     public class FeedBackService : IFeedBackService
     {
         private readonly ApplicationContext _context;
-        private readonly Castle.Core.Logging.ILogger _logger;
+        private readonly ILogger<FeedBackService> _logger;
 
         public FeedBackService(ApplicationContext context,
-                                Castle.Core.Logging.ILogger logger)
+                               ILogger<FeedBackService> logger)
         {
             _logger = logger;
             _context = context;
@@ -40,9 +39,9 @@ namespace InternetHospital.BusinessLogic.Services
                 _context.SaveChanges();
                 return feedback;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                _logger.Fatal($"{nameof(FeedBackService)} failed with {ex.Message}", ex);
+               _logger.LogCritical($"{nameof(FeedBackService)} failed with {exception.Message}", exception);
                 return null;
             }
         }

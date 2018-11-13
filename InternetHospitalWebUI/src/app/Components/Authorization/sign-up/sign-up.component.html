@@ -31,8 +31,8 @@
         </div>
         <div style="margin-top:-15px;">
             <mat-radio-group formControlName="Role" id="group">
-                <mat-radio-button class="marginten" value="Patient">Patient</mat-radio-button>
-                <mat-radio-button class="marginten" value="Doctor">Doctor</mat-radio-button>
+                <mat-radio-button color="primary" class="marginten" value="Patient">Patient</mat-radio-button>
+                <mat-radio-button color="primary" class="marginten" value="Doctor">Doctor</mat-radio-button>
               </mat-radio-group>
         </div>
         <div>
@@ -42,8 +42,8 @@
         </div>
         <div>
           <div div fxLayout="row" fxLayoutAlign="space-around center">
-            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="imageHandling.isImageValid == false || service.form.invalid">Submit</button>
             <button class="marginbtn" mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
+            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="imageHandling.isImageValid == false || service.form.invalid">Submit</button>
           </div>
         </div>
       </div>
