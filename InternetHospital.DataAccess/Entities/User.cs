@@ -15,11 +15,14 @@ namespace InternetHospital.DataAccess.Entities
         public DateTime SignUpTime { get; set; }
         public DateTime LastStatusChangeTime { get; set; }
         public int StatusId { get; set; }
-        public virtual ICollection<FeedBack> FeedBacks { set; get; }
 
         public virtual Doctor Doctor { get; set; }
         public virtual Status Status { get; set; }
         public virtual ICollection<RefreshToken> Tokens { get; set; }
+        public virtual ICollection<FeedBack> FeedBacks { set; get; }
         public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual Passport Passport { get; set; }
+        //public virtual ICollection<TemporaryUser> TemporaryUsers { get; set; }
+        //public virtual ICollection<Passport> Passports { get; set; }
     }
 }
