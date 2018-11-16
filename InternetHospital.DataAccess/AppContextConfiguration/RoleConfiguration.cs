@@ -10,9 +10,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
     {
         public static async Task InitializeAsync(RoleManager<IdentityRole<int>> roleManager)
         {
-            try
-            {
-                var initialRoles = new List<IdentityRole<int>>
+            var initialRoles = new List<IdentityRole<int>>
                 {
                     new IdentityRole<int>
                     {
@@ -32,24 +30,14 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
                     }
                 };
 
-                foreach (var role in initialRoles)
+            foreach (var role in initialRoles)
+            {
+                if (await roleManager.FindByNameAsync(role.Name) == null)
                 {
-                    if (await roleManager.FindByNameAsync(role.Name) == null)
-                    {
-                        await roleManager.CreateAsync(new IdentityRole<int>(role.Name));
-                    }
+                    await roleManager.CreateAsync(new IdentityRole<int>(role.Name));
                 }
             }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($"Check if file exist and path is correct: {ex.Message}");
-                throw;
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"Something wrong with file or path, its better to check them: {ex.Message}");
-                throw;
-            }
+
         }
     }
 }

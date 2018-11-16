@@ -23,96 +23,78 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
             const int USERS_AMOUNT = 700;
             const int NO_DOCTOR_USERS = 300;
             int moderatorsAmount = 60;
-            try
+            #region FakeUserData
+            string password = "1234Pass";
+            var fakeUsers = new Faker<User>()
+                            .RuleFor(u => u.FirstName, f => f.Name.FirstName(Name.Gender.Male))
+                            .RuleFor(u => u.SecondName, f => f.Name.LastName(Name.Gender.Male))
+                            .RuleFor(u => u.ThirdName, f => f.Name.FirstName(Name.Gender.Male))
+                            .RuleFor(u => u.BirthDate, f => f.Date.Between(new DateTime(1989, 1, 1), DateTime.Now))
+                            .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.SecondName))
+                            .RuleFor(u => u.UserName, (f, u) => u.Email)
+                            .RuleFor(u => u.EmailConfirmed, f => true)
+                            .RuleFor(u => u.SignUpTime, f => DateTime.Now)
+                            .RuleFor(u => u.LastStatusChangeTime, f => DateTime.Now)
+                            .RuleFor(u => u.StatusId, f => 3)
+                            .RuleFor(u => u.Doctor, f => new Doctor
+                            {
+                                Address = f.Address.FullAddress(),
+                                IsApproved = true,
+                                SpecializationId = rng.Next(1, 34),
+                                DoctorsInfo = "Hello, aloha, czesz!! I am a great doctor!"
+                            });
+            #endregion
+
+            var users = fakeUsers.Generate(USERS_AMOUNT + 1);
+
+            for (int i = 0; i < NO_DOCTOR_USERS + 1; i++)
             {
-                #region FakeUserData
-                string password = "1234Pass";
-                var fakeUsers = new Faker<User>()
-                                .RuleFor(u => u.FirstName, f => f.Name.FirstName(Name.Gender.Male))
-                                .RuleFor(u => u.SecondName, f => f.Name.LastName(Name.Gender.Male))
-                                .RuleFor(u => u.ThirdName, f => f.Name.FirstName(Name.Gender.Male))
-                                .RuleFor(u => u.BirthDate, f => f.Date.Between(new DateTime(1989, 1, 1), DateTime.Now))
-                                .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.SecondName))
-                                .RuleFor(u => u.UserName, (f, u) => u.Email)
-                                .RuleFor(u => u.EmailConfirmed, f => true)
-                                .RuleFor(u => u.SignUpTime, f => DateTime.Now)
-                                .RuleFor(u => u.LastStatusChangeTime, f => DateTime.Now)
-                                .RuleFor(u => u.StatusId, f => 3)
-                                .RuleFor(u => u.Doctor, f => new Doctor
-                                {
-                                    Address = f.Address.FullAddress(),
-                                    IsApproved = true,
-                                    SpecializationId = rng.Next(1, 34),
-                                    DoctorsInfo = "Hello, aloha, czesz!! I am a great doctor!"
-                                });
-                #endregion
+                users[i].Doctor = null;
+            }
 
-                var users = fakeUsers.Generate(USERS_AMOUNT + 1);
+            if (await userManager.FindByNameAsync(users[0].Email) == null)
+            {
+                IdentityResult result = await userManager.CreateAsync(users[0], password);
 
-                for (int i = 0; i < NO_DOCTOR_USERS + 1; i++)
+                if (result.Succeeded)
                 {
-                    users[i].Doctor = null;
+                    await userManager.AddToRoleAsync(users[0], "Admin");
                 }
+            }
 
-                if (await userManager.FindByNameAsync(users[0].Email) == null)
+            for (int i = 1; i < moderatorsAmount; i++)
+            {
+                if (await userManager.FindByNameAsync(users[i].Email) == null)
                 {
-                    IdentityResult result = await userManager.CreateAsync(users[0], password);
+                    IdentityResult result = await userManager.CreateAsync(users[i], password);
 
                     if (result.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(users[0], "Admin");
+                        await userManager.AddToRoleAsync(users[i], "Moderator");
                     }
                 }
+            }
 
-                for (int i = 1; i < moderatorsAmount; i++)
+            for (int i = moderatorsAmount; i < USERS_AMOUNT; i++)
+            {
+                if (await userManager.FindByNameAsync(users[i].Email) == null)
                 {
-                    if (await userManager.FindByNameAsync(users[i].Email) == null)
+                    IdentityResult result = await userManager.CreateAsync(users[i], password);
+                    if (users[i].Doctor != null)
                     {
-                        IdentityResult result = await userManager.CreateAsync(users[i], password);
-
                         if (result.Succeeded)
                         {
-                            await userManager.AddToRoleAsync(users[i], "Moderator");
+                            await userManager.AddToRoleAsync(users[i], "Doctor");
                         }
                     }
-                }
-
-                for (int i = moderatorsAmount; i < USERS_AMOUNT; i++)
-                {
-                    if (await userManager.FindByNameAsync(users[i].Email) == null)
+                    else
                     {
-                        IdentityResult result = await userManager.CreateAsync(users[i], password);
-                        if (users[i].Doctor != null)
+                        if (result.Succeeded)
                         {
-                            if (result.Succeeded)
-                            {
-                                await userManager.AddToRoleAsync(users[i], "Doctor");
-                            }
-                        }
-                        else
-                        {
-                            if (result.Succeeded)
-                            {
-                                await userManager.AddToRoleAsync(users[i], "Patient");
-                            }
+                            await userManager.AddToRoleAsync(users[i], "Patient");
                         }
                     }
                 }
-            }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($"Check if file exist and path is correct: {ex.Message}");
-                throw;
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"Something wrong with file or path, its better to check them: {ex.Message}");
-                throw;
-            }
-            catch (ApplicationException ex)
-            {
-                Console.WriteLine($"Probably it`s something wrong with parsing jsonFiles: {ex.Message}");
-                throw;
             }
         }
     }
