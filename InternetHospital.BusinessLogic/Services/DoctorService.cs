@@ -73,7 +73,7 @@ namespace InternetHospital.BusinessLogic.Services
             return (doctorsResult, doctorsAmount);
         }
 
-        public ICollection<SpecializationModel> GetAvailableSpecialization()
+        public IEnumerable<SpecializationModel> GetAvailableSpecialization()
         {
             var specializations = _context.Specializations
                 .Where(s => s.Doctors.Count > 0)

@@ -46,7 +46,7 @@ namespace InternetHospital.BusinessLogic.Services
             }
         }
 
-        public List<FeedBackType> GetFeedBackTypes()
+        public IEnumerable<FeedBackType> GetFeedBackTypes()
         {
             return _context.FeedBackTypes.ToList();
         }

@@ -17,21 +17,20 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly IUploadingFiles _uploadingFiles;
-        private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IPatientService _patientService;
+        private readonly IFilesService _uploadingFiles;
 
-        public PatientController(IUploadingFiles uploadingFiles, ApplicationContext context, 
-            UserManager<User> userManager)
+        public PatientController(UserManager<User> userManager, IPatientService patientService, IFilesService uploadingFiles)
         {
-            _uploadingFiles = uploadingFiles;
-            _context = context;
             _userManager = userManager;
+            _uploadingFiles = uploadingFiles;
+            _patientService = patientService;
         }
 
         [HttpPut("updateAvatar")]
         [Authorize]
-        public async Task<ActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
+        public async Task<IActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
         {
             var patientId = User.Identity?.Name;
             if (patientId != null && file != null)
@@ -64,7 +63,7 @@ namespace InternetHospital.WebApi.Controllers
 
         [HttpPut("update")]
         [Authorize]
-        public async Task<ActionResult> UpdatePatientProfile([FromForm(Name = "PassportURL")]IFormFileCollection files)
+        public async Task<IActionResult> UpdatePatientProfile([FromForm(Name = "PassportURL")]IFormFileCollection files)
         {
             if (files == null)
             {
@@ -83,28 +82,14 @@ namespace InternetHospital.WebApi.Controllers
 
             if (ModelState.IsValid)
             {
-                var patient = _context.Users.FirstOrDefault(p => p.Id == int.Parse(User.Identity.Name));
-                if (patient == null)
+                if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    return BadRequest();
-                }
-                _context.Update(patient);
-
-                patient.FirstName = patientModel.FirstName;
-                patient.SecondName = patientModel.SecondName;
-                patient.ThirdName = patientModel.ThirdName;
-                patient.PhoneNumber = patientModel.PhoneNumber;
-                patient.BirthDate = DateTime.ParseExact(patientModel.BirthDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-                var userWithPassport = await _uploadingFiles.UploadPassport(files, patient);
-                if (userWithPassport != null)
-                {
-                    await _context.SaveChangesAsync();
-                    return Ok();
+                    var result = await _patientService.UpdatePatienInfo(patientModel, userId, files);
+                    return result ? (IActionResult)Ok() : BadRequest(new { message = "Error during files uploading!" });
                 }
                 else
                 {
-                    return BadRequest(new { message = "Error during files uploading!" });
+                    return BadRequest(new { message = "Error with user ID!" });
                 }
             }
             return BadRequest();

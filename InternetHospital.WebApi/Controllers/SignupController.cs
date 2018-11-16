@@ -13,25 +13,21 @@ namespace InternetHospital.WebApi.controllers
     public class SignupController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private readonly ISignUpService _signUpService;
         private readonly IMailService _mailService;
-        private readonly IRegistrationService _registrationService;
-        private readonly IUploadingFiles _uploadingFiles;
 
-        public SignupController(UserManager<User> userManager, IMailService mailService, 
-            IRegistrationService registrationService, IUploadingFiles uploadingFiles)
+        public SignupController(UserManager<User> userManager, IMailService mailService, ISignUpService signUpService)
         {
             _userManager = userManager;
+            _signUpService = signUpService;
             _mailService = mailService;
-            _registrationService = registrationService;
-            _uploadingFiles = uploadingFiles;
         }
 
         // POST: api/Signup
         [HttpPost]
-        public async Task<ActionResult> Register(IFormFile formFile)
+        public async Task<IActionResult> Register(IFormFile formFile)
         {
-            const string PATIENT = "Patient";
-            const string DOCTOR = "Doctor";
+            string callbackUrl = null;
 
             var file = Request.Form.Files["Image"];
             var userRegistrationModel = new UserRegistrationModel
@@ -44,77 +40,48 @@ namespace InternetHospital.WebApi.controllers
             };
 
             TryValidateModel(userRegistrationModel);
+
             if (userRegistrationModel.UserName.Contains('/'))
             {
                 ModelState.AddModelError("", "Invalid email name!");
             }
+
             if (ModelState.IsValid)
             {
-                if (await _userManager.FindByEmailAsync(userRegistrationModel.Email) == null)
+                (bool state, string text) = await _signUpService.CheckSignUpModel(_userManager, userRegistrationModel, file);
+                if (state)
                 {
-                    string callbackUrl = null;
-                    User user = null;
-                    if (userRegistrationModel.Role == PATIENT)
-                    {
-                        user = await _registrationService.PatientRegistration(userRegistrationModel);
-                        if (user == null)
-                        {
-                            return BadRequest(new { message = "Error during patient registration" });
-                        }
-                        callbackUrl = await GenerateConfirmationLink(user);
-                    } 
-                    else if (userRegistrationModel.Role == DOCTOR)
-                    {
-                        user = await _registrationService.DoctorRegistration(userRegistrationModel);
-                        if (user == null)
-                        {
-                            return BadRequest(new { message = "Error during doctor registration" });
-                        }
-                        callbackUrl = await GenerateConfirmationLink(user);
-                    }
-                    else
-                    {
-                        return BadRequest(new { message = "Role type doesn't match conditions! must be only a Doctor or a patient" });
-                    }
-                    var userWithAvatar = await _uploadingFiles.UploadAvatar(file, user);
-                    await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
-                                 $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
-                    if (userWithAvatar == null)
-                    {
-                        return Ok(new { message = "Your account is created. But avatar wasn't upload. Confirm your account on email!" });
-                    }
-                    else
-                    {
-                        return Ok(new { message = "Your account is created. Confirm your account on email!" });
-                    }
+                    await _mailService.SendMsgToEmail(userRegistrationModel.Email, "Confirm Your account, please",
+            $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
+
+                    return Ok(new { message = text });
                 }
                 else
                 {
-                    return BadRequest(new { message = "This email is already registered!" });
+                    return BadRequest(new { message = text });
                 }
             }
             else
             {
                 ModelState.AddModelError("", "Wrong form!");
-                return BadRequest( new { message = ModelState.Root.Errors[0].ErrorMessage });
-            }            
+                return BadRequest(new { message = ModelState.Root.Errors[0].ErrorMessage });
+            }
         }
 
         [HttpGet("ConfirmEmail")]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
-            {
-                return BadRequest(new { message = "lost userId or token!" });
-            }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
+            var user = await _userManager.FindByIdAsync(userId ?? "0");
+            if (user == null || code == null)
             {
                 return BadRequest(new { message = "Not such users in DB to confirm" });
             }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
+            else
+            {
+                var result = await _userManager.ConfirmEmailAsync(user, code);
 
-            return Ok(new { message = "Email Confirmed!" });
+                return Ok(new { message = "Email Confirmed!" });
+            }
         }
 
         private async Task<string> GenerateConfirmationLink(User user)

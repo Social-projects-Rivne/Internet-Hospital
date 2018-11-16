@@ -34,9 +34,9 @@ namespace InternetHospital.BusinessLogic.Services
 
             var doctor = new Doctor
             {
-                IsApproved = false
+                IsApproved = false,
+                User = user
             };
-            doctor.User = user;
 
             _context.Add(doctor);
             _context.SaveChanges();

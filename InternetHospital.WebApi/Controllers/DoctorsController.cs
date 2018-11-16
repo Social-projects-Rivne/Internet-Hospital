@@ -46,7 +46,7 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpGet("specializations")]
-        public ICollection<SpecializationModel> GetSpecializations()
+        public IEnumerable<SpecializationModel> GetSpecializations()
         {
             return _doctorService.GetAvailableSpecialization();
         }
