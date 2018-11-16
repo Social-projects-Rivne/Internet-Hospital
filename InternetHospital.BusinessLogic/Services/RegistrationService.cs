@@ -51,21 +51,19 @@ namespace InternetHospital.BusinessLogic.Services
                 return null;
             }
             await _userManager.AddToRoleAsync(user, vm.Role);
-            return user;            
+            return user;
         }
 
         private async Task<User> UserRegistration(UserRegistrationModel vm)
         {
-            var user = Mapper.Map<User>(vm);
-            user.SignUpTime = DateTime.UtcNow;
+            var user = Mapper.Map<UserRegistrationModel, User>(vm, cfg =>
+                cfg.AfterMap((src, dest) =>
+                    { dest.SignUpTime = DateTime.UtcNow; dest.StatusId = 2; }));
+
             if (await _roleManager.FindByNameAsync(vm.Role) == null)
             {
                 await _roleManager.CreateAsync(new IdentityRole<int>(vm.Role));
             }
-
-            if (_context.Statuses.Count() == 0)
-                user.Status = new Status { Name = "Undetermined status", Id = 2 };
-            user.StatusId = 2; // 2 - New User status
 
             var result = await _userManager.CreateAsync(user, vm.Password);
             if (result.Succeeded)
