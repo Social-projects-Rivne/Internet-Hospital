@@ -1,7 +1,6 @@
-﻿using InternetHospital.DataAccess.AppContextConfiguration.Helpers;
-using Microsoft.AspNetCore.Identity;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -13,17 +12,31 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         {
             try
             {
-                string jsonString = File.ReadAllText(UrlHelper.JsonFilesURL + UrlHelper.RoleConfigJSON);
-                string role = null;
-                var jsonRoles = JArray.Parse(jsonString);
-
-                foreach (dynamic item in jsonRoles)
+                var initialRoles = new List<IdentityRole<int>>
                 {
-                    //It's necessary because i had an exception in runtime execution
-                    role = item.Name;
-                    if (await roleManager.FindByNameAsync(role) == null)
+                    new IdentityRole<int>
                     {
-                        await roleManager.CreateAsync(new IdentityRole<int>(role));
+                        Name = "Patient"
+                    }
+                    ,new IdentityRole<int>
+                    {
+                        Name = "Doctor"
+                    }
+                    ,new IdentityRole<int>
+                    {
+                        Name = "Moderator"
+                    }
+                    ,new IdentityRole<int>
+                    {
+                        Name = "Admin"
+                    }
+                };
+
+                foreach (var role in initialRoles)
+                {
+                    if (await roleManager.FindByNameAsync(role.Name) == null)
+                    {
+                        await roleManager.CreateAsync(new IdentityRole<int>(role.Name));
                     }
                 }
             }

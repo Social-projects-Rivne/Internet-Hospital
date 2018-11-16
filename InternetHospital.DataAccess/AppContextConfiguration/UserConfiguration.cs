@@ -1,7 +1,7 @@
-﻿using InternetHospital.DataAccess.AppContextConfiguration.Helpers;
+﻿using Bogus;
+using Bogus.DataSets;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
-using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -10,83 +10,91 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
 {
     public class UserConfiguration
     {
+        private enum Gender
+        {
+            Male,
+            Female
+        }
+
+        private static Random rng = new Random();
+
         public static async Task InitializeAsync(UserManager<User> userManager)
         {
+            const int USERS_AMOUNT = 700;
+            const int NO_DOCTOR_USERS = 300;
+            int moderatorsAmount = 60;
             try
             {
-                string jsonString = File.ReadAllText(UrlHelper.JsonFilesURL + UrlHelper.UserConfigJSON);
-                var jsonUsers = JArray.Parse(jsonString);
+                #region FakeUserData
+                string password = "1234Pass";
+                var fakeUsers = new Faker<User>()
+                                .RuleFor(u => u.FirstName, f => f.Name.FirstName(Name.Gender.Male))
+                                .RuleFor(u => u.SecondName, f => f.Name.LastName(Name.Gender.Male))
+                                .RuleFor(u => u.ThirdName, f => f.Name.FirstName(Name.Gender.Male))
+                                .RuleFor(u => u.BirthDate, f => f.Date.Between(new DateTime(1989, 1, 1), DateTime.Now))
+                                .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.SecondName))
+                                .RuleFor(u => u.UserName, (f, u) => u.Email)
+                                .RuleFor(u => u.EmailConfirmed, f => true)
+                                .RuleFor(u => u.SignUpTime, f => DateTime.Now)
+                                .RuleFor(u => u.LastStatusChangeTime, f => DateTime.Now)
+                                .RuleFor(u => u.StatusId, f => 3)
+                                .RuleFor(u => u.Doctor, f => new Doctor
+                                {
+                                    Address = f.Address.FullAddress(),
+                                    IsApproved = true,
+                                    SpecializationId = rng.Next(1, 34),
+                                    DoctorsInfo = "Hello, aloha, czesz!! I am a great doctor!"
+                                });
+                #endregion
 
-                //It's necessary because i had an exception in runtime execution 
-                string email = null;
-                string firstName = null;
-                string secondName = null;
-                string thirdName = null;
-                dynamic doctor = null;
-                string password = null;
-                string role = null;
-                string statusId = null;
+                var users = fakeUsers.Generate(USERS_AMOUNT + 1);
 
-                foreach (dynamic item in jsonUsers)
+                for (int i = 0; i < NO_DOCTOR_USERS + 1; i++)
                 {
-                    email = item.Email;
-                    if (await userManager.FindByNameAsync(email) == null)
+                    users[i].Doctor = null;
+                }
+
+                if (await userManager.FindByNameAsync(users[0].Email) == null)
+                {
+                    IdentityResult result = await userManager.CreateAsync(users[0], password);
+
+                    if (result.Succeeded)
                     {
-                        firstName = item.FirstName;
-                        secondName = item.SecondName;
-                        thirdName = item.ThirdName;
-                        statusId = item.StatusId;
-                        doctor = item.Doctor;
-                        password = item.Password;
-                        role = item.Role;
+                        await userManager.AddToRoleAsync(users[0], "Admin");
+                    }
+                }
 
-                        if (!int.TryParse(statusId, out int stId))
-                        {
-                            throw new ApplicationException($"'StatusId' in UserConfigurationFile can`t be parsed to int! The value is {statusId}");
-                        }
+                for (int i = 1; i < moderatorsAmount; i++)
+                {
+                    if (await userManager.FindByNameAsync(users[i].Email) == null)
+                    {
+                        IdentityResult result = await userManager.CreateAsync(users[i], password);
 
-                        var user = new User
-                        {
-                            UserName = email,
-                            Email = email,
-                            EmailConfirmed = true,
-                            FirstName = firstName,
-                            SecondName = secondName,
-                            ThirdName = thirdName,
-                            StatusId = stId,
-                            SignUpTime = DateTime.Now,
-                            LastStatusChangeTime = DateTime.Now
-                        };
-
-                        if (doctor != null)
-                        {
-                            string doctorsInfo = item.Doctor.DoctorsInfo;
-                            string address = item.Doctor.Address;
-                            string isApproved = item.Doctor.IsApproved;
-                            string specializationId = item.Doctor.SpecializationId;
-
-                            if(!bool.TryParse(isApproved, out bool isAppr))
-                            {
-                                throw new ApplicationException($"'IsApproved' in UserConfigurationFile can`t be parsed to bool! The value is {isApproved}");
-                            }
-                            if (!int.TryParse(specializationId, out int specId))
-                            {
-                                throw new ApplicationException($"'SpecializationId' in UserConfigurationFile can`t be parsed to int! The value is {isApproved}");
-                            }
-
-                            user.Doctor = new Doctor
-                            {
-                                DoctorsInfo = doctorsInfo,
-                                Address = address,
-                                IsApproved = isAppr,
-                                SpecializationId = specId
-                            };
-                        }
-
-                        IdentityResult result = await userManager.CreateAsync(user, password);
                         if (result.Succeeded)
                         {
-                            await userManager.AddToRoleAsync(user, role);
+                            await userManager.AddToRoleAsync(users[i], "Moderator");
+                        }
+                    }
+                }
+
+                for (int i = moderatorsAmount; i < USERS_AMOUNT; i++)
+                {
+                    if (await userManager.FindByNameAsync(users[i].Email) == null)
+                    {
+                        IdentityResult result = await userManager.CreateAsync(users[i], password);
+                        if (users[i].Doctor != null)
+                        {
+                            if (result.Succeeded)
+                            {
+                                await userManager.AddToRoleAsync(users[i], "Doctor");
+                            }
+                        }
+                        else
+                        {
+                            if (result.Succeeded)
+                            {
+                                await userManager.AddToRoleAsync(users[i], "Patient");
+                            }
                         }
                     }
                 }
