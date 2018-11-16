@@ -15,10 +15,11 @@ namespace InternetHospital.DataAccess.Entities
         public string ThirdName { get; set; }
         public string PhoneNumber { get; set; }
         public string Role { get; set; }
-        public DateTime? BirthDate { get; set; }
-
         public string Address { get; set; }
         public string LicenseURL { get; set; }
+
+        public DateTime? BirthDate { get; set; }
+        public DateTime AddedTime { get; set; }
         public User User { get; set; }
     }
 }

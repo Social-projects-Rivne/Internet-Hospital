@@ -10,7 +10,6 @@ namespace InternetHospital.DataAccess.Entities
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
         public string AvatarURL { get; set; }
-        public string PassportURL { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime SignUpTime { get; set; }
         public DateTime LastStatusChangeTime { get; set; }
@@ -18,11 +17,11 @@ namespace InternetHospital.DataAccess.Entities
 
         public virtual Doctor Doctor { get; set; }
         public virtual Status Status { get; set; }
+        public virtual Passport Passport { get; set; }
         public virtual ICollection<RefreshToken> Tokens { get; set; }
         public virtual ICollection<FeedBack> FeedBacks { set; get; }
         public virtual ICollection<Appointment> Appointments { get; set; }
-        public virtual Passport Passport { get; set; }
-        //public virtual ICollection<TemporaryUser> TemporaryUsers { get; set; }
-        //public virtual ICollection<Passport> Passports { get; set; }
+        public virtual ICollection<TemporaryUser> TemporaryUsers { get; set; }
+        public virtual ICollection<Passport> Passports { get; set; }
     }
 }
