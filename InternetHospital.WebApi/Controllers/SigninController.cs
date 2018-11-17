@@ -29,30 +29,22 @@ namespace InternetHospital.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn([FromBody]UserLoginModel form)
         {
-            var user = await _userManager.FindByNameOrEmailAsync(form.UserName);
-            if (user == null)
+            var (user,state) = await _signIn.CheckIfExist(form, _userManager);
+            IActionResult status;
+            if (state == true)
             {
-                return NotFound(new { message = "You have entered an invalid username or password" });
+                status = Ok(new
+                {
+                    user_avatar = user.AvatarURL,
+                    access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
+                    refresh_token = _tokenService.GenerateRefreshToken(user).Token
+                });
             }
             else
             {
-                var result = await _signIn.CheckIfExist(user, form, _userManager);
-                IActionResult status;
-                if(result == true)
-                {
-                    status = Ok(new
-                    {
-                        user_avatar = user.AvatarURL,
-                        access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
-                        refresh_token = _tokenService.GenerateRefreshToken(user).Token
-                    });
-                }
-                else
-                {
-                    status = NotFound(new { message = "You have entered an invalid username or password" });
-                }
-                return status;
+                status = NotFound(new { message = "You have entered an invalid username or password" });
             }
+            return status;
         }
 
         [HttpPost("refresh")]

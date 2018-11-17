@@ -11,6 +11,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface ISignInService
     {
-        Task<bool> CheckIfExist(User user, UserLoginModel model, UserManager<User> userManager);
+        Task<(User user, bool state)> CheckIfExist(UserLoginModel model, UserManager<User> userManager);
     }
 }

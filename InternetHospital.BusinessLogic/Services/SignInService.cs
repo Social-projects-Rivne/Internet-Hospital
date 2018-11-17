@@ -12,22 +12,17 @@ namespace InternetHospital.BusinessLogic.Services
 {
     public class SignInService : ISignInService
     {
-        public async Task<bool> CheckIfExist(User user, UserLoginModel model, UserManager<User> userManager)
+        public async Task<(User user, bool state)> CheckIfExist(UserLoginModel model, UserManager<User> userManager)
         {
-            bool result;
-            if (!await userManager.IsEmailConfirmedAsync(user))
+            var user = await userManager.FindByNameOrEmailAsync(model.UserName);
+            if (await userManager.IsEmailConfirmedAsync(user) && await userManager.CheckPasswordAsync(user, model.Password))
             {
-                result = false;
-            }
-            else if (!await userManager.CheckPasswordAsync(user, model.Password))
-            {
-                result = false;
+                return (user, true);
             }
             else
             {
-                result = true;
+                return (user, false);
             }
-            return result;
         }
     }
 }
