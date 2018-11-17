@@ -51,7 +51,9 @@ namespace InternetHospital.WebApi.controllers
                 (bool state, string text) = await _signUpService.CheckSignUpModel(_userManager, userRegistrationModel, file);
                 if (state)
                 {
-                    await _mailService.SendMsgToEmail(userRegistrationModel.Email, "Confirm Your account, please",
+                    var user = await _userManager.FindByEmailAsync(userRegistrationModel.Email);
+                    callbackUrl = await GenerateConfirmationLink(user);
+                    await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
             $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
 
                     return Ok(new { message = text });
