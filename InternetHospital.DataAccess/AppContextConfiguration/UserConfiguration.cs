@@ -22,7 +22,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         {
             const int USERS_AMOUNT = 700;
             const int NO_DOCTOR_USERS = 300;
-            int moderatorsAmount = 60;
+            const int MODERATORS_AMOUNT = 60;
             #region FakeUserData
             string password = "1234Pass";
             var fakeUsers = new Faker<User>()
@@ -62,7 +62,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
                 }
             }
 
-            for (int i = 1; i < moderatorsAmount; i++)
+            for (int i = 1; i < MODERATORS_AMOUNT; i++)
             {
                 if (await userManager.FindByNameAsync(users[i].Email) == null)
                 {
@@ -75,23 +75,22 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
                 }
             }
 
-            for (int i = moderatorsAmount; i < USERS_AMOUNT; i++)
+            for (int i = MODERATORS_AMOUNT; i < USERS_AMOUNT + 1; i++)
             {
                 if (await userManager.FindByNameAsync(users[i].Email) == null)
                 {
                     IdentityResult result = await userManager.CreateAsync(users[i], password);
-                    if (users[i].Doctor != null)
+                    if (result.Succeeded)
                     {
-                        if (result.Succeeded)
+                        if (users[i].Doctor != null)
                         {
                             await userManager.AddToRoleAsync(users[i], "Doctor");
+                            Console.WriteLine($"Doctor Created with ID {i}");
                         }
-                    }
-                    else
-                    {
-                        if (result.Succeeded)
+                        else
                         {
                             await userManager.AddToRoleAsync(users[i], "Patient");
+                            Console.WriteLine($"Patient Created with ID {i}");
                         }
                     }
                 }
