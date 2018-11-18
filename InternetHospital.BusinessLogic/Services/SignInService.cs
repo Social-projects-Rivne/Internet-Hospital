@@ -15,6 +15,10 @@ namespace InternetHospital.BusinessLogic.Services
         public async Task<(User user, bool state)> CheckIfExist(UserLoginModel model, UserManager<User> userManager)
         {
             var user = await userManager.FindByNameOrEmailAsync(model.UserName);
+            if (user == null)
+            {
+                return (user, false);
+            }
             if (await userManager.IsEmailConfirmedAsync(user) && await userManager.CheckPasswordAsync(user, model.Password))
             {
                 return (user, true);
