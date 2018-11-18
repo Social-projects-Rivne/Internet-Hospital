@@ -72,7 +72,6 @@ namespace InternetHospital.BusinessLogic.Services
             GetAvailableAppointments(AppointmentSearchModel searchParameters)
         {
             var appointments = _context.Appointments
-                .AsQueryable()
                 .Where(a => (a.DoctorId == searchParameters.DoctorId)
                             && (a.StatusId == (int)AppointmentStatuses.DEFAULT_STATUS)
                             && (a.StartTime >= searchParameters.From.Value));

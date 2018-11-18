@@ -55,7 +55,7 @@ namespace InternetHospital.WebApi.Controllers
 
             var status = _appointmentService.AddAppointment(creationModel, doctorId);
 
-            return status ? (IActionResult)Ok(new { message = "Ok" }) : BadRequest();
+            return status ? (IActionResult)Ok() : BadRequest();
         }
 
         [Authorize(Policy = "ApprovedDoctors")]
