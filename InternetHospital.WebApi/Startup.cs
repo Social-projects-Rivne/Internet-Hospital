@@ -111,6 +111,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<ISignUpService, SignUpService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IModeratorService, ModeratorService>();
 
         }
 
