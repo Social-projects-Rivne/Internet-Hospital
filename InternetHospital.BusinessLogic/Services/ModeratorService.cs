@@ -57,7 +57,7 @@ namespace InternetHospital.BusinessLogic.Services
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, MODERATOR);
-                    return (user, "Confirm link was send on email!");
+                    return (user, null);
                 }
 
                 return (null, "Error during registration");
@@ -89,7 +89,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         private IQueryable<User> GetModerators()
         {
-            var moderatorRoleId = _roleManager.Roles.FirstOrDefault(r => r.Name == MODERATOR).Id;
+            var moderatorRoleId = _roleManager.Roles.FirstOrDefault(r => r.Name == MODERATOR)?.Id;
 
             var modersIds = _context.UserRoles.Where(r => r.RoleId == moderatorRoleId).Select(r => r.UserId);
 
@@ -109,7 +109,7 @@ namespace InternetHospital.BusinessLogic.Services
                                         SecondName = m.SecondName,
                                         ThirdName = m.ThirdName,
                                         SignUpTime = m.SignUpTime,
-                                        Status = _context.Statuses.FirstOrDefault(s => s.Id == m.StatusId).Name
+                                        Status = m.Status.Name
                                     });
             return moders;
         }

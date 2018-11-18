@@ -42,9 +42,9 @@ namespace InternetHospital.WebApi.Controllers
                 string callbackUrl = await GenerateConfirmationLink(moder.Item1);
                 await _mailService.SendMsgToEmail(moder.Item1.Email, "Confirm Your account, please",
                     $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
-                return Ok(moder.Item2);
+                return Ok();
             }
-            return BadRequest(moder.Item2);
+            return BadRequest(new { message = moder.Item2 });
         }
 
         private async Task<string> GenerateConfirmationLink(User user)
