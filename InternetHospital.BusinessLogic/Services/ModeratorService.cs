@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
@@ -36,6 +38,33 @@ namespace InternetHospital.BusinessLogic.Services
             _roleManager = rm;
         }
 
+        public async Task<(User, string)> CreateModeratorAsync(ModeratorCreatingModel vm)
+        {
+            if (await _userManager.FindByEmailAsync(vm.Email) == null)
+            {
+                var user = Mapper.Map<ModeratorCreatingModel, User>(vm, cnf => 
+                    cnf.AfterMap((src, dest) =>
+                    {
+                        dest.StatusId = _context.Statuses.FirstOrDefault(s => s.Name == ACTIVE_STATUS).Id;
+                        dest.SignUpTime = DateTime.UtcNow;
+                        dest.UserName = src.Email;
+                    }));
+                if (await _roleManager.FindByNameAsync(MODERATOR) == null)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole<int>(MODERATOR));
+                }
+                var result = await _userManager.CreateAsync(user, vm.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, MODERATOR);
+                    return (user, "Confirm link was send on email!");
+                }
+
+                return (null, "Error during registration");
+            }
+            return (null, "User with such email is already created!");
+        }
+
         public FilteredModeratorsModel GetFilteredModerators(ModeratorSearchParameters queryParameters)
         {
             var moderators = GetModerators();
@@ -64,7 +93,7 @@ namespace InternetHospital.BusinessLogic.Services
 
             var modersIds = _context.UserRoles.Where(r => r.RoleId == moderatorRoleId).Select(r => r.UserId);
 
-            var moderators = _userManager.Users.Where(u => modersIds.Contains(u.Id)).AsQueryable();
+            var moderators = _userManager.Users.Where(u => modersIds.Contains(u.Id));
             return moderators;
         }
 

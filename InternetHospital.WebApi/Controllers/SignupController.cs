@@ -76,14 +76,12 @@ namespace InternetHospital.WebApi.controllers
             var user = await _userManager.FindByIdAsync(userId ?? "0");
             if (user == null || code == null)
             {
-                return BadRequest(new { message = "Not such users in DB to confirm" });
+                return BadRequest(new { message = "No such user in DB to confirm" });
             }
-            else
-            {
-                var result = await _userManager.ConfirmEmailAsync(user, code);
 
-                return Ok(new { message = "Email Confirmed!" });
-            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            return Ok("Email Confirmed!");
         }
 
         private async Task<string> GenerateConfirmationLink(User user)
