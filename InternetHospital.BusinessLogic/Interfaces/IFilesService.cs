@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace InternetHospital.BusinessLogic.Interfaces
 {
-    public interface IUploadingFiles
+    public interface IFilesService
     {
         Task<User> UploadAvatar(IFormFile image, User user);
         Task<User> UploadPassport(IFormFileCollection images, User user);

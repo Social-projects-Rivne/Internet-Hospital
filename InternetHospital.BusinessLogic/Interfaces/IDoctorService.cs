@@ -9,6 +9,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
 
         (IEnumerable<DoctorModel> doctors, int count) GetFilteredDoctors(DoctorSearchParameters queryParameters);
 
-        ICollection<SpecializationModel> GetAvailableSpecialization();
+        IEnumerable<SpecializationModel> GetAvailableSpecialization();
     }
 }

@@ -13,40 +13,38 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class SigninController : ControllerBase
     {
+        private readonly ISignInService _signIn;
         private readonly ITokenService _tokenService;
         private readonly UserManager<User> _userManager;
 
-        public SigninController(UserManager<User> userManager, ITokenService tokenService)
+        public SigninController(UserManager<User> userManager,
+            ITokenService tokenService,
+            ISignInService signIn)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _signIn = signIn;
         }
 
         [HttpPost]
-        public async Task<ActionResult> SignIn([FromBody]UserLoginModel form)
+        public async Task<IActionResult> SignIn([FromBody]UserLoginModel form)
         {
-            var user = await _userManager.FindByNameOrEmailAsync(form.UserName);
-            if (user == null)
+            var (user,state) = await _signIn.CheckIfExist(form, _userManager);
+            IActionResult status;
+            if (state == true)
             {
-                return NotFound(new { message = "You have entered an invalid username or password" });
+                status = Ok(new
+                {
+                    user_avatar = user.AvatarURL,
+                    access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
+                    refresh_token = _tokenService.GenerateRefreshToken(user).Token
+                });
             }
             else
             {
-                if (!await _userManager.IsEmailConfirmedAsync(user))
-                {
-                    return NotFound(new { message = "You have entered an invalid username or password" });
-                }
+                status = NotFound(new { message = "You have entered an invalid username or password" });
             }
-            if (!await _userManager.CheckPasswordAsync(user, form.Password))
-            {
-                return NotFound(new { message = "You have entered an invalid username or password" });
-            }
-            return Ok(new
-            {
-                user_avatar = user.AvatarURL,
-                access_token = new JwtSecurityTokenHandler().WriteToken(await _tokenService.GenerateAccessToken(user)),
-                refresh_token = _tokenService.GenerateRefreshToken(user).Token
-            });
+            return status;
         }
 
         [HttpPost("refresh")]

@@ -47,7 +47,7 @@ namespace InternetHospital.WebApi
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<ApplicationContext>(opt =>
                     {
-                        opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection"), 
+                        opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection"),
                                       m => m.MigrationsAssembly("InternetHospital.WebApi"));
                     });
 
@@ -71,23 +71,23 @@ namespace InternetHospital.WebApi
                                       })
                     .AddJwtBearer(options =>
                                  {
-                                    options.TokenValidationParameters = new TokenValidationParameters
-                                                                        {
-                                                                            ValidateIssuer = true,
-                                                                            ValidateAudience = false,
-                                                                            ValidateLifetime = true,
-                                                                            ValidateIssuerSigningKey = true,
-                                                                            ValidIssuer = appSettings.JwtIssuer,
-                                                                            ClockSkew = TimeSpan.Zero,
-                                                                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                                                                                                                                .GetBytes(appSettings.JwtKey))
-                                                                        };
+                                     options.TokenValidationParameters = new TokenValidationParameters
+                                     {
+                                         ValidateIssuer = true,
+                                         ValidateAudience = false,
+                                         ValidateLifetime = true,
+                                         ValidateIssuerSigningKey = true,
+                                         ValidIssuer = appSettings.JwtIssuer,
+                                         ClockSkew = TimeSpan.Zero,
+                                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                                                                                                                                 .GetBytes(appSettings.JwtKey))
+                                     };
                                  });
 
             //Add Authorization policy
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("ApprovedPatients", 
+                options.AddPolicy("ApprovedPatients",
                                   policyBuilder => policyBuilder.RequireAssertion(
                                                    context => context.User.HasClaim(claim =>
                                                                                     claim.Type == "ApprovedPatient")
@@ -107,7 +107,11 @@ namespace InternetHospital.WebApi
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddScoped<IUploadingFiles, UploadingService>();
+            services.AddScoped<IFilesService, FilesService>();
+            services.AddScoped<ISignInService, SignInService>();
+            services.AddScoped<ISignUpService, SignUpService>();
+            services.AddScoped<IPatientService, PatientService>();
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -138,6 +142,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<UserRegistrationModel, User>();
                 config.CreateMap<AppointmentCreationModel, Appointment>();
                 config.CreateMap<FeedBackCreationModel, FeedBack>();
+                config.CreateMap<PatientModel, User>();
             });
 
             app.UseMvc();

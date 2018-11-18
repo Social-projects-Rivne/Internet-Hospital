@@ -12,7 +12,7 @@ using System;
 
 namespace InternetHospital.BusinessLogic.Services
 {
-    public class UploadingService : IUploadingFiles
+    public class FilesService : IFilesService
     {
         private readonly IHostingEnvironment _env;
         private readonly UserManager<User> _userManager;
@@ -23,7 +23,7 @@ namespace InternetHospital.BusinessLogic.Services
         const int MAX_WIDTH = 3000;
         const int IMAGE_MAX_LENGTH = 20;
 
-        public UploadingService(IHostingEnvironment env, UserManager<User> userManager)
+        public FilesService(IHostingEnvironment env, UserManager<User> userManager)
         {
             _env = env;
             _userManager = userManager;
