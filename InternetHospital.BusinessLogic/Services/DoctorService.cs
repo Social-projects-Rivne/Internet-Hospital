@@ -6,16 +6,25 @@ using InternetHospital.DataAccess.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class DoctorService : IDoctorService
     {
         private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly IFilesService _uploadingFiles;
+        const string DOCTOR = "Doctor";
 
-        public DoctorService(ApplicationContext context)
+        public DoctorService(ApplicationContext context, UserManager<User> userManager, IFilesService uploadingFiles)
         {
             _context = context;
+            _userManager = userManager;
+            _uploadingFiles = uploadingFiles;
         }
 
         public DoctorDetailedModel Get(int id)
@@ -104,5 +113,52 @@ namespace InternetHospital.BusinessLogic.Services
             return doctorsModel;
         }
 
+        public DoctorProfileModel GetDoctorProfile(int userId)
+        {
+            var user = _context.Users
+                .Include(u => u.Doctor)
+                .Include(u => u.Doctor.Specialization)
+                .FirstOrDefault(u => u.Id == userId);
+
+            var doctorModel = new DoctorProfileModel(); 
+                
+            Mapper.Map(user, doctorModel, opt => opt.AfterMap((u, dm) =>
+            {
+                dm.Address = u.Doctor.Address;
+                dm.Specialization = u.Doctor.Specialization.Name;
+            }));
+            
+            return doctorModel;
+        }
+
+        public async Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license)
+        {
+            var addedTime = DateTime.Now;
+            var result = true;
+            var doctor = _context.Users
+                .Include(u => u.Doctor)
+                .FirstOrDefault(u => u.Id == userId);
+            if (doctor == null)
+            {
+                result = false;
+                return result;
+            }
+
+            var temporaryPatient = Mapper.Map<TemporaryUser>(doctorModel);
+            temporaryPatient.AddedTime = addedTime;
+            temporaryPatient.Role = DOCTOR;
+            temporaryPatient.UserId = doctor.Id;
+
+            _context.Add(temporaryPatient);
+            _context.Update(doctor);
+
+            // TODO: SO MUCH SAME LOGICS in these methods beneath - implement 1 common method !!!
+            await _uploadingFiles.UploadPassport(passport, doctor, addedTime);
+            await _uploadingFiles.UploadDiploma(diploma, doctor, addedTime);
+            await _uploadingFiles.UploadLicense(license, doctor, addedTime);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
     }
 }
