@@ -13,7 +13,7 @@ namespace InternetHospital.BusinessLogic.Services
             var user = await userManager.FindByNameOrEmailAsync(model.UserName);
             if (user == null)
             {
-                return (null, false);
+                return (user, false);
             }
             if (await userManager.IsEmailConfirmedAsync(user) && await userManager.CheckPasswordAsync(user, model.Password))
             {
