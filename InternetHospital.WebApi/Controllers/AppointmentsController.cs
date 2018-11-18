@@ -1,8 +1,8 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
-using InternetHospital.BusinessLogic.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using InternetHospital.BusinessLogic.Models.Appointment;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -30,12 +30,18 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
-        [HttpGet("getavailable")]
-        public IActionResult GetAvailableAppointments([FromQuery] int doctorId)
+        [HttpGet("available")]
+        public IActionResult GetAvailableAppointments([FromQuery] AppointmentSearchModel parameters)
         {
-            var availableAppointments = _appointmentService.GetAvailableAppointments(doctorId);
+            var (appointments, quantity) = _appointmentService.GetAvailableAppointments(parameters);
 
-            return Ok(availableAppointments);
+            return Ok(
+                new
+                {
+                    appointments,
+                    quantity
+                }
+            );
         }
 
         [Authorize(Policy = "ApprovedDoctors")]
@@ -47,9 +53,9 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var (status, message) = _appointmentService.AddAppointment(creationModel, doctorId);
+            var status = _appointmentService.AddAppointment(creationModel, doctorId);
 
-            return status ? (IActionResult)Ok(new { message }) : BadRequest(new { message });
+            return status ? (IActionResult)Ok(new { message = "Ok" }) : BadRequest();
         }
 
         [Authorize(Policy = "ApprovedDoctors")]
