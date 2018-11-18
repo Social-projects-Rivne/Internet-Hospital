@@ -104,7 +104,7 @@ namespace InternetHospital.BusinessLogic.Services
                 pathFile[i] = $"/{folderName}/{user.UserName}/{passportFolder}/{fileName}";
             }
             string json = JsonConvert.SerializeObject(pathFile);
-            user.PassportURL = json;
+            //user.PassportURL = json;
 
             return user;
         }

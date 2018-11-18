@@ -12,29 +12,9 @@ namespace InternetHospital.WebApi
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole<int>>>();
-                    var userManager = services.GetRequiredService<UserManager<User>>();
-
-                    await RoleConfiguration.InitializeAsync(roleManager);
-                    await UserConfiguration.InitializeAsync(userManager);
-                }
-                catch (Exception exception)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogCritical(exception, $"{nameof(Program)} failed with {exception.Message}");
-                }
-            }
-
-            host.Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
