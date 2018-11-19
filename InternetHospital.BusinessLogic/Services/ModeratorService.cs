@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
@@ -89,7 +90,11 @@ namespace InternetHospital.BusinessLogic.Services
 
             FilteredModeratorsModel fModel = new FilteredModeratorsModel();
             fModel.AmountOfAllFiltered = moderators.Count();
-            fModel.Moderators = Pagination(moderators, queryParameters.Page, queryParameters.PageSize).ToList();
+
+            moderators = PaginationHelper<User>
+                .GetPageValues(moderators, queryParameters.PageSize, queryParameters.Page);
+
+            fModel.Moderators = ConvertToViewModel(moderators).ToList();
             return fModel;
         }
 
@@ -145,11 +150,9 @@ namespace InternetHospital.BusinessLogic.Services
             return moderators;
         }
 
-        private IQueryable<ModeratorModel> Pagination(IQueryable<User> moderators, int pageNumber, int elementsOnPage)
+        private IQueryable<ModeratorModel> ConvertToViewModel(IQueryable<User> moderators)
         {
-            var moders = moderators.Skip((pageNumber - 1) * elementsOnPage)
-                                    .Take(elementsOnPage)
-                                    .Select(m => new ModeratorModel
+            var moders = moderators.Select(m => new ModeratorModel
                                     {
                                         Id = m.Id,
                                         Email = m.Email,
