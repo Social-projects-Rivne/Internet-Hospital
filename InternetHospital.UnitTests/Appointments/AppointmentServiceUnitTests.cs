@@ -2,7 +2,7 @@
 using AutoFixture;
 using FluentAssertions;
 using Xunit;
-using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Models.Appointment;
 using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
