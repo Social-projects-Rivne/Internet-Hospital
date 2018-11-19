@@ -98,6 +98,10 @@ namespace InternetHospital.WebApi
                                                    context => context.User.HasClaim(claim =>
                                                               claim.Type == "ApprovedDoctor")
                                                            && context.User.IsInRole("Doctor")));
+
+                options.AddPolicy("Administrator",
+                                  policyBuilder => policyBuilder.RequireAssertion(
+                                                   context => context.User.IsInRole("Admin")));
             });
 
             //Dependency injection

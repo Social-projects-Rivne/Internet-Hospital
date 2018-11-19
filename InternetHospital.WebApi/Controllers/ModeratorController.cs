@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +10,12 @@ namespace InternetHospital.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Administrator")]
     public class ModeratorController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
         private readonly IModeratorService _moderatorService;
-        private readonly IMailService _mailService;
+        private readonly IMailService _mailService; 
 
         public ModeratorController(UserManager<User> userManager, IModeratorService moderatorService, IMailService mailService)
         {
