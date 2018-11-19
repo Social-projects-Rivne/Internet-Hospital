@@ -134,31 +134,32 @@ namespace InternetHospital.BusinessLogic.Services
         public async Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license)
         {
             var addedTime = DateTime.Now;
-            var result = true;
             var doctor = _context.Users
                 .Include(u => u.Doctor)
                 .FirstOrDefault(u => u.Id == userId);
             if (doctor == null)
             {
-                result = false;
-                return result;
+                return false;
             }
 
-            var temporaryPatient = Mapper.Map<TemporaryUser>(doctorModel);
-            temporaryPatient.AddedTime = addedTime;
-            temporaryPatient.Role = DOCTOR;
-            temporaryPatient.UserId = doctor.Id;
+            var temporaryUser = Mapper.Map<DoctorProfileModel, TemporaryUser>(doctorModel, 
+            config => config.AfterMap((src, dest) => 
+            {
+                dest.AddedTime = addedTime;
+                dest.Role = DOCTOR;
+                dest.UserId = doctor.Id;
 
-            _context.Add(temporaryPatient);
+            }));
+
+            _context.Add(temporaryUser);
             _context.Update(doctor);
 
-            // TODO: SO MUCH SAME LOGICS in these methods beneath - implement 1 common method !!!
             await _uploadingFiles.UploadPassport(passport, doctor, addedTime);
             await _uploadingFiles.UploadDiploma(diploma, doctor, addedTime);
             await _uploadingFiles.UploadLicense(license, doctor, addedTime);
             await _context.SaveChangesAsync();
 
-            return result;
+            return true;
         }
     }
 }

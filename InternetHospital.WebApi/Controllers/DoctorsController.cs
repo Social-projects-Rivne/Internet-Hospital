@@ -56,7 +56,7 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpPut("update")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> UpdateDoctor([FromForm(Name = "PassportURL")]IFormFileCollection passport,
             [FromForm(Name = "DiplomaURL")]IFormFileCollection diploma,
             [FromForm(Name = "LicenseURL")]IFormFileCollection license)
@@ -65,7 +65,7 @@ namespace InternetHospital.WebApi.Controllers
             var doctorModel = new DoctorProfileModel
             {
                 FirstName = Request.Form["FirstName"],
-                SecondName = Request.Form["SecondName"], // First letter to Uper other tolower case !!!
+                SecondName = Request.Form["SecondName"],
                 ThirdName = Request.Form["ThirdName"],
                 PhoneNumber = Request.Form["PhoneNumber"],
                 BirthDate = DateTime.Parse(Request.Form["BirthDate"]),
@@ -91,11 +91,9 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpGet("getProfile")]
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public IActionResult GetDoctorProfile()
         {
-
-            var patientId = User.Identity?.Name;
             if (!int.TryParse(User.Identity.Name, out int userId))
             {
                 return BadRequest();

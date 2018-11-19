@@ -61,14 +61,10 @@ namespace InternetHospital.WebApi.Controllers
         [Authorize]
         public async Task<IActionResult> UpdatePatientProfile([FromForm(Name = "PassportURL")]IFormFileCollection files)
         {
-            //if (files == null)
-            //{
-            //    ModelState.AddModelError("Files", "Files didn't upload");
-            //}
             var patientModel = new PatientModel
             {
                 FirstName = Request.Form["FirstName"],
-                SecondName = Request.Form["SecondName"], // First letter to Uper other tolower case !!!
+                SecondName = Request.Form["SecondName"],
                 ThirdName = Request.Form["ThirdName"],
                 PhoneNumber = Request.Form["PhoneNumber"],
                 BirthDate = Request.Form["BirthDate"]
@@ -109,7 +105,5 @@ namespace InternetHospital.WebApi.Controllers
             }
             return BadRequest(new { message = "Cannot get profile data!"});
         }
-
-
     }
 }

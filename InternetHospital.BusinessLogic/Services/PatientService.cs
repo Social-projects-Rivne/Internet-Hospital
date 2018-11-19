@@ -6,8 +6,6 @@ using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,24 +29,26 @@ namespace InternetHospital.BusinessLogic.Services
         public async Task<PatientModel> GetPatientProfile(int userId)
         {
             var patient = await _userManager.FindByIdAsync(userId.ToString());
-            var patientModel = Mapper.Map<PatientModel>(patient);
+            var patientModel = Mapper.Map<User, PatientModel>(patient);
             return patientModel;
         }
 
         public async Task<bool> UpdatePatientInfo(PatientModel patientModel, int userId, IFormFileCollection files)
         {
             var addedTime = DateTime.Now;
-            var result = true;
             var patient = _context.Users.FirstOrDefault(p => p.Id == userId);
             if (patient == null)
             {
-                result = false;
+                return false;
             }
 
-            var temporaryPatient = Mapper.Map<TemporaryUser>(patientModel);
-            temporaryPatient.AddedTime = addedTime;
-            temporaryPatient.Role = PATIENT;
-            temporaryPatient.UserId = patient.Id;
+            var temporaryPatient = Mapper.Map<PatientModel, TemporaryUser>(patientModel, 
+                config => config.AfterMap((src, dest) => 
+                {
+                    dest.AddedTime = addedTime;
+                    dest.Role = PATIENT;
+                    dest.UserId = patient.Id;
+                }));
 
             _context.Add(temporaryPatient);
             _context.Update(patient);
@@ -56,7 +56,7 @@ namespace InternetHospital.BusinessLogic.Services
             await _uploadingFiles.UploadPassport(files, patient, addedTime);
             await _context.SaveChangesAsync();
 
-            return result;
+            return true;
         }
     }
 }
