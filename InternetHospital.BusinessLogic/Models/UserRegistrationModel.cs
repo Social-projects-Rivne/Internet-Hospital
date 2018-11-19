@@ -7,7 +7,7 @@ namespace InternetHospital.BusinessLogic.Models
         [Required]
         public string UserName { get; set; }
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Invalid email!")]
         public string Email { get; set; }
         [Required]
         public string Role { get; set; }

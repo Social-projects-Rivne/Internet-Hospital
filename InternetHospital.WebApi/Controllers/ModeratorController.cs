@@ -34,20 +34,37 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostModerator([FromBody] ModeratorCreatingModel moderatorCreatingModel)
+        public async Task<IActionResult> PostModeratorAsync([FromBody] ModeratorCreatingModel moderatorCreatingModel)
         {
             var moder = await _moderatorService.CreateModeratorAsync(moderatorCreatingModel);
             if (moder.Item1 != null)
             {
-                string callbackUrl = await GenerateConfirmationLink(moder.Item1);
+                string callbackUrl = await GenerateConfirmationLinkAsync(moder.Item1);
                 await _mailService.SendMsgToEmail(moder.Item1.Email, "Confirm Your account, please",
-                    $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
-                return Ok();
+                    $"Confirm registration following the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
+                return Ok(new { message = moder.Item2 });
             }
             return BadRequest(new { message = moder.Item2 });
         }
 
-        private async Task<string> GenerateConfirmationLink(User user)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteModeratorAsync(int id)
+        {
+            var result = await _moderatorService.DeleteAsync(id);
+            if (result.Item1)
+            {
+                return Ok(new { message = result.Item2 });
+            }
+            return BadRequest(new { message = result.Item2 });
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteModeratorAsync([FromQuery]int[] ids)
+        {
+            var result = await _moderatorService.DeleteAsync(ids);
+            return Ok(result);
+        }
+
+        private async Task<string> GenerateConfirmationLinkAsync(User user)
         {
             var codes = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.Action(

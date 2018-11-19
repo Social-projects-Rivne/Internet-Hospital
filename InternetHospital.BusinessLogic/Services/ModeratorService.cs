@@ -20,6 +20,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         private const string MODERATOR = "Moderator";
         private const string ACTIVE_STATUS = "Active";
+        private const string DELETED_STATUS = "Deleted";
         private const string SORT_BY_FIRST_NAME = "firstName";
         private const string SORT_BY_SECOND_NAME = "secondName";
         private const string SORT_BY_THIRD_NAME = "thirdName";
@@ -57,12 +58,12 @@ namespace InternetHospital.BusinessLogic.Services
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, MODERATOR);
-                    return (user, null);
+                    return (user, "Confirm link was send on email");
                 }
 
                 return (null, "Error during registration");
             }
-            return (null, "User with such email is already created!");
+            return (null, "User with such email already exists!");
         }
 
         public FilteredModeratorsModel GetFilteredModerators(ModeratorSearchParameters queryParameters)
@@ -81,10 +82,58 @@ namespace InternetHospital.BusinessLogic.Services
                                                    || m.SecondName.ToLower().Contains(lowerSearchParam)
                                                    || m.ThirdName.ToLower().Contains(lowerSearchParam));
             }
+
+            if (!string.IsNullOrEmpty(queryParameters.Order))
+            {
+                moderators = SortModerators(moderators, queryParameters.Sort, queryParameters.Order);
+            }
+
             FilteredModeratorsModel fModel = new FilteredModeratorsModel();
             fModel.AmountOfAllFiltered = moderators.Count();
             fModel.Moderators = Pagination(moderators, queryParameters.Page, queryParameters.PageSize).ToList();
             return fModel;
+        }
+
+        public async Task<(bool,string)> DeleteAsync(int id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user != null && await _userManager.IsInRoleAsync(user, "Moderator"))
+            {
+                await _userManager.UpdateAsync(user);
+                user.StatusId = _context.Statuses.FirstOrDefault(s => s.Name == DELETED_STATUS).Id;
+                await _context.SaveChangesAsync();
+                return (true, "Deleted successfully");
+            }
+
+            return (false, "Couldn't delete user with such id!");
+        }
+
+        public async Task<IEnumerable<(bool, string)>> DeleteAsync(int[] ids)
+        {
+            List<(bool, string)> messages = new List<(bool, string)>();
+            foreach (var id in ids)
+            {
+                var user = await _userManager.FindByIdAsync(id.ToString());
+                if (user != null)
+                {
+                    if (await _userManager.IsInRoleAsync(user, "Moderator"))
+                    {
+                        await _userManager.UpdateAsync(user);
+                        user.StatusId = _context.Statuses.FirstOrDefault(s => s.Name == DELETED_STATUS).Id;
+                        await _context.SaveChangesAsync();
+                        messages.Add((true, $"Moderator with email {user.Email} deleted successfully!"));
+                    }
+                    else
+                    {
+                        messages.Add((false, $"User with email {user.Email} isn't moderator!"));
+                    }
+                }
+                else
+                {
+                    messages.Add((false, $"Couldn't delete user with such id - {id}!"));
+                }
+            }
+            return messages;
         }
 
         private IQueryable<User> GetModerators()

@@ -11,6 +11,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
     { 
         FilteredModeratorsModel GetFilteredModerators(ModeratorSearchParameters queryParameters);
         Task<(User, string)> CreateModeratorAsync(ModeratorCreatingModel vm);
+        Task<(bool, string)> DeleteAsync(int id);
+        Task<IEnumerable<(bool, string)>> DeleteAsync(int[] id);
 
     }
 }
