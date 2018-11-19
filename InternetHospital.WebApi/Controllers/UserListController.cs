@@ -18,23 +18,22 @@ namespace InternetHospital.WebApi.Controllers
 
         private readonly IUserListService _userListService;
 
-        UserListController(IUserListService userListService)
+        public UserListController(IUserListService userListService)
         {
             _userListService = userListService;
         }
 
-        // GET: api/UserList
+        // GET: api/userlist 
         [HttpGet]
         public ICollection<User> Get()
         {
-            return _userListService.GetUsers();
-        }
+            var Users = _userListService.GetUsers();
 
-        // PUT: api/UserList/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            if (Users != null)
+                return Users;
+            else
+                return null;
 
+        }
     }
 }

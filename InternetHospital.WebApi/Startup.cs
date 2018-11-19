@@ -108,6 +108,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IUploadingFiles, UploadingService>();
+            services.AddScoped<IUserListService, UserListService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
