@@ -17,6 +17,9 @@ namespace InternetHospital.DataAccess
         public DbSet<Status> Statuses { get; set; }
         public DbSet<FeedBack> FeedBacks { set; get; }
         public DbSet<FeedBackType> FeedBackTypes { set; get; }
+        public DbSet<IllnessHistory> IllnessHistories { set; get; }
+        public DbSet<Passport> Passports { set; get; }
+        public DbSet<TemporaryUser> TemporaryUsers { set; get; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
@@ -27,11 +30,9 @@ namespace InternetHospital.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new DoctorConfiguration());
-
-            // TODO: rewrite to do not use json configs
-            // builder.ApplyConfiguration(new StatusConfiguration());
-            // builder.ApplyConfiguration(new AppointmenStatusConfiguration());
-            // builder.ApplyConfiguration(new SpecializationConfiguration());
+            builder.ApplyConfiguration(new StatusConfiguration());
+            builder.ApplyConfiguration(new AppointmenStatusConfiguration());
+            builder.ApplyConfiguration(new SpecializationConfiguration());
             base.OnModelCreating(builder);
         }
     }

@@ -4,14 +4,16 @@ using InternetHospital.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20181116142422_Create_Password_and_TempUser_entities")]
+    partial class Create_Password_and_TempUser_entities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,33 +153,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.ToTable("FeedBackTypes");
                 });
 
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.IllnessHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("ConclusionTime");
-
-                    b.Property<string>("Diagnose");
-
-                    b.Property<int>("DoctorId");
-
-                    b.Property<string>("Symptoms");
-
-                    b.Property<string>("Treatment");
-
-                    b.Property<int?>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("IllnessHistories");
-                });
-
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
                 {
                     b.Property<int>("Id")
@@ -196,7 +171,7 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Passports");
+                    b.ToTable("Passport");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.RefreshToken", b =>
@@ -324,7 +299,7 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TemporaryUsers");
+                    b.ToTable("TemporaryUser");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.User", b =>
@@ -553,18 +528,6 @@ namespace InternetHospital.WebApi.Migrations
                         .WithMany("FeedBacks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.IllnessHistory", b =>
-                {
-                    b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
-                        .WithMany("IllnessHistories")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
-                        .WithMany("IllnessHistories")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>

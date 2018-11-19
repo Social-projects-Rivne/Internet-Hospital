@@ -17,8 +17,8 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class FeedBackController : ControllerBase
     {
-        private IFeedBackService _feedBackService;
-        private UserManager<User> _userManager;
+        private readonly IFeedBackService _feedBackService;
+        private readonly UserManager<User> _userManager;
 
         public FeedBackController(IFeedBackService feedBackService,
              UserManager<User> userManager)
@@ -44,7 +44,7 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpGet("feedbacktypes")]
-        public ICollection<FeedBackType> GetFeedBacks()
+        public IEnumerable<FeedBackType> GetFeedBacks()
         {
             return _feedBackService.GetFeedBackTypes();
         }
