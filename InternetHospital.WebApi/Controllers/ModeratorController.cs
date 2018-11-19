@@ -10,7 +10,7 @@ namespace InternetHospital.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Administrator")]
+    [Authorize(Roles = "Admin")]
     public class ModeratorController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
