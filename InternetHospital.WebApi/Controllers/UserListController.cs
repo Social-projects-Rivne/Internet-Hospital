@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InternetHospital.BusinessLogic.Interfaces;
-using InternetHospital.BusinessLogic.Models;
-using InternetHospital.BusinessLogic.Services;
+﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.DataAccess.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -15,7 +9,6 @@ namespace InternetHospital.WebApi.Controllers
     [ApiController]
     public class UserListController : ControllerBase
     {
-
         private readonly IUserListService _userListService;
 
         public UserListController(IUserListService userListService)
@@ -25,15 +18,10 @@ namespace InternetHospital.WebApi.Controllers
 
         // GET: api/userlist 
         [HttpGet]
-        public ICollection<User> Get()
+        public IEnumerable<User> Get()
         {
             var Users = _userListService.GetUsers();
-
-            if (Users != null)
-                return Users;
-            else
-                return null;
-
+            return Users != null ? Users : null;
         }
     }
 }

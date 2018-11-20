@@ -117,7 +117,6 @@ namespace InternetHospital.WebApi
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddScoped<IUploadingFiles, UploadingService>();
             services.AddScoped<IUserListService, UserListService>();
             services.AddScoped<IFilesService, FilesService>();
             services.AddScoped<ISignInService, SignInService>();
