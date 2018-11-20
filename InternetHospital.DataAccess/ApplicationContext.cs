@@ -33,6 +33,7 @@ namespace InternetHospital.DataAccess
             builder.ApplyConfiguration(new StatusConfiguration());
             builder.ApplyConfiguration(new AppointmenStatusConfiguration());
             builder.ApplyConfiguration(new SpecializationConfiguration());
+            builder.ApplyConfiguration(new AppointmentConfiguration());
             base.OnModelCreating(builder);
         }
     }

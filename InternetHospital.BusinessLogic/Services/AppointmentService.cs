@@ -5,11 +5,8 @@ using InternetHospital.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Transactions;
 using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Models.Appointment;
-using Microsoft.EntityFrameworkCore;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -219,7 +216,7 @@ namespace InternetHospital.BusinessLogic.Services
                 _context.SaveChanges();
                 return true;
             }
-            catch /*(DbUpdateConcurrencyException)*/
+            catch
             {
                 return false;
             }
