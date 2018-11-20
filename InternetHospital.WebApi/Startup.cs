@@ -153,6 +153,9 @@ namespace InternetHospital.WebApi
                 config.CreateMap<AppointmentCreationModel, Appointment>();
                 config.CreateMap<FeedBackCreationModel, FeedBack>();
                 config.CreateMap<PatientModel, User>();
+                config.CreateMap<PatientModel, TemporaryUser>();
+                config.CreateMap<User, DoctorProfileModel>();
+                config.CreateMap<DoctorProfileModel, TemporaryUser>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
             });
 

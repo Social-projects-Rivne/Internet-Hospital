@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -49,6 +53,58 @@ namespace InternetHospital.WebApi.Controllers
         public IEnumerable<SpecializationModel> GetSpecializations()
         {
             return _doctorService.GetAvailableSpecialization();
+        }
+
+        [HttpPut("update")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> UpdateDoctor([FromForm(Name = "PassportURL")]IFormFileCollection passport,
+            [FromForm(Name = "DiplomaURL")]IFormFileCollection diploma,
+            [FromForm(Name = "LicenseURL")]IFormFileCollection license)
+        {
+
+            var doctorModel = new DoctorProfileModel
+            {
+                FirstName = Request.Form["FirstName"],
+                SecondName = Request.Form["SecondName"],
+                ThirdName = Request.Form["ThirdName"],
+                PhoneNumber = Request.Form["PhoneNumber"],
+                BirthDate = DateTime.Parse(Request.Form["BirthDate"]),
+                Address = Request.Form["Address"],
+                Specialization = Request.Form["Specialization"],
+            };
+
+            TryValidateModel(doctorModel);
+
+            if (ModelState.IsValid)
+            {
+                if (int.TryParse(User.Identity.Name, out int userId))
+                {
+                    var result = await _doctorService.UpdateDoctorInfo(doctorModel, userId, passport, diploma, license);
+                    return result ? (IActionResult)Ok() : BadRequest(new { message = "Error during updating!" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Error with user ID!" });
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("getProfile")]
+        [Authorize(Roles = "Doctor")]
+        public IActionResult GetDoctorProfile()
+        {
+            if (!int.TryParse(User.Identity.Name, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var doctor =  _doctorService.GetDoctorProfile(userId);
+            if (doctor != null)
+            {
+                return Ok(doctor);
+            }
+            return BadRequest(new { message = "Cannot get profile data!" });
         }
     }
 }
