@@ -27,16 +27,14 @@ namespace InternetHospital.BusinessLogic.Services
         private const string SORT_BY_STATUS = "status";
         private const string SORT_BY_SIGN_UP = "signUpTime";
         private const string SORT_BY_EMAIL = "email";
-
         private const string ORDER_ASC = "asc";
 
-
-        public ModeratorService(ApplicationContext context, UserManager<User> um,
-            RoleManager<IdentityRole<int>> rm)
+        public ModeratorService(ApplicationContext context, UserManager<User> userManager,
+            RoleManager<IdentityRole<int>> roleManager)
         {
             _context = context;
-            _userManager = um;
-            _roleManager = rm;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<(User, string)> CreateModeratorAsync(ModeratorCreatingModel vm)
