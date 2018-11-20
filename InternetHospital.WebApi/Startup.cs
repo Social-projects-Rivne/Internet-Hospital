@@ -121,6 +121,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<ISignUpService, SignUpService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IModeratorService, ModeratorService>();
 
         }
 
@@ -157,6 +158,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<User, DoctorProfileModel>();
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
+                config.CreateMap<ModeratorCreatingModel, User>();
             });
 
             app.UseMvc();
