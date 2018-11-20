@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InternetHospital.BusinessLogic.Models
+namespace InternetHospital.BusinessLogic.Models.Appointment
 {
     public class AppointmentModel
     {

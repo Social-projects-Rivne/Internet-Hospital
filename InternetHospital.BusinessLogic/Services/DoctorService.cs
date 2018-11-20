@@ -7,9 +7,9 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using InternetHospital.BusinessLogic.Helpers;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -73,9 +73,19 @@ namespace InternetHospital.BusinessLogic.Services
             }
 
             var doctorsAmount = doctors.Count();
-            var doctorsResult = PaginationHelper(doctors, queryParameters.PageCount, queryParameters.Page)
+            var doctorsResult = PaginationHelper<Doctor>
+                .GetPageValues(doctors, queryParameters.PageCount, queryParameters.Page)
+                .Select(x => new DoctorModel
+                    {
+                        Id = x.UserId,
+                        FirstName = x.User.FirstName,
+                        SecondName = x.User.SecondName,
+                        ThirdName = x.User.ThirdName,
+                        AvatarURL = x.User.AvatarURL,
+                        Specialization = x.Specialization.Name
+                    })
                 .OrderBy(x => x.SecondName)
-                .ToList(); ;
+                .ToList();
 
             return (doctorsResult, doctorsAmount);
         }

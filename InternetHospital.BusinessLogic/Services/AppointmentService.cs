@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
 using InternetHospital.BusinessLogic.Interfaces;
-using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InternetHospital.BusinessLogic.Helpers;
+using InternetHospital.BusinessLogic.Models.Appointment;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class AppointmentService : IAppointmentService
     {
         private readonly ApplicationContext _context;
-        private const int MINIMUM_APPOINTMENT_TIME = 15;
-        private const int MINIMUM_TIME_BEFORE_APPOINTMENT = 10;
-        private const int TIME_FOR_FINISHING_APPOINTMENT = 12;
 
         public AppointmentService(ApplicationContext context)
         {
@@ -54,68 +52,44 @@ namespace InternetHospital.BusinessLogic.Services
         /// <param name="creationModel"></param>
         /// <param name="doctorId"></param>
         /// <returns>
-        /// returns status and message of appointment creation
+        /// returns status of appointment creation
         /// </returns>
-        public (bool status, string message) AddAppointment(AppointmentCreationModel creationModel, int doctorId)
+        public bool AddAppointment(AppointmentCreationModel creationModel, int doctorId)
         {
             DeleteUncommittedAppointments(doctorId);
 
-            if (DateTime.Now > creationModel.StartTime)
-            {
-                return (false, "You don't have a time machine");
-            }
-            if (creationModel.StartTime > creationModel.EndTime)
-            {
-                return (false, "Appointment can't start after ending");
-            }
-            if ((creationModel.EndTime - creationModel.StartTime).TotalMinutes < MINIMUM_APPOINTMENT_TIME)
-            {
-                return (false, $"Your appointment has to be at least {MINIMUM_APPOINTMENT_TIME} minutes");
-            }
-            if (creationModel.StartTime.Date != creationModel.EndTime.Date)
-            {
-                return (false, "Your appointment can't be bigger then one day");
-            }
-            var isReserved = _context.Appointments.Any(a => a.DoctorId == doctorId
-                                                       && ((creationModel.StartTime >= a.StartTime && creationModel.StartTime < a.EndTime)
-                                                           || (creationModel.EndTime > a.StartTime && creationModel.EndTime <= a.EndTime)));
-            if (isReserved)
-            {
-                return (false, "You already have an appointment for this time");
-            }
-
-            var ifUnfinished = _context.Appointments.Any(a => a.DoctorId == doctorId
-                                                              && (DateTime.Now - a.EndTime).TotalHours > TIME_FOR_FINISHING_APPOINTMENT
-                                                              && (a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS));
-            if (ifUnfinished)
-            {
-                return (false, "You have out of date appointments. Please close it before creating new");
-            }
-
-            return CreateAppointment(creationModel, doctorId) ? (true, "Appointment has been successfully created") : (false, "Error adding an appointment");
+            return CreateAppointment(creationModel, doctorId);
         }
 
         /// <summary>
         /// Get all available appointments of selected doctor 
         /// </summary>
-        /// <param name="doctorId"></param>
+        /// <param name="searchParameters"></param>
         /// <returns>
         /// returns a list of appointments what can be reserved by patient
         /// </returns>
-        public IEnumerable<AvailableAppointmentModel> GetAvailableAppointments(int doctorId)
+        public (IEnumerable<AvailableAppointmentModel> appointments, int quantity)
+            GetAvailableAppointments(AppointmentSearchModel searchParameters)
         {
             var appointments = _context.Appointments
-                .Where(a => (a.DoctorId == doctorId)
-                            && (a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS)
-                            && (a.StartTime - DateTime.Now).TotalMinutes > MINIMUM_TIME_BEFORE_APPOINTMENT)
-                .Select(a => new AvailableAppointmentModel
-                {
-                    Id = a.Id,
-                    Address = a.Address,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime
-                });
-            return appointments.ToList();
+                .Where(a => (a.DoctorId == searchParameters.DoctorId)
+                            && (a.StatusId == (int)AppointmentStatuses.DEFAULT_STATUS)
+                            && (a.StartTime >= searchParameters.From.Value));
+
+            if (searchParameters.Till != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime <= searchParameters.Till.Value);
+            }
+
+            var appointmentsAmount = appointments.Count();
+            var appointmentsResult = PaginationHelper<Appointment>
+                .GetPageValues(appointments, searchParameters.PageCount, searchParameters.Page)
+                .Select(a => Mapper.Map<Appointment, AvailableAppointmentModel>(a))
+                .OrderBy(a => a.StartTime)
+                .ToList();
+
+            return (appointmentsResult, appointmentsAmount);
         }
 
         /// <summary>
