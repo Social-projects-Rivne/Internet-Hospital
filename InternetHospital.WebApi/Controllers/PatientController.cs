@@ -101,7 +101,6 @@ namespace InternetHospital.WebApi.Controllers
             if (patient != null)
             {
                 return Ok(patient);
-
             }
             return BadRequest(new { message = "Cannot get profile data!"});
         }

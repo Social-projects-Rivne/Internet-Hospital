@@ -73,29 +73,17 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<User> UploadPassport(IFormFileCollection images, User user, DateTime addedTime)
         {
-            if (images.Count == 0)
-            {
-                return user;
-            }
-            return await UploadFiles(images, user, addedTime, PASSPORT);
+            return images.Count == 0 ? user : await UploadFiles(images, user, addedTime, PASSPORT);
         }
 
         public async Task<User> UploadDiploma(IFormFileCollection images, User user, DateTime addedTime)
         {
-            if (images.Count == 0)
-            {
-                return user;
-            }
-            return await UploadFiles(images, user, addedTime, DIPLOMA);
+            return images.Count == 0 ? user : await UploadFiles(images, user, addedTime, DIPLOMA);
         }
 
         public async Task<User> UploadLicense(IFormFileCollection images, User user, DateTime addedTime)
         {
-            if (images.Count == 0)
-            {
-                return user;
-            }
-            return await UploadFiles(images, user, addedTime, LICENSE);
+            return images.Count == 0 ? user : await UploadFiles(images, user, addedTime, LICENSE);
         }
 
         public async Task<User> UploadFiles(IFormFileCollection images, User user, DateTime addedTime, string fileTypeFolder)

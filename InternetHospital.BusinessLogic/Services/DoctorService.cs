@@ -16,14 +16,12 @@ namespace InternetHospital.BusinessLogic.Services
     public class DoctorService : IDoctorService
     {
         private readonly ApplicationContext _context;
-        private readonly UserManager<User> _userManager;
         private readonly IFilesService _uploadingFiles;
         const string DOCTOR = "Doctor";
 
-        public DoctorService(ApplicationContext context, UserManager<User> userManager, IFilesService uploadingFiles)
+        public DoctorService(ApplicationContext context, IFilesService uploadingFiles)
         {
             _context = context;
-            _userManager = userManager;
             _uploadingFiles = uploadingFiles;
         }
 
