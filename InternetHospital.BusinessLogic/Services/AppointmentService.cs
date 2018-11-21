@@ -191,6 +191,37 @@ namespace InternetHospital.BusinessLogic.Services
             return (true, "Appointment was finished");
         }
 
+        /// <summary>
+        /// subscribe patient to appointment
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// status of subscription to appointment
+        /// </returns>
+        public bool SubscribeForAppointment(int appointmentId, int patientId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+
+            if (appointment == null || appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
+            {
+                return false;
+            }
+
+            appointment.UserId = patientId;
+            appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private bool CreateAppointment(AppointmentCreationModel model, int id)
         {
             try
