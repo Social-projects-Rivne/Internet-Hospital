@@ -1,8 +1,10 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
+using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -15,9 +17,9 @@ namespace InternetHospital.BusinessLogic.Services
             _context = context;
         }
 
-        public List<User> GetUsers()
+        public List<UserModel> GetUsers()
         {
-            return _context.Users.ToList();
+            return _context.Users.Select(u => Mapper.Map<User, UserModel>(u)).ToList();
         }
     }
 }

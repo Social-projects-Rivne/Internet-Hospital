@@ -7,6 +7,7 @@ namespace InternetHospital.BusinessLogic.Models
     public class UserModel
     {
         public int Id { set; get; }
+        public string Email { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string ThirdName { get; set; }

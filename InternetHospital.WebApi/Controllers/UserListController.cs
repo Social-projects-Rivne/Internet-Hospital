@@ -18,10 +18,10 @@ namespace InternetHospital.WebApi.Controllers
 
         // GET: api/userlist 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IActionResult Get()
         {
             var Users = _userListService.GetUsers();
-            return Users != null ? Users : null;
+            return Ok(Users);
         }
     }
 }
