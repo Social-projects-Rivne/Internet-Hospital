@@ -55,8 +55,9 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     Id = a.Id,
                     UserId = a.UserId,
-                    DoctorFirstName = a.User.FirstName,
-                    DoctorSecondName = a.User.SecondName,
+                    DoctorFirstName = a.Doctor.User.FirstName,
+                    DoctorSecondName = a.Doctor.User.SecondName,
+                    DoctorSpecialication = a.Doctor.Specialization.Name,
                     Address = a.Address,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
@@ -230,6 +231,29 @@ namespace InternetHospital.BusinessLogic.Services
 
             appointment.UserId = patientId;
             appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UnsubscribeForAppointment(int appointmentId, int patientId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+
+            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.RESERVED_STATUS)
+            {
+                return false;
+            }
+
+            appointment.UserId = patientId;
+            appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
             try
             {
                 _context.SaveChanges();
