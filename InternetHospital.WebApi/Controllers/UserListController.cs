@@ -1,4 +1,5 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
+using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -23,5 +24,18 @@ namespace InternetHospital.WebApi.Controllers
             var Users = _userListService.GetUsers();
             return Ok(Users);
         }
+
+        [HttpGet("getparams")]
+        public IActionResult GetDoctors([FromQuery]UserSearchParameters queryParameters)
+        {
+            var (users, quantity) = _userListService.FilteredUsers(queryParameters);
+
+            return Ok(
+                new {
+                    users,
+                    Count = quantity
+                });
+        }
+
     }
 }
