@@ -20,6 +20,7 @@ using InternetHospital.BusinessLogic.Validation.AppointmentValidators;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.WebApi.Swagger;
 
 namespace InternetHospital.WebApi
 {
@@ -111,6 +112,8 @@ namespace InternetHospital.WebApi
                                                            && context.User.IsInRole("Doctor")));
             });
 
+            services.AddSwaggerServices();
+
             //Dependency injection
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IFeedBackService, FeedBackService>();
@@ -139,6 +142,7 @@ namespace InternetHospital.WebApi
                 app.UseHsts();
             }
 
+            app.ConfigureSwagger();
             app.UseStaticFiles();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
