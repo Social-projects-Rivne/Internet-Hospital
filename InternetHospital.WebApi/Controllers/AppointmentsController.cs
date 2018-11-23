@@ -30,6 +30,19 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
+        [HttpGet("forpatient")]
+        public IActionResult GetPatientAppointments()
+        {
+            if (!int.TryParse(User.Identity.Name, out var patientId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var myAppointments = _appointmentService.GetPatientsAppointments(patientId);
+
+            return Ok(new { });
+        }
+
         [HttpGet("available")]
         public IActionResult GetAvailableAppointments([FromQuery] AppointmentSearchModel parameters)
         {

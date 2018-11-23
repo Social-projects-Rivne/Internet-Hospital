@@ -46,6 +46,25 @@ namespace InternetHospital.BusinessLogic.Services
             return appointments.ToList();
         }
 
+        public IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId)
+        {
+            var appointments = _context.Appointments
+                .Where(a => (a.UserId == patientId)
+                        && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                .Select(a => new AppointmentForPatient
+                {
+                    Id = a.Id,
+                    UserId = a.UserId,
+                    DoctorFirstName = a.User.FirstName,
+                    DoctorSecondName = a.User.SecondName,
+                    Address = a.Address,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    Status = a.Status.Name
+                });
+            return appointments.ToList();
+        }
+
         /// <summary>
         /// Create an appointment
         /// </summary>
