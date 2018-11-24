@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
 
 namespace InternetHospital.BusinessLogic.Interfaces
@@ -11,6 +12,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         bool SubscribeForAppointment(int appointmentId, int patientId);
         (bool status, string message) CancelAppointment(int appointmentId, int doctorId);
         (bool status, string message) DeleteAppointment(int appointmentId, int doctorId);
-        (bool status, string message) FinishAppointment(int appointmentId, int doctorId);
+        (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
     }
 }

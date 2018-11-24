@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -98,6 +99,19 @@ namespace InternetHospital.WebApi.Controllers
             var status = _appointmentService.SubscribeForAppointment(model.Id, patientId);
 
             return status ? (IActionResult)Ok() : BadRequest();
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("illnesshistory")]
+        public IActionResult FillHistory([FromBody] IllnessHistoryModel illnessHistory)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+            var (status, message) = _appointmentService.FillIllnessHistory(illnessHistory);
+
+            return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
     }
 }

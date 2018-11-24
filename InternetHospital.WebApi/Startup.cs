@@ -20,6 +20,7 @@ using InternetHospital.BusinessLogic.Validation.AppointmentValidators;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.BusinessLogic.Validation;
 
 namespace InternetHospital.WebApi
 {
@@ -41,6 +42,7 @@ namespace InternetHospital.WebApi
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentCreationValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<IllnessHistoryCreationValidator>();
                     });
 
             //allow to get user Id in BLL

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -30,8 +31,8 @@ namespace InternetHospital.BusinessLogic.Services
         {
             var appointments = _context.Appointments
                 .Where(a => (a.DoctorId == doctorId)
-                            && (a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS 
-                                || a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS))
+                            && (a.StatusId == (int)AppointmentStatuses.DEFAULT_STATUS
+                                || a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS))
                 .Select(a => new AppointmentModel
                 {
                     Id = a.Id,
@@ -114,7 +115,7 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can delete only your appointments");
             }
 
-            if (appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
+            if (appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
             {
                 return (false, "This appointment is reserved. You can only cancel it");
             }
@@ -147,48 +148,15 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can cancel only your appointments");
             }
 
-            if (appointment.StatusId != (int) AppointmentStatuses.RESERVED_STATUS)
+            if (appointment.StatusId != (int)AppointmentStatuses.RESERVED_STATUS)
             {
                 return (false, "You can cancel only reserved appointments");
             }
 
-            appointment.StatusId = (int) AppointmentStatuses.CANCELED_STATUS;
+            appointment.StatusId = (int)AppointmentStatuses.CANCELED_STATUS;
             _context.SaveChanges();
 
             return (true, "Appointment was canceled");
-        }
-
-        /// <summary>
-        /// finish appointment if patient reserved it and came to doctor
-        /// </summary>
-        /// <param name="appointmentId"></param>
-        /// <param name="doctorId"></param>
-        /// <returns>
-        /// returns status and message of appointment finishing
-        /// </returns>
-        public (bool status, string message) FinishAppointment(int appointmentId, int doctorId)
-        {
-            var appointment = _context.Appointments
-                .FirstOrDefault(a => a.Id == appointmentId);
-            if (appointment == null)
-            {
-                return (false, "Appointment not found");
-            }
-
-            if (appointment.DoctorId != doctorId)
-            {
-                return (false, "You can finish only your appointments");
-            }
-
-            if (appointment.StatusId != (int) AppointmentStatuses.RESERVED_STATUS)
-            {
-                return (false, "You can finish only reserved appointments");
-            }
-
-            appointment.StatusId = (int) AppointmentStatuses.FINISHED_STATUS;
-            _context.SaveChanges();
-
-            return (true, "Appointment was finished");
         }
 
         /// <summary>
@@ -204,7 +172,7 @@ namespace InternetHospital.BusinessLogic.Services
             var appointment = _context.Appointments
                 .FirstOrDefault(a => a.Id == appointmentId);
 
-            if (appointment == null || appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
+            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
             {
                 return false;
             }
@@ -222,12 +190,66 @@ namespace InternetHospital.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// Add illness data to DB
+        /// </summary>
+        /// <param name="illnessModel"></param>
+        /// <returns>Operation succeed status</returns>
+        public (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel)
+        {
+            bool status = false;
+            string message = null;
+
+            var appointment = _context.
+                                Appointments.
+                                Where(a => a.Id == illnessModel.AppointmentId)
+                                .Single();
+
+            try
+            {
+                if (FillIllness(illnessModel, appointment))
+                {
+                    appointment.StatusId = (int)AppointmentStatuses.FINISHED_STATUS;
+                    _context.SaveChanges();
+                    status = true;
+                }
+            }
+            catch
+            {
+                message = "Something wrong with finishing appointment!";
+            }
+
+            return (status, message);
+        }
+
+        private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
+        {
+            bool result = true;
+            try
+            {
+                var illnessHistory = Mapper.Map<IllnessHistoryModel, IllnessHistory>(illnessModel, opt =>
+                                                                            opt.AfterMap((im, ih) =>
+                                                                            {
+                                                                                ih.DoctorId = appointment.DoctorId;
+                                                                                ih.UserId = appointment.UserId ?? default;
+                                                                                ih.AppointmentId = appointment.Id;
+                                                                                ih.ConclusionTime = DateTime.Now;
+                                                                            }));
+                _context.IllnessHistories.Add(illnessHistory);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
+        }
+
         private bool CreateAppointment(AppointmentCreationModel model, int id)
         {
             try
             {
                 var appointment = Mapper.Map<Appointment>(model);
-                appointment.StatusId = (int) AppointmentStatuses.DEFAULT_STATUS;
+                appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
                 appointment.DoctorId = id;
                 if (model.Address == null)
                     appointment.Address = _context.Doctors.FirstOrDefault(d => d.UserId == id)?.Address;
@@ -247,7 +269,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 var uncommittedAppointments = _context.Appointments
                     .Where(a => a.DoctorId == doctorId
-                                && a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS
+                                && a.StatusId == (int)AppointmentStatuses.DEFAULT_STATUS
                                 && DateTime.Now > a.StartTime);
                 _context.RemoveRange(uncommittedAppointments);
                 _context.SaveChanges();
