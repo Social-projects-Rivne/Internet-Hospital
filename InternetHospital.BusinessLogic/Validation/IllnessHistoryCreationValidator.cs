@@ -31,7 +31,6 @@ namespace InternetHospital.BusinessLogic.Validation
                     .Must(i => IsExits(i.AppointmentId))
                     .OverridePropertyName("message")
                     .WithMessage("Apoointment isn`t exist")
-                    .WithState(i => StatusCodes.Status404NotFound)
                     .DependentRules(() =>
                     {
                         RuleFor(i => i)
