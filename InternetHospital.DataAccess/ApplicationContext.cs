@@ -20,6 +20,11 @@ namespace InternetHospital.DataAccess
         public DbSet<IllnessHistory> IllnessHistories { set; get; }
         public DbSet<Passport> Passports { set; get; }
         public DbSet<TemporaryUser> TemporaryUsers { set; get; }
+        public DbSet<ArticleType> ArticleTypes { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<ArticleAttachment> ArticleAttachments { get; set; }
+        public DbSet<ArticleTypeArticle> ArticleTypeArticles { get; set; }
+        public DbSet<ArticleEdition> ArticleEditions { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
@@ -34,6 +39,7 @@ namespace InternetHospital.DataAccess
             builder.ApplyConfiguration(new AppointmenStatusConfiguration());
             builder.ApplyConfiguration(new SpecializationConfiguration());
             builder.ApplyConfiguration(new AppointmentConfiguration());
+            builder.ApplyConfiguration(new ArticleTypeArticleConfiguration());
             base.OnModelCreating(builder);
         }
     }
