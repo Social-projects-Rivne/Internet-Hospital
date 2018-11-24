@@ -30,6 +30,20 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpGet("forpatient")]
+        public IActionResult GetPatientAppointments()
+        {
+            if (!int.TryParse(User.Identity.Name, out var patientId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var myAppointments = _appointmentService.GetPatientsAppointments(patientId);
+
+            return Ok(new { appointments = myAppointments });
+        }
+
         [HttpGet("available")]
         public IActionResult GetAvailableAppointments([FromQuery] AppointmentSearchModel parameters)
         {
@@ -96,6 +110,20 @@ namespace InternetHospital.WebApi.Controllers
             }
 
             var status = _appointmentService.SubscribeForAppointment(model.Id, patientId);
+
+            return status ? (IActionResult)Ok() : BadRequest();
+        }
+
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpPost("unsubscribe")]
+        public IActionResult UnsubscribeForAppointment([FromBody] AppointmentUnsubscribeModel model)
+        {
+            if (!int.TryParse(User.Identity.Name, out var patientId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _appointmentService.UnsubscribeForAppointment(model.Id, patientId);
 
             return status ? (IActionResult)Ok() : BadRequest();
         }
