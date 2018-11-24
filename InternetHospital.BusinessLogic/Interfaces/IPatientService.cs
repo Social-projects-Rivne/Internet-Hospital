@@ -10,5 +10,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface IPatientService
     {
         Task<bool> UpdatePatienInfo(PatientModel patientModel, int userId, IFormFileCollection files);
+        Task<PatientDetailedModel> Get(int id);
     }
 }

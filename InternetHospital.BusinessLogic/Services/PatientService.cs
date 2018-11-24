@@ -4,6 +4,7 @@ using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,6 +23,17 @@ namespace InternetHospital.BusinessLogic.Services
         {
             _context = context;
             _uploadingFiles = uploadingFiles;
+        }
+
+        public async Task<PatientDetailedModel> Get(int id)
+        {
+            PatientDetailedModel returnedPatient = null;
+            var searchedPatient = await _context.Users.Include(p=> p.IllnessHistories).FirstOrDefaultAsync(pa=> pa.Id == id);
+            if (searchedPatient != null)
+            {  
+                returnedPatient = Mapper.Map<User, PatientDetailedModel>(searchedPatient);
+            }
+            return returnedPatient;
         }
 
         public async Task<bool> UpdatePatienInfo(PatientModel patientModel, int userId, IFormFileCollection files)

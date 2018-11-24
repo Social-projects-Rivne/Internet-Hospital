@@ -13,6 +13,7 @@ namespace InternetHospital.DataAccess.Entities
         public DateTime EndTime { get; set; }
 
         public virtual AppointmentStatus Status { get; set; }
+        public virtual IllnessHistory IllnessHistory { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual User User { get; set; }
     }
