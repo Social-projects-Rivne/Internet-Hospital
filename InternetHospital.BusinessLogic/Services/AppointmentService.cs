@@ -46,6 +46,13 @@ namespace InternetHospital.BusinessLogic.Services
             return appointments.ToList();
         }
 
+        /// <summary>
+        /// Get all reserved appointments for current patient
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// returns a list of patient's reserved appointments
+        /// </returns>
         public IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId)
         {
             var appointments = _context.Appointments
@@ -242,6 +249,14 @@ namespace InternetHospital.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// unsubscribe patient to appointment
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// status of unsubscription to appointment
+        /// </returns>
         public bool UnsubscribeForAppointment(int appointmentId, int patientId)
         {
             var appointment = _context.Appointments
