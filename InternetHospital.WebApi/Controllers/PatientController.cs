@@ -42,7 +42,20 @@ namespace InternetHospital.WebApi.Controllers
                     return Ok(returnPatient);
                 }
             }
-            return BadRequest(new { message = "Couldnt find a doctor" });
+            return BadRequest(new { message = "Couldnt find a patient" });
+        }
+        [HttpGet("GetHistories")]
+        public IActionResult GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
+        {
+            var (histories, count) = _patientService.GetFilteredHistories(queryParameters);
+
+            return Ok(
+                new
+                {
+                    histories,
+                    totalHistories = count
+                }
+              );
         }
 
         [HttpPut("updateAvatar")]

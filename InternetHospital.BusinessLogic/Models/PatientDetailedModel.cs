@@ -10,7 +10,6 @@ namespace InternetHospital.BusinessLogic.Models
         public string ThirdName { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime? BirthDate { get; set; }
-        //public string PhoneNumber { get; set; }
         public IllnessHistoryModel[] IllnessHistory { get; set; }
     }
 }
