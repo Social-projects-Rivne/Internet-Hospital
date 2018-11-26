@@ -18,7 +18,7 @@ namespace InternetHospital.BusinessLogic.Services
             _context = context;
         }
 
-        public (List<UserModel> users, int count) FilteredUsers(UserSearchParameters queryParameters)
+        public (IEnumerable<UserModel> users, int count) FilteredUsers(UserSearchParameters queryParameters)
         {
 
             var users = _context.Users.AsQueryable();
@@ -41,23 +41,14 @@ namespace InternetHospital.BusinessLogic.Services
             var usersResult = PaginationHelper<User>
                 .GetPageValues(users, queryParameters.PageCount, queryParameters.Page)
                 .OrderBy(x => x.SecondName)
-                .Select( x => new UserModel {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    SecondName = x.SecondName,
-                    ThirdName = x.ThirdName,
-                    Email = x.Email,
-                    StatusId = x.StatusId,
-                    BirthDate = x.BirthDate,
-                    AvatarURL = x.AvatarURL,
-                })
+                .Select(u => Mapper.Map<User, UserModel>(u))
                 .ToList();
 
             return (usersResult, usersQuantity);
 
         }
 
-        public List<UserModel> GetUsers()
+        public IEnumerable<UserModel> GetUsers()
         {
             return _context.Users.Select(u => Mapper.Map<User, UserModel>(u)).ToList();
         }
