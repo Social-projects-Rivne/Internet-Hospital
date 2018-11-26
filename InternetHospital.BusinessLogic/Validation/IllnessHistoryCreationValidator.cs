@@ -30,7 +30,7 @@ namespace InternetHospital.BusinessLogic.Validation
                     RuleFor(i => i)
                     .Must(i => IsExits(i.AppointmentId))
                     .OverridePropertyName("message")
-                    .WithMessage("Apoointment isn`t exist")
+                    .WithMessage("Apoointment with current doctor isn`t exist")
                     .DependentRules(() =>
                     {
                         RuleFor(i => i)
@@ -43,7 +43,8 @@ namespace InternetHospital.BusinessLogic.Validation
 
         private bool IsExits(int appointmentId)
         {
-            var result = _context.Appointments.Any(a => a.Id == appointmentId);
+            var doctorId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+            var result = _context.Appointments.Any(a => a.Id == appointmentId && a.DoctorId == doctorId);
             return result;
         }
 
