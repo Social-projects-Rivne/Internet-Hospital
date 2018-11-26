@@ -24,21 +24,7 @@ namespace InternetHospital.WebApi.Controllers
             _patientService = patientService;
         }
 
-        [HttpGet("GetProfile")]
-        public async Task<IActionResult> GetPatient()
-        {
-            var patientId = User.Identity?.Name;
-            if (patientId != null)
-            {
-                var patient = await _userManager.FindByIdAsync(patientId);
-                var returnPatient = await _patientService.Get(patient.Id);
-                if (returnPatient != null)
-                {
-                    return Ok(returnPatient);
-                }
-            }
-            return BadRequest(new { message = "Couldnt find a patient" });
-        }
+        
         [HttpGet("GetHistories")]
         public IActionResult GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
         {
@@ -116,22 +102,20 @@ namespace InternetHospital.WebApi.Controllers
             return BadRequest();
         }
 
-        [HttpGet("getProfile")]
-        [Authorize]
-        public async Task<IActionResult> GetPatientProfile()
+        [HttpGet("GetDetailedProfile")]
+        public async Task<IActionResult> GetPatient()
         {
             var patientId = User.Identity?.Name;
-            if (!int.TryParse(User.Identity.Name, out int userId))
+            if (patientId != null)
             {
-                return BadRequest();
+                var patient = await _userManager.FindByIdAsync(patientId);
+                var returnPatient = await _patientService.Get(patient.Id);
+                if (returnPatient != null)
+                {
+                    return Ok(returnPatient);
+                }
             }
-
-            var patient = await _patientService.GetPatientProfile(userId);
-            if (patient != null)
-            {
-                return Ok(patient);
-            }
-            return BadRequest(new { message = "Cannot get profile data!"});
+            return BadRequest(new { message = "Couldnt find a patient" });
         }
     }
 }

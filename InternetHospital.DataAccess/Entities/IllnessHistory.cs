@@ -9,7 +9,7 @@ namespace InternetHospital.DataAccess.Entities
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int DoctorId { get; set; }
-        public int AppointmentId { get; set; }
+        public int? AppointmentId { get; set; }
         public string Complaints { get; set; }
         public string DiseaseAnamnesis { get; set; }
         public string LifeAnamnesis { get; set; }
