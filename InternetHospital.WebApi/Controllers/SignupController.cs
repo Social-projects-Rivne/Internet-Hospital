@@ -54,20 +54,14 @@ namespace InternetHospital.WebApi.controllers
                     var user = await _userManager.FindByEmailAsync(userRegistrationModel.Email);
                     callbackUrl = await GenerateConfirmationLink(user);
                     await _mailService.SendMsgToEmail(user.Email, "Confirm Your account, please",
-            $"Confirm registration folowing the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
+                        $"Confirm registration following the link: <a href='{callbackUrl}'>Confirm email NOW</a>");
 
                     return Ok(new { message = text });
                 }
-                else
-                {
-                    return BadRequest(new { message = text });
-                }
+                return BadRequest(new { message = text });
             }
-            else
-            {
-                ModelState.AddModelError("", "Wrong form!");
-                return BadRequest(new { message = ModelState.Root.Errors[0].ErrorMessage });
-            }
+            ModelState.AddModelError("", "Wrong form!");
+            return BadRequest(new { message = ModelState.Root.Errors[0].ErrorMessage });
         }
 
         [HttpGet("ConfirmEmail")]
@@ -76,14 +70,12 @@ namespace InternetHospital.WebApi.controllers
             var user = await _userManager.FindByIdAsync(userId ?? "0");
             if (user == null || code == null)
             {
-                return BadRequest(new { message = "Not such users in DB to confirm" });
+                return BadRequest(new { message = "No such user in DB to confirm" });
             }
-            else
-            {
-                var result = await _userManager.ConfirmEmailAsync(user, code);
 
-                return Ok(new { message = "Email Confirmed!" });
-            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            return Ok("Email Confirmed!");
         }
 
         private async Task<string> GenerateConfirmationLink(User user)

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
-using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -94,10 +90,6 @@ namespace InternetHospital.WebApi.Controllers
         [Authorize]
         public async Task<IActionResult> UpdatePatientProfile([FromForm(Name = "PassportURL")]IFormFileCollection files)
         {
-            if (files == null)
-            {
-                ModelState.AddModelError("Files", "Files didn't upload");
-            }
             var patientModel = new PatientModel
             {
                 FirstName = Request.Form["FirstName"],
@@ -113,8 +105,8 @@ namespace InternetHospital.WebApi.Controllers
             {
                 if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    var result = await _patientService.UpdatePatienInfo(patientModel, userId, files);
-                    return result ? (IActionResult)Ok() : BadRequest(new { message = "Error during files uploading!" });
+                    var result = await _patientService.UpdatePatientInfo(patientModel, userId, files);
+                    return result ? (IActionResult)Ok() : BadRequest(new { message = "Error during updating!" });
                 }
                 else
                 {
@@ -122,6 +114,24 @@ namespace InternetHospital.WebApi.Controllers
                 }
             }
             return BadRequest();
-        } 
+        }
+
+        [HttpGet("getProfile")]
+        [Authorize]
+        public async Task<IActionResult> GetPatientProfile()
+        {
+            var patientId = User.Identity?.Name;
+            if (!int.TryParse(User.Identity.Name, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var patient = await _patientService.GetPatientProfile(userId);
+            if (patient != null)
+            {
+                return Ok(patient);
+            }
+            return BadRequest(new { message = "Cannot get profile data!"});
+        }
     }
 }

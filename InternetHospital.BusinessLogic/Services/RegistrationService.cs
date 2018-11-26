@@ -58,7 +58,7 @@ namespace InternetHospital.BusinessLogic.Services
         {
             var user = Mapper.Map<UserRegistrationModel, User>(vm, cfg =>
                 cfg.AfterMap((src, dest) =>
-                    { dest.SignUpTime = DateTime.UtcNow; dest.StatusId = 2; }));
+                    { dest.SignUpTime = DateTime.Now; dest.StatusId = 2; }));
 
             if (await _roleManager.FindByNameAsync(vm.Role) == null)
             {

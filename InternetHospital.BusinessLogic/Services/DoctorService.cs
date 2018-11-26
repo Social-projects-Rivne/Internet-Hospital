@@ -6,16 +6,23 @@ using InternetHospital.DataAccess.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using InternetHospital.BusinessLogic.Helpers;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class DoctorService : IDoctorService
     {
         private readonly ApplicationContext _context;
+        private readonly IFilesService _uploadingFiles;
+        const string DOCTOR = "Doctor";
 
-        public DoctorService(ApplicationContext context)
+        public DoctorService(ApplicationContext context, IFilesService uploadingFiles)
         {
             _context = context;
+            _uploadingFiles = uploadingFiles;
         }
 
         public DoctorDetailedModel Get(int id)
@@ -66,9 +73,19 @@ namespace InternetHospital.BusinessLogic.Services
             }
 
             var doctorsAmount = doctors.Count();
-            var doctorsResult = PaginationHelper(doctors, queryParameters.PageCount, queryParameters.Page)
+            var doctorsResult = PaginationHelper<Doctor>
+                .GetPageValues(doctors, queryParameters.PageCount, queryParameters.Page)
+                .Select(x => new DoctorModel
+                    {
+                        Id = x.UserId,
+                        FirstName = x.User.FirstName,
+                        SecondName = x.User.SecondName,
+                        ThirdName = x.User.ThirdName,
+                        AvatarURL = x.User.AvatarURL,
+                        Specialization = x.Specialization.Name
+                    })
                 .OrderBy(x => x.SecondName)
-                .ToList(); ;
+                .ToList();
 
             return (doctorsResult, doctorsAmount);
         }
@@ -104,5 +121,53 @@ namespace InternetHospital.BusinessLogic.Services
             return doctorsModel;
         }
 
+        public DoctorProfileModel GetDoctorProfile(int userId)
+        {
+            var user = _context.Users
+                .Include(u => u.Doctor)
+                .Include(u => u.Doctor.Specialization)
+                .FirstOrDefault(u => u.Id == userId);
+
+            var doctorModel = new DoctorProfileModel(); 
+                
+            Mapper.Map(user, doctorModel, opt => opt.AfterMap((u, dm) =>
+            {
+                dm.Address = u.Doctor.Address;
+                dm.Specialization = u.Doctor.Specialization.Name;
+            }));
+            
+            return doctorModel;
+        }
+
+        public async Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license)
+        {
+            var addedTime = DateTime.Now;
+            var doctor = _context.Users
+                .Include(u => u.Doctor)
+                .FirstOrDefault(u => u.Id == userId);
+            if (doctor == null)
+            {
+                return false;
+            }
+
+            var temporaryUser = Mapper.Map<DoctorProfileModel, TemporaryUser>(doctorModel, 
+            config => config.AfterMap((src, dest) => 
+            {
+                dest.AddedTime = addedTime;
+                dest.Role = DOCTOR;
+                dest.UserId = doctor.Id;
+
+            }));
+
+            _context.Add(temporaryUser);
+            _context.Update(doctor);
+
+            await _uploadingFiles.UploadPassport(passport, doctor, addedTime);
+            await _uploadingFiles.UploadDiploma(diploma, doctor, addedTime);
+            await _uploadingFiles.UploadLicense(license, doctor, addedTime);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

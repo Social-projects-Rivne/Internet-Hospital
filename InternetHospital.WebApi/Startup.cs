@@ -11,12 +11,16 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Models.Appointment;
 using InternetHospital.BusinessLogic.Services;
+using InternetHospital.BusinessLogic.Validation.AppointmentValidators;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.WebApi.Swagger;
 
 namespace InternetHospital.WebApi
 {
@@ -32,7 +36,17 @@ namespace InternetHospital.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(f =>
+                    {
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentCreationValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentUnsubscribeValidator>();
+                    });
+
+            //allow to get user Id in BLL
+            services.AddHttpContextAccessor();
 
             //enable CORS
             services.AddCors();
@@ -79,8 +93,7 @@ namespace InternetHospital.WebApi
                                          ValidateIssuerSigningKey = true,
                                          ValidIssuer = appSettings.JwtIssuer,
                                          ClockSkew = TimeSpan.Zero,
-                                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                                                                                                                                 .GetBytes(appSettings.JwtKey))
+                                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.JwtKey))
                                      };
                                  });
 
@@ -100,6 +113,8 @@ namespace InternetHospital.WebApi
                                                            && context.User.IsInRole("Doctor")));
             });
 
+            services.AddSwaggerServices();
+
             //Dependency injection
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IFeedBackService, FeedBackService>();
@@ -111,6 +126,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<ISignUpService, SignUpService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IModeratorService, ModeratorService>();
 
         }
 
@@ -127,6 +143,7 @@ namespace InternetHospital.WebApi
                 app.UseHsts();
             }
 
+            app.ConfigureSwagger();
             app.UseStaticFiles();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
@@ -144,6 +161,11 @@ namespace InternetHospital.WebApi
                 config.CreateMap<FeedBackCreationModel, FeedBack>();
                 config.CreateMap<PatientModel, User>();
                 config.CreateMap<User, PatientDetailedModel>().ForMember(dest => dest.IllnessHistory, opt => opt.MapFrom(src => src.IllnessHistories));
+                config.CreateMap<PatientModel, TemporaryUser>();
+                config.CreateMap<User, DoctorProfileModel>();
+                config.CreateMap<DoctorProfileModel, TemporaryUser>();
+                config.CreateMap<Appointment, AvailableAppointmentModel>();
+                config.CreateMap<ModeratorCreatingModel, User>();
             });
 
             app.UseMvc();
