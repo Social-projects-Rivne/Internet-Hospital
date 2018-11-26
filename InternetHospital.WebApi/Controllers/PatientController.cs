@@ -102,23 +102,6 @@ namespace InternetHospital.WebApi.Controllers
             return BadRequest();
         }
 
-        [HttpGet("getProfile")]
-        [Authorize]
-        public async Task<IActionResult> GetPatientProfile()
-        {
-            var patientId = User.Identity?.Name;
-            if (!int.TryParse(User.Identity.Name, out int userId))
-            {
-                return BadRequest();
-            }
-
-            var patient = await _patientService.GetPatientProfile(userId);
-            if (patient != null)
-            {
-                return Ok(patient);
-            }
-            return BadRequest(new { message = "Cannot get profile data!"});
-        }
         [HttpGet("GetDetailedProfile")]
         public async Task<IActionResult> GetPatient()
         {
