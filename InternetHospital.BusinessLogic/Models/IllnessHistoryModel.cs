@@ -7,7 +7,6 @@ namespace InternetHospital.BusinessLogic.Models
     public class IllnessHistoryModel
     {
         public int AppointmentId { get; set; }
-        //public string DoctorName { get; set; }
         public DateTime ConclusionTime { get; set; }
         public string Complaints { get; set; }
         public string DiseaseAnamnesis { get; set; }

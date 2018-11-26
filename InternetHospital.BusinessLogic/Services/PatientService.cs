@@ -37,7 +37,7 @@ namespace InternetHospital.BusinessLogic.Services
         }
         public (IEnumerable<IllnessHistoryModel> histories, int count) GetFilteredHistories(IllnessHistorySearchModel queryParameters)
         {
-            var histories = _context.IllnessHistories.AsQueryable();
+            var histories = _context.IllnessHistories.OrderBy(d => d.ConclusionTime).AsQueryable();
             if (queryParameters.SearchFromDate != null)
             {
                 var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
@@ -52,9 +52,7 @@ namespace InternetHospital.BusinessLogic.Services
                     Where(d => d.ConclusionTime <= toDate);
             }
             var historiesCount = histories.Count();
-            var historiesResult = PaginationHelper(histories, queryParameters.PageCount, queryParameters.Page)
-                .OrderBy(d => d.ConclusionTime)
-                .ToList();
+            var historiesResult = PaginationHelper(histories, queryParameters.PageCount, queryParameters.Page).ToList();
             return (historiesResult, historiesCount);
         }
         private IQueryable<IllnessHistoryModel> PaginationHelper(IQueryable<IllnessHistory> histories, int pageCount, int page)

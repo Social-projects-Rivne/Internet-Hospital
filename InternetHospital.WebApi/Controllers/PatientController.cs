@@ -35,8 +35,7 @@ namespace InternetHospital.WebApi.Controllers
             if (patientId != null)
             {
                 var patient = await _userManager.FindByIdAsync(patientId);
-
-                var returnPatient = await _patientService.Get(int.Parse(patientId));
+                var returnPatient = await _patientService.Get(patient.Id);
                 if (returnPatient != null)
                 {
                     return Ok(returnPatient);
