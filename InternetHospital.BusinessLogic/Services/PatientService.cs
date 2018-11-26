@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -63,9 +64,9 @@ namespace InternetHospital.BusinessLogic.Services
                 .Skip(pageCount * (page - 1))
                 .Take(pageCount).Select(x => new IllnessHistoryModel
                 {
-                    AppointmentId = x.AppointmentId,
+                    AppointmentId = x.AppointmentId ?? default,
                     Complaints = x.Complaints,
-                    ConclusionTime = x.ConclusionTime,
+                    FinishAppointmentTime = x.ConclusionTime,
                     Diagnose = x.Diagnose,
                     DiseaseAnamnesis = x.DiseaseAnamnesis,
                     LifeAnamnesis = x.LifeAnamnesis,
