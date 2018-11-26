@@ -47,6 +47,33 @@ namespace InternetHospital.BusinessLogic.Services
         }
 
         /// <summary>
+        /// Get all reserved appointments for current patient
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// returns a list of patient's reserved appointments
+        /// </returns>
+        public IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId)
+        {
+            var appointments = _context.Appointments
+                .Where(a => (a.UserId == patientId)
+                        && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                .Select(a => new AppointmentForPatient
+                {
+                    Id = a.Id,
+                    UserId = a.UserId,
+                    DoctorFirstName = a.Doctor.User.FirstName,
+                    DoctorSecondName = a.Doctor.User.SecondName,
+                    DoctorSpecialication = a.Doctor.Specialization.Name,
+                    Address = a.Address,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    Status = a.Status.Name
+                });
+            return appointments.ToList();
+        }
+
+        /// <summary>
         /// Create an appointment
         /// </summary>
         /// <param name="creationModel"></param>
@@ -189,6 +216,68 @@ namespace InternetHospital.BusinessLogic.Services
             _context.SaveChanges();
 
             return (true, "Appointment was finished");
+        }
+
+        /// <summary>
+        /// subscribe patient to appointment
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// status of subscription to appointment
+        /// </returns>
+        public bool SubscribeForAppointment(int appointmentId, int patientId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+
+            if (appointment == null || appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
+            {
+                return false;
+            }
+
+            appointment.UserId = patientId;
+            appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// unsubscribe patient to appointment
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// status of unsubscription to appointment
+        /// </returns>
+        public bool UnsubscribeForAppointment(int appointmentId, int patientId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+
+            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.RESERVED_STATUS)
+            {
+                return false;
+            }
+
+            appointment.UserId = patientId;
+            appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private bool CreateAppointment(AppointmentCreationModel model, int id)

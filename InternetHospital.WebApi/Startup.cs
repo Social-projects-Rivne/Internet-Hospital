@@ -20,6 +20,7 @@ using InternetHospital.BusinessLogic.Validation.AppointmentValidators;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.WebApi.Swagger;
 
 namespace InternetHospital.WebApi
 {
@@ -40,6 +41,8 @@ namespace InternetHospital.WebApi
                     {
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentCreationValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentUnsubscribeValidator>();
                     });
 
             //allow to get user Id in BLL
@@ -110,6 +113,8 @@ namespace InternetHospital.WebApi
                                                            && context.User.IsInRole("Doctor")));
             });
 
+            services.AddSwaggerServices();
+
             //Dependency injection
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IFeedBackService, FeedBackService>();
@@ -122,6 +127,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<ISignUpService, SignUpService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IModeratorService, ModeratorService>();
 
         }
 
@@ -138,6 +144,7 @@ namespace InternetHospital.WebApi
                 app.UseHsts();
             }
 
+            app.ConfigureSwagger();
             app.UseStaticFiles();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
@@ -154,8 +161,12 @@ namespace InternetHospital.WebApi
                 config.CreateMap<AppointmentCreationModel, Appointment>();
                 config.CreateMap<FeedBackCreationModel, FeedBack>();
                 config.CreateMap<PatientModel, User>();
+                config.CreateMap<PatientModel, TemporaryUser>();
+                config.CreateMap<User, DoctorProfileModel>();
+                config.CreateMap<DoctorProfileModel, TemporaryUser>();
                 config.CreateMap<UserModel, User>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
+                config.CreateMap<ModeratorCreatingModel, User>();
             });
 
             app.UseMvc();

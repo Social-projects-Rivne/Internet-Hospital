@@ -25,7 +25,21 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var myAppointments = _appointmentService.GetMyAppointments(doctorId).ToList();
+            var myAppointments = _appointmentService.GetMyAppointments(doctorId);
+
+            return Ok(new { appointments = myAppointments });
+        }
+
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpGet("forpatient")]
+        public IActionResult GetPatientAppointments()
+        {
+            if (!int.TryParse(User.Identity.Name, out var patientId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var myAppointments = _appointmentService.GetPatientsAppointments(patientId);
 
             return Ok(new { appointments = myAppointments });
         }
@@ -69,7 +83,7 @@ namespace InternetHospital.WebApi.Controllers
 
             var (status, message) = _appointmentService.CancelAppointment(model.Id, doctorId);
 
-            return status ? (IActionResult)Ok(new { message }) : BadRequest(new { message });
+            return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
 
         [Authorize(Policy = "ApprovedDoctors")]
@@ -83,21 +97,35 @@ namespace InternetHospital.WebApi.Controllers
 
             var (status, message) = _appointmentService.DeleteAppointment(model.Id, doctorId);
 
-            return status ? (IActionResult)Ok(new { message }) : BadRequest(new { message });
+            return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
 
-        [Authorize(Policy = "ApprovedDoctors")]
-        [HttpPost("finish")]
-        public IActionResult FinishAppointment([FromBody] AppointmentEditingModel model)
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpPost("subscribe")]
+        public IActionResult SubscribeForAppointment([FromBody] AppointmentSubscribeModel model)
         {
-            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            if (!int.TryParse(User.Identity.Name, out var patientId))
             {
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var (status, message) = _appointmentService.FinishAppointment(model.Id, doctorId);
+            var status = _appointmentService.SubscribeForAppointment(model.Id, patientId);
 
-            return status ? (IActionResult)Ok(new { message }) : BadRequest(new { message });
+            return status ? (IActionResult)Ok() : BadRequest();
+        }
+
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpPost("unsubscribe")]
+        public IActionResult UnsubscribeForAppointment([FromBody] AppointmentUnsubscribeModel model)
+        {
+            if (!int.TryParse(User.Identity.Name, out var patientId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _appointmentService.UnsubscribeForAppointment(model.Id, patientId);
+
+            return status ? (IActionResult)Ok() : BadRequest();
         }
     }
 }
