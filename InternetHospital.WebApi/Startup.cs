@@ -162,6 +162,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
+                config.CreateMap<IllnessHistoryModel, IllnessHistory>();
             });
 
             app.UseMvc();

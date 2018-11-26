@@ -190,60 +190,6 @@ namespace InternetHospital.BusinessLogic.Services
             }
         }
 
-        /// <summary>
-        /// Add illness data to DB
-        /// </summary>
-        /// <param name="illnessModel"></param>
-        /// <returns>Operation succeed status</returns>
-        public (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel)
-        {
-            bool status = false;
-            string message = null;
-
-            var appointment = _context.
-                                Appointments.
-                                Where(a => a.Id == illnessModel.AppointmentId)
-                                .Single();
-
-            try
-            {
-                if (FillIllness(illnessModel, appointment))
-                {
-                    appointment.StatusId = (int)AppointmentStatuses.FINISHED_STATUS;
-                    _context.SaveChanges();
-                    status = true;
-                }
-            }
-            catch
-            {
-                message = "Something wrong with finishing appointment!";
-            }
-
-            return (status, message);
-        }
-
-        private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
-        {
-            bool result = true;
-            try
-            {
-                var illnessHistory = Mapper.Map<IllnessHistoryModel, IllnessHistory>(illnessModel, opt =>
-                                                                            opt.AfterMap((im, ih) =>
-                                                                            {
-                                                                                ih.DoctorId = appointment.DoctorId;
-                                                                                ih.UserId = appointment.UserId ?? default;
-                                                                                ih.AppointmentId = appointment.Id;
-                                                                                ih.ConclusionTime = DateTime.Now;
-                                                                            }));
-                _context.IllnessHistories.Add(illnessHistory);
-            }
-            catch
-            {
-                result = false;
-            }
-            return result;
-        }
-
         private bool CreateAppointment(AppointmentCreationModel model, int id)
         {
             try
