@@ -43,6 +43,7 @@ namespace InternetHospital.WebApi
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentHistoryValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentUnsubscribeValidator>();
                     });
 
             //allow to get user Id in BLL

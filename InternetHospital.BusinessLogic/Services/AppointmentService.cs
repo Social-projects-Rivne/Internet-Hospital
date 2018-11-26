@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
@@ -47,7 +47,7 @@ namespace InternetHospital.BusinessLogic.Services
                 });
             return appointments.ToList();
         }
-
+        
         /// <summary>
         /// get doctor's appointments history by page
         /// </summary>
@@ -110,6 +110,33 @@ namespace InternetHospital.BusinessLogic.Services
 
             return new PageModel<List<AppointmentModel>>()
                 {EntityAmount = appointmentsAmount, Entities = appointmentsResult};
+        }
+
+        /// <summary>
+        /// Get all reserved appointments for current patient
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// returns a list of patient's reserved appointments
+        /// </returns>
+        public IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId)
+        {
+            var appointments = _context.Appointments
+                .Where(a => (a.UserId == patientId)
+                        && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                .Select(a => new AppointmentForPatient
+                {
+                    Id = a.Id,
+                    UserId = a.UserId,
+                    DoctorFirstName = a.Doctor.User.FirstName,
+                    DoctorSecondName = a.Doctor.User.SecondName,
+                    DoctorSpecialication = a.Doctor.Specialization.Name,
+                    Address = a.Address,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    Status = a.Status.Name
+                });
+            return appointments.ToList();
         }
 
         /// <summary>
@@ -235,8 +262,8 @@ namespace InternetHospital.BusinessLogic.Services
             _context.SaveChanges();
 
             return (true, "Appointment was canceled");
-        }
-        
+        }       
+
         /// <summary>
         /// subscribe patient to appointment
         /// </summary>
@@ -257,6 +284,37 @@ namespace InternetHospital.BusinessLogic.Services
 
             appointment.UserId = patientId;
             appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// unsubscribe patient to appointment
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="patientId"></param>
+        /// <returns>
+        /// status of unsubscription to appointment
+        /// </returns>
+        public bool UnsubscribeForAppointment(int appointmentId, int patientId)
+        {
+            var appointment = _context.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+
+            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.RESERVED_STATUS)
+            {
+                return false;
+            }
+
+            appointment.UserId = patientId;
+            appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
             try
             {
                 _context.SaveChanges();
