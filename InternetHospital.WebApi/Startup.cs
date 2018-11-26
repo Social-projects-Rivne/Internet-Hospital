@@ -42,6 +42,7 @@ namespace InternetHospital.WebApi
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentCreationValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentHistoryValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentUnsubscribeValidator>();
                     });
 
