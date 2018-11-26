@@ -15,6 +15,7 @@ using FluentValidation.AspNetCore;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models.Articles;
 using InternetHospital.BusinessLogic.Services;
 using InternetHospital.BusinessLogic.Validation.AppointmentValidators;
 using InternetHospital.DataAccess;
@@ -127,6 +128,8 @@ namespace InternetHospital.WebApi
             services.AddScoped<ISignUpService, SignUpService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IModeratorService, ModeratorService>();
+            services.AddScoped<IArticleTypeService, ArticleTypeService>();
+            services.AddScoped<IArticleService, ArticleService>();
 
         }
 
@@ -165,6 +168,9 @@ namespace InternetHospital.WebApi
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
+                config.CreateMap<ArticleType, ArticleTypeModel>();
+                config.CreateMap<ArticleAttachment, ArticleAttachmentModel>();
+                config.CreateMap<ArticleCreatingModel, Article>();
             });
 
             app.UseMvc();

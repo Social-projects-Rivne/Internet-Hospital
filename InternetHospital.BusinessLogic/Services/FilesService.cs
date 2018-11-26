@@ -27,6 +27,11 @@ namespace InternetHospital.BusinessLogic.Services
         const string DIPLOMA = "Diploma";
         const string LICENSE = "License";
 
+        const string ARTICLE_ATTACHMENTS_FOLDER_NAME = "Attachments";
+        const string HOME_PAGE = "HomePage";
+        private const string ARTICAL_PREVIEW_IMG = "Preview_img_";
+        private const string ARTICLE_IMG = "Img_";
+
         public FilesService(IHostingEnvironment env, UserManager<User> userManager, ApplicationContext context)
         {
             _env = env;
@@ -147,6 +152,53 @@ namespace InternetHospital.BusinessLogic.Services
                 }
             }
             return user;
+        }
+
+        public async Task<bool> UploadArticlePhotosAsync(IFormFile[] previewImages, IFormFile[] articleImages, int articleId)
+        {
+            bool uploaded = false;
+            if (previewImages.Length > 0 || articleImages.Length > 0)
+            {
+                string webRootPath = _env.WebRootPath;
+
+                var fileDestDir = Path.Combine(webRootPath, HOME_PAGE, articleId.ToString(),
+                    ARTICLE_ATTACHMENTS_FOLDER_NAME);
+
+                if (!Directory.Exists(fileDestDir))
+                {
+                    Directory.CreateDirectory(fileDestDir);
+                }
+                AddArticleAttachmentAsync(articleImages, fileDestDir, articleId, false);
+                AddArticleAttachmentAsync(previewImages, fileDestDir, articleId, true);
+
+                uploaded = true;
+            }
+
+            return uploaded;
+        }
+
+        private async void AddArticleAttachmentAsync(IFormFile[] attachments, string path, int articleId, bool isOnPreview)
+        {
+            for (int i = 0; i < attachments.Length; i++)
+            {
+                string extension = attachments[i].FileName.Substring(attachments[i].FileName.LastIndexOf('.'));
+                var fileName = $"{(isOnPreview ? ARTICAL_PREVIEW_IMG : ARTICLE_IMG)}{i + 1}{extension}";
+                var fileFullPath = Path.Combine(path, fileName);
+                using (var stream = new FileStream(fileFullPath, FileMode.Create))
+                {
+                    await attachments[i].CopyToAsync(stream);
+                }
+                var dbURL = $"/{HOME_PAGE}/{articleId}/{ARTICLE_ATTACHMENTS_FOLDER_NAME}/{fileName}";
+                var articleAttachment = new ArticleAttachment
+                {
+                    ArticleId = articleId,
+                    IsOnPreview = isOnPreview,
+                    Url = dbURL
+                };
+                _context.Add(articleAttachment);
+            }
+
+            _context.SaveChanges();
         }
     }
 }

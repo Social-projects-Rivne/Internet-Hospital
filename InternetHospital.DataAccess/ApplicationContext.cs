@@ -25,6 +25,7 @@ namespace InternetHospital.DataAccess
         public DbSet<ArticleAttachment> ArticleAttachments { get; set; }
         public DbSet<ArticleTypeArticle> ArticleTypeArticles { get; set; }
         public DbSet<ArticleEdition> ArticleEditions { get; set; }
+        public DbSet<ArticleStatus> ArticleStatuses { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
@@ -40,6 +41,7 @@ namespace InternetHospital.DataAccess
             builder.ApplyConfiguration(new SpecializationConfiguration());
             builder.ApplyConfiguration(new AppointmentConfiguration());
             builder.ApplyConfiguration(new ArticleTypeArticleConfiguration());
+            builder.ApplyConfiguration(new ArticleStatusConfiguration());
             base.OnModelCreating(builder);
         }
     }
