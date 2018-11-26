@@ -24,21 +24,7 @@ namespace InternetHospital.WebApi.Controllers
             _patientService = patientService;
         }
 
-        [HttpGet("GetProfile")]
-        public async Task<IActionResult> GetPatient()
-        {
-            var patientId = User.Identity?.Name;
-            if (patientId != null)
-            {
-                var patient = await _userManager.FindByIdAsync(patientId);
-                var returnPatient = await _patientService.Get(patient.Id);
-                if (returnPatient != null)
-                {
-                    return Ok(returnPatient);
-                }
-            }
-            return BadRequest(new { message = "Couldnt find a patient" });
-        }
+        
         [HttpGet("GetHistories")]
         public IActionResult GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
         {
@@ -132,6 +118,21 @@ namespace InternetHospital.WebApi.Controllers
                 return Ok(patient);
             }
             return BadRequest(new { message = "Cannot get profile data!"});
+        }
+        [HttpGet("GetDetailedProfile")]
+        public async Task<IActionResult> GetPatient()
+        {
+            var patientId = User.Identity?.Name;
+            if (patientId != null)
+            {
+                var patient = await _userManager.FindByIdAsync(patientId);
+                var returnPatient = await _patientService.Get(patient.Id);
+                if (returnPatient != null)
+                {
+                    return Ok(returnPatient);
+                }
+            }
+            return BadRequest(new { message = "Couldnt find a patient" });
         }
     }
 }

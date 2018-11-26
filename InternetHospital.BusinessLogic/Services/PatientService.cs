@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -56,14 +57,14 @@ namespace InternetHospital.BusinessLogic.Services
             var historiesCount = histories.Count();
             var historiesResult = PaginationHelper(histories, queryParameters.PageCount, queryParameters.Page).ToList();
             return (historiesResult, historiesCount);
-        }
+        }   
         private IQueryable<IllnessHistoryModel> PaginationHelper(IQueryable<IllnessHistory> histories, int pageCount, int page)
         {
             var historiesModel = histories
                 .Skip(pageCount * (page - 1))
                 .Take(pageCount).Select(x => new IllnessHistoryModel
                 {
-                    AppointmentId = x.AppointmentId,
+                    AppointmentId = x.AppointmentId ?? default,
                     Complaints = x.Complaints,
                     ConclusionTime = x.ConclusionTime,
                     Diagnose = x.Diagnose,
