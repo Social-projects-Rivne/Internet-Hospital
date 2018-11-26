@@ -313,7 +313,7 @@ namespace InternetHospital.BusinessLogic.Services
                 return false;
             }
 
-            appointment.UserId = patientId;
+            appointment.UserId = null;
             appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
             try
             {
