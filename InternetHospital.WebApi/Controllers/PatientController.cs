@@ -24,6 +24,35 @@ namespace InternetHospital.WebApi.Controllers
             _patientService = patientService;
         }
 
+        [HttpGet("GetProfile")]
+        public async Task<IActionResult> GetPatient()
+        {
+            var patientId = User.Identity?.Name;
+            if (patientId != null)
+            {
+                var patient = await _userManager.FindByIdAsync(patientId);
+                var returnPatient = await _patientService.Get(patient.Id);
+                if (returnPatient != null)
+                {
+                    return Ok(returnPatient);
+                }
+            }
+            return BadRequest(new { message = "Couldnt find a patient" });
+        }
+        [HttpGet("GetHistories")]
+        public IActionResult GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
+        {
+            var (histories, count) = _patientService.GetFilteredHistories(queryParameters);
+
+            return Ok(
+                new
+                {
+                    histories,
+                    totalHistories = count
+                }
+              );
+        }
+
         [HttpPut("updateAvatar")]
         [Authorize]
         public async Task<IActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)

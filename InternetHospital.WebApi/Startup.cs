@@ -20,6 +20,7 @@ using InternetHospital.BusinessLogic.Validation.AppointmentValidators;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
+using InternetHospital.WebApi.Swagger;
 using InternetHospital.BusinessLogic.Validation;
 
 namespace InternetHospital.WebApi
@@ -43,6 +44,8 @@ namespace InternetHospital.WebApi
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<IllnessHistoryCreationValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentHistoryValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<AppointmentUnsubscribeValidator>();
                     });
 
             //allow to get user Id in BLL
@@ -113,6 +116,8 @@ namespace InternetHospital.WebApi
                                                            && context.User.IsInRole("Doctor")));
             });
 
+            services.AddSwaggerServices();
+
             //Dependency injection
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IFeedBackService, FeedBackService>();
@@ -141,6 +146,7 @@ namespace InternetHospital.WebApi
                 app.UseHsts();
             }
 
+            app.ConfigureSwagger();
             app.UseStaticFiles();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
@@ -157,6 +163,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<AppointmentCreationModel, Appointment>();
                 config.CreateMap<FeedBackCreationModel, FeedBack>();
                 config.CreateMap<PatientModel, User>();
+                config.CreateMap<User, PatientDetailedModel>().ForMember(dest => dest.IllnessHistory, opt => opt.MapFrom(src => src.IllnessHistories));
                 config.CreateMap<PatientModel, TemporaryUser>();
                 config.CreateMap<User, DoctorProfileModel>();
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
