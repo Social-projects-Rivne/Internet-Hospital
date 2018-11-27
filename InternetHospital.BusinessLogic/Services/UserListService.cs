@@ -48,6 +48,11 @@ namespace InternetHospital.BusinessLogic.Services
 
         }
 
+        public IEnumerable<Status> GetStatuses()
+        {
+            return _context.Statuses.ToList();
+        }
+
         public IEnumerable<UserModel> GetUsers()
         {
             return _context.Users.Select(u => Mapper.Map<User, UserModel>(u)).ToList();
