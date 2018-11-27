@@ -8,7 +8,8 @@
   <ItemGroup>
     <Folder Include="CustomMiddleware\" />
     <Folder Include="Swagger\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Images\Frankie_Volkman%40yahoo.com\" />
+    <Folder Include="wwwroot\Images\Victor49%40yahoo.com\" />
   </ItemGroup>
 
   <ItemGroup>
