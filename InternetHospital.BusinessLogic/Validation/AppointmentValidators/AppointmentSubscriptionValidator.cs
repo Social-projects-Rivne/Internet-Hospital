@@ -88,7 +88,8 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
             var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
             return !_context.Appointments.Any(a => a.UserId == patientId
                                            && a.DoctorId == _appointment.DoctorId
-                                           && a.StartTime.Date == _appointment.StartTime.Date);
+                                           && a.StartTime.Date == _appointment.StartTime.Date
+                                           && a.StatusId != (int) AppointmentStatuses.CANCELED_STATUS);
 
         }
     }
