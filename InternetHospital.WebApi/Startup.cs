@@ -125,6 +125,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IUserListService, UserListService>();
             services.AddScoped<IFilesService, FilesService>();
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<ISignUpService, SignUpService>();
@@ -167,6 +168,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<PatientModel, TemporaryUser>();
                 config.CreateMap<User, DoctorProfileModel>();
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
+                config.CreateMap<UserModel, User>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
                 config.CreateMap<IllnessHistoryModel, IllnessHistory>();
