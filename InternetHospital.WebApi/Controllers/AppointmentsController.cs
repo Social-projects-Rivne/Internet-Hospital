@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models;
 
 namespace InternetHospital.WebApi.Controllers
 {

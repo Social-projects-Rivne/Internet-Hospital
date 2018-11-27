@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using InternetHospital.BusinessLogic.Helpers;
+using InternetHospital.BusinessLogic.Models.Appointment;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -76,14 +77,14 @@ namespace InternetHospital.BusinessLogic.Services
             var doctorsResult = PaginationHelper<Doctor>
                 .GetPageValues(doctors, queryParameters.PageCount, queryParameters.Page)
                 .Select(x => new DoctorModel
-                    {
-                        Id = x.UserId,
-                        FirstName = x.User.FirstName,
-                        SecondName = x.User.SecondName,
-                        ThirdName = x.User.ThirdName,
-                        AvatarURL = x.User.AvatarURL,
-                        Specialization = x.Specialization.Name
-                    })
+                {
+                    Id = x.UserId,
+                    FirstName = x.User.FirstName,
+                    SecondName = x.User.SecondName,
+                    ThirdName = x.User.ThirdName,
+                    AvatarURL = x.User.AvatarURL,
+                    Specialization = x.Specialization.Name
+                })
                 .OrderBy(x => x.SecondName)
                 .ToList();
 
@@ -128,14 +129,14 @@ namespace InternetHospital.BusinessLogic.Services
                 .Include(u => u.Doctor.Specialization)
                 .FirstOrDefault(u => u.Id == userId);
 
-            var doctorModel = new DoctorProfileModel(); 
-                
+            var doctorModel = new DoctorProfileModel();
+
             Mapper.Map(user, doctorModel, opt => opt.AfterMap((u, dm) =>
             {
                 dm.Address = u.Doctor.Address;
                 dm.Specialization = u.Doctor.Specialization.Name;
             }));
-            
+
             return doctorModel;
         }
 
@@ -150,8 +151,8 @@ namespace InternetHospital.BusinessLogic.Services
                 return false;
             }
 
-            var temporaryUser = Mapper.Map<DoctorProfileModel, TemporaryUser>(doctorModel, 
-            config => config.AfterMap((src, dest) => 
+            var temporaryUser = Mapper.Map<DoctorProfileModel, TemporaryUser>(doctorModel,
+            config => config.AfterMap((src, dest) =>
             {
                 dest.AddedTime = addedTime;
                 dest.Role = DOCTOR;
@@ -169,5 +170,56 @@ namespace InternetHospital.BusinessLogic.Services
 
             return true;
         }
+
+        /// <summary>
+        /// Add illness data to DB
+        /// </summary>
+        /// <param name="illnessModel"></param>
+        /// <returns>Operation succeed status</returns>
+        public (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel)
+        {
+            bool status = false;
+            string message = null;
+
+            var appointment = _context.
+                                Appointments
+                                .Where(a => a.Id == illnessModel.AppointmentId)
+                                .Single();
+
+            if (FillIllness(illnessModel, appointment))
+            {
+                appointment.StatusId = (int)AppointmentStatuses.FINISHED_STATUS;
+                _context.SaveChanges();
+                status = true;
+            }
+            else
+            {
+                message = "Something wrong with finishing appointment!";
+            }
+
+            return (status, message);
+        }
+
+        private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
+        {
+            bool result = true;
+            try
+            {
+                var illnessHistory = Mapper.Map<IllnessHistoryModel, IllnessHistory>(illnessModel, opt =>
+                                                                            opt.AfterMap((im, ih) =>
+                                                                            {
+                                                                                ih.DoctorId = appointment.DoctorId;
+                                                                                ih.UserId = appointment.UserId ?? default;
+                                                                                ih.ConclusionTime = DateTime.Now;
+                                                                            }));
+                _context.IllnessHistories.Add(illnessHistory);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
+        }
+
     }
 }

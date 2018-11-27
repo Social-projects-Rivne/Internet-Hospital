@@ -21,6 +21,7 @@ using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
 using InternetHospital.WebApi.Swagger;
+using InternetHospital.BusinessLogic.Validation;
 
 namespace InternetHospital.WebApi
 {
@@ -42,6 +43,7 @@ namespace InternetHospital.WebApi
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentCreationValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSearchValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentSubscriptionValidator>();
+                        f.RegisterValidatorsFromAssemblyContaining<IllnessHistoryCreationValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentHistoryValidator>();
                         f.RegisterValidatorsFromAssemblyContaining<AppointmentUnsubscribeValidator>();
                     });
@@ -167,6 +169,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
+                config.CreateMap<IllnessHistoryModel, IllnessHistory>();
             });
 
             app.UseMvc();

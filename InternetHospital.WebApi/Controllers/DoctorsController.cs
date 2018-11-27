@@ -106,5 +106,14 @@ namespace InternetHospital.WebApi.Controllers
             }
             return BadRequest(new { message = "Cannot get profile data!" });
         }
+
+        [HttpPost("illnesshistory")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult FillHistory([FromBody] IllnessHistoryModel illnessHistory)
+        {
+            var (status, message) = _doctorService.FillIllnessHistory(illnessHistory);
+
+            return status ? (IActionResult)Ok() : BadRequest(new { message });
+        }
     }
 }
