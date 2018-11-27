@@ -37,5 +37,11 @@ namespace InternetHospital.WebApi.Controllers
                 });
         }
 
+        [HttpGet("getstatuses")]
+        public IActionResult GetStatuses()
+        {
+            return Ok(_userListService.GetStatuses());
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using InternetHospital.BusinessLogic.Models;
+using InternetHospital.DataAccess.Entities;
 using System.Collections.Generic;
 
 namespace InternetHospital.BusinessLogic.Interfaces
@@ -7,5 +8,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
     {
         IEnumerable<UserModel> GetUsers();
         (IEnumerable<UserModel> users, int count) FilteredUsers(UserSearchParameters queryParameters);
+        IEnumerable<Status> GetStatuses();
     }
 }
