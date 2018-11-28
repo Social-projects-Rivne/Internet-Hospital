@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -14,10 +16,14 @@ namespace InternetHospital.WebApi.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
+        private readonly UserManager<User> _userManager;
+        private readonly IFilesService _uploadingFiles;
 
-        public DoctorsController(IDoctorService service)
+        public DoctorsController(IDoctorService service, UserManager<User> userManager, IFilesService filesService)
         {
             _doctorService = service;
+            _userManager = userManager;
+            _uploadingFiles = filesService;
         }
 
         [HttpGet("{id}", Name = "Get")]
@@ -31,6 +37,39 @@ namespace InternetHospital.WebApi.Controllers
             else
             {
                 return NotFound(new { message = "Couldn't find such doctor" });
+            }
+        }
+
+        [HttpPut("updateAvatar")]
+        [Authorize]
+        public async Task<IActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
+        {
+            var doctorId = User.Identity?.Name;
+            if (doctorId != null && file != null)
+            {
+                var doctor = await _userManager.FindByIdAsync(doctorId);
+                await _uploadingFiles.UploadAvatar(file, doctor);
+                return Ok();
+            }
+            return BadRequest(new { message = "Cannot change avatar!" });
+        }
+
+        [HttpGet("getAvatar")]
+        [Authorize]
+        public async Task<IActionResult> GetAvatar()
+        {
+            var doctorId = User.Identity?.Name;
+            if (doctorId != null)
+            {
+                var doctor = await _userManager.FindByIdAsync(doctorId);// _doctorService.GetAvatar(patientId);
+                return Ok(new
+                {
+                    doctor.AvatarURL
+                });
+            }
+            else
+            {
+                return BadRequest();
             }
         }
 
