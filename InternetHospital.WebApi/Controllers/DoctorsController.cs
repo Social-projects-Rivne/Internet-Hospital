@@ -16,12 +16,10 @@ namespace InternetHospital.WebApi.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
-        private readonly IFilesService _uploadingFiles;
 
-        public DoctorsController(IDoctorService service, UserManager<User> userManager, IFilesService filesService)
+        public DoctorsController(IDoctorService service)
         {
             _doctorService = service;
-            _uploadingFiles = filesService;
         }
 
         [HttpGet("{id}", Name = "Get")]
@@ -43,7 +41,12 @@ namespace InternetHospital.WebApi.Controllers
         public async Task<IActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
         {
             var doctorId = User.Identity?.Name;
-            return await _doctorService.UpdateDoctorAvatar(doctorId, file);
+            bool result = await _doctorService.UpdateDoctorAvatar(doctorId, file);
+            if(result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpGet("getAvatar")]

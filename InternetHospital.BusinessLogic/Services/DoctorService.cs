@@ -144,15 +144,15 @@ namespace InternetHospital.BusinessLogic.Services
             return doctorModel;
         }
 
-        public async Task<IActionResult> UpdateDoctorAvatar(string doctorId, IFormFile file)
+        public async Task<bool> UpdateDoctorAvatar(string doctorId, IFormFile file)
         {
             if (doctorId != null && file != null)
             {
                 var doctor = await _userManager.FindByIdAsync(doctorId);
                 await _uploadingFiles.UploadAvatar(file, doctor);
-                return new OkResult();
+                return true;
             }
-            return new BadRequestResult();
+            return false;
         }
         public async Task<string> GetDoctorAvatar(string doctorId)
         {

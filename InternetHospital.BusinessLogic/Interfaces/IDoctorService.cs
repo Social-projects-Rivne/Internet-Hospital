@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.BusinessLogic.Interfaces
 {
@@ -15,7 +14,7 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport,
             IFormFileCollection diploma, IFormFileCollection license);
         DoctorProfileModel GetDoctorProfile(int userId);
-        Task<IActionResult> UpdateDoctorAvatar(string doctorId, IFormFile file);
+        Task<bool> UpdateDoctorAvatar(string doctorId, IFormFile file);
         Task<string> GetDoctorAvatar(string doctorId);
         (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
     }
