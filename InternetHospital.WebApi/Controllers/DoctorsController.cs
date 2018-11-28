@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -32,6 +34,35 @@ namespace InternetHospital.WebApi.Controllers
             {
                 return NotFound(new { message = "Couldn't find such doctor" });
             }
+        }
+
+        [HttpPut("updateAvatar")]
+        [Authorize]
+        public async Task<IActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
+        {
+            var doctorId = User.Identity?.Name;
+            bool result = await _doctorService.UpdateDoctorAvatar(doctorId, file);
+            if(result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("getAvatar")]
+        [Authorize]
+        public async Task<IActionResult> GetAvatar()
+       {
+            var doctorId = User.Identity?.Name;
+            string avatarURL = await _doctorService.GetDoctorAvatar(doctorId);
+            if (!string.IsNullOrWhiteSpace(avatarURL))
+            {
+                return Ok(new
+                {
+                    avatarURL
+                });
+            }
+            return BadRequest();
         }
 
         // GET: api/Doctors
