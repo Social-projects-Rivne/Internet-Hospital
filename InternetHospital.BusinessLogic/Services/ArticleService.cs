@@ -30,16 +30,16 @@ namespace InternetHospital.BusinessLogic.Services
             _filesService = filesService;
         }
 
-        public IEnumerable<ArticleModerateShortModel> GetShortModerateShortArticles(ArticlesFilteringModel articlesFilteringModel)
+        public FilteredModel<ArticleModerateShortModel> GetShortModerateShortArticles(ArticlesFilteringModel articlesFilteringModel)
         {
             var articles = _context.Articles.AsQueryable();
-            if (articlesFilteringModel.IncludeOnlyActive)
+            if (!articlesFilteringModel.IncludeAll)
             {
                 articles = articles.Where(a => a.ArticleStatus.Name == ACTIVE_ARTICLE);
             }
-            if (!string.IsNullOrWhiteSpace(articlesFilteringModel.SearchString))
+            if (!string.IsNullOrWhiteSpace(articlesFilteringModel.Search))
             {
-                var search = articlesFilteringModel.SearchString.ToLower();
+                var search = articlesFilteringModel.Search.ToLower();
                 articles = articles.Where(a => 
                     a.Author.FirstName.ToLower().Contains(search)
                     || a.Author.SecondName.ToLower().Contains(search)
@@ -63,22 +63,29 @@ namespace InternetHospital.BusinessLogic.Services
                 articles = articles.Where(a => a.TimeOfCreation < articlesFilteringModel.To);
             }
 
+            var result = new FilteredModel<ArticleModerateShortModel>();
+            result.Amount = articles.Count();
+
             articles = PaginationHelper<Article>.GetPageValues(articles, articlesFilteringModel.PageSize,
                 articlesFilteringModel.Page);
-            var artShort = articles.Select(a => new ArticleModerateShortModel
+
+            result.Results = articles.Select(a => new ArticleModerateShortModel
             {
                 Author = $"{a.Author.FirstName} {a.Author.SecondName} {a.Author.ThirdName}",
                 Id = a.Id,
                 Title = a.Title,
+                ShortDescription = a.ShortDescription,
                 DateOfCreation = a.TimeOfCreation,
-                Editings = a.ArticleEditions.Select(editing => new ArticleEditingModel
+                Editions = a.ArticleEditions.Select(edition => new ArticleEditingModel
                 {
-                    Author = $"{editing.Author.FirstName} {editing.Author.SecondName} {editing.Author.ThirdName}",
-                    DateOfEdit = editing.Time
+                    Author = $"{edition.Author.FirstName} {edition.Author.SecondName} {edition.Author.ThirdName}",
+                    DateOfEdit = edition.Time
                 }).ToList(),
-                PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview).Select(att => att.Url).ToList()
+                PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview).Select(att => att.Url).ToList(),
+                Types = a.Types.Select(t => t.Type.Name).ToList(),
+                Status = a.ArticleStatus.Name
             }).ToList();
-            return artShort;
+            return result;
         }
 
         public ArticleModerateModel GetModelForEditing(int id)
@@ -131,15 +138,17 @@ namespace InternetHospital.BusinessLogic.Services
             _context.SaveChanges();
             foreach (int typeId in newArticle.TypeIds)
             {
-                if(_context.ArticleTypes.Any(at => at.Id == typeId))
-                _context.Add(new ArticleTypeArticle
                 {
-                    ArticleId = article.Id,
-                    TypeId = typeId
-                });
+                    if (_context.ArticleTypes.Any(at => at.Id == typeId))
+                        _context.Add(new ArticleTypeArticle
+                        {
+                            ArticleId = article.Id,
+                            TypeId = typeId
+                        });
+                }
             }
 
-            await _filesService.UploadArticlePhotosAsync(newArticle.ArticlePreviewAttachments, newArticle.ArticleAttachments,
+            _filesService.UploadArticlePhotos(newArticle.ArticlePreviewAttachments, newArticle.ArticleAttachments,
                 article.Id);
             article.Text = article.Text.Replace(ID_KEY, article.Id.ToString());
             _context.SaveChanges();

@@ -25,9 +25,10 @@ namespace InternetHospital.WebApi.Controllers
 
         // GET: api/Article
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetFilteredArticles([FromQuery] ArticlesFilteringModel filter)
         {
-            return new string[] { "value1", "value2" };
+            var articles = _articleService.GetShortModerateShortArticles(filter);
+            return Ok(articles);
         }
 
         // GET: api/Article/5

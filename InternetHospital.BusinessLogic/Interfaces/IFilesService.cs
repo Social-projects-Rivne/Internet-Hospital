@@ -12,6 +12,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<User> UploadDiploma(IFormFileCollection images, User user, DateTime addedTime);
         Task<User> UploadLicense(IFormFileCollection images, User user, DateTime addedTime);
 
-        Task<bool> UploadArticlePhotosAsync(IFormFile[] previewImages, IFormFile[] articleImages, int articleId);
+        void UploadArticlePhotos(IFormFile[] previewImages, IFormFile[] articleImages, int articleId);
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Articles;
 
 namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IArticleService
     {
-        IEnumerable<ArticleModerateShortModel> GetShortModerateShortArticles(
+        FilteredModel<ArticleModerateShortModel> GetShortModerateShortArticles(
             ArticlesFilteringModel articlesFilteringModel);
 
         ArticleModerateModel GetModelForEditing(int id);

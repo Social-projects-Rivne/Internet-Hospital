@@ -31,6 +31,10 @@ namespace InternetHospital.BusinessLogic.Services
         const string HOME_PAGE = "HomePage";
         private const string ARTICAL_PREVIEW_IMG = "Preview_img_";
         private const string ARTICLE_IMG = "Img_";
+        private const int PREVIEW_MIN_WIDTH = 300;
+        private const int PREVIEW_MAX_WIDTH = 3000;
+        private const int PREVIEW_MIN_HEIGHT = 300;
+        private const int PREVIEW_MAX_HEIGHT = 3000;
 
         public FilesService(IHostingEnvironment env, UserManager<User> userManager, ApplicationContext context)
         {
@@ -93,7 +97,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<User> UploadFiles(IFormFileCollection images, User user, DateTime addedTime, string fileTypeFolder)
         {
-            bool isValidImage = false;
+            bool isValidImage;
             foreach (var image in images)
             {
                 isValidImage = ImageValidation.IsValidImageFile(image, MIN_HEIGHT, MAX_HEIGHT, MIN_WIDTH, MAX_WIDTH)
@@ -154,9 +158,8 @@ namespace InternetHospital.BusinessLogic.Services
             return user;
         }
 
-        public async Task<bool> UploadArticlePhotosAsync(IFormFile[] previewImages, IFormFile[] articleImages, int articleId)
+        public void UploadArticlePhotos(IFormFile[] previewImages, IFormFile[] articleImages, int articleId)
         {
-            bool uploaded = false;
             if (previewImages.Length > 0 || articleImages.Length > 0)
             {
                 string webRootPath = _env.WebRootPath;
@@ -168,37 +171,54 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     Directory.CreateDirectory(fileDestDir);
                 }
-                AddArticleAttachmentAsync(articleImages, fileDestDir, articleId, false);
-                AddArticleAttachmentAsync(previewImages, fileDestDir, articleId, true);
 
-                uploaded = true;
+                AddArticleAttachment(articleImages, fileDestDir, articleId, false);
+                AddArticleAttachment(previewImages, fileDestDir, articleId, true);
+
             }
-
-            return uploaded;
         }
 
-        private async void AddArticleAttachmentAsync(IFormFile[] attachments, string path, int articleId, bool isOnPreview)
+        private void AddArticleAttachment(IFormFile[] attachments, string path, int articleId, bool isOnPreview)
         {
             for (int i = 0; i < attachments.Length; i++)
             {
-                string extension = attachments[i].FileName.Substring(attachments[i].FileName.LastIndexOf('.'));
-                var fileName = $"{(isOnPreview ? ARTICAL_PREVIEW_IMG : ARTICLE_IMG)}{i + 1}{extension}";
-                var fileFullPath = Path.Combine(path, fileName);
-                using (var stream = new FileStream(fileFullPath, FileMode.Create))
+                if (IsValidArticleImageAttachment(attachments[i], isOnPreview))
                 {
-                    await attachments[i].CopyToAsync(stream);
+                    string extension = attachments[i].FileName.Substring(attachments[i].FileName.LastIndexOf('.'));
+                    var fileName = $"{(isOnPreview ? ARTICAL_PREVIEW_IMG : ARTICLE_IMG)}{i + 1}{extension}";
+                    var fileFullPath = Path.Combine(path, fileName);
+                    using (var stream = new FileStream(fileFullPath, FileMode.Create))
+                    {
+                        attachments[i].CopyTo(stream);
+                    }
+
+                    var dbURL = $"/{HOME_PAGE}/{articleId}/{ARTICLE_ATTACHMENTS_FOLDER_NAME}/{fileName}";
+                    var articleAttachment = new ArticleAttachment
+                    {
+                        ArticleId = articleId,
+                        IsOnPreview = isOnPreview,
+                        Url = dbURL
+                    };
+                    _context.Add(articleAttachment);
                 }
-                var dbURL = $"/{HOME_PAGE}/{articleId}/{ARTICLE_ATTACHMENTS_FOLDER_NAME}/{fileName}";
-                var articleAttachment = new ArticleAttachment
-                {
-                    ArticleId = articleId,
-                    IsOnPreview = isOnPreview,
-                    Url = dbURL
-                };
-                _context.Add(articleAttachment);
+            }
+            _context.SaveChanges();
+        }
+
+        private bool IsValidArticleImageAttachment(IFormFile file, bool isOnPreview)
+        {
+            bool isValidFile;
+            if (isOnPreview)
+            {
+                isValidFile = ImageValidation.IsValidImageFile(file, PREVIEW_MIN_HEIGHT,
+                    PREVIEW_MAX_HEIGHT, PREVIEW_MIN_WIDTH, PREVIEW_MAX_WIDTH);
+            }
+            else
+            {
+                isValidFile = ImageValidation.IsImage(file);
             }
 
-            _context.SaveChanges();
+            return isValidFile;
         }
     }
 }
