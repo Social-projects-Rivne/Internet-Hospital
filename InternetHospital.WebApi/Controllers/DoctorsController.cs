@@ -16,13 +16,11 @@ namespace InternetHospital.WebApi.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
-        private readonly UserManager<User> _userManager;
         private readonly IFilesService _uploadingFiles;
 
         public DoctorsController(IDoctorService service, UserManager<User> userManager, IFilesService filesService)
         {
             _doctorService = service;
-            _userManager = userManager;
             _uploadingFiles = filesService;
         }
 
@@ -45,32 +43,23 @@ namespace InternetHospital.WebApi.Controllers
         public async Task<IActionResult> UpdateAvatar([FromForm(Name = "Image")]IFormFile file)
         {
             var doctorId = User.Identity?.Name;
-            if (doctorId != null && file != null)
-            {
-                var doctor = await _userManager.FindByIdAsync(doctorId);
-                await _uploadingFiles.UploadAvatar(file, doctor);
-                return Ok();
-            }
-            return BadRequest(new { message = "Cannot change avatar!" });
+            return await _doctorService.UpdateDoctorAvatar(doctorId, file);
         }
 
         [HttpGet("getAvatar")]
         [Authorize]
         public async Task<IActionResult> GetAvatar()
-        {
+       {
             var doctorId = User.Identity?.Name;
-            if (doctorId != null)
+            string avatarURL = await _doctorService.GetDoctorAvatar(doctorId);
+            if (!string.IsNullOrWhiteSpace(avatarURL))
             {
-                var doctor = await _userManager.FindByIdAsync(doctorId);// _doctorService.GetAvatar(patientId);
                 return Ok(new
                 {
-                    doctor.AvatarURL
+                    avatarURL
                 });
             }
-            else
-            {
-                return BadRequest();
-            }
+            return BadRequest();
         }
 
         // GET: api/Doctors
