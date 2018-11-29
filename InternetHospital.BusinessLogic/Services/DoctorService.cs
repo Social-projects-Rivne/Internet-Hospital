@@ -11,18 +11,22 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class DoctorService : IDoctorService
     {
         private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
         private readonly IFilesService _uploadingFiles;
         const string DOCTOR = "Doctor";
 
-        public DoctorService(ApplicationContext context, IFilesService uploadingFiles)
+        public DoctorService(ApplicationContext context, IFilesService uploadingFiles, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
             _uploadingFiles = uploadingFiles;
         }
 
@@ -138,6 +142,29 @@ namespace InternetHospital.BusinessLogic.Services
             }));
 
             return doctorModel;
+        }
+
+        public async Task<bool> UpdateDoctorAvatar(string doctorId, IFormFile file)
+        {
+            if (doctorId != null && file != null)
+            {
+                var doctor = await _userManager.FindByIdAsync(doctorId);
+                await _uploadingFiles.UploadAvatar(file, doctor);
+                return true;
+            }
+            return false;
+        }
+        public async Task<string> GetDoctorAvatar(string doctorId)
+        {
+            if (doctorId != null)
+            {
+                var doctor = await _userManager.FindByIdAsync(doctorId);
+                return doctor.AvatarURL;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public async Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license)

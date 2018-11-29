@@ -122,6 +122,7 @@ namespace InternetHospital.BusinessLogic.Services
         public IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId)
         {
             var appointments = _context.Appointments
+                .OrderBy(a => a.StartTime)
                 .Where(a => (a.UserId == patientId)
                         && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
                 .Select(a => new AppointmentForPatient
