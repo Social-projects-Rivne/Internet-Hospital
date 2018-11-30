@@ -41,19 +41,19 @@ namespace InternetHospital.BusinessLogic.Services
         public (IEnumerable<IllnessHistoryModel> histories, int count) GetFilteredHistories(IllnessHistorySearchModel queryParameters)
         {
             var histories = _context.IllnessHistories.OrderBy(d => d.ConclusionTime).AsQueryable();
-            if (queryParameters.SearchFromDate != null)
-            {
-                var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
-                histories = histories
-                    .Where(d => d.ConclusionTime >= fromDate);
-            }
-            if (queryParameters.SearchToDate != null)
-            {
-                var toDate = Convert.ToDateTime(queryParameters.SearchToDate);
-                toDate = toDate.AddDays(1);
-                histories = histories.
-                    Where(d => d.ConclusionTime <= toDate);
-            }
+            //if (queryParameters.SearchFromDate != null)
+            //{
+            //    var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
+            //    histories = histories
+            //        .Where(d => d.ConclusionTime >= fromDate);
+            //}
+            //if (queryParameters.SearchToDate != null)
+            //{
+            //    var toDate = Convert.ToDateTime(queryParameters.SearchToDate);
+            //    toDate = toDate.AddDays(1);
+            //    histories = histories.
+            //        Where(d => d.ConclusionTime <= toDate);
+            //}
             var historiesCount = histories.Count();
             var historiesResult = PaginationHelper(histories, queryParameters.PageCount, queryParameters.Page).ToList();
             return (historiesResult, historiesCount);
@@ -66,7 +66,7 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     AppointmentId = x.AppointmentId ?? default,
                     Complaints = x.Complaints,
-                    FinishAppointmentTime = x.ConclusionTime,
+                    FinishAppointmentTimeStamp = x.ConclusionTime,
                     Diagnose = x.Diagnose,
                     DiseaseAnamnesis = x.DiseaseAnamnesis,
                     LifeAnamnesis = x.LifeAnamnesis,

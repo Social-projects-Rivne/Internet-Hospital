@@ -18,7 +18,7 @@ namespace InternetHospital.DataAccess.Entities
         public string Diagnose { get; set; }
         public string SurveyPlan { get; set; }
         public string TreatmentPlan { get; set; }
-        public DateTime ConclusionTime { get; set; }
+        public int ConclusionTime { get; set; }
 
         public virtual User User { get; set; }
         public virtual Doctor Doctor { get; set; }

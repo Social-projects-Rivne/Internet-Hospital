@@ -237,7 +237,8 @@ namespace InternetHospital.BusinessLogic.Services
                                                                             {
                                                                                 ih.DoctorId = appointment.DoctorId;
                                                                                 ih.UserId = appointment.UserId ?? default;
-                                                                                ih.ConclusionTime = DateTime.Now;
+                                                                                var dateTime = new DateTime(DateTime.UtcNow.Ticks, DateTimeKind.Utc);
+                                                                                ih.ConclusionTime = (int)new DateTimeOffset(dateTime).ToUnixTimeSeconds();
                                                                             }));
                 _context.IllnessHistories.Add(illnessHistory);
             }
