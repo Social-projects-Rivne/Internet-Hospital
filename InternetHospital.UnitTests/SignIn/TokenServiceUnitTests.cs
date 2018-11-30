@@ -64,7 +64,7 @@ namespace InternetHospital.UnitTests.SignIn
         }
 
         [Fact]
-        public void ShouldGenerateAccessToken()
+        public async void ShouldGenerateAccessToken()
         {
             // arrange
             var options = DbContextHelper.GetDbOptions(nameof(ShouldGenerateAccessToken));
@@ -88,7 +88,7 @@ namespace InternetHospital.UnitTests.SignIn
                 var tokenService = new TokenService(context, _configuration, fakeManager.Object);
 
                 // act
-                var token = tokenService.GenerateAccessToken(fixtureUser);
+                var token = await tokenService.GenerateAccessToken(fixtureUser);
 
                 // assert
                 token.Should().NotBeNull();
