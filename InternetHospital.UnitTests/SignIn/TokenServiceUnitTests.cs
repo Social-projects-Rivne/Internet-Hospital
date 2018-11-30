@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
@@ -9,10 +8,7 @@ using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.UnitTests.TestHelpers;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using Moq;
-using Microsoft.Extensions.Logging;
 
 namespace InternetHospital.UnitTests.SignIn
 {
@@ -49,7 +45,7 @@ namespace InternetHospital.UnitTests.SignIn
                 context.SaveChanges();
             }
 
-            var fakeManager = GetFakeManager();
+            var fakeManager = FakeGenerator.GetFakeUserManager();
 
             using (var context = new ApplicationContext(options))
             {
@@ -79,9 +75,10 @@ namespace InternetHospital.UnitTests.SignIn
                 context.SaveChanges();
             }
 
-            var fakeManager = GetFakeManager();
-            fakeManager.Setup(m => m.GetRolesAsync(fixtureUser))
-                .Returns(Task.FromResult(GetUserRole()));
+            var fakeManager = FakeGenerator.GetFakeUserManager();
+            fakeManager
+                .Setup(m => m.GetRolesAsync(fixtureUser))
+                .Returns(Task.FromResult(UserRoleToIList("testRole")));
 
             using (var context = new ApplicationContext(options))
             {
@@ -95,25 +92,9 @@ namespace InternetHospital.UnitTests.SignIn
             }
         }
 
-
-
-        private static Mock<UserManager<User>> GetFakeManager()
+        private static IList<string> UserRoleToIList(string role)
         {
-            return new Mock<UserManager<User>>(
-                new Mock<IUserStore<User>>().Object,
-                new Mock<IOptions<IdentityOptions>>().Object,
-                new Mock<IPasswordHasher<User>>().Object,
-                new IUserValidator<User>[0],
-                new IPasswordValidator<User>[0],
-                new Mock<ILookupNormalizer>().Object,
-                new Mock<IdentityErrorDescriber>().Object,
-                new Mock<IServiceProvider>().Object,
-                new Mock<ILogger<UserManager<User>>>().Object);
-        }
-
-        private static IList<string> GetUserRole()
-        {
-            return new List<string> { "Admin" };
+            return new List<string> { role };
         }
     }
 }

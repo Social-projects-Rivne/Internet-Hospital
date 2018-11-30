@@ -35,7 +35,7 @@ namespace InternetHospital.BusinessLogic.Services
         /// Method for generation access tokens for app users
         /// </summary>
         /// <param name="user"></param>
-        /// <returns></returns>
+        /// <returns>access token</returns>
         public async Task<JwtSecurityToken> GenerateAccessToken(User user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
