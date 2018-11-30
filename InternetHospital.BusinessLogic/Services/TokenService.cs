@@ -32,7 +32,7 @@ namespace InternetHospital.BusinessLogic.Services
         }
 
         /// <summary>
-        /// Method for generation access tokens for app uesers
+        /// Method for generation access tokens for app users
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
