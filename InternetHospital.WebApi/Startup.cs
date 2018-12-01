@@ -169,8 +169,8 @@ namespace InternetHospital.WebApi
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
                 config.CreateMap<ArticleType, ArticleTypeModel>();
-                config.CreateMap<ArticleAttachment, ArticleAttachmentModel>();
                 config.CreateMap<ArticleCreatingModel, Article>();
+                config.CreateMap<Article, SendingArticleEditingModel>();
             });
 
             app.UseMvc();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InternetHospital.BusinessLogic.Models.Articles
 {
-    public class ArticleModerateShortModel
+    public class ArticleModeratePreviewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -22,7 +22,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         private const string ACTIVE_ARTICLE = "Active";
         private const string DELETED__ARTICLE = "Deleted";
-        public const string ID_KEY = "%$#@_article_id_@$#%";
+        public const string ID_KEY = "HomePage/%$#@_article_id_@$#%/Attachments/";
 
         public ArticleService(ApplicationContext context, IFilesService filesService)
         {
@@ -30,7 +30,7 @@ namespace InternetHospital.BusinessLogic.Services
             _filesService = filesService;
         }
 
-        public FilteredModel<ArticleModerateShortModel> GetShortModerateShortArticles(ArticlesFilteringModel articlesFilteringModel)
+        public FilteredModel<ArticleModeratePreviewModel> GetModerateArticles(ArticlesFilteringModel articlesFilteringModel)
         {
             var articles = _context.Articles.AsQueryable();
             if (!articlesFilteringModel.IncludeAll)
@@ -63,13 +63,13 @@ namespace InternetHospital.BusinessLogic.Services
                 articles = articles.Where(a => a.TimeOfCreation < articlesFilteringModel.To);
             }
 
-            var result = new FilteredModel<ArticleModerateShortModel>();
+            var result = new FilteredModel<ArticleModeratePreviewModel>();
             result.Amount = articles.Count();
 
             articles = PaginationHelper<Article>.GetPageValues(articles, articlesFilteringModel.PageSize,
                 articlesFilteringModel.Page);
 
-            result.Results = articles.Select(a => new ArticleModerateShortModel
+            result.Results = articles.Select(a => new ArticleModeratePreviewModel
             {
                 Author = $"{a.Author.FirstName} {a.Author.SecondName} {a.Author.ThirdName}",
                 Id = a.Id,
@@ -88,28 +88,6 @@ namespace InternetHospital.BusinessLogic.Services
             return result;
         }
 
-        public ArticleModerateModel GetModelForEditing(int id)
-        {
-            var article = _context.Articles.Include(a => a.Attachments)
-                                                .Include(a => a.Types).ThenInclude(t => t.Type)
-                                                                        .FirstOrDefault(a => a.Id == id);
-            if (article != null)
-            {
-                var editedArticle = new ArticleModerateModel
-                {
-                    Title = article.Title,
-                    AttachmentLinks = article.Attachments.Select(att => Mapper.Map<ArticleAttachment, ArticleAttachmentModel>(att)).ToArray(),
-                    ShortDescription = article.ShortDescription,
-                    Text = article.Text,
-                    TypeIds = article.Types.Select(t => Mapper.Map<ArticleType, ArticleTypeModel>(t.Type)).ToList()
-                };
-                return editedArticle;
-            }
-
-            return null;
-
-        }
-        // public UpdateModel()
         public bool DeleteArticle(int articleId)
         {
             var article = _context.Articles.FirstOrDefault(a => a.Id == articleId);
@@ -122,12 +100,33 @@ namespace InternetHospital.BusinessLogic.Services
 
             return false;
         }
-        // public GetArticlesForPreview()
-        // public GetArticle(int id)
 
+        public SendingArticleEditingModel GetArticleForEditing(int id)
+        {
+            var article = _context.Articles.Include(a => a.Author)
+                                            .Include(a => a.Types)
+                                            .Include(a => a.Attachments).FirstOrDefault(a => a.Id == id);
+            SendingArticleEditingModel result = null;
+            if (article != null)
+            {
+                result = Mapper.Map<Article, SendingArticleEditingModel>(article, cnf =>
+                    cnf.AfterMap((src, dest) =>
+                    {
+                        dest.Author = $"{src.Author.FirstName} {src.Author.SecondName} {src.Author.ThirdName}";
+                        dest.TypeIds = src.Types.Select(t => t.TypeId).ToList();
+                        dest.ArticleAttachmentPaths =
+                            src.Attachments.Where(a => !a.IsOnPreview).Select(a => a.Url).ToList();
+                        dest.PreviewAttachmentPaths =
+                            src.Attachments.Where(a => a.IsOnPreview).Select(a => a.Url).ToList();
+                    }));
+                var prevAtach = article.Attachments.Where(a => a.IsOnPreview).Select(a => a.Url).ToList();
+                result.PreviewAttachmentsBase64 = _filesService.GetBase64StringsFromAttachments(prevAtach);
+            }
 
+            return result;
+        }
 
-        public async Task<bool> CreateArticle(ArticleCreatingModel newArticle)
+        public bool CreateArticle(ArticleCreatingModel newArticle)
         {
             var article = Mapper.Map<ArticleCreatingModel, Article>(newArticle, cnf => cnf.AfterMap((src, dest) =>
                 {
@@ -148,8 +147,13 @@ namespace InternetHospital.BusinessLogic.Services
                 }
             }
 
-            _filesService.UploadArticlePhotos(newArticle.ArticlePreviewAttachments, newArticle.ArticleAttachments,
+            _filesService.UploadArticleAttachments(newArticle.ArticlePreviewAttachments, newArticle.ArticleAttachments,
                 article.Id);
+            var articalAttachments = article.Attachments.Where(a => !a.IsOnPreview).ToList();
+            for (var i = 0; i < articalAttachments.Count; ++i)
+            {
+                article.Text = article.Text.Replace($"{ID_KEY}{i + 1}", articalAttachments[i].Url);
+            }       
             article.Text = article.Text.Replace(ID_KEY, article.Id.ToString());
             _context.SaveChanges();
             return true;
@@ -166,6 +170,48 @@ namespace InternetHospital.BusinessLogic.Services
                 }
             }
             return typeIds;
+        }
+
+        public bool UpdateArticle(ArticleUpdateModel updateModel)
+        {
+            var article = _context.Articles.FirstOrDefault(a => a.Id == updateModel.Id);
+            if (article != null)
+            {
+                article.Title = updateModel.Title;
+                article.ShortDescription = updateModel.ShortDescription;
+
+                var articleTypesForRemoving = _context.ArticleTypeArticles
+                                    .Where(ata => ata.ArticleId == article.Id && !updateModel.TypeIds
+                                                                                            .Contains(ata.TypeId));
+                _context.ArticleTypeArticles.RemoveRange(articleTypesForRemoving);
+                var typeIdsForAdding = updateModel.TypeIds
+                    .Where(t => !_context.ArticleTypeArticles.Any(ata => ata.ArticleId == article.Id 
+                                                                        && ata.TypeId == t)).Select(
+                                                                                t => new ArticleTypeArticle
+                                                                                {
+                                                                                    ArticleId = article.Id,
+                                                                                    TypeId = t
+                                                                                });
+                _context.ArticleTypeArticles.AddRange(typeIdsForAdding);
+                _filesService.RemoveArticleAttachment(updateModel.DeletedAttachmentsPaths);
+                _filesService.UploadArticleAttachments(updateModel.ArticlePreviewAttachments, updateModel.ArticleAttachments, article.Id);
+
+                var articalAttachments = article.Attachments.Where(a => !a.IsOnPreview).ToList();
+                for (var i = 0; i < articalAttachments.Count; ++i)
+                {
+                    article.Text = article.Text.Replace($"{ID_KEY}{i + 1}", articalAttachments[i].Url);
+                }
+                _context.ArticleEditions.Add(new ArticleEdition
+                {
+                    ArticleId = article.Id,
+                    AuthorId = updateModel.EditorId,
+                    Time = DateTime.UtcNow
+                });
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

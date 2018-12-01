@@ -7,12 +7,13 @@ namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IArticleService
     {
-        FilteredModel<ArticleModerateShortModel> GetShortModerateShortArticles(
+        FilteredModel<ArticleModeratePreviewModel> GetModerateArticles(
             ArticlesFilteringModel articlesFilteringModel);
 
-        ArticleModerateModel GetModelForEditing(int id);
         bool DeleteArticle(int articleId);
-        Task<bool> CreateArticle(ArticleCreatingModel newArticle);
+        bool CreateArticle(ArticleCreatingModel newArticle);
+        SendingArticleEditingModel GetArticleForEditing(int id);
+        bool UpdateArticle(ArticleUpdateModel updateModel);
         IEnumerable<int> ConvertStringIdsToInt(string[] ids);
     }
 }

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.FileProviders;
 
 namespace InternetHospital.BusinessLogic.Models.Articles
 {
-    public class ArticleCreatingModel
+    public class ArticleUpdateModel
     {
         [Required]
-        public int AuthorId { get; set; } = 1;
+        public int Id { get; set; }
         [Required]
         [MinLength(2)]
         [MaxLength(100)]
@@ -24,10 +23,10 @@ namespace InternetHospital.BusinessLogic.Models.Articles
         public string ShortDescription { get; set; }
         [Required]
         public string Text { get; set; }
-        public IFormFile[] ArticleAttachments { get; set; }
         [Required]
-        [MinLength(3)]
-        [MaxLength(10)]
+        public int EditorId { get; set; }
+        public IFormFile[] ArticleAttachments { get; set; }
         public IFormFile[] ArticlePreviewAttachments { get; set; }
+        public string[] DeletedAttachmentsPaths { get; set; }
     }
 }

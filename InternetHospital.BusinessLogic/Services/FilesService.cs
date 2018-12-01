@@ -9,6 +9,9 @@ using InternetHospital.BusinessLogic.Validation;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -158,13 +161,11 @@ namespace InternetHospital.BusinessLogic.Services
             return user;
         }
 
-        public void UploadArticlePhotos(IFormFile[] previewImages, IFormFile[] articleImages, int articleId)
+        public void UploadArticleAttachments(IFormFile[] previewImages, IFormFile[] articleImages, int articleId)
         {
             if (previewImages.Length > 0 || articleImages.Length > 0)
             {
-                string webRootPath = _env.WebRootPath;
-
-                var fileDestDir = Path.Combine(webRootPath, HOME_PAGE, articleId.ToString(),
+                var fileDestDir = Path.Combine(_env.WebRootPath, HOME_PAGE, articleId.ToString(),
                     ARTICLE_ATTACHMENTS_FOLDER_NAME);
 
                 if (!Directory.Exists(fileDestDir))
@@ -174,7 +175,6 @@ namespace InternetHospital.BusinessLogic.Services
 
                 AddArticleAttachment(articleImages, fileDestDir, articleId, false);
                 AddArticleAttachment(previewImages, fileDestDir, articleId, true);
-
             }
         }
 
@@ -185,7 +185,7 @@ namespace InternetHospital.BusinessLogic.Services
                 if (IsValidArticleImageAttachment(attachments[i], isOnPreview))
                 {
                     string extension = attachments[i].FileName.Substring(attachments[i].FileName.LastIndexOf('.'));
-                    var fileName = $"{(isOnPreview ? ARTICAL_PREVIEW_IMG : ARTICLE_IMG)}{i + 1}{extension}";
+                    var fileName = $"{Guid.NewGuid()}{extension}";
                     var fileFullPath = Path.Combine(path, fileName);
                     using (var stream = new FileStream(fileFullPath, FileMode.Create))
                     {
@@ -202,7 +202,35 @@ namespace InternetHospital.BusinessLogic.Services
                     _context.Add(articleAttachment);
                 }
             }
-            _context.SaveChanges();
+        }
+
+        public void RemoveArticleAttachment(string[] attachmentPaths)
+        {
+            for (int i = 0; i < attachmentPaths.Length; i++)
+            {
+                var fileFullPath = _env.WebRootPath + attachmentPaths[i].Replace("/", "\\");
+                if (File.Exists(fileFullPath))
+                {
+                    File.Delete(fileFullPath);
+                    _context.ArticleAttachments.Remove(
+                        _context.ArticleAttachments.FirstOrDefault(a => a.Url == attachmentPaths[i]));
+                }
+            }
+        }
+
+        public IEnumerable<string> GetBase64StringsFromAttachments(IEnumerable<string> attachmentPaths)
+        {
+            var base64Imgs = new List<string>();
+            foreach (var attachmentPath in attachmentPaths)
+            {
+                var filePath = $"{_env.WebRootPath}/{attachmentPath}";
+                var byteArr = File.ReadAllBytes(filePath);
+                var format = $"data:image/{filePath.Substring(filePath.LastIndexOf('.') + 1)}";
+                var base64 = $"{format};base64,{Convert.ToBase64String(byteArr)}";
+                base64Imgs.Add(base64);
+            }
+
+            return base64Imgs;
         }
 
         private bool IsValidArticleImageAttachment(IFormFile file, bool isOnPreview)
