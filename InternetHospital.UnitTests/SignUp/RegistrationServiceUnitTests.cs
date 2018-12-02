@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using AutoMapper;
+using FluentAssertions;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
@@ -40,7 +41,7 @@ namespace InternetHospital.UnitTests.SignUp
                 var res = await registrationService.PatientRegistration(fixtureRegistrationModel);
 
                 // asset
-                Assert.Equal(expectedUser.Email, res.Email);
+                res.Email.Should().BeEquivalentTo(expectedUser.Email);
             }
         }
 
@@ -53,7 +54,7 @@ namespace InternetHospital.UnitTests.SignUp
             var options = DbContextHelper.GetDbOptions(nameof(ShoulDoctorRegistrate));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
 
-            var fixutureUser = fixture.Build<User>()
+            var expectedUser = fixture.Build<User>()
                 .With(u => u.Id, USER_ID)
                 .With(u => u.Doctor, new Doctor
                 {
@@ -61,7 +62,7 @@ namespace InternetHospital.UnitTests.SignUp
                 })
                 .Create();
 
-            var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(fixutureUser, DOCTOR);
+            var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(expectedUser, DOCTOR);
             var fakeUserManager = RegistrationHelper.GetConfiguredUserManager();
             var fakeRoleManager = RegistrationHelper.GetFakeRoleManager();
 
@@ -73,8 +74,8 @@ namespace InternetHospital.UnitTests.SignUp
                 var res = await registrationService.DoctorRegistration(fixtureRegistrationModel);
 
                 // assert
-                Assert.Equal(res.Email, fixutureUser.Email);
-                Assert.Equal(fixutureUser.Doctor.UserId.ToString(), res.Doctor.UserId.ToString());
+                res.Email.Should().BeEquivalentTo(expectedUser.Email);
+                res.Doctor.UserId.Should().Be(expectedUser.Doctor.UserId);
             }
         }
     }
