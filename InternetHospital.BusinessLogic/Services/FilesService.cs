@@ -161,9 +161,10 @@ namespace InternetHospital.BusinessLogic.Services
             return user;
         }
 
-        public void UploadArticleAttachments(IFormFile[] previewImages, IFormFile[] articleImages, int articleId)
+        public List<string> UploadArticleAttachment(IFormFile[] attachments, int articleId, bool isOnPreview)
         {
-            if (previewImages.Length > 0 || articleImages.Length > 0)
+            var createdFileNames = new List<string>();
+            if (attachments.Length > 0)
             {
                 var fileDestDir = Path.Combine(_env.WebRootPath, HOME_PAGE, articleId.ToString(),
                     ARTICLE_ATTACHMENTS_FOLDER_NAME);
@@ -173,49 +174,39 @@ namespace InternetHospital.BusinessLogic.Services
                     Directory.CreateDirectory(fileDestDir);
                 }
 
-                AddArticleAttachment(articleImages, fileDestDir, articleId, false);
-                AddArticleAttachment(previewImages, fileDestDir, articleId, true);
-            }
-        }
-
-        private void AddArticleAttachment(IFormFile[] attachments, string path, int articleId, bool isOnPreview)
-        {
-            for (int i = 0; i < attachments.Length; i++)
-            {
-                if (IsValidArticleImageAttachment(attachments[i], isOnPreview))
+                for (int i = 0; i < attachments.Length; i++)
                 {
-                    string extension = attachments[i].FileName.Substring(attachments[i].FileName.LastIndexOf('.'));
-                    var fileName = $"{Guid.NewGuid()}{extension}";
-                    var fileFullPath = Path.Combine(path, fileName);
-                    using (var stream = new FileStream(fileFullPath, FileMode.Create))
+                    if (IsValidArticleImageAttachment(attachments[i], isOnPreview))
                     {
-                        attachments[i].CopyTo(stream);
+                        string extension = attachments[i].FileName.Substring(attachments[i].FileName.LastIndexOf('.'));
+                        var fileName = $"{Guid.NewGuid()}{extension}";
+                        var fileFullPath = Path.Combine(fileDestDir, fileName);
+                        using (var stream = new FileStream(fileFullPath, FileMode.Create))
+                        {
+                            attachments[i].CopyTo(stream);
+                        }
+                        createdFileNames.Add(fileName);
                     }
-
-                    var dbURL = $"/{HOME_PAGE}/{articleId}/{ARTICLE_ATTACHMENTS_FOLDER_NAME}/{fileName}";
-                    var articleAttachment = new ArticleAttachment
-                    {
-                        ArticleId = articleId,
-                        IsOnPreview = isOnPreview,
-                        Url = dbURL
-                    };
-                    _context.Add(articleAttachment);
                 }
             }
+
+            return createdFileNames;
         }
 
-        public void RemoveArticleAttachment(string[] attachmentPaths)
+        public List<string> RemoveArticleAttachment(string[] attachmentPaths)
         {
+            var removedUrls = new List<string>();
             for (int i = 0; i < attachmentPaths.Length; i++)
             {
                 var fileFullPath = _env.WebRootPath + attachmentPaths[i].Replace("/", "\\");
                 if (File.Exists(fileFullPath))
                 {
                     File.Delete(fileFullPath);
-                    _context.ArticleAttachments.Remove(
-                        _context.ArticleAttachments.FirstOrDefault(a => a.Url == attachmentPaths[i]));
+                    removedUrls.Add((attachmentPaths[i]));
                 }
             }
+
+            return removedUrls;
         }
 
         public IEnumerable<string> GetBase64StringsFromAttachments(IEnumerable<string> attachmentPaths)

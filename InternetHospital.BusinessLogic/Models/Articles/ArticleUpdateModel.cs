@@ -27,6 +27,8 @@ namespace InternetHospital.BusinessLogic.Models.Articles
         public int EditorId { get; set; }
         public IFormFile[] ArticleAttachments { get; set; }
         public IFormFile[] ArticlePreviewAttachments { get; set; }
-        public string[] DeletedAttachmentsPaths { get; set; }
+        public string[] DeletedPreviewAttachmentPaths { get; set; }
+        public string[] DeletedArticleAttachmentPaths { get; set; }
+
     }
 }

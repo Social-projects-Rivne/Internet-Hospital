@@ -86,7 +86,8 @@ namespace InternetHospital.WebApi.Controllers
                 ShortDescription = Request.Form["ShortDescription"],
                 TypeIds = _articleService.ConvertStringIdsToInt(Request.Form["TypeIds"]),
                 Text = Request.Form["Article"],
-                DeletedAttachmentsPaths = Request.Form["DeletedAttachmentPaths"],
+                DeletedArticleAttachmentPaths = Request.Form["DeletedArticleAttachmentPaths"],
+                DeletedPreviewAttachmentPaths = Request.Form["DeletedPreviewAttachmentPaths"],
                 ArticlePreviewAttachments = articlePreviewAttachments,
                 ArticleAttachments = articleAttachments
             };
