@@ -1,8 +1,8 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models;
 
 namespace InternetHospital.WebApi.Controllers
 {
@@ -47,13 +47,13 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("available")]
         public IActionResult GetAvailableAppointments([FromQuery] AppointmentSearchModel parameters)
         {
-            var (appointments, quantity) = _appointmentService.GetAvailableAppointments(parameters);
+            var result = _appointmentService.GetAvailableAppointments(parameters);
 
             return Ok(
                 new
                 {
-                    appointments,
-                    quantity
+                    appointments = result.Entities,
+                    quantity = result.EntityAmount
                 }
             );
         }
@@ -126,6 +126,26 @@ namespace InternetHospital.WebApi.Controllers
             var status = _appointmentService.UnsubscribeForAppointment(model.Id, patientId);
 
             return status ? (IActionResult)Ok() : BadRequest();
+        }
+        
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("history")]
+        public IActionResult GetAppointmentsHistory([FromQuery] AppointmentHistoryParameters parameters)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var result = _appointmentService.GetMyAppointmentsHistory(parameters, doctorId);
+
+            return Ok(
+                new
+                {
+                    appointments = result.Entities,
+                    quantity = result.EntityAmount
+                }
+            );
         }
     }
 }

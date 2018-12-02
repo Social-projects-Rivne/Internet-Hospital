@@ -42,7 +42,14 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
                                      RuleFor(a => a)
                                          .Must(a => NotOverlay())
                                          .OverridePropertyName("message")
-                                         .WithMessage("You already have an appointment for this time");
+                                         .WithMessage("You already have an appointment for this time")
+                                         .DependentRules(() =>
+                                         {
+                                             RuleFor(a => a)
+                                                 .Must(a => NotAlreadySubscribed())
+                                                 .OverridePropertyName("message")
+                                                 .WithMessage("You can only have one appointment with each doctor per day");
+                                         });
                                  });
                          });
                 });
@@ -74,6 +81,16 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
                 .Any(a => a.UserId == patientId
                           && ((a.StartTime >= _appointment.StartTime && a.StartTime < _appointment.EndTime)
                               || (a.EndTime > _appointment.StartTime && a.EndTime <= _appointment.EndTime)));
+        }
+
+        private bool NotAlreadySubscribed()
+        {
+            var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+            return !_context.Appointments.Any(a => a.UserId == patientId
+                                           && a.DoctorId == _appointment.DoctorId
+                                           && a.StartTime.Date == _appointment.StartTime.Date
+                                           && a.StatusId != (int) AppointmentStatuses.CANCELED_STATUS);
+
         }
     }
 }

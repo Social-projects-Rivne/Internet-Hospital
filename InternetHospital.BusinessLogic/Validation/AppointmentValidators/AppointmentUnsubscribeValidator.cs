@@ -34,13 +34,21 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
                          .DependentRules(() =>
                          {
                              RuleFor(a => a)
-                                 .Must(a => TooLate())
+                                 .Must(a => IsOver())
                                  .OverridePropertyName("message")
-                                 .WithMessage("You can not unsubscribe until the appointment is less than 24 hours");                                 
+                                 .WithMessage("Appointment is over")
+                                 .DependentRules(() =>
+                                 {
+                                     RuleFor(a => a)
+                                         .Must(a => TooLate())
+                                         .OverridePropertyName("message")
+                                         .WithMessage("You can not unsubscribe until the appointment is less than 24 hours");
+                                 });
+                                                            
                          });
                 });
         }
-
+        
         private bool IfExist(int appointmentId)
         {
             _appointment = _context.Appointments
@@ -53,6 +61,12 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
         private bool NotOpened()
         {
             return _appointment.Status.Id == (int)AppointmentStatuses.RESERVED_STATUS;
+        }
+
+        private bool IsOver()
+        {
+            var timeNow = DateTime.Now;
+            return timeNow < _appointment.StartTime;
         }
 
         private bool TooLate()

@@ -269,19 +269,35 @@ namespace InternetHospital.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AppointmentId");
+
+                    b.Property<string>("Complaints");
+
                     b.Property<DateTime>("ConclusionTime");
 
                     b.Property<string>("Diagnose");
 
+                    b.Property<string>("DiseaseAnamnesis");
+
                     b.Property<int>("DoctorId");
 
-                    b.Property<string>("Symptoms");
+                    b.Property<string>("LifeAnamnesis");
 
-                    b.Property<string>("Treatment");
+                    b.Property<string>("LocalStatus");
+
+                    b.Property<string>("ObjectiveStatus");
+
+                    b.Property<string>("SurveyPlan");
+
+                    b.Property<string>("TreatmentPlan");
 
                     b.Property<int?>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId")
+                        .IsUnique()
+                        .HasFilter("[AppointmentId] IS NOT NULL");
 
                     b.HasIndex("DoctorId");
 
@@ -716,6 +732,10 @@ namespace InternetHospital.WebApi.Migrations
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.IllnessHistory", b =>
                 {
+                    b.HasOne("InternetHospital.DataAccess.Entities.Appointment", "Appointment")
+                        .WithOne("IllnessHistory")
+                        .HasForeignKey("InternetHospital.DataAccess.Entities.IllnessHistory", "AppointmentId");
+
                     b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
                         .WithMany("IllnessHistories")
                         .HasForeignKey("DoctorId")

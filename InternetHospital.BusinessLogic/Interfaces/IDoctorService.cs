@@ -14,5 +14,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport,
             IFormFileCollection diploma, IFormFileCollection license);
         DoctorProfileModel GetDoctorProfile(int userId);
+        Task<bool> UpdateDoctorAvatar(string doctorId, IFormFile file);
+        Task<string> GetDoctorAvatar(string doctorId);
+        (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
     }
 }
