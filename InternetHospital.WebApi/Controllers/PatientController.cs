@@ -26,16 +26,16 @@ namespace InternetHospital.WebApi.Controllers
 
         
         [HttpGet("GetHistories")]
-        public IActionResult GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
+        public async Task<IActionResult> GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
         {
             var patientId = User.Identity?.Name;
-            var result = _patientService.GetFilteredHistories(queryParameters, patientId);
+            var (histories, count) = await _patientService.GetFilteredHistories(queryParameters, patientId);
 
             return Ok(
                 new
                 {
-                    result.Result.histories,
-                    totalHistories = result.Result.count,
+                    histories,
+                    totalHistories = count,
                 }
               );
         }

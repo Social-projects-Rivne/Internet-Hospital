@@ -53,6 +53,15 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 Directory.CreateDirectory(fileDestDir);
             }
+            else
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(fileDestDir);
+                foreach(FileInfo file in directoryInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+
+            }
             
             var fileExtesion = Path.GetExtension(image.FileName);
             var fileName = Guid.NewGuid().ToString() + fileExtesion;
