@@ -27,17 +27,6 @@ namespace InternetHospital.BusinessLogic.Services
             _uploadingFiles = uploadingFiles;
             _userManager = userManager;
         }
-
-        public async Task<PatientDetailedModel> Get(int id)
-        {
-            PatientDetailedModel returnedPatient = null;
-            var searchedPatient = await _context.Users.Include(p=> p.IllnessHistories).FirstOrDefaultAsync(pa=> pa.Id == id);
-            if (searchedPatient != null)
-            {  
-                returnedPatient = Mapper.Map<User, PatientDetailedModel>(searchedPatient);
-            }
-            return returnedPatient;
-        }
         public async Task<(IEnumerable<IllnessHistoryModel> histories, int count)> GetFilteredHistories(IllnessHistorySearchModel queryParameters, string id)
         {
             var patient = await _userManager.FindByIdAsync(id);
@@ -82,8 +71,12 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<PatientModel> GetPatientProfile(int userId)
         {
+            PatientModel patientModel = null;
             var patient = await _userManager.FindByIdAsync(userId.ToString());
-            var patientModel = Mapper.Map<User, PatientModel>(patient);
+            if (patient != null)
+            {
+                patientModel = Mapper.Map<User, PatientModel>(patient);
+            }
             return patientModel;
         }
 

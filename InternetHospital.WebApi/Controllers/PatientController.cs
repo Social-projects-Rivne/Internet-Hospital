@@ -110,7 +110,7 @@ namespace InternetHospital.WebApi.Controllers
             if (patientId != null)
             {
                 var patient = await _userManager.FindByIdAsync(patientId);
-                var returnPatient = await _patientService.Get(patient.Id);
+                var returnPatient = await _patientService.GetPatientProfile(patient.Id);
                 if (returnPatient != null)
                 {
                     return Ok(returnPatient);
