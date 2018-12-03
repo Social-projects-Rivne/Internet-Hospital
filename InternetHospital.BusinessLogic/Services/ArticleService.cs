@@ -24,8 +24,8 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly IFilesService _filesService;
         private readonly IHostingEnvironment _env;
 
-        const string ARTICLE_ATTACHMENTS_FOLDER_NAME = "Attachments";
-        const string HOME_PAGE = "HomePage";
+        private const string ARTICLE_ATTACHMENTS_FOLDER_NAME = "Attachments";
+        private const string HOME_PAGE = "HomePage";
         private const string ACTIVE_ARTICLE = "Active";
         private const string DELETED__ARTICLE = "Deleted";
         public const string ARTICLE_ID_KEY = "%$#@_article_id_@$#%";

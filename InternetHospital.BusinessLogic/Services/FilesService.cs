@@ -6,12 +6,9 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Validation;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -32,8 +29,6 @@ namespace InternetHospital.BusinessLogic.Services
 
         const string ARTICLE_ATTACHMENTS_FOLDER_NAME = "Attachments";
         const string HOME_PAGE = "HomePage";
-        private const string ARTICAL_PREVIEW_IMG = "Preview_img_";
-        private const string ARTICLE_IMG = "Img_";
         private const int PREVIEW_MIN_WIDTH = 300;
         private const int PREVIEW_MAX_WIDTH = 3000;
         private const int PREVIEW_MIN_HEIGHT = 300;

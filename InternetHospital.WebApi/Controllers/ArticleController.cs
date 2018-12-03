@@ -23,7 +23,6 @@ namespace InternetHospital.WebApi.Controllers
             _articleTypeService = articleTypeService;
         }
 
-        // GET: api/Article
         [HttpGet("moderate")]
         public IActionResult GetFilteredModerateArticles([FromQuery] ArticlesFilteringModel filter)
         {
@@ -31,7 +30,6 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(articles);
         }
 
-        // GET: api/Article/5
         [HttpGet("moderate/{id}")]
         public IActionResult Get(int id)
         {
@@ -43,7 +41,6 @@ namespace InternetHospital.WebApi.Controllers
             return NotFound();
         }
 
-        // POST: api/Article
         [Authorize(Roles = "Admin,Moderator")]
         [HttpPost("moderate")]
         public IActionResult Post(IFormFile[] articlePreviewAttachments, IFormFile[] articleAttachments)
@@ -75,7 +72,6 @@ namespace InternetHospital.WebApi.Controllers
             return BadRequest(new {message = "Model is invalid!"});
         }
 
-        // POST: api/Article
         [Authorize(Roles = "Admin,Moderator")]
         [HttpPut("moderate")]
         public IActionResult Put(IFormFile[] articlePreviewAttachments, IFormFile[] articleAttachments)
@@ -135,14 +131,6 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(articleTypes);
         }
 
-        // PUT: api/Article/5
-        [Authorize(Roles = "Admin,Moderator")]
-        [HttpPut("moderate/{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
         [Authorize(Roles = "Admin,Moderator")]
         [HttpDelete("moderate/{id}")]
         public IActionResult Delete(int id)
@@ -152,10 +140,7 @@ namespace InternetHospital.WebApi.Controllers
             {
                 return Ok();
             }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
     }
 }
