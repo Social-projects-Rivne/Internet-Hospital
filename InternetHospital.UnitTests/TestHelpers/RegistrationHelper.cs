@@ -13,7 +13,9 @@ namespace InternetHospital.UnitTests.TestHelpers
 {
     public static class RegistrationHelper
     {
-        const int NEW_USER_STATUS = 2;
+        public const int NEW_USER_ID = 2;
+        public const string DOCTOR = "Doctor";
+        public const string PATIENT = "Patient";
 
         public static Mock<UserManager<User>> GetFakeUserManager()
         {
@@ -70,10 +72,10 @@ namespace InternetHospital.UnitTests.TestHelpers
         public static User GetNewPatient(Fixture fixture)
         {
             return fixture.Build<User>()
-                .With(p => p.StatusId, NEW_USER_STATUS)
+                .With(p => p.StatusId, NEW_USER_ID)
                 .With(p => p.Status, new Status
                 {
-                    Id = 2,
+                    Id = NEW_USER_ID,
                     Name = "New"
                 })
                 .With(p => p.Doctor, null)
@@ -83,16 +85,16 @@ namespace InternetHospital.UnitTests.TestHelpers
         public static User GetNewDoctor(Fixture fixture)
         {
             return fixture.Build<User>()
-                .With(u => u.Id, 2)
-                .With(u => u.StatusId, NEW_USER_STATUS)
+                .With(u => u.Id, NEW_USER_ID)
+                .With(u => u.StatusId, NEW_USER_ID)
                 .With(u => u.Status, new Status
                 {
-                    Id = 2,
+                    Id = NEW_USER_ID,
                     Name = "New"
                 })
                 .With(u => u.Doctor, new Doctor
                 {
-                    UserId = 2
+                    UserId = NEW_USER_ID
                 })
                 .Create();
         }

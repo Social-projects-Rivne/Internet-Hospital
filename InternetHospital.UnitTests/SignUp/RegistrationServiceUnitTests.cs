@@ -21,7 +21,7 @@ namespace InternetHospital.UnitTests.SignUp
         [Fact]
         public async void ShouldPatientRegistrate()
         {
-            const string PATIENT = "Patient";
+            const string PATIENT = RegistrationHelper.PATIENT;
 
             var options = DbContextHelper.GetDbOptions(nameof(ShouldPatientRegistrate));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
@@ -48,8 +48,8 @@ namespace InternetHospital.UnitTests.SignUp
         [Fact]
         public async void ShoulDoctorRegistrate()
         {
-            const int USER_ID = 2;
-            const string DOCTOR = "Doctor";
+            const int USER_ID = RegistrationHelper.NEW_USER_ID;
+            const string DOCTOR = RegistrationHelper.DOCTOR;
 
             var options = DbContextHelper.GetDbOptions(nameof(ShoulDoctorRegistrate));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();

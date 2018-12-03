@@ -13,9 +13,8 @@ namespace InternetHospital.UnitTests.SignUp
 {
     public class SignUpServiceUnitTests
     {
-        const int NEW_USER_STATUS = 2;
-        const string DOCTOR = "Doctor";
-        const string PATIENT = "Patient";
+        const string DOCTOR = RegistrationHelper.DOCTOR;
+        const string PATIENT = RegistrationHelper.PATIENT;
 
         [Fact]
         public async void ShouldCheckSignUpModel()
