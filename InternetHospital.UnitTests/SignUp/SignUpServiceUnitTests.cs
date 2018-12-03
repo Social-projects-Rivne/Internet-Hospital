@@ -13,9 +13,6 @@ namespace InternetHospital.UnitTests.SignUp
 {
     public class SignUpServiceUnitTests
     {
-        const string DOCTOR = RegistrationHelper.DOCTOR;
-        const string PATIENT = RegistrationHelper.PATIENT;
-
         [Fact]
         public async void ShouldCheckSignUpModel()
         {
@@ -28,8 +25,8 @@ namespace InternetHospital.UnitTests.SignUp
 
             var fakeUserManager = RegistrationHelper.GetFakeUserManager();
 
-            var expectedPatientModel = RegistrationHelper.GetRegistrationModel(fixturePatient, PATIENT);
-            var expectedDoctorModel = RegistrationHelper.GetRegistrationModel(fixtureDoctor, DOCTOR);
+            var expectedPatientModel = RegistrationHelper.GetRegistrationModel(fixturePatient, RegistrationHelper.PATIENT);
+            var expectedDoctorModel = RegistrationHelper.GetRegistrationModel(fixtureDoctor, RegistrationHelper.DOCTOR);
 
             var fakeRegistrationService = new Mock<IRegistrationService>();
             fakeRegistrationService.Setup(s => s.DoctorRegistration(It.IsAny<UserRegistrationModel>()))

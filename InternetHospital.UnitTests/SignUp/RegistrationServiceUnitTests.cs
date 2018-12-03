@@ -21,15 +21,13 @@ namespace InternetHospital.UnitTests.SignUp
         [Fact]
         public async void ShouldPatientRegistrate()
         {
-            const string PATIENT = RegistrationHelper.PATIENT;
-
             var options = DbContextHelper.GetDbOptions(nameof(ShouldPatientRegistrate));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
 
             var expectedUser = fixture.Build<User>()
                 .Create();
 
-            var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(expectedUser, PATIENT);
+            var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(expectedUser, RegistrationHelper.PATIENT);
             var fakeUserManager = RegistrationHelper.GetConfiguredUserManager();
             var fakeRoleManager = RegistrationHelper.GetFakeRoleManager();
 
@@ -48,21 +46,18 @@ namespace InternetHospital.UnitTests.SignUp
         [Fact]
         public async void ShoulDoctorRegistrate()
         {
-            const int USER_ID = RegistrationHelper.NEW_USER_ID;
-            const string DOCTOR = RegistrationHelper.DOCTOR;
-
             var options = DbContextHelper.GetDbOptions(nameof(ShoulDoctorRegistrate));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
 
             var expectedUser = fixture.Build<User>()
-                .With(u => u.Id, USER_ID)
+                .With(u => u.Id, RegistrationHelper.NEW_USER_ID)
                 .With(u => u.Doctor, new Doctor
                 {
-                    UserId = USER_ID
+                    UserId = RegistrationHelper.NEW_USER_ID
                 })
                 .Create();
 
-            var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(expectedUser, DOCTOR);
+            var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(expectedUser, RegistrationHelper.DOCTOR);
             var fakeUserManager = RegistrationHelper.GetConfiguredUserManager();
             var fakeRoleManager = RegistrationHelper.GetFakeRoleManager();
 
