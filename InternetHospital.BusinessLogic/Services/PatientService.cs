@@ -38,9 +38,10 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return returnedPatient;
         }
-        public (IEnumerable<IllnessHistoryModel> histories, int count) GetFilteredHistories(IllnessHistorySearchModel queryParameters)
+        public async Task<(IEnumerable<IllnessHistoryModel> histories, int count)> GetFilteredHistories(IllnessHistorySearchModel queryParameters, string id)
         {
-            var histories = _context.IllnessHistories.OrderBy(d => d.ConclusionTime).AsQueryable();
+            var patient = await _userManager.FindByIdAsync(id);
+            var histories = _context.IllnessHistories.Where(x => x.UserId == patient.Id).OrderBy(d => d.ConclusionTime).AsQueryable();
             if (queryParameters.SearchFromDate != null)
             {
                 var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);

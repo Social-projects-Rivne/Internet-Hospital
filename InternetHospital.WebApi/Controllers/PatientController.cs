@@ -28,13 +28,14 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("GetHistories")]
         public IActionResult GetIllnessHistories([FromQuery] IllnessHistorySearchModel queryParameters)
         {
-            var (histories, count) = _patientService.GetFilteredHistories(queryParameters);
+            var patientId = User.Identity?.Name;
+            var result = _patientService.GetFilteredHistories(queryParameters, patientId);
 
             return Ok(
                 new
                 {
-                    histories,
-                    totalHistories = count
+                    result.Result.histories,
+                    totalHistories = result.Result.count,
                 }
               );
         }
