@@ -155,11 +155,11 @@ namespace InternetHospital.BusinessLogic.Services
 
             _context.AddRange(types);
 
-            var createdPreviewAttachments = _filesService.UploadArticleAttachment(newArticle.ArticlePreviewAttachments, article.Id, true);
-            var previewAttachments = AddAttachmentsToDB(createdPreviewAttachments, article.Id, true);
+            var createdPreviewAttachments = _filesService.UploadArticleAttachment(newArticle.ArticlePreviewAttachments, article.Id, true).ToList();
+            var previewAttachments = AddAttachmentsToDb(createdPreviewAttachments, article.Id, true);
 
-            var createdArticleTextAttachments = _filesService.UploadArticleAttachment(newArticle.ArticleAttachments, article.Id, false);
-            var articleTextAttachments = AddAttachmentsToDB(createdArticleTextAttachments, article.Id, false);
+            var createdArticleTextAttachments = _filesService.UploadArticleAttachment(newArticle.ArticleAttachments, article.Id, false).ToList();
+            var articleTextAttachments = AddAttachmentsToDb(createdArticleTextAttachments, article.Id, false);
 
             article.Text = article.Text.Replace(ARTICLE_ID_KEY, article.Id.ToString());
             for (var i = 0; i < articleTextAttachments.Count; ++i)
@@ -190,6 +190,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 article.Title = updateModel.Title;
                 article.ShortDescription = updateModel.ShortDescription;
+                article.Text = updateModel.Text;
 
                 var articleTypesForRemoving = _context.ArticleTypeArticles
                                     .Where(ata => ata.ArticleId == article.Id 
@@ -198,23 +199,34 @@ namespace InternetHospital.BusinessLogic.Services
                 _context.ArticleTypeArticles.RemoveRange(articleTypesForRemoving);
                 AddTypesToExistingArticle(updateModel.TypeIds, article.Id);
 
-                var deletedArticleAttachments = _filesService.RemoveArticleAttachment(updateModel.DeletedArticleAttachmentPaths);
-                var amountOfRemoved = RemoveAttachmnetsFromDB(deletedArticleAttachments);
-
-                var deletedArticlePreviewAttachments = _filesService.RemoveArticleAttachment(updateModel.DeletedPreviewAttachmentPaths);
-                var amountOfPreviewRemoved = RemoveAttachmnetsFromDB(deletedArticlePreviewAttachments);
-
-                var createdPreviewAttachments = _filesService.UploadArticleAttachment(updateModel.ArticlePreviewAttachments, article.Id, true);
-                var previewAttachments = AddAttachmentsToDB(createdPreviewAttachments, article.Id, true);
-
-                var createdArticleAttachments = _filesService.UploadArticleAttachment(updateModel.ArticleAttachments, article.Id, false);
-                var articleTextAttachments = AddAttachmentsToDB(createdArticleAttachments, article.Id, false);
-
-                article.Text = updateModel.Text.Replace(ARTICLE_ID_KEY, article.Id.ToString());
-                for (var i = 0; i < articleTextAttachments.Count; ++i)
+                if (updateModel.DeletedArticleAttachmentPaths.Any())
                 {
-                    article.Text = article.Text.Replace($"{ATTACHMENT_NAME_KEY}{i + 1}", createdArticleAttachments[i]);
+                    DeleteAttachments(updateModel.DeletedArticleAttachmentPaths);
                 }
+
+                if (updateModel.DeletedPreviewAttachmentPaths.Any())
+                {
+                    DeleteAttachments(updateModel.DeletedPreviewAttachmentPaths);
+                }
+
+                if (updateModel.ArticlePreviewAttachments.Any())
+                {
+                    var createdPreviewAttachments = _filesService.UploadArticleAttachment(updateModel.ArticlePreviewAttachments, article.Id, true).ToList();
+                    var previewAttachments = AddAttachmentsToDb(createdPreviewAttachments, article.Id, true);
+                }
+
+                if (updateModel.ArticleAttachments.Any())
+                {
+                    var createdArticleAttachments = _filesService.UploadArticleAttachment(updateModel.ArticleAttachments, article.Id, false).ToList();
+                    var articleTextAttachments = AddAttachmentsToDb(createdArticleAttachments, article.Id, false);
+
+                    article.Text = article.Text.Replace(ARTICLE_ID_KEY, article.Id.ToString());
+                    for (var i = 0; i < articleTextAttachments.Count; ++i)
+                    {
+                        article.Text = article.Text.Replace($"{ATTACHMENT_NAME_KEY}{i + 1}", createdArticleAttachments[i]);
+                    }
+                }
+               
                 _context.ArticleEditions.Add(new ArticleEdition
                 {
                     ArticleId = article.Id,
@@ -228,7 +240,24 @@ namespace InternetHospital.BusinessLogic.Services
             return false;
         }
 
-        private List<ArticleAttachment> AddAttachmentsToDB(List<string> attachmentFileNames, int articleId,
+        private int DeleteAttachments(IEnumerable<string> attachmentPaths)
+        {
+            _filesService.RemoveArticleAttachment(attachmentPaths);
+            int amountOfRemoved = 0;
+            foreach (var attachmentPath in attachmentPaths)
+            { 
+                var attachment = _context.ArticleAttachments.FirstOrDefault(a => a.Url == attachmentPath);
+                if (attachment != null)
+                {
+                    ++amountOfRemoved;
+                    _context.Remove(attachment);
+                }
+            }
+
+            return amountOfRemoved;
+        }
+
+        private List<ArticleAttachment> AddAttachmentsToDb(List<string> attachmentFileNames, int articleId,
                                                                       bool isPreview)
         {
             var attachments = attachmentFileNames.Select(name => new ArticleAttachment
@@ -243,34 +272,26 @@ namespace InternetHospital.BusinessLogic.Services
 
         private int AddTypesToExistingArticle(IEnumerable<int> typeIds, int articleId)
         {
-            var typeIdsForAdding = typeIds.Distinct().Where(t =>
-                                !_context.ArticleTypeArticles.Any(ata => 
-                                                                        ata.ArticleId == articleId 
-                                                                        && ata.TypeId == t));
-            var types = typeIds.Select(
-                    t => new ArticleTypeArticle
-                    {
-                        ArticleId = articleId,
-                        TypeId = t
-                    });
-            _context.ArticleTypeArticles.AddRange(types);
-            return types.Count();
-        }
-
-        private int RemoveAttachmnetsFromDB(List<string> attachments)
-        {
-            int amountOfRemoved = 0;
-            for (int i = 0; i < attachments.Count; ++i)
+            if (typeIds.Any())
             {
-                var attachment = _context.ArticleAttachments.FirstOrDefault(a => a.Url == attachments[i]);
-                if (attachment != null)
+                var typeIdsForAdding = typeIds.Distinct().Where(t =>
+                    !_context.ArticleTypeArticles.Any(ata =>
+                        ata.ArticleId == articleId
+                        && ata.TypeId == t));
+                if (typeIdsForAdding.Any())
                 {
-                    ++amountOfRemoved;
-                    _context.Remove(attachment);
+                    var types = typeIds.Select(
+                        t => new ArticleTypeArticle
+                        {
+                            ArticleId = articleId,
+                            TypeId = t
+                        });
+                    _context.ArticleTypeArticles.AddRange(types);
+                    return types.Count();
                 }
             }
 
-            return amountOfRemoved;
+            return 0;
         }
     }
 }

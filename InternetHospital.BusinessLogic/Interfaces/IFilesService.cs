@@ -13,8 +13,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<User> UploadDiploma(IFormFileCollection images, User user, DateTime addedTime);
         Task<User> UploadLicense(IFormFileCollection images, User user, DateTime addedTime);
 
-        List<string> UploadArticleAttachment(IFormFile[] attachments, int articleId, bool isOnPreview);
+        IEnumerable<string> UploadArticleAttachment(IFormFile[] attachments, int articleId, bool isOnPreview);
         IEnumerable<string> GetBase64StringsFromAttachments(IEnumerable<string> attachmentPaths);
-        List<string> RemoveArticleAttachment(string[] attachmentPaths);
+        IEnumerable<string> RemoveArticleAttachment(IEnumerable<string> attachmentPaths);
     }
 }

@@ -156,7 +156,7 @@ namespace InternetHospital.BusinessLogic.Services
             return user;
         }
 
-        public List<string> UploadArticleAttachment(IFormFile[] attachments, int articleId, bool isOnPreview)
+        public IEnumerable<string> UploadArticleAttachment(IFormFile[] attachments, int articleId, bool isOnPreview)
         {
             var createdFileNames = new List<string>();
             if (attachments.Length > 0)
@@ -188,16 +188,16 @@ namespace InternetHospital.BusinessLogic.Services
             return createdFileNames;
         }
 
-        public List<string> RemoveArticleAttachment(string[] attachmentPaths)
+        public IEnumerable<string> RemoveArticleAttachment(IEnumerable<string> attachmentPaths)
         {
             var removedUrls = new List<string>();
-            for (int i = 0; i < attachmentPaths.Length; i++)
+            foreach (var attachmentPath in attachmentPaths)
             {
-                var fileFullPath = _env.WebRootPath + attachmentPaths[i].Replace("/", "\\");
+                var fileFullPath = _env.WebRootPath + attachmentPath.Replace("/", "\\");
                 if (File.Exists(fileFullPath))
                 {
                     File.Delete(fileFullPath);
-                    removedUrls.Add((attachmentPaths[i]));
+                    removedUrls.Add(attachmentPath);
                 }
             }
 
