@@ -227,6 +227,19 @@ namespace InternetHospital.BusinessLogic.Services
             return (status, message);
         }
 
+        public IEnumerable<PreviousAppointmentsModel> GetPreviousAppointments(int doctorId)
+        {
+            var appointments = _context.Appointments
+                .Where(a => a.DoctorId == doctorId && a.StatusId >= (int)AppointmentStatuses.CANCELED_STATUS)
+                .Include(a => a.IllnessHistory)
+                .Include(a => a.User)
+                .Include(a => a.Status)
+                .Select(a => Mapper.Map<Appointment, PreviousAppointmentsModel>(a))
+                .ToList();
+
+            return appointments;
+        }
+
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
         {
             bool result = true;

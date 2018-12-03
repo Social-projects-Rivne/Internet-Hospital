@@ -80,7 +80,7 @@ namespace InternetHospital.BusinessLogic.Services
                     .Where(a => a.StartTime <= parameters.Till.Value);
             }
 
-            if (parameters.Statuses.Count > 0)
+            if (parameters.Statuses.Count() > 0)
             {
                 var predicate = PredicateBuilder.False<Appointment>();
 
