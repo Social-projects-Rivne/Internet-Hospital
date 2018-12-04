@@ -18,14 +18,8 @@ namespace InternetHospital.UnitTests.PatientProfile
 {
     public class PatientServiceUnitTests : IDisposable
     {
-        public PatientServiceUnitTests()
-        {
-            Mapper.Reset();
-            Mapper.Initialize(cfg => cfg.CreateMap<User, PatientModel>());
-        }
-
         [Fact]
-        public void ShouldGetPatientProfile()
+        public async void ShouldGetPatientProfile()
         {
             // arrange
             var options = DbContextHelper.GetDbOptions(nameof(ShouldGetPatientProfile));
@@ -39,7 +33,7 @@ namespace InternetHospital.UnitTests.PatientProfile
                 context.Users.Add(fixtureUser);
                 context.SaveChanges();
             }
-
+            Mapper.Initialize(cfg => cfg.CreateMap<User, PatientModel>());
             var fakeManager = FakeGenerator.GetFakeUserManager();
             fakeManager
                 .Setup(m => m.FindByIdAsync(fixtureUser.Id.ToString()))
@@ -50,7 +44,7 @@ namespace InternetHospital.UnitTests.PatientProfile
                 var patientService = new PatientService(context, null, fakeManager.Object);
 
                 // act
-                var patient = patientService.GetPatientProfile(fixtureUser.Id).Result;
+                var patient = await patientService.GetPatientProfile(fixtureUser.Id);
 
                 // assert
                 patient.FirstName.Should().BeEquivalentTo(fixtureUser.FirstName);
@@ -58,9 +52,9 @@ namespace InternetHospital.UnitTests.PatientProfile
         }
 
         [Fact]
-        public void ShouldGetFilteredIllnessHistories()
+        public async void ShouldGetFilteredIllnessHistories()
         {
-            var options = DbContextHelper.GetDbOptions(nameof(ShouldGetPatientProfile));
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldGetFilteredIllnessHistories));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
 
             var fixtureUser = fixture.Build<User>()
@@ -70,6 +64,7 @@ namespace InternetHospital.UnitTests.PatientProfile
                 context.Users.Add(fixtureUser);
                 context.SaveChanges();
             }
+            Mapper.Initialize(cfg => cfg.CreateMap<User, PatientModel>());
             var fakeManager = FakeGenerator.GetFakeUserManager();
             fakeManager
                 .Setup(m => m.FindByIdAsync(fixtureUser.Id.ToString()))
@@ -80,7 +75,7 @@ namespace InternetHospital.UnitTests.PatientProfile
                 var patientService = new PatientService(context, null, fakeManager.Object);
 
                 // act
-                var filteredIllnessHistories = patientService.GetFilteredHistories(GetExpectedQuerryParams(), fixtureUser.Id.ToString()).Result;
+                var filteredIllnessHistories = await patientService.GetFilteredHistories(GetExpectedQuerryParams(), fixtureUser.Id.ToString());
 
                 // assert
                 filteredIllnessHistories.count.Should().BeGreaterOrEqualTo(fixtureUser.IllnessHistories.Count);
