@@ -246,14 +246,12 @@ namespace InternetHospital.UnitTests.Appointments
                                            .With(a => a.UserId, PATIENT_ID)
                                            .Create();
 
+           
             using (var context = new ApplicationContext(options))
             {
                 context.Appointments.Add(fixtureAppointment);
                 context.SaveChanges();
-            }
 
-            using (var context = new ApplicationContext(options))
-            {
                 var appointmentService = new AppointmentService(context);
 
                 // act
@@ -290,10 +288,7 @@ namespace InternetHospital.UnitTests.Appointments
             {
                 context.Appointments.Add(fixtureAppointment);
                 context.SaveChanges();
-            }
 
-            using (var context = new ApplicationContext(options))
-            {
                 var appointmentService = new AppointmentService(context);
 
                 // act
