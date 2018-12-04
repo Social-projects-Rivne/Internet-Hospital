@@ -304,7 +304,7 @@ namespace InternetHospital.BusinessLogic.Services
         /// <returns>
         /// status of unsubscription to appointment
         /// </returns>
-        public bool UnsubscribeForAppointment(int appointmentId, int patientId)
+        public bool UnsubscribeForAppointment(int appointmentId)
         {
             var appointment = _context.Appointments
                 .FirstOrDefault(a => a.Id == appointmentId);

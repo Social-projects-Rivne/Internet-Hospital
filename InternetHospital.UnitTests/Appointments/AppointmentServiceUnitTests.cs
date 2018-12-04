@@ -223,6 +223,80 @@ namespace InternetHospital.UnitTests.Appointments
             return new List<AppointmentForPatient> { model };
         }
 
+        [Fact]
+        public void ShouldSubscribeForAppointment()
+        {
+            // arrange
+            const int ALLOWED_STATUS_ID = 1;
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldSubscribeForAppointment));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+
+            var fixturePatient = fixture.Build<User>()
+                .Create();
+
+            var patientId = fixturePatient.Id;
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                                           .With(a => a.Status, new AppointmentStatus
+                                           {
+                                               Id = ALLOWED_STATUS_ID
+                                           })
+                                           .With(a => a.UserId)
+                                           .Create();
+
+           
+            using (var context = new ApplicationContext(options))
+            {
+                context.Appointments.Add(fixtureAppointment);
+                context.SaveChanges();
+
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var status = appointmentService.SubscribeForAppointment(fixtureAppointment.Id, patientId);
+
+                // assert
+                status.Should().BeTrue();
+            }
+        }
+
+        [Fact]
+        public void ShouldUnsubscribeForAppointment()
+        {
+            // arrange
+            const int ALLOWED_STATUS_ID = 2;
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldUnsubscribeForAppointment));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+            var fixturePatient = fixture.Build<User>()
+                .Create();
+
+            var patientId = fixturePatient.Id;
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                                           .With(a => a.Status, new AppointmentStatus
+                                           {
+                                               Id = ALLOWED_STATUS_ID
+                                           })
+                                           .With(a => a.UserId)
+                                           .Create();
+
+                 using (var context = new ApplicationContext(options))
+            {
+                context.Appointments.Add(fixtureAppointment);
+                context.SaveChanges();
+
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var status = appointmentService.UnsubscribeForAppointment(fixtureAppointment.Id);
+
+                // assert
+                status.Should().BeTrue();
+            }
+        }
+
         public void Dispose()
         {
             // if we use AutoMapper we must reset it after each test

@@ -12,7 +12,7 @@ namespace InternetHospital.BusinessLogic.Interfaces
         IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId);
         bool AddAppointment(AppointmentCreationModel creationModel, int doctorId);
         bool SubscribeForAppointment(int appointmentId, int patientId);
-        bool UnsubscribeForAppointment(int appointmentId, int patientId);
+        bool UnsubscribeForAppointment(int appointmentId);
         (bool status, string message) CancelAppointment(int appointmentId, int doctorId);
         (bool status, string message) DeleteAppointment(int appointmentId, int doctorId);
     }
