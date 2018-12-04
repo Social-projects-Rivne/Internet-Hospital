@@ -66,7 +66,7 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     AppointmentId = x.AppointmentId ?? default,
                     Complaints = x.Complaints,
-                    FinishAppointmentTime = x.ConclusionTime,
+                    FinishAppointmentTimeStamp =  x.ConclusionTime.Ticks,
                     Diagnose = x.Diagnose,
                     DiseaseAnamnesis = x.DiseaseAnamnesis,
                     LifeAnamnesis = x.LifeAnamnesis,
