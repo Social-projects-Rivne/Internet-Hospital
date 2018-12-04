@@ -228,9 +228,13 @@ namespace InternetHospital.UnitTests.Appointments
         {
             // arrange
             const int ALLOWED_STATUS_ID = 1;
-            const int PATIENT_ID = 92;
             var options = DbContextHelper.GetDbOptions(nameof(ShouldSubscribeForAppointment));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+
+            var fixturePatient = fixture.Build<User>()
+                .Create();
+
+            var patientId = fixturePatient.Id;
 
             var fixtureAppointment = fixture.Build<Appointment>()
                                            .With(a => a.StatusId, ALLOWED_STATUS_ID)
@@ -238,7 +242,7 @@ namespace InternetHospital.UnitTests.Appointments
                                            {
                                                Id = ALLOWED_STATUS_ID
                                            })
-                                           .With(a => a.UserId, PATIENT_ID)
+                                           .With(a => a.UserId)
                                            .Create();
 
            
@@ -250,7 +254,7 @@ namespace InternetHospital.UnitTests.Appointments
                 var appointmentService = new AppointmentService(context);
 
                 // act
-                var status = appointmentService.SubscribeForAppointment(fixtureAppointment.Id, PATIENT_ID);
+                var status = appointmentService.SubscribeForAppointment(fixtureAppointment.Id, patientId);
 
                 // assert
                 status.Should().BeTrue();
@@ -261,20 +265,32 @@ namespace InternetHospital.UnitTests.Appointments
         public void ShouldUnsubscribeForAppointment()
         {
             // arrange
+            const int ALLOWED_STATUS_ID = 2;
             var options = DbContextHelper.GetDbOptions(nameof(ShouldUnsubscribeForAppointment));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
             var fixturePatient = fixture.Build<User>()
-                .Create();            
+                .Create();
 
-            using (var context = new ApplicationContext(options))
+            var patientId = fixturePatient.Id;
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                                           .With(a => a.Status, new AppointmentStatus
+                                           {
+                                               Id = ALLOWED_STATUS_ID
+                                           })
+                                           .With(a => a.UserId)
+                                           .Create();
+
+                 using (var context = new ApplicationContext(options))
             {
-                context.Users.Add(fixturePatient);
+                context.Appointments.Add(fixtureAppointment);
                 context.SaveChanges();
 
                 var appointmentService = new AppointmentService(context);
 
                 // act
-                var status = appointmentService.UnsubscribeForAppointment(fixturePatient.Id);
+                var status = appointmentService.UnsubscribeForAppointment(fixtureAppointment.Id);
 
                 // assert
                 status.Should().BeTrue();
