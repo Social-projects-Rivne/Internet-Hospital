@@ -23,5 +23,7 @@ namespace InternetHospital.DataAccess.Entities
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<TemporaryUser> TemporaryUsers { get; set; }
         public virtual ICollection<Passport> Passports { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<ArticleEdition> AtricleEditions { get; set; }
     }
 }
