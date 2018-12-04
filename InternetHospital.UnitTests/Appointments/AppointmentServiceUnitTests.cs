@@ -272,7 +272,6 @@ namespace InternetHospital.UnitTests.Appointments
             const int PATIENT_ID = 92;
             var options = DbContextHelper.GetDbOptions(nameof(ShouldUnsubscribeForAppointment));
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
-
             var fixturePatient = fixture.Build<User>()
                 .Create();
 
