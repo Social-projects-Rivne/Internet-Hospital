@@ -154,6 +154,7 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return false;
         }
+
         public async Task<string> GetDoctorAvatar(string doctorId)
         {
             if (doctorId != null)
@@ -227,17 +228,69 @@ namespace InternetHospital.BusinessLogic.Services
             return (status, message);
         }
 
-        public IEnumerable<PreviousAppointmentsModel> GetPreviousAppointments(int doctorId)
+        public PageModel<IEnumerable<PreviousAppointmentsModel>> GetPreviousAppointments(AppointmentHistoryParameters parameters, int doctorId)
         {
+            //var appointments = _context.Appointments
+            //    .Where(a => a.DoctorId == doctorId && a.StatusId >= (int)AppointmentStatuses.CANCELED_STATUS)
+            //    .OrderByDescending(a => a.StartTime)
+            //    .Include(a => a.IllnessHistory)
+            //    .Include(a => a.User)
+            //    .Include(a => a.Status);
+
             var appointments = _context.Appointments
-                .Where(a => a.DoctorId == doctorId && a.StatusId >= (int)AppointmentStatuses.CANCELED_STATUS)
+                .OrderByDescending(a => a.StartTime)
                 .Include(a => a.IllnessHistory)
                 .Include(a => a.User)
                 .Include(a => a.Status)
+                .Where(a => a.DoctorId == doctorId && a.StatusId >= (int)AppointmentStatuses.CANCELED_STATUS);
+
+            if (!string.IsNullOrEmpty(parameters.SearchByName))
+            {
+                var lowerSearchParam = parameters.SearchByName.ToLower();
+                appointments = appointments.Where(a => a.User.FirstName.ToLower().Contains(lowerSearchParam)
+                                                       || a.User.SecondName.ToLower().Contains(lowerSearchParam));
+            }
+
+            if (parameters.From != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime >= parameters.From.Value);
+            }
+
+            if (parameters.Till != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime <= parameters.Till.Value);
+            }
+
+            if (parameters.Statuses.Count() > 0)
+            {
+                var predicate = PredicateBuilder.False<Appointment>();
+
+                foreach (var status in parameters.Statuses)
+                {
+                    predicate = predicate.Or(p => p.StatusId == status);
+                }
+
+                appointments = appointments.Where(predicate);
+            }
+
+            var appointmentsAmount = appointments.Count();
+            var appointmentsResult = PaginationHelper<Appointment>
+                .GetPageValues(appointments, parameters.PageCount, parameters.Page)
                 .Select(a => Mapper.Map<Appointment, PreviousAppointmentsModel>(a))
                 .ToList();
 
-            return appointments;
+            return new PageModel<IEnumerable<PreviousAppointmentsModel>>()
+            { EntityAmount = appointmentsAmount, Entities = appointmentsResult };
+        }
+
+        public IEnumerable<string> GetAppointmentStatuses()
+        {
+            var statuses = Enum.GetNames(typeof(AppointmentStatuses))
+                .Where((s,i)=>(i+1) >= (int)AppointmentStatuses.CANCELED_STATUS)
+                .Select(s=> (s.Replace('_',' ')).ToLower());
+            return statuses;
         }
 
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
@@ -260,6 +313,5 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return result;
         }
-
     }
 }

@@ -150,7 +150,7 @@ namespace InternetHospital.WebApi.Controllers
 
         [HttpGet("previousAppointments")]
         [Authorize(Policy = "ApprovedDoctors")]
-        public IActionResult GetPreviousAppointments()
+        public IActionResult GetPreviousAppointments([FromQuery] AppointmentHistoryParameters parameters)
         {
             if (!int.TryParse(User.Identity.Name, out int doctorId))
             {
@@ -172,8 +172,8 @@ namespace InternetHospital.WebApi.Controllers
         [Authorize(Policy = "ApprovedDoctors")]
         public IActionResult GetAppointmentStatuses()
         {
-            var a = Enum.GetNames(typeof(AppointmentStatuses));
-            return Ok(a);
+            var statuses = _doctorService.GetAppointmentStatuses();
+            return Ok(statuses);
         }
     }
 }
