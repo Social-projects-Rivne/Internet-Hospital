@@ -11,8 +11,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface IPatientService
     {
         Task<bool> UpdatePatientInfo(PatientModel patientModel, int userId, IFormFileCollection files);
-        Task<PatientDetailedModel> Get(int id);
-        (IEnumerable<IllnessHistoryModel> histories, int count) GetFilteredHistories(IllnessHistorySearchModel queryParameters);
+
+        Task<(IEnumerable<IllnessHistoryModel> histories, int count)> GetFilteredHistories(IllnessHistorySearchModel queryParameters, string id);
         Task<PatientModel> GetPatientProfile(int userId);
     }
 }
