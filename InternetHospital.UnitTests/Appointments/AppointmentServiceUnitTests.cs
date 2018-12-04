@@ -244,13 +244,7 @@ namespace InternetHospital.UnitTests.Appointments
                                                Id = ALLOWED_STATUS_ID
                                            })
                                            .With(a => a.UserId, PATIENT_ID)
-                                           .With(a => a.User, new User
-                                           {
-                                               Id = PATIENT_ID
-                                           })
                                            .Create();
-
-            Mapper.Initialize(cfg => cfg.CreateMap<AppointmentSubscribeModel, Appointment>());
 
             using (var context = new ApplicationContext(options))
             {
@@ -291,13 +285,7 @@ namespace InternetHospital.UnitTests.Appointments
                                                Id = ALLOWED_STATUS_ID
                                            })
                                            .With(a => a.UserId, PATIENT_ID)
-                                           .With(a => a.User, new User
-                                           {
-                                               Id = PATIENT_ID
-                                           })
                                            .Create();
-
-            Mapper.Initialize(cfg => cfg.CreateMap<AppointmentUnsubscribeModel, Appointment>());
 
             using (var context = new ApplicationContext(options))
             {
