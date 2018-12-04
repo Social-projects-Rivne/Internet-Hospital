@@ -43,7 +43,7 @@ namespace InternetHospital.BusinessLogic.Validation
 
         private bool Finish(long finishedTimeStamp)
         {
-            const int maxMilisecDifference = 10000;
+            const int maxMilisecDifference = 300000;
             var nowTimeStamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var difference = finishedTimeStamp - nowTimeStamp;
             return difference <= maxMilisecDifference;
