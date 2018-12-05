@@ -92,7 +92,7 @@ namespace InternetHospital.UnitTests.PatientProfile
                 FirstName = patient.FirstName,
                 SecondName = patient.SecondName,
                 ThirdName = patient.ThirdName,
-                BirthDate = Convert.ToDateTime(patient.BirthDate),
+                BirthDate = patient.BirthDate,
                 PhoneNumber = patient.PhoneNumber
             };
         }
