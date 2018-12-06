@@ -230,19 +230,12 @@ namespace InternetHospital.BusinessLogic.Services
 
         public PageModel<IEnumerable<PreviousAppointmentsModel>> GetPreviousAppointments(AppointmentHistoryParameters parameters, int doctorId)
         {
-            //var appointments = _context.Appointments
-            //    .Where(a => a.DoctorId == doctorId && a.StatusId >= (int)AppointmentStatuses.CANCELED_STATUS)
-            //    .OrderByDescending(a => a.StartTime)
-            //    .Include(a => a.IllnessHistory)
-            //    .Include(a => a.User)
-            //    .Include(a => a.Status);
-
             var appointments = _context.Appointments
                 .OrderByDescending(a => a.StartTime)
                 .Include(a => a.IllnessHistory)
                 .Include(a => a.User)
                 .Include(a => a.Status)
-                .Where(a => a.DoctorId == doctorId && a.StatusId >= (int)AppointmentStatuses.CANCELED_STATUS);
+                .Where(a => a.DoctorId == doctorId);
 
             if (!string.IsNullOrEmpty(parameters.SearchByName))
             {
@@ -288,7 +281,6 @@ namespace InternetHospital.BusinessLogic.Services
         public IEnumerable<string> GetAppointmentStatuses()
         {
             var statuses = Enum.GetNames(typeof(AppointmentStatuses))
-                .Where((s,i)=>(i+1) >= (int)AppointmentStatuses.CANCELED_STATUS)
                 .Select(s=> (s.Replace('_',' ')).ToLower());
             return statuses;
         }
