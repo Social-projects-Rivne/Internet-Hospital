@@ -1,6 +1,7 @@
 ﻿using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace InternetHospital.BusinessLogic.Interfaces
@@ -11,5 +12,9 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<User> UploadPassport(IFormFileCollection images, User user, DateTime addedTime);
         Task<User> UploadDiploma(IFormFileCollection images, User user, DateTime addedTime);
         Task<User> UploadLicense(IFormFileCollection images, User user, DateTime addedTime);
+
+        IEnumerable<string> UploadArticleAttachment(IFormFile[] attachments, int articleId, bool isOnPreview);
+        IEnumerable<string> GetBase64StringsFromAttachments(IEnumerable<string> attachmentPaths);
+        IEnumerable<string> RemoveArticleAttachment(IEnumerable<string> attachmentPaths);
     }
 }

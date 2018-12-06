@@ -27,33 +27,23 @@ namespace InternetHospital.BusinessLogic.Services
             _uploadingFiles = uploadingFiles;
             _userManager = userManager;
         }
-
-        public async Task<PatientDetailedModel> Get(int id)
+        public async Task<(IEnumerable<IllnessHistoryModel> histories, int count)> GetFilteredHistories(IllnessHistorySearchModel queryParameters, string id)
         {
-            PatientDetailedModel returnedPatient = null;
-            var searchedPatient = await _context.Users.Include(p=> p.IllnessHistories).FirstOrDefaultAsync(pa=> pa.Id == id);
-            if (searchedPatient != null)
-            {  
-                returnedPatient = Mapper.Map<User, PatientDetailedModel>(searchedPatient);
+            var patient = await _userManager.FindByIdAsync(id);
+            var histories = _context.IllnessHistories.Where(p => p.UserId == patient.Id).OrderBy(d => d.ConclusionTime).AsQueryable();
+            if (queryParameters.SearchFromDate != null)
+            {
+                var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
+                histories = histories
+                    .Where(d => d.ConclusionTime >= fromDate);
             }
-            return returnedPatient;
-        }
-        public (IEnumerable<IllnessHistoryModel> histories, int count) GetFilteredHistories(IllnessHistorySearchModel queryParameters)
-        {
-            var histories = _context.IllnessHistories.OrderBy(d => d.ConclusionTime).AsQueryable();
-            //if (queryParameters.SearchFromDate != null)
-            //{
-            //    var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
-            //    histories = histories
-            //        .Where(d => d.ConclusionTime >= fromDate);
-            //}
-            //if (queryParameters.SearchToDate != null)
-            //{
-            //    var toDate = Convert.ToDateTime(queryParameters.SearchToDate);
-            //    toDate = toDate.AddDays(1);
-            //    histories = histories.
-            //        Where(d => d.ConclusionTime <= toDate);
-            //}
+            if (queryParameters.SearchToDate != null)
+            {
+                var toDate = Convert.ToDateTime(queryParameters.SearchToDate);
+                toDate = toDate.AddDays(1);
+                histories = histories.
+                    Where(d => d.ConclusionTime <= toDate);
+            }
             var historiesCount = histories.Count();
             var historiesResult = PaginationHelper(histories, queryParameters.PageCount, queryParameters.Page).ToList();
             return (historiesResult, historiesCount);
@@ -81,8 +71,12 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<PatientModel> GetPatientProfile(int userId)
         {
+            PatientModel patientModel = null;
             var patient = await _userManager.FindByIdAsync(userId.ToString());
-            var patientModel = Mapper.Map<User, PatientModel>(patient);
+            if (patient != null)
+            {
+                patientModel = Mapper.Map<User, PatientModel>(patient);
+            }
             return patientModel;
         }
 

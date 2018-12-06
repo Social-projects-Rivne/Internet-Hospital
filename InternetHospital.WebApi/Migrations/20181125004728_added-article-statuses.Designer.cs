@@ -4,14 +4,16 @@ using InternetHospital.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20181125004728_added-article-statuses")]
+    partial class addedarticlestatuses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,35 +271,19 @@ namespace InternetHospital.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AppointmentId");
-
-                    b.Property<string>("Complaints");
-
                     b.Property<DateTime>("ConclusionTime");
 
                     b.Property<string>("Diagnose");
 
-                    b.Property<string>("DiseaseAnamnesis");
-
                     b.Property<int>("DoctorId");
 
-                    b.Property<string>("LifeAnamnesis");
+                    b.Property<string>("Symptoms");
 
-                    b.Property<string>("LocalStatus");
-
-                    b.Property<string>("ObjectiveStatus");
-
-                    b.Property<string>("SurveyPlan");
-
-                    b.Property<string>("TreatmentPlan");
+                    b.Property<string>("Treatment");
 
                     b.Property<int?>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId")
-                        .IsUnique()
-                        .HasFilter("[AppointmentId] IS NOT NULL");
 
                     b.HasIndex("DoctorId");
 
@@ -732,10 +718,6 @@ namespace InternetHospital.WebApi.Migrations
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.IllnessHistory", b =>
                 {
-                    b.HasOne("InternetHospital.DataAccess.Entities.Appointment", "Appointment")
-                        .WithOne("IllnessHistory")
-                        .HasForeignKey("InternetHospital.DataAccess.Entities.IllnessHistory", "AppointmentId");
-
                     b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
                         .WithMany("IllnessHistories")
                         .HasForeignKey("DoctorId")
