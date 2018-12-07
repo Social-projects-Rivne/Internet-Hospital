@@ -25,5 +25,6 @@ namespace InternetHospital.DataAccess.Entities
         public virtual ICollection<Passport> Passports { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<ArticleEdition> AtricleEditions { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }

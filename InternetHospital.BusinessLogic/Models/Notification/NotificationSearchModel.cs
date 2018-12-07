@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace InternetHospital.BusinessLogic.Models.Appointment
+﻿namespace InternetHospital.BusinessLogic.Models.Notification
 {
-    public class AppointmentHistoryParameters
+    public class NotificationSearchModel
     {
         private const int DEFAULT_PAGE = 1;
         private const int MAX_PAGE_COUNT = 15;
@@ -14,9 +11,5 @@ namespace InternetHospital.BusinessLogic.Models.Appointment
             get => _pageCount;
             set => _pageCount = (value > MAX_PAGE_COUNT) ? MAX_PAGE_COUNT : value;
         }
-        public DateTime? From { get; set; }
-        public DateTime? Till { get; set; } = null;
-        public List<int> Statuses { get; set; } = new List<int>();
-        public string SearchByName { get; set; }
     }
 }

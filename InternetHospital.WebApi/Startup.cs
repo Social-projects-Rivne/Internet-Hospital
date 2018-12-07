@@ -134,6 +134,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<IModeratorService, ModeratorService>();
             services.AddScoped<IArticleTypeService, ArticleTypeService>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
         }
 
