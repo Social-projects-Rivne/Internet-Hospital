@@ -44,9 +44,35 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpGet("feedbacktypes")]
-        public IEnumerable<FeedBackType> GetFeedBacks()
+        public IActionResult GetFeedBackTypes()
         {
-            return _feedBackService.GetFeedBackTypes();
+            return Ok(_feedBackService.GetFeedBackTypes());
+        }
+
+        //[HttpGet("getfeedbacks")]
+        //public IActionResult GetFeedBacks()
+        //{
+        //    return Ok(_feedBackService.GetFeedBacks());
+        //}
+
+        [HttpGet("getinvolvedusers")]
+        public IActionResult GedInvolvedUsers()
+        {
+            return _feedBackService.GetUsers() == null ? (IActionResult)BadRequest(null) : Ok(_feedBackService.GetUsers());
+        }
+
+        [HttpGet("getviewfeedbacks")]
+        public IActionResult GetViewFeedbacks([FromQuery]FeedbackSearchParams queryParameters)
+        {
+
+            var (feedbacks, quantity) = _feedBackService.GetFeedbackViewModels(queryParameters);
+
+            return Ok(
+                new {
+                    feedbacks,
+                    quantity
+                });
+
         }
 
     }
