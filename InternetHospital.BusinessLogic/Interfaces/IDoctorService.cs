@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Models.Appointment;
 using Microsoft.AspNetCore.Http;
 
 namespace InternetHospital.BusinessLogic.Interfaces
@@ -17,5 +19,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<bool> UpdateDoctorAvatar(string doctorId, IFormFile file);
         Task<string> GetDoctorAvatar(string doctorId);
         (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
+        FilteredMyPatientsModel GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters);
     }
 }

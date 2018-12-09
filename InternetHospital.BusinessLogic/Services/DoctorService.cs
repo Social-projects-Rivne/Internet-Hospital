@@ -248,5 +248,66 @@ namespace InternetHospital.BusinessLogic.Services
             return result;
         }
 
+        private IQueryable<User> GetMyPatients(int doctorId)
+        {
+            var patients = _context.Users.Where(x => x.Appointments.Any(a => a.DoctorId == doctorId))
+                .Select(p => new User
+                {
+                    Id = p.Id,
+                    FirstName = p.FirstName,
+                    SecondName = p.SecondName,
+                    ThirdName = p.ThirdName,
+                    Email = p.Email
+                });
+            return patients;
+        }
+
+        private IQueryable<MyPatientModel> ConvertToViewModel(IQueryable<User> patients)
+        {
+            var _patients = patients.Select(m => new MyPatientModel
+            {
+                Id = m.Id,
+                PatientEmail = m.Email,
+                PatientFirstName = m.FirstName,
+                PatientSecondName = m.SecondName,
+                PatientThirdName = m.ThirdName,
+            });
+            return _patients;
+        }
+
+        public FilteredMyPatientsModel GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
+        {
+            var patients = GetMyPatients(doctorId);
+
+            FilteredMyPatientsModel fModel = new FilteredMyPatientsModel();
+            fModel.AmountOfAllFiltered = patients.Count();
+
+            patients = PaginationHelper<User>
+                .GetPageValues(patients, queryParameters.PageSize, queryParameters.Page);
+
+            fModel.MyPatients = ConvertToViewModel(patients).ToList();
+            return fModel;
+
+            //var patients = _context.Appointments
+            // .Where(p => (p.DoctorId == doctorId))
+            // .GroupBy(p => new { p.UserId })
+            // .Select(x => x.FirstOrDefault())
+            // //.GroupBy(p => p.UserId)
+            // //.Where(g => g.Count() == 1)
+            // //.Select(g => g.First())
+            // .Select(p => new MyPatientModel
+            // {
+            //     Id = p.Id,
+            //     PatientId = p.Id,
+            //     PatientFirstName = p.User.FirstName,
+            //     PatientSecondName = p.User.SecondName,
+            //     PatientThirdName = p.User.ThirdName,
+            //     PatientEmail = p.User.Email
+            // });
+
+            //return patients/*.Distinct()*/.ToList();
+        }
+
+        
     }
 }
