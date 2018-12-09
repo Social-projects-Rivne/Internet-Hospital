@@ -154,6 +154,7 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return false;
         }
+
         public async Task<string> GetDoctorAvatar(string doctorId)
         {
             if (doctorId != null)
@@ -227,6 +228,63 @@ namespace InternetHospital.BusinessLogic.Services
             return (status, message);
         }
 
+        public PageModel<IEnumerable<PreviousAppointmentsModel>> GetPreviousAppointments(AppointmentHistoryParameters parameters, int doctorId)
+        {
+            var appointments = _context.Appointments
+                .OrderByDescending(a => a.StartTime)
+                .Include(a => a.IllnessHistory)
+                .Include(a => a.User)
+                .Include(a => a.Status)
+                .Where(a => a.DoctorId == doctorId);
+
+            if (!string.IsNullOrEmpty(parameters.SearchByName))
+            {
+                var lowerSearchParam = parameters.SearchByName.ToLower();
+                appointments = appointments.Where(a => a.User.FirstName.ToLower().Contains(lowerSearchParam)
+                                                       || a.User.SecondName.ToLower().Contains(lowerSearchParam));
+            }
+
+            if (parameters.From != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime >= parameters.From.Value);
+            }
+
+            if (parameters.Till != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime <= parameters.Till.Value);
+            }
+
+            if (parameters.Statuses.Count() > 0)
+            {
+                var predicate = PredicateBuilder.False<Appointment>();
+
+                foreach (var status in parameters.Statuses)
+                {
+                    predicate = predicate.Or(p => p.StatusId == status);
+                }
+
+                appointments = appointments.Where(predicate);
+            }
+
+            var appointmentsAmount = appointments.Count();
+            var appointmentsResult = PaginationHelper<Appointment>
+                .GetPageValues(appointments, parameters.PageCount, parameters.Page)
+                .Select(a => Mapper.Map<Appointment, PreviousAppointmentsModel>(a))
+                .ToList();
+
+            return new PageModel<IEnumerable<PreviousAppointmentsModel>>()
+            { EntityAmount = appointmentsAmount, Entities = appointmentsResult };
+        }
+
+        public IEnumerable<string> GetAppointmentStatuses()
+        {
+            var statuses = Enum.GetNames(typeof(AppointmentStatuses))
+                .Select(s=> (s.Replace('_',' ')).ToLower());
+            return statuses;
+        }
+
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
         {
             bool result = true;
@@ -247,6 +305,5 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return result;
         }
-
     }
 }
