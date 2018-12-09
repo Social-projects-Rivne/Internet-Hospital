@@ -22,6 +22,11 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly UserManager<User> _userManager;
         private readonly IFilesService _uploadingFiles;
         const string DOCTOR = "Doctor";
+        private const string SORT_BY_FIRST_NAME = "firstName";
+        private const string SORT_BY_SECOND_NAME = "secondName";
+        private const string SORT_BY_THIRD_NAME = "thirdName";
+        private const string SORT_BY_EMAIL = "email";
+        private const string ORDER_ASC = "asc";
 
         public DoctorService(ApplicationContext context, IFilesService uploadingFiles, UserManager<User> userManager)
         {
@@ -248,7 +253,7 @@ namespace InternetHospital.BusinessLogic.Services
             return result;
         }
 
-        private IQueryable<User> GetMyPatients(int doctorId)
+        private IQueryable<User> GetDateOfMyPatients(int doctorId)
         {
             var patients = _context.Users.Where(x => x.Appointments.Any(a => a.DoctorId == doctorId))
                 .Select(p => new User
@@ -264,20 +269,34 @@ namespace InternetHospital.BusinessLogic.Services
 
         private IQueryable<MyPatientModel> ConvertToViewModel(IQueryable<User> patients)
         {
-            var _patients = patients.Select(m => new MyPatientModel
+            var _patients = patients.Select(p => new MyPatientModel
             {
-                Id = m.Id,
-                PatientEmail = m.Email,
-                PatientFirstName = m.FirstName,
-                PatientSecondName = m.SecondName,
-                PatientThirdName = m.ThirdName,
+                Id = p.Id,
+                PatientId = p.Id,
+                PatientEmail = p.Email,
+                PatientFirstName = p.FirstName,
+                PatientSecondName = p.SecondName,
+                PatientThirdName = p.ThirdName,
             });
             return _patients;
         }
 
         public FilteredMyPatientsModel GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
         {
-            var patients = GetMyPatients(doctorId);
+            var patients = GetDateOfMyPatients(doctorId);
+
+            if (!string.IsNullOrEmpty(queryParameters.SearchByName))
+            {
+                var lowerSearchParam = queryParameters.SearchByName.ToLower();
+                patients = patients.Where(m => m.FirstName.ToLower().Contains(lowerSearchParam)
+                                                   || m.SecondName.ToLower().Contains(lowerSearchParam)
+                                                   || m.ThirdName.ToLower().Contains(lowerSearchParam));
+            }
+
+            if (!string.IsNullOrEmpty(queryParameters.Order))
+            {
+                patients = SortMyPatients(patients, queryParameters.Sort, queryParameters.Order);
+            }
 
             FilteredMyPatientsModel fModel = new FilteredMyPatientsModel();
             fModel.AmountOfAllFiltered = patients.Count();
@@ -287,27 +306,47 @@ namespace InternetHospital.BusinessLogic.Services
 
             fModel.MyPatients = ConvertToViewModel(patients).ToList();
             return fModel;
-
-            //var patients = _context.Appointments
-            // .Where(p => (p.DoctorId == doctorId))
-            // .GroupBy(p => new { p.UserId })
-            // .Select(x => x.FirstOrDefault())
-            // //.GroupBy(p => p.UserId)
-            // //.Where(g => g.Count() == 1)
-            // //.Select(g => g.First())
-            // .Select(p => new MyPatientModel
-            // {
-            //     Id = p.Id,
-            //     PatientId = p.Id,
-            //     PatientFirstName = p.User.FirstName,
-            //     PatientSecondName = p.User.SecondName,
-            //     PatientThirdName = p.User.ThirdName,
-            //     PatientEmail = p.User.Email
-            // });
-
-            //return patients/*.Distinct()*/.ToList();
         }
 
-        
+        private IQueryable<User> SortMyPatients(IQueryable<User> patients, string sortField, string orderBy)
+        {
+            if (orderBy == ORDER_ASC)
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_EMAIL:
+                        patients = patients.OrderBy(p => p.Email);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderBy(p => p.FirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderBy(p => p.SecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderBy(p => p.ThirdName);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_EMAIL:
+                        patients = patients.OrderByDescending(p => p.Email);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderByDescending(p => p.FirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderByDescending(p => p.SecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderByDescending(p => p.ThirdName);
+                        break;
+                }
+            }
+            return patients;
+        }
     }
 }
