@@ -295,7 +295,7 @@ namespace InternetHospital.BusinessLogic.Services
                                                                             {
                                                                                 ih.DoctorId = appointment.DoctorId;
                                                                                 ih.UserId = appointment.UserId ?? default;
-                                                                                ih.ConclusionTime = DateTime.Now;
+                                                                                ih.ConclusionTime = new DateTime(im.FinishAppointmentTimeStamp);
                                                                             }));
                 _context.IllnessHistories.Add(illnessHistory);
             }
