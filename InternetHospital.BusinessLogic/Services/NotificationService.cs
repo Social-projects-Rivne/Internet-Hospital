@@ -22,7 +22,7 @@ namespace InternetHospital.BusinessLogic.Services
         public PageModel<List<Notification>> GetMyNotifications(NotificationSearchModel model, int userId)
         {
             var notifications = _context.Notifications
-                .OrderBy(n=>n.Date)
+                .OrderByDescending(n=>n.Date)
                 .Where(n => n.RecepientId == userId);
 
             var notificationAmount = notifications.Count();

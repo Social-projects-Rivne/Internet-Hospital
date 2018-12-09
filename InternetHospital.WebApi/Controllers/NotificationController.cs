@@ -18,7 +18,7 @@ namespace InternetHospital.WebApi.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Get([FromRoute] NotificationSearchModel model)
+        public IActionResult Get([FromQuery] NotificationSearchModel model)
         {
             if (!int.TryParse(User.Identity.Name, out var userId))
             {
@@ -30,22 +30,16 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(myNotifications);
         }
 
-        public class Test
-        {
-            public int Id { get; set; }
-        }
-
-
         [Authorize]
         [HttpPatch("change")]
-        public IActionResult ChangeReadStatus([FromBody]Test model)
+        public IActionResult ChangeReadStatus([FromBody]int id)
         {
             if (!int.TryParse(User.Identity.Name, out var userId))
             {
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var status = _notificationService.ChangeReadStatus(model.Id, userId);
+            var status = _notificationService.ChangeReadStatus(id, userId);
 
             return status ? (IActionResult)Ok() : BadRequest();
         }
