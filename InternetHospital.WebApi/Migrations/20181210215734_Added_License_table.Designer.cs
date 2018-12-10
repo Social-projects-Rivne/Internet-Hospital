@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20181210154011_Added_field_tmpUser_table")]
-    partial class Added_field_tmpUser_table
+    [Migration("20181210215734_Added_License_table")]
+    partial class Added_License_table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -195,13 +195,13 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<string>("DiplomaURL");
 
-                    b.Property<int>("DoctorId");
-
                     b.Property<bool?>("IsValid");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Diplomas");
                 });
@@ -217,8 +217,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.Property<bool?>("IsApproved")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
-
-                    b.Property<string>("LicenseURL");
 
                     b.Property<int?>("SpecializationId");
 
@@ -306,6 +304,27 @@ namespace InternetHospital.WebApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("IllnessHistories");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.License", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddedTime");
+
+                    b.Property<bool?>("IsValid");
+
+                    b.Property<string>("LicenseURL");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Licenses");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
@@ -437,8 +456,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.Property<DateTime?>("BirthDate");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<string>("LicenseURL");
 
                     b.Property<string>("PhoneNumber");
 
@@ -703,9 +720,9 @@ namespace InternetHospital.WebApi.Migrations
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Diploma", b =>
                 {
-                    b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
                         .WithMany("Diplomas")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -748,6 +765,14 @@ namespace InternetHospital.WebApi.Migrations
                     b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
                         .WithMany("IllnessHistories")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.License", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
+                        .WithMany("Licenses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
