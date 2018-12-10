@@ -17,6 +17,7 @@ namespace InternetHospital.DataAccess.Entities
         public string Role { get; set; }
         public string Address { get; set; }
         public string LicenseURL { get; set; }
+        public string Specialization { get; set; }
 
         public DateTime? BirthDate { get; set; }
         public DateTime AddedTime { get; set; }
