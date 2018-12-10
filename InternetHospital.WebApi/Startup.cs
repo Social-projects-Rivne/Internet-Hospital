@@ -23,6 +23,9 @@ using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
 using InternetHospital.WebApi.Swagger;
 using InternetHospital.BusinessLogic.Validation;
+using InternetHospital.WebApi.Hubs;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
 
 namespace InternetHospital.WebApi
 {
@@ -55,10 +58,12 @@ namespace InternetHospital.WebApi
             //enable CORS
             services.AddCors();
 
+            //enable SignalR
+            services.AddSignalR();
+
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             //configure entity framework
@@ -99,6 +104,20 @@ namespace InternetHospital.WebApi
                                          ClockSkew = TimeSpan.Zero,
                                          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.JwtKey))
                                      };
+                                     options.Events = new JwtBearerEvents
+                                     {
+                                         OnMessageReceived = context =>
+                                         {
+                                             var accessToken = context.Request.Query["access_token"];
+                                             var path = context.HttpContext.Request.Path;
+                                             if (!string.IsNullOrEmpty(accessToken) &&
+                                                 (path.StartsWithSegments("/notifications")))
+                                             {
+                                                 context.Token = accessToken;
+                                             }
+                                             return Task.CompletedTask;
+                                         }
+                                     };
                                  });
 
             //Add Authorization policy
@@ -135,7 +154,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<IArticleTypeService, ArticleTypeService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<INotificationService, NotificationService>();
-
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -179,6 +198,11 @@ namespace InternetHospital.WebApi
                 config.CreateMap<ArticleCreatingModel, Article>();
                 config.CreateMap<Article, SendingArticleEditingModel>();
                 config.CreateMap<IllnessHistoryModel, IllnessHistory>();
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NotificationHub>("/notifications");
             });
 
             app.UseMvc();

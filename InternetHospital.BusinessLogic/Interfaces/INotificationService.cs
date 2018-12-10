@@ -8,7 +8,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface INotificationService
     {
         PageModel<List<Notification>> GetMyNotifications(NotificationSearchModel model, int userId);
-
         bool ChangeReadStatus(int notificationId, int userId);
+        int GetUnreadNotificationsCount(int userId);
+        bool AddNotification(int userId, string message);
     }
 }

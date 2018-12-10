@@ -44,10 +44,40 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 notification.IsRead = !notification.IsRead;
                 _context.SaveChanges();
+
                 return true;
             }
 
             return false;
+        }
+
+        public int GetUnreadNotificationsCount(int userId)
+        {
+            var count = _context.Notifications.Count(n => n.RecepientId == userId 
+                                                          && !n.IsRead);
+            return count;
+        }
+
+        public bool AddNotification(int userId, string message)
+        {
+            Notification notification = new Notification
+            {
+                RecepientId = userId,
+                IsRead = false,
+                Message = message,
+                Date = DateTime.Now
+            };
+
+            try
+            {
+                _context.Notifications.Add(notification);
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
