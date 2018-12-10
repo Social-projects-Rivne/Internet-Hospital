@@ -87,7 +87,9 @@ namespace InternetHospital.BusinessLogic.Services
                     SecondName = x.User.SecondName,
                     ThirdName = x.User.ThirdName,
                     AvatarURL = x.User.AvatarURL,
-                    Specialization = x.Specialization.Name
+                    Specialization = x.Specialization.Name,
+                    Address = x.Address,
+                    Email = x.User.Email,
                 })
                 .OrderBy(x => x.SecondName)
                 .ToList();
