@@ -253,6 +253,13 @@ namespace InternetHospital.BusinessLogic.Services
             return result;
         }
 
+        /// <summary>
+        /// Get all patients who had appointments for current doctor
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns>
+        /// returns a collection of doctor's patients
+        /// </returns>
         private IQueryable<User> GetDateOfMyPatients(int doctorId)
         {
             var patients = _context.Users.Where(x => x.Appointments.Any(a => a.DoctorId == doctorId))
@@ -267,12 +274,18 @@ namespace InternetHospital.BusinessLogic.Services
             return patients;
         }
 
+        /// <summary>
+        /// Convert patients collection from User model to MyPatientModel
+        /// </summary>
+        /// <param name="patients"></param>
+        /// <returns>
+        /// return collection of patients
+        /// </returns>
         private IQueryable<MyPatientModel> ConvertToViewModel(IQueryable<User> patients)
         {
             var _patients = patients.Select(p => new MyPatientModel
             {
                 Id = p.Id,
-                PatientId = p.Id,
                 PatientEmail = p.Email,
                 PatientFirstName = p.FirstName,
                 PatientSecondName = p.SecondName,
@@ -281,6 +294,14 @@ namespace InternetHospital.BusinessLogic.Services
             return _patients;
         }
 
+        /// <summary>
+        /// Get all patients who had appointments for current doctor
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <param name="queryParameters"></param>
+        /// <returns>
+        /// returns a collection of doctor's patients
+        /// </returns>
         public FilteredMyPatientsModel GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
         {
             var patients = GetDateOfMyPatients(doctorId);
@@ -308,6 +329,15 @@ namespace InternetHospital.BusinessLogic.Services
             return fModel;
         }
 
+        /// <summary>
+        /// Sorting patients by passed parameter
+        /// </summary>
+        /// <param name="patients"></param>
+        /// <param name="sortField"></param>
+        /// <param name="orderBy"></param>
+        /// <returns>
+        /// returns a collection of sorting patients
+        /// </returns>
         private IQueryable<User> SortMyPatients(IQueryable<User> patients, string sortField, string orderBy)
         {
             if (orderBy == ORDER_ASC)

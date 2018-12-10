@@ -7,7 +7,6 @@ namespace InternetHospital.BusinessLogic.Models
     public class MyPatientModel
     {
         public int Id { get; set; }
-        public int? PatientId { get; set; }
         public string PatientFirstName { get; set; }
         public string PatientSecondName { get; set; }
         public string PatientThirdName { get; set; }
