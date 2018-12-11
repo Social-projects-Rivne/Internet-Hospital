@@ -252,16 +252,18 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return result;
         }
-
+               
         /// <summary>
         /// Get all patients who had appointments for current doctor
         /// </summary>
         /// <param name="doctorId"></param>
+        /// <param name="queryParameters"></param>
         /// <returns>
         /// returns a collection of doctor's patients
         /// </returns>
-        private IQueryable<User> GetDateOfMyPatients(int doctorId)
+        public FilteredModel<MyPatientModel> GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
         {
+            // get all patients of current doctor
             var patients = _context.Users.Where(x => x.Appointments.Any(a => a.DoctorId == doctorId))
                 .Select(p => new User
                 {
@@ -271,41 +273,8 @@ namespace InternetHospital.BusinessLogic.Services
                     ThirdName = p.ThirdName,
                     Email = p.Email
                 });
-            return patients;
-        }
 
-        /// <summary>
-        /// Convert patients collection from User model to MyPatientModel
-        /// </summary>
-        /// <param name="patients"></param>
-        /// <returns>
-        /// return collection of patients
-        /// </returns>
-        private IQueryable<MyPatientModel> ConvertToViewModel(IQueryable<User> patients)
-        {
-            var _patients = patients.Select(p => new MyPatientModel
-            {
-                Id = p.Id,
-                PatientEmail = p.Email,
-                PatientFirstName = p.FirstName,
-                PatientSecondName = p.SecondName,
-                PatientThirdName = p.ThirdName,
-            });
-            return _patients;
-        }
-
-        /// <summary>
-        /// Get all patients who had appointments for current doctor
-        /// </summary>
-        /// <param name="doctorId"></param>
-        /// <param name="queryParameters"></param>
-        /// <returns>
-        /// returns a collection of doctor's patients
-        /// </returns>
-        public FilteredMyPatientsModel GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
-        {
-            var patients = GetDateOfMyPatients(doctorId);
-
+            // check search parameter
             if (!string.IsNullOrEmpty(queryParameters.SearchByName))
             {
                 var lowerSearchParam = queryParameters.SearchByName.ToLower();
@@ -314,18 +283,28 @@ namespace InternetHospital.BusinessLogic.Services
                                                    || m.ThirdName.ToLower().Contains(lowerSearchParam));
             }
 
+            // check order parameter
             if (!string.IsNullOrEmpty(queryParameters.Order))
             {
                 patients = SortMyPatients(patients, queryParameters.Sort, queryParameters.Order);
             }
 
-            FilteredMyPatientsModel fModel = new FilteredMyPatientsModel();
-            fModel.AmountOfAllFiltered = patients.Count();
+            // declare new FilteredModel
+            FilteredModel<MyPatientModel> fModel = new FilteredModel<MyPatientModel>();
+            fModel.Amount = patients.Count();
 
             patients = PaginationHelper<User>
                 .GetPageValues(patients, queryParameters.PageSize, queryParameters.Page);
 
-            fModel.MyPatients = ConvertToViewModel(patients).ToList();
+            fModel.Results = patients.Select(p => new MyPatientModel
+            {
+                Id = p.Id,
+                PatientEmail = p.Email,
+                PatientFirstName = p.FirstName,
+                PatientSecondName = p.SecondName,
+                PatientThirdName = p.ThirdName,
+            }).ToList();
+            
             return fModel;
         }
 
