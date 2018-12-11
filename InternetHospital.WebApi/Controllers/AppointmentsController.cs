@@ -44,6 +44,15 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpPatch("changeAccess")]
+        public IActionResult ChangePersonalInfoAccess([FromBody] AppointmentSubscribeModel model)
+        {
+            var result = _appointmentService.ChangeAccessForPersonalInfo(model);
+
+            return result ? (IActionResult)Ok() : BadRequest();
+        }
+
         [HttpGet("available")]
         public IActionResult GetAvailableAppointments([FromQuery] AppointmentSearchModel parameters)
         {

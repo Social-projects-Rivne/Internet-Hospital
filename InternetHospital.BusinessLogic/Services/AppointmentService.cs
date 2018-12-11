@@ -71,9 +71,32 @@ namespace InternetHospital.BusinessLogic.Services
                     Address = a.Address,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
-                    Status = a.Status.Name
+                    Status = a.Status.Name,
+                    isAllowPatientInfo = a.IsAllowPatientInfo
                 });
             return appointments.ToList();
+        }
+
+        public bool ChangeAccessForPersonalInfo(AppointmentSubscribeModel model)
+        {
+            var appointment = _context.Appointments
+               .FirstOrDefault(a => a.Id == model.Id);
+
+            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
+            {
+                return false;
+            }
+            
+            appointment.IsAllowPatientInfo = model.IsAllowPatientInfo;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

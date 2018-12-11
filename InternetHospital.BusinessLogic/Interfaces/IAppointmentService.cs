@@ -9,6 +9,7 @@ namespace InternetHospital.BusinessLogic.Interfaces
         IEnumerable<AppointmentModel> GetMyAppointments(int doctorId);
         PageModel<List<AvailableAppointmentModel>> GetAvailableAppointments(AppointmentSearchModel searchParameters);
         IEnumerable<AppointmentForPatient> GetPatientsAppointments(int patientId);
+        bool ChangeAccessForPersonalInfo(AppointmentSubscribeModel model);
         bool AddAppointment(AppointmentCreationModel creationModel, int doctorId);
         bool SubscribeForAppointment(AppointmentSubscribeModel appointmentModel, int patientId);
         bool UnsubscribeForAppointment(int appointmentId);
