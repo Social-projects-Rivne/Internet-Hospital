@@ -22,6 +22,11 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly UserManager<User> _userManager;
         private readonly IFilesService _uploadingFiles;
         const string DOCTOR = "Doctor";
+        private const string SORT_BY_FIRST_NAME = "firstName";
+        private const string SORT_BY_SECOND_NAME = "secondName";
+        private const string SORT_BY_THIRD_NAME = "thirdName";
+        private const string SORT_BY_EMAIL = "email";
+        private const string ORDER_ASC = "asc";
 
         public DoctorService(ApplicationContext context, IFilesService uploadingFiles, UserManager<User> userManager)
         {
@@ -306,6 +311,111 @@ namespace InternetHospital.BusinessLogic.Services
                 result = false;
             }
             return result;
+        }
+
+        /// <summary>
+        /// Get all patients who had appointments for current doctor
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <param name="queryParameters"></param>
+        /// <returns>
+        /// returns a collection of doctor's patients
+        /// </returns>
+        public FilteredModel<MyPatientModel> GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
+        {
+            // get all patients of current doctor
+            var patients = _context.Users.Where(x => x.Appointments.Any(a => a.DoctorId == doctorId))
+                .Select(p => new User
+                {
+                    Id = p.Id,
+                    FirstName = p.FirstName,
+                    SecondName = p.SecondName,
+                    ThirdName = p.ThirdName,
+                    Email = p.Email
+                });
+
+            // check search parameter
+            if (!string.IsNullOrEmpty(queryParameters.SearchByName))
+            {
+                var lowerSearchParam = queryParameters.SearchByName.ToLower();
+                patients = patients.Where(m => m.FirstName.ToLower().Contains(lowerSearchParam)
+                                                   || m.SecondName.ToLower().Contains(lowerSearchParam)
+                                                   || m.ThirdName.ToLower().Contains(lowerSearchParam));
+            }
+
+            // check order parameter
+            if (!string.IsNullOrEmpty(queryParameters.Order))
+            {
+                patients = SortMyPatients(patients, queryParameters.Sort, queryParameters.Order);
+            }
+
+            // declare new FilteredModel
+            FilteredModel<MyPatientModel> fModel = new FilteredModel<MyPatientModel>();
+            fModel.Amount = patients.Count();
+
+            patients = PaginationHelper<User>
+                .GetPageValues(patients, queryParameters.PageSize, queryParameters.Page);
+
+            fModel.Results = patients.Select(p => new MyPatientModel
+            {
+                Id = p.Id,
+                PatientEmail = p.Email,
+                PatientFirstName = p.FirstName,
+                PatientSecondName = p.SecondName,
+                PatientThirdName = p.ThirdName,
+            }).ToList();
+
+            return fModel;
+        }
+
+        /// <summary>
+        /// Sorting patients by passed parameter
+        /// </summary>
+        /// <param name="patients"></param>
+        /// <param name="sortField"></param>
+        /// <param name="orderBy"></param>
+        /// <returns>
+        /// returns a collection of sorting patients
+        /// </returns>
+        private IQueryable<User> SortMyPatients(IQueryable<User> patients, string sortField, string orderBy)
+        {
+            if (orderBy == ORDER_ASC)
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_EMAIL:
+                        patients = patients.OrderBy(p => p.Email);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderBy(p => p.FirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderBy(p => p.SecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderBy(p => p.ThirdName);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_EMAIL:
+                        patients = patients.OrderByDescending(p => p.Email);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderByDescending(p => p.FirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderByDescending(p => p.SecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderByDescending(p => p.ThirdName);
+                        break;
+                }
+            }
+            return patients;
         }
     }
 }

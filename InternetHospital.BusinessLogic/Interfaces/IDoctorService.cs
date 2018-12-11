@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
@@ -14,11 +15,12 @@ namespace InternetHospital.BusinessLogic.Interfaces
         IEnumerable<SpecializationModel> GetAvailableSpecialization();
         PageModel<IEnumerable<PreviousAppointmentsModel>> GetPreviousAppointments(AppointmentHistoryParameters parameters, int doctorId);
         Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId,
-            IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license);
+        IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license);
         DoctorProfileModel GetDoctorProfile(int userId);
         Task<bool> UpdateDoctorAvatar(string doctorId, IFormFile file);
         Task<string> GetDoctorAvatar(string doctorId);
         (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
+        FilteredModel<MyPatientModel> GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters);
         IEnumerable<string> GetAppointmentStatuses();
     }
 }
