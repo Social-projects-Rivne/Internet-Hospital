@@ -209,10 +209,10 @@ namespace InternetHospital.BusinessLogic.Services
         /// <returns>
         /// status of subscription to appointment
         /// </returns>
-        public bool SubscribeForAppointment(int appointmentId, int patientId)
+        public bool SubscribeForAppointment(AppointmentSubscribeModel appointmentModel, int patientId)
         {
             var appointment = _context.Appointments
-                .FirstOrDefault(a => a.Id == appointmentId);
+                .FirstOrDefault(a => a.Id == appointmentModel.Id);
 
             if (appointment == null || appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
             {
@@ -220,6 +220,7 @@ namespace InternetHospital.BusinessLogic.Services
             }
 
             appointment.UserId = patientId;
+            appointment.IsAllowPatientInfo = appointmentModel.IsAllowPatientInfo;
             appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
             try
             {

@@ -109,7 +109,7 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var status = _appointmentService.SubscribeForAppointment(model.Id, patientId);
+            var status = _appointmentService.SubscribeForAppointment(model, patientId);
 
             return status ? (IActionResult)Ok() : BadRequest();
         }
