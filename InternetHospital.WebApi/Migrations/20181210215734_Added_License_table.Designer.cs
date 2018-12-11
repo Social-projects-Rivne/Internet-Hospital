@@ -4,14 +4,16 @@ using InternetHospital.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20181210215734_Added_License_table")]
+    partial class Added_License_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -466,8 +468,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.Property<string>("ThirdName");
 
                     b.Property<int>("UserId");
-
-                    b.Property<bool?>("isRejected");
 
                     b.HasKey("Id");
 

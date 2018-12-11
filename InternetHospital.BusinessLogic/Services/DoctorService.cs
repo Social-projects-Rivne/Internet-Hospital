@@ -34,8 +34,9 @@ namespace InternetHospital.BusinessLogic.Services
         {
             DoctorDetailedModel returnedDoctor = null;
             var searchedDoctor = _context.Doctors.Include(d => d.User)
+                                                 .Include(d => d.User.Licenses)
                                                  .Include(d => d.Specialization)
-                                                 .Include(d => d.Diplomas)
+                                                 .Include(d => d.User.Diplomas)
                                                      .FirstOrDefault(d => d.UserId == id && d.User != null);
             if (searchedDoctor != null && searchedDoctor.IsApproved == true)
             {
@@ -51,8 +52,9 @@ namespace InternetHospital.BusinessLogic.Services
                     Specialization = searchedDoctor.Specialization.Name,
                     DoctorsInfo = searchedDoctor.DoctorsInfo,
                     AvatarURL = searchedDoctor.User.AvatarURL,
-                    LicenseURL = searchedDoctor.LicenseURL,
-                    DiplomasURL = searchedDoctor.Diplomas.Where(d => d.IsValid == true)
+                    LicenseURL = searchedDoctor.User.Licenses
+                                                    .LastOrDefault(l => l.IsValid == true).LicenseURL,
+                    DiplomasURL = searchedDoctor.User.Diplomas.Where(d => d.IsValid == true)
                                                              .Select(d => d.DiplomaURL).ToArray()
                 };
             }
