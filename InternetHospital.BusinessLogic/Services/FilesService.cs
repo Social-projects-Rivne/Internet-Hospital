@@ -151,7 +151,7 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     var diplomaPhoto = new Diploma
                     {
-                        DoctorId = user.Id,
+                        UserId = user.Id,
                         DiplomaURL = dbURL,
                         AddedTime = addedTime
                     };
@@ -159,7 +159,13 @@ namespace InternetHospital.BusinessLogic.Services
                 }
                 else if (fileTypeFolder == LICENSE)
                 {
-                    user.Doctor.LicenseURL = dbURL;
+                    var licensePhoto = new License
+                    {
+                        UserId = user.Id,
+                        LicenseURL = dbURL,
+                        AddedTime = addedTime
+                    };
+                    _context.Add(licensePhoto);
                 }
             }
             return user;

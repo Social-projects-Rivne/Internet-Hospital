@@ -22,7 +22,7 @@ namespace InternetHospital.BusinessLogic.Validation
             CascadeMode = CascadeMode.StopOnFirstFailure;
 
             RuleFor(i => i)
-                .Must(i => i.FinishAppointmentTime < DateTime.Now)
+                .Must(i => Finish(i.FinishAppointmentTimeStamp))
                 .OverridePropertyName("message")
                 .WithMessage("Please wait for the appointment beginning")
                 .DependentRules(() =>
@@ -39,6 +39,14 @@ namespace InternetHospital.BusinessLogic.Validation
                         .WithMessage("No one assigned to this appointment");
                     });
                 });
+        }
+
+        private bool Finish(long finishedTimeStamp)
+        {
+            const int maxMilisecDifference = 300000;
+            var nowTimeStamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            var difference = finishedTimeStamp - nowTimeStamp;
+            return difference <= maxMilisecDifference;
         }
 
         private bool IsExits(int appointmentId)
