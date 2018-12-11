@@ -145,6 +145,34 @@ namespace InternetHospital.WebApi.Controllers
             return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet("mypatients")]
         [Authorize(Policy = "ApprovedDoctors")]
         public IActionResult GetMyPatients([FromQuery] MyPatientsSearchParameters patientsSearch)
