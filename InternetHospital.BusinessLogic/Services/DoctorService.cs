@@ -252,7 +252,38 @@ namespace InternetHospital.BusinessLogic.Services
             }
             return result;
         }
-               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// Get all patients who had appointments for current doctor
         /// </summary>
@@ -304,7 +335,7 @@ namespace InternetHospital.BusinessLogic.Services
                 PatientSecondName = p.SecondName,
                 PatientThirdName = p.ThirdName,
             }).ToList();
-            
+
             return fModel;
         }
 
