@@ -58,7 +58,7 @@ namespace InternetHospital.BusinessLogic.Services
                     DoctorsInfo = searchedDoctor.DoctorsInfo,
                     AvatarURL = searchedDoctor.User.AvatarURL,
                     LicenseURL = searchedDoctor.User.Licenses
-                                                    .LastOrDefault(l => l.IsValid == true).LicenseURL,
+                                                    .LastOrDefault(l => l.IsValid == true)?.LicenseURL,
                     DiplomasURL = searchedDoctor.User.Diplomas.Where(d => d.IsValid == true)
                                                              .Select(d => d.DiplomaURL).ToArray()
                 };
