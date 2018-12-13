@@ -16,6 +16,7 @@ namespace InternetHospital.BusinessLogic.Services
     {
         private readonly ApplicationContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;
+        private const string NOTIFY_METHOD = "Notify";
 
         public NotificationService(ApplicationContext context, IHubContext<NotificationHub> hubContext)
         {
@@ -84,16 +85,10 @@ namespace InternetHospital.BusinessLogic.Services
             }
         }
 
-        public void Notify(int id)
+        public void NewMessageNotify(int id)
         {
             _hubContext.Clients.User(id.ToString())
-                   .SendAsync("Notify", GetUnreadNotificationsCount(id));
-        }
-
-        public void OnLoad(int id)
-        {
-            _hubContext.Clients.User(id.ToString())
-                   .SendAsync("OnLoad", GetUnreadNotificationsCount(id));
+                   .SendAsync(NOTIFY_METHOD, GetUnreadNotificationsCount(id));
         }
     }
 }

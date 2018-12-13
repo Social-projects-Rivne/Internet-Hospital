@@ -42,13 +42,8 @@ namespace InternetHospital.WebApi.Controllers
 
             var status = _notificationService.ChangeReadStatus(id, userId);
 
-            if (status)
-            {
-                _notificationService.OnLoad(userId);
-                return Ok();
-            }
 
-            return BadRequest();
+            return status ? (IActionResult)Ok() : BadRequest();
         }      
         
         [Authorize(Roles ="Admin, Moderator")]
@@ -58,7 +53,7 @@ namespace InternetHospital.WebApi.Controllers
             var status = _notificationService.AddNotification(model.Recepient, model.Message);
             if (status)
             {
-                _notificationService.Notify(model.Recepient);
+                _notificationService.NewMessageNotify(model.Recepient);
                 return Ok();
             }
 

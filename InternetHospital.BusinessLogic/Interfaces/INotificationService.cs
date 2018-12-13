@@ -10,7 +10,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         PageModel<List<Notification>> GetMyNotifications(NotificationSearchModel model, int userId);
         bool ChangeReadStatus(int notificationId, int userId);
         bool AddNotification(int userId, string message);
-        void Notify(int id);
-        void OnLoad(int id);
+        void NewMessageNotify(int id);
     }
 }
