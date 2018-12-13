@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using InternetHospital.BusinessLogic.Helpers;
+using InternetHospital.BusinessLogic.Hubs;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Notification;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
+using Microsoft.AspNetCore.SignalR;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class NotificationService : INotificationService
     {
         private readonly ApplicationContext _context;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public NotificationService(ApplicationContext context)
+        public NotificationService(ApplicationContext context, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         public PageModel<List<Notification>> GetMyNotifications(NotificationSearchModel model, int userId)
@@ -51,7 +55,7 @@ namespace InternetHospital.BusinessLogic.Services
             return false;
         }
 
-        public int GetUnreadNotificationsCount(int userId)
+        private int GetUnreadNotificationsCount(int userId)
         {
             var count = _context.Notifications.Count(n => n.RecepientId == userId 
                                                           && !n.IsRead);
@@ -78,6 +82,18 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 return false;
             }
+        }
+
+        public void Notify(int id)
+        {
+            _hubContext.Clients.User(id.ToString())
+                   .SendAsync("Notify", GetUnreadNotificationsCount(id));
+        }
+
+        public void OnLoad(int id)
+        {
+            _hubContext.Clients.User(id.ToString())
+                   .SendAsync("OnLoad", GetUnreadNotificationsCount(id));
         }
     }
 }

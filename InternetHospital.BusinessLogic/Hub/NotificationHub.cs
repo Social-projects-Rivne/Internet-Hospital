@@ -3,16 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace InternetHospital.WebApi.Hubs
+namespace InternetHospital.BusinessLogic.Hubs
 {
-    public class CustomUserIdProvider : IUserIdProvider
-    {
-        public virtual string GetUserId(HubConnectionContext connection)
-        {
-            return connection.User?.Identity.Name;
-        }
-    }
-    
+    [Authorize]
     public class NotificationHub : Hub
     {
         private readonly INotificationService _notificationService;
@@ -27,8 +20,7 @@ namespace InternetHospital.WebApi.Hubs
             var userId = Context.User.Identity.Name;
             if (!string.IsNullOrEmpty(userId))
             {
-                int count = _notificationService.GetUnreadNotificationsCount(int.Parse(userId));
-                await Clients.User(userId).SendAsync("OnLoad", count);
+                _notificationService.OnLoad(int.Parse(userId));
             }
         }
     }

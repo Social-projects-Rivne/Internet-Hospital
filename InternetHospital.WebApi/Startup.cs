@@ -23,9 +23,9 @@ using InternetHospital.DataAccess.Entities;
 using InternetHospital.WebApi.CustomMiddleware;
 using InternetHospital.WebApi.Swagger;
 using InternetHospital.BusinessLogic.Validation;
-using InternetHospital.WebApi.Hubs;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using InternetHospital.BusinessLogic.Hubs;
 
 namespace InternetHospital.WebApi
 {

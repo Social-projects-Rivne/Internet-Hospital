@@ -1,7 +1,5 @@
-﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using InternetHospital.BusinessLogic.Interfaces;
+﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models.Notification;
-using InternetHospital.WebApi.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -13,12 +11,10 @@ namespace InternetHospital.WebApi.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
-        IHubContext<NotificationHub> _hubContext;
 
-        public NotificationController(INotificationService notificationService, IHubContext<NotificationHub> hubContext)
+        public NotificationController(INotificationService notificationService)
         {
             _notificationService = notificationService;
-            _hubContext = hubContext;
         }
 
         [Authorize]
@@ -48,22 +44,21 @@ namespace InternetHospital.WebApi.Controllers
 
             if (status)
             {
-                _hubContext.Clients.User(User.Identity.Name)
-                    .SendAsync("OnLoad", _notificationService.GetUnreadNotificationsCount(userId));
+                _notificationService.OnLoad(userId);
                 return Ok();
             }
 
             return BadRequest();
-        }
-
-        [HttpGet("test")]
-        public IActionResult test(int who, string message)
+        }      
+        
+        [Authorize(Roles ="Admin, Moderator")]
+        [HttpPost("send")]
+        public IActionResult Send([FromBody] MessageModel model)
         {
-           var status = _notificationService.AddNotification(who, message);
+            var status = _notificationService.AddNotification(model.Recepient, model.Message);
             if (status)
             {
-                _hubContext.Clients.User(who.ToString())
-                    .SendAsync("Notify", _notificationService.GetUnreadNotificationsCount(who));
+                _notificationService.Notify(model.Recepient);
                 return Ok();
             }
 
