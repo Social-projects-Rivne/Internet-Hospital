@@ -37,7 +37,6 @@ namespace InternetHospital.BusinessLogic.Services
 
             return new PageModel<List<Notification>>()
                 { EntityAmount = notificationAmount, Entities = notificationResult };
-
         }
 
         public bool ChangeReadStatus(int notificationId, int userId)
