@@ -12,6 +12,7 @@ namespace InternetHospital.DataAccess
         public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Diploma> Diplomas { get; set; }
+        public DbSet<License> Licenses { get; set; }
         public DbSet<RefreshToken> Tokens { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Status> Statuses { get; set; }

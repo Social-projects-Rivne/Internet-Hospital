@@ -15,6 +15,6 @@ namespace InternetHospital.BusinessLogic.Models
         public string Diagnose { get; set; }
         public string SurveyPlan { get; set; }
         public string TreatmentPlan { get; set; }
-        public DateTime FinishAppointmentTime { get; set; }
+        public long FinishAppointmentTimeStamp { get; set; }
     }
 }
