@@ -10,6 +10,8 @@ namespace InternetHospital.DataAccess.Entities
         public int TypeId { set; get; }
         public int UserId { set; get; }
         public string Text { set; get; }
+        public string Reply { set; get; }
+        public bool IsViewed { set; get; }
         public DateTime DateTime { set; get; }
 
         public virtual FeedBackType Type { set; get; }

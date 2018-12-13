@@ -9,6 +9,8 @@ namespace InternetHospital.BusinessLogic.Models
         public int FeedbackTypeId { set; get; }
         public string FeedbackTypeName { set; get; }
         public DateTime dateTime { set; get; }
+        public string Reply { set; get; }
+        public bool IsViewed { set; get; }
 
         public int UserId { set; get; }
         public string UsersEmail { get; set; }
@@ -17,6 +19,5 @@ namespace InternetHospital.BusinessLogic.Models
         public string UsersThirdName { get; set; }
         public string UsersAvatarURL { get; set; }
         public DateTime? UsersBirthDate { get; set; }
-        public bool? IsViewed { set; get; }
     }
 }

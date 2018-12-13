@@ -77,13 +77,13 @@ namespace InternetHospital.BusinessLogic.Services
 
             for (int i = 0; i < feedBacks.Count; i++)
             {
-                feedbackViews.Add(new FeedbackViewModel
-                {
+                feedbackViews.Add(new FeedbackViewModel {
                     Id = feedBacks[i].Id,
                     FeedbackTypeId = feedBacks[i].TypeId,
                     Text = feedBacks[i].Text,
-                    IsViewed = false,
                     dateTime = feedBacks[i].DateTime,
+                    IsViewed = feedBacks[i].IsViewed,
+                    Reply = feedBacks[i].Reply,
 
                     UserId = users[i].Id,
                     UsersAvatarURL = users[i].AvatarURL,
@@ -93,6 +93,7 @@ namespace InternetHospital.BusinessLogic.Services
                     UsersSecondName = users[i].SecondName,
                     UsersThirdName = users[i].ThirdName,
                 });
+                feedBacks[i].IsViewed = false;
 
                 foreach (var item in types)
                 {
@@ -124,6 +125,19 @@ namespace InternetHospital.BusinessLogic.Services
                 .GetPageValues(queryFeedbacks, queryParameters.PageCount, queryParameters.Page);
 
             return (feedbacks, feedbackViews.Count);
+        }
+
+        public FeedBack UpdateFeedBack(int id, FeedbackViewModel feedback)
+        {
+            FeedBack FeedbackEntity =  _context.FeedBacks.FirstOrDefault(x => x.Id == id);
+
+            FeedbackEntity.IsViewed = feedback.IsViewed;
+            FeedbackEntity.Reply = feedback.Reply;
+            FeedbackEntity.Text = feedback.Text;
+
+            _context.SaveChanges();
+
+            return FeedbackEntity;
         }
 
     }

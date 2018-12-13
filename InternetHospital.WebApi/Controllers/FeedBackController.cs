@@ -64,7 +64,6 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("getviewfeedbacks")]
         public IActionResult GetViewFeedbacks([FromQuery]FeedbackSearchParams queryParameters)
         {
-
             var (feedbacks, quantity) = _feedBackService.GetFeedbackViewModels(queryParameters);
 
             return Ok(
@@ -72,7 +71,17 @@ namespace InternetHospital.WebApi.Controllers
                     feedbacks,
                     quantity
                 });
+        }
 
+        [HttpPut("updatefeedback")]
+        public IActionResult UpdateFeedback(int feedbackId, [FromBody]FeedbackViewModel feedback) {
+
+            var reply = _feedBackService.UpdateFeedBack(feedbackId, feedback);
+
+            if (reply != null)
+                return Ok();
+            else
+                return BadRequest();
         }
 
     }
