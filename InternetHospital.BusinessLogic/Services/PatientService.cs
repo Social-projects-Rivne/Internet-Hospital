@@ -64,7 +64,7 @@ namespace InternetHospital.BusinessLogic.Services
                     ObjectiveStatus = x.ObjectiveStatus,
                     SurveyPlan = x.SurveyPlan,
                     TreatmentPlan = x.TreatmentPlan,
-                    DoctorName = x.Appointment.Doctor.User.FirstName + " " + x.Appointment.Doctor.User.SecondName + " " + x.Appointment.Doctor.User.ThirdName
+                    DoctorName = $"{x.Appointment.Doctor.User.FirstName} {x.Appointment.Doctor.User.SecondName} {x.Appointment.Doctor.User.ThirdName}"
                 });
 
             return historiesModel;
