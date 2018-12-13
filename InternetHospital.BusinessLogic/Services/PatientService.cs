@@ -56,14 +56,15 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     AppointmentId = x.AppointmentId ?? default,
                     Complaints = x.Complaints,
-                    FinishAppointmentTimeStamp =  x.ConclusionTime.Ticks,
+                    FinishAppointmentTimeStamp = x.ConclusionTime.Ticks,
                     Diagnose = x.Diagnose,
                     DiseaseAnamnesis = x.DiseaseAnamnesis,
                     LifeAnamnesis = x.LifeAnamnesis,
                     LocalStatus = x.LocalStatus,
                     ObjectiveStatus = x.ObjectiveStatus,
                     SurveyPlan = x.SurveyPlan,
-                    TreatmentPlan = x.TreatmentPlan
+                    TreatmentPlan = x.TreatmentPlan,
+                    DoctorName = $"{x.Appointment.Doctor.User.FirstName} {x.Appointment.Doctor.User.SecondName} {x.Appointment.Doctor.User.ThirdName}"
                 });
 
             return historiesModel;
