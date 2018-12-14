@@ -27,6 +27,7 @@ namespace InternetHospital.DataAccess
         public DbSet<ArticleTypeArticle> ArticleTypeArticles { get; set; }
         public DbSet<ArticleEdition> ArticleEditions { get; set; }
         public DbSet<ArticleStatus> ArticleStatuses { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
