@@ -12,6 +12,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         (IEnumerable<FeedbackViewModel>, int count) GetFeedbackViewModels(FeedbackSearchParams queryParameters);
         IEnumerable<FeedBackType> GetFeedBackTypes();
         IEnumerable<UserModel> GetUsers();
-        FeedBack UpdateFeedBack(int id, FeedbackViewModel feedback);
+        FeedBack UpdateFeedBack(FeedbackViewModel feedback);
     }
 }

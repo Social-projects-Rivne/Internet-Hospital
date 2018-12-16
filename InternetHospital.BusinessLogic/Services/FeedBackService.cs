@@ -127,9 +127,9 @@ namespace InternetHospital.BusinessLogic.Services
             return (feedbacks, feedbackViews.Count);
         }
 
-        public FeedBack UpdateFeedBack(int id, FeedbackViewModel feedback)
+        public FeedBack UpdateFeedBack(FeedbackViewModel feedback)
         {
-            FeedBack FeedbackEntity =  _context.FeedBacks.FirstOrDefault(x => x.Id == id);
+            FeedBack FeedbackEntity =  _context.FeedBacks.FirstOrDefault(x => x.Id == feedback.Id);
 
             FeedbackEntity.IsViewed = feedback.IsViewed;
             FeedbackEntity.Reply = feedback.Reply;

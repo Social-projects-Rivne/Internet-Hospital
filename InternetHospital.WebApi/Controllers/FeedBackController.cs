@@ -49,12 +49,6 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(_feedBackService.GetFeedBackTypes());
         }
 
-        //[HttpGet("getfeedbacks")]
-        //public IActionResult GetFeedBacks()
-        //{
-        //    return Ok(_feedBackService.GetFeedBacks());
-        //}
-
         [HttpGet("getinvolvedusers")]
         public IActionResult GedInvolvedUsers()
         {
@@ -74,9 +68,10 @@ namespace InternetHospital.WebApi.Controllers
         }
 
         [HttpPut("updatefeedback")]
-        public IActionResult UpdateFeedback(int feedbackId, [FromBody]FeedbackViewModel feedback) {
+        public IActionResult UpdateFeedback([FromBody]FeedbackViewModel feedback) 
+        {
 
-            var reply = _feedBackService.UpdateFeedBack(feedbackId, feedback);
+            var reply = _feedBackService.UpdateFeedBack(feedback);
 
             if (reply != null)
                 return Ok();
