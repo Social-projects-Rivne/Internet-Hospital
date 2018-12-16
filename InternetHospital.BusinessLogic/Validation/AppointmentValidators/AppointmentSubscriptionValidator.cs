@@ -14,6 +14,7 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationContext _context;
         private Appointment _appointment;
+        private DoctorBlackList _blackList;
 
         public AppointmentSubscriptionValidator(ApplicationContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -48,7 +49,14 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
                                              RuleFor(a => a)
                                                  .Must(a => NotAlreadySubscribed())
                                                  .OverridePropertyName("message")
-                                                 .WithMessage("You can only have one appointment with each doctor per day");
+                                                 .WithMessage("You can only have one appointment with each doctor per day")
+                                                 .DependentRules(() =>
+                                                 {
+                                                     RuleFor(a => a)
+                                                         .Must(a => AddedToBlackList())
+                                                         .OverridePropertyName("message")
+                                                         .WithMessage("The doctor added you to black list");
+                                                 });
                                          });
                                  });
                          });
@@ -91,6 +99,13 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
                                            && a.StartTime.Date == _appointment.StartTime.Date
                                            && a.StatusId != (int) AppointmentStatuses.CANCELED_STATUS);
 
+        }
+
+        private bool AddedToBlackList()
+        {
+            var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+            return !_context.DoctorBlackLists.Any(b => b.UserId == patientId
+                                            && b.DoctorId == _blackList.DoctorId);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace InternetHospital.DataAccess.Entities
         public virtual Specialization Specialization { get; set; }
         public virtual ICollection<IllnessHistory> IllnessHistories { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<DoctorBlackList> BlackList { get; set; }
     }
 }

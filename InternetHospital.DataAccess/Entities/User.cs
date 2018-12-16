@@ -27,5 +27,6 @@ namespace InternetHospital.DataAccess.Entities
         public virtual ICollection<ArticleEdition> AtricleEditions { get; set; }
         public virtual ICollection<Diploma> Diplomas { get; set; }
         public virtual ICollection<License> Licenses { get; set; }
+        public virtual ICollection<DoctorBlackList> DoctorBlackLists { get; set; }
     }
 }
