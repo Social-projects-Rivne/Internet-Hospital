@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models.DoctorBlackList;
 using Microsoft.AspNetCore.Http;
 
 namespace InternetHospital.BusinessLogic.Interfaces
@@ -21,6 +22,9 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<string> GetDoctorAvatar(string doctorId);
         (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
         FilteredModel<MyPatientModel> GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters);
+        FilteredModel<MyBlackList> GetBlackList(int doctorId, MyPatientsSearchParameters queryParameters);
         IEnumerable<string> GetAppointmentStatuses();
+        bool AddToBlackList(AddToBlackListModel creationModel, int doctorId);
+        bool RemoveFromBlackList(int[] patientId, int doctorId);
     }
 }
