@@ -30,6 +30,34 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("AllAppointments")]
+        public IActionResult GetPreviousAppointments([FromQuery] AppointmentHistoryParameters parameters)
+        {
+            if (!int.TryParse(User.Identity.Name, out int doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var result = _appointmentService.GetMyAppointments(parameters, doctorId);
+
+            return Ok(
+                new
+                {
+                    appointments = result.Entities,
+                    quantity = result.EntityAmount
+                }
+            );
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("appointmentStatuses")]
+        public IActionResult GetAppointmentStatuses()
+        {
+            var statuses = _appointmentService.GetAppointmentStatuses();
+            return Ok(statuses);
+        }
+
         [Authorize(Policy = "ApprovedPatients")]
         [HttpGet("forpatient")]
         public IActionResult GetPatientAppointments()
@@ -46,7 +74,7 @@ namespace InternetHospital.WebApi.Controllers
 
         [Authorize(Policy = "ApprovedPatients")]
         [HttpPatch("changeAccess")]
-        public IActionResult ChangePersonalInfoAccess([FromBody] AppointmentSubscribeModel model)
+        public IActionResult ChangePersonalInfoAccess([FromBody] ChangePatientInfoAccessModel model)
         {
             var result = _appointmentService.ChangeAccessForPersonalInfo(model);
 

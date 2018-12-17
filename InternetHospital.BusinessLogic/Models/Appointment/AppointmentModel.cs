@@ -12,6 +12,7 @@ namespace InternetHospital.BusinessLogic.Models.Appointment
         public string Status { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public IllnessHistoryModel IllnessHistory { get; set; }
     }
 
     public enum AppointmentStatuses

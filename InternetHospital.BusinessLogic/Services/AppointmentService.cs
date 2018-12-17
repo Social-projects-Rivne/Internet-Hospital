@@ -8,6 +8,7 @@ using System.Linq;
 using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -49,6 +50,71 @@ namespace InternetHospital.BusinessLogic.Services
         }
 
         /// <summary>
+        /// Get all appointments for current doctor with search params
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns>
+        /// returns a list of doctor's appointments
+        /// </returns>
+        public PageModel<IEnumerable<AppointmentModel>> GetMyAppointments(AppointmentHistoryParameters parameters, int doctorId)
+        {
+            DeleteUncommittedAppointments(doctorId);
+            var appointments = _context.Appointments
+               .OrderByDescending(a => a.StartTime)
+               .Include(a => a.IllnessHistory)
+               .Include(a => a.User)
+               .Include(a => a.Status)
+               .Where(a => a.DoctorId == doctorId);
+
+            if (!string.IsNullOrEmpty(parameters.SearchByName))
+            {
+                var lowerSearchParam = parameters.SearchByName.ToLower();
+                appointments = appointments.Where(a => a.User.FirstName.ToLower().Contains(lowerSearchParam)
+                                                       || a.User.SecondName.ToLower().Contains(lowerSearchParam));
+            }
+
+            if (parameters.From != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime >= parameters.From.Value);
+            }
+
+            if (parameters.Till != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime <= parameters.Till.Value);
+            }
+
+            if (parameters.Statuses.Count() > 0)
+            {
+                var predicate = PredicateBuilder.False<Appointment>();
+
+                foreach (var status in parameters.Statuses)
+                {
+                    predicate = predicate.Or(p => p.StatusId == status);
+                }
+
+                appointments = appointments.Where(predicate);
+            }
+
+            var appointmentsAmount = appointments.Count();
+            var appointmentsResult = PaginationHelper<Appointment>
+                .GetPageValues(appointments, parameters.PageCount, parameters.Page)
+                .Select(a => Mapper.Map<Appointment, AppointmentModel>(a))
+                .ToList();
+
+            return new PageModel<IEnumerable<AppointmentModel>>()
+            { EntityAmount = appointmentsAmount, Entities = appointmentsResult };
+        }
+
+        public IEnumerable<string> GetAppointmentStatuses()
+        {
+            var statuses = Enum.GetNames(typeof(AppointmentStatuses))
+                .Select(s => (s.Replace('_', ' ')).ToLower());
+            return statuses;
+        }
+
+        /// <summary>
         /// Get all reserved appointments for current patient
         /// </summary>
         /// <param name="patientId"></param>
@@ -77,12 +143,12 @@ namespace InternetHospital.BusinessLogic.Services
             return appointments.ToList();
         }
 
-        public bool ChangeAccessForPersonalInfo(AppointmentSubscribeModel model)
+        public bool ChangeAccessForPersonalInfo(ChangePatientInfoAccessModel model)
         {
             var appointment = _context.Appointments
-               .FirstOrDefault(a => a.Id == model.Id);
+               .FirstOrDefault(a => a.Id == model.AppointmentId);
 
-            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
+            if (appointment == null)
             {
                 return false;
             }

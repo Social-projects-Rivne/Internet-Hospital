@@ -147,33 +147,5 @@ namespace InternetHospital.WebApi.Controllers
 
             return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
-
-        [HttpGet("previousAppointments")]
-        [Authorize(Policy = "ApprovedDoctors")]
-        public IActionResult GetPreviousAppointments([FromQuery] AppointmentHistoryParameters parameters)
-        {
-            if (!int.TryParse(User.Identity.Name, out int doctorId))
-            {
-                return BadRequest(new { message = "Wrong claims" });
-            }
-
-            var result = _doctorService.GetPreviousAppointments(parameters, doctorId);
-
-            return Ok(
-                new
-                {
-                    appointments = result.Entities,
-                    quantity = result.EntityAmount
-                }
-            );
-        }
-
-        [HttpGet("appointmentStatuses")]
-        [Authorize(Policy = "ApprovedDoctors")]
-        public IActionResult GetAppointmentStatuses()
-        {
-            var statuses = _doctorService.GetAppointmentStatuses();
-            return Ok(statuses);
-        }
     }
 }

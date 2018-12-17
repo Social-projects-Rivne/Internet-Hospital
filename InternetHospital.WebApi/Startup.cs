@@ -65,7 +65,7 @@ namespace InternetHospital.WebApi
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<ApplicationContext>(opt =>
                     {
-                        opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection"),
+                        opt.UseSqlServer(Configuration.GetConnectionString("LocaleMsSql"),
                                       m => m.MigrationsAssembly("InternetHospital.WebApi"));
                     });
 
@@ -179,9 +179,8 @@ namespace InternetHospital.WebApi
                 config.CreateMap<Article, SendingArticleEditingModel>();
                 config.CreateMap<IllnessHistoryModel, IllnessHistory>();
                 config.CreateMap<IllnessHistory, IllnessHistoryModel>();
-                config.CreateMap<Appointment, PreviousAppointmentsModel>()
-                .ForMember(prevAppoint => prevAppoint.UserFullName, opt => opt.MapFrom(o => $"{o.User.FirstName} {o.User.SecondName}"))
-                .ForMember(prevAppoint => prevAppoint.Status, opt => opt.MapFrom(o => o.Status.Name));
+                config.CreateMap<Appointment, AppointmentModel>()
+                .ForMember(appointment => appointment.Status, opt => opt.MapFrom(o => o.Status.Name));
             });
 
             app.UseMvc();
