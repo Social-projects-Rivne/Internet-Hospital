@@ -301,7 +301,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 articles = articles.Where(a => a.Id < articlesFilteringModel.LastArticleId);
             }
-            articles = articles.OrderByDescending(a => a.Id).AsQueryable()
+            articles = articles.OrderByDescending(a => a.TimeOfCreation).AsQueryable()
                 .Take(articlesFilteringModel.AmountOfArticles)
                         .Include(a => a.Attachments)
                         .Include(a => a.Author)
@@ -310,7 +310,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 var result = new HomePageArticlesModel();
                 result.LastArticleId = articles.LastOrDefault().Id;
-                result.IsLast = _context.Articles.OrderByDescending(a => a.Id).Any(a => a.Id < result.LastArticleId);
+                result.IsLast = !_context.Articles.Any(a => a.Id < result.LastArticleId && a.ArticleStatus.Name == ACTIVE_ARTICLE);
                 result.Articles = articles.Select(a => new HomePageArticleModel
                 {
                     Title = a.Title,
