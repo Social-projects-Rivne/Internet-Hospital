@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Hubs;
 using InternetHospital.BusinessLogic.Interfaces;
@@ -17,6 +18,7 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly ApplicationContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;
         private const string NOTIFY_METHOD = "Notify";
+        private const string ONLOAD_METHOD = "OnLoad";
 
         public NotificationService(ApplicationContext context, IHubContext<NotificationHub> hubContext)
         {
@@ -88,6 +90,12 @@ namespace InternetHospital.BusinessLogic.Services
         {
             _hubContext.Clients.User(id.ToString())
                    .SendAsync(NOTIFY_METHOD, GetUnreadNotificationsCount(id));
+        }
+
+        public async Task OnLoad(int id)
+        {
+            await _hubContext.Clients.User(id.ToString())
+                   .SendAsync(ONLOAD_METHOD, GetUnreadNotificationsCount(id));
         }
     }
 }

@@ -41,9 +41,13 @@ namespace InternetHospital.WebApi.Controllers
             }
 
             var status = _notificationService.ChangeReadStatus(id, userId);
+            if (status)
+            {
+                _notificationService.OnLoad(userId);
+                return Ok();
+            }
 
-
-            return status ? (IActionResult)Ok() : BadRequest();
+            return BadRequest();
         }      
         
         [Authorize(Roles ="Admin, Moderator")]
