@@ -2,7 +2,7 @@
 {
     public class FeedbackSearchParams
     {
-        private const int MAX_PAGE_COUNT = 15;
+        private const int MAX_PAGE_COUNT = 50;
         private const int DEFAULT_PAGE = 1;
         public int Page { get; set; } = DEFAULT_PAGE;
         private int _pageCount = MAX_PAGE_COUNT;
