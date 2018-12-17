@@ -105,7 +105,7 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
         {
             var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
             return !_context.DoctorBlackLists.Any(b => b.UserId == patientId
-                                            && b.DoctorId == _blackList.DoctorId);
+                                            && b.DoctorId == _appointment.DoctorId);
         }
     }
 }
