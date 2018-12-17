@@ -296,15 +296,13 @@ namespace InternetHospital.BusinessLogic.Services
 
         public HomePageArticlesModel GetArticlesForHomePage(HomePageArticlesFilteringModel articlesFilteringModel)
         {
-            // We reverse articles for taking new and skip all articles which have bigger than last one
-            // Method implemented in such way, because if moderator add new article some articles could duplicate
-            // in home page.
-            var articles = _context.Articles.OrderByDescending(a => a.Id).AsQueryable();
+            var articles = _context.Articles.Where(a => a.ArticleStatus.Name == ACTIVE_ARTICLE);
             if (articlesFilteringModel.LastArticleId != null && articles.Any())
             {
-                articles = articles.SkipWhile(a => a.Id > articlesFilteringModel.LastArticleId);
+                articles = articles.Where(a => a.Id < articlesFilteringModel.LastArticleId);
             }
-            articles = articles.Take(articlesFilteringModel.AmountOfArticles)
+            articles = articles.OrderByDescending(a => a.Id).AsQueryable()
+                .Take(articlesFilteringModel.AmountOfArticles)
                         .Include(a => a.Attachments)
                         .Include(a => a.Author)
                         .Include(a => a.Types).ThenInclude(t => t.Type);
