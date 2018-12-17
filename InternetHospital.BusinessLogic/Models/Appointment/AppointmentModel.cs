@@ -10,6 +10,7 @@ namespace InternetHospital.BusinessLogic.Models.Appointment
         public string UserSecondName { get; set; }
         public string Address { get; set; }
         public string Status { get; set; }
+        public bool IsAllowPatientInfo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public IllnessHistoryModel IllnessHistory { get; set; }
