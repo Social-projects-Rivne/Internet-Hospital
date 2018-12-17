@@ -14,7 +14,6 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationContext _context;
         private Appointment _appointment;
-        private DoctorBlackList _blackList;
 
         public AppointmentSubscriptionValidator(ApplicationContext context, IHttpContextAccessor httpContextAccessor)
         {
