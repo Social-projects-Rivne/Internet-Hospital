@@ -293,5 +293,39 @@ namespace InternetHospital.BusinessLogic.Services
 
             return 0;
         }
+
+        public HomePageArticlesModel GetArticlesForHomePage(HomePageArticlesFilteringModel articlesFilteringModel)
+        {
+            // We reverse articles for taking new and skip all articles which have bigger than last one
+            // Method implemented in such way, because if moderator add new article some articles could duplicate
+            // in home page.
+            var articles = _context.Articles.OrderByDescending(a => a.Id).AsQueryable();
+            if (articlesFilteringModel.LastArticleId != null && articles.Any())
+            {
+                articles = articles.SkipWhile(a => a.Id > articlesFilteringModel.LastArticleId);
+            }
+            articles = articles.Take(articlesFilteringModel.AmountOfArticles)
+                        .Include(a => a.Attachments)
+                        .Include(a => a.Author)
+                        .Include(a => a.Types).ThenInclude(t => t.Type);
+            if (articles.Any())
+            {
+                var result = new HomePageArticlesModel();
+                result.LastArticleId = articles.LastOrDefault().Id;
+                result.IsLast = _context.Articles.OrderByDescending(a => a.Id).Any(a => a.Id < result.LastArticleId);
+                result.Articles = articles.Select(a => new HomePageArticleModel
+                {
+                    Title = a.Title,
+                    Types = a.Types.Select(t => t.Type.Name).ToList(),
+                    DateOfCreation = a.TimeOfCreation,
+                    ShortDescription = a.ShortDescription,
+                    Author = $"{a.Author.FirstName} {a.Author.SecondName}",
+                    PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview).Select(att => att.Url).ToList()
+                }).ToList();
+                return result;
+            }
+
+            return null;
+        }
     }
 }
