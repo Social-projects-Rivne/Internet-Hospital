@@ -123,29 +123,9 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var status = _appointmentService.UnsubscribeForAppointment(model.Id, patientId);
+            var status = _appointmentService.UnsubscribeForAppointment(model.Id);
 
             return status ? (IActionResult)Ok() : BadRequest();
-        }
-        
-        [Authorize(Policy = "ApprovedDoctors")]
-        [HttpGet("history")]
-        public IActionResult GetAppointmentsHistory([FromQuery] AppointmentHistoryParameters parameters)
-        {
-            if (!int.TryParse(User.Identity.Name, out var doctorId))
-            {
-                return BadRequest(new { message = "Wrong claims" });
-            }
-
-            var result = _appointmentService.GetMyAppointmentsHistory(parameters, doctorId);
-
-            return Ok(
-                new
-                {
-                    appointments = result.Entities,
-                    quantity = result.EntityAmount
-                }
-            );
         }
     }
 }

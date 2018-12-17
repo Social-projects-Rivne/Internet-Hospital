@@ -7,19 +7,21 @@ using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.UnitTests.TestHelpers;
+using AutoMapper;
+using System;
 
 namespace InternetHospital.UnitTests.Appointments
 {
     /// <summary>
     /// Represents unit tests for AppointmentService.
     /// </summary>
-    public class AppointmentServiceUnitTests
+    public class AppointmentServiceUnitTests : IDisposable
     {
         [Fact]
         public void ShouldGetMyAppointments()
         {
             // arrange
-            const int ALLOWED_STATUS_ID = 1;
+            const int ALLOWED_STATUS_ID = 2;
 
             // get in memory db options
             var options = DbContextHelper.GetDbOptions(nameof(ShouldGetMyAppointments));
@@ -67,21 +69,238 @@ namespace InternetHospital.UnitTests.Appointments
             }
         }
 
-        private List<AppointmentModel> GetExpectedAppointments(Appointment apoinment)
+        [Fact]
+        public void ShouldGetPatientsAppointments()
+        {
+            // arrange
+            const int ALLOWED_STATUS_ID = 2;
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldGetPatientsAppointments));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                .With(a => a.Status, new AppointmentStatus
+                {
+                    Id = ALLOWED_STATUS_ID
+                })
+                .With(a => a.UserId, 1)
+                .With(a => a.User, new User
+                {
+                    Id = 1
+                })
+                .Create();
+
+            var expectedData = GetExpectedPatientAppointments(fixtureAppointment);
+
+            using (var context = new ApplicationContext(options))
+            {
+                context.Appointments.Add(fixtureAppointment);
+                context.SaveChanges();
+            }
+
+            var patientId = fixtureAppointment.UserId;
+
+            using (var context = new ApplicationContext(options))
+            {
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var appointments = appointmentService.GetPatientsAppointments((int)patientId);
+
+                // assert
+                appointments.Should().BeEquivalentTo(expectedData);
+            }
+        }
+
+        [Fact]
+        public void ShouldAddAppointment()
+        {
+            // arrange
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldAddAppointment));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+
+            var fixtureAppointment = fixture.Build<AppointmentCreationModel>()
+                .Create();
+
+            var fixtureDoctor = fixture.Build<Doctor>()
+                .Create();
+
+            var doctorId = fixtureDoctor.UserId;
+
+            Mapper.Initialize(cfg => cfg.CreateMap<AppointmentCreationModel, Appointment>());
+
+            using (var context = new ApplicationContext(options))
+            {
+                context.Doctors.Add(fixtureDoctor);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationContext(options))
+            {
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var status = appointmentService.AddAppointment(fixtureAppointment, doctorId);
+
+                // assert
+                status.Should().BeTrue();
+            }
+        }
+
+        [Fact]
+        public void ShouldDeleteAppointment()
+        {
+            // arrange
+            const int ALLOWED_STATUS_ID = 1;
+            const int DOCTOR_ID = 1;
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldDeleteAppointment));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                                           .With(a => a.Status, new AppointmentStatus
+                                           {
+                                               Id = ALLOWED_STATUS_ID
+                                           })
+                                           .With(a => a.DoctorId, DOCTOR_ID)
+                                           .With(a => a.Doctor, new Doctor
+                                           {
+                                               UserId = DOCTOR_ID
+                                           })
+                                           .Create();
+
+            var appointmentId = fixtureAppointment.Id;
+            using (var context = new ApplicationContext(options))
+            {
+                context.Appointments.Add(fixtureAppointment);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationContext(options))
+            {
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var appointments = appointmentService.DeleteAppointment(appointmentId, DOCTOR_ID);
+
+                // assert
+                appointments.status.Should().BeTrue();
+            }
+        }
+
+        private List<AppointmentModel> GetExpectedAppointments(Appointment appointment)
         {
             var model = new AppointmentModel
-                        {
-                            Id = apoinment.Id,
-                            UserId = apoinment.UserId,
-                            UserFirstName = apoinment.User.FirstName,
-                            UserSecondName = apoinment.User.SecondName,
-                            Address = apoinment.Address,
-                            StartTime = apoinment.StartTime,
-                            EndTime = apoinment.EndTime,
-                            Status = apoinment.Status.Name
-                        };
+            {
+                Id = appointment.Id,
+                UserId = appointment.UserId,
+                UserFirstName = appointment.User.FirstName,
+                UserSecondName = appointment.User.SecondName,
+                Address = appointment.Address,
+                StartTime = appointment.StartTime,
+                EndTime = appointment.EndTime,
+                Status = appointment.Status.Name
+            };
 
             return new List<AppointmentModel> { model };
+        }
+
+        private List<AppointmentForPatient> GetExpectedPatientAppointments(Appointment appointment)
+        {
+            var model = new AppointmentForPatient
+            {
+                Id = appointment.Id,
+                UserId = appointment.UserId,
+                DoctorFirstName = appointment.Doctor.User.FirstName,
+                DoctorSecondName = appointment.Doctor.User.SecondName,
+                DoctorSpecialication = appointment.Doctor.Specialization.Name,
+                Address = appointment.Address,
+                StartTime = appointment.StartTime,
+                EndTime = appointment.EndTime,
+                Status = appointment.Status.Name
+            };
+
+            return new List<AppointmentForPatient> { model };
+        }
+
+        [Fact]
+        public void ShouldSubscribeForAppointment()
+        {
+            // arrange
+            const int ALLOWED_STATUS_ID = 1;
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldSubscribeForAppointment));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+
+            var fixturePatient = fixture.Build<User>()
+                .Create();
+
+            var patientId = fixturePatient.Id;
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                                           .With(a => a.Status, new AppointmentStatus
+                                           {
+                                               Id = ALLOWED_STATUS_ID
+                                           })
+                                           .With(a => a.UserId)
+                                           .Create();
+
+           
+            using (var context = new ApplicationContext(options))
+            {
+                context.Appointments.Add(fixtureAppointment);
+                context.SaveChanges();
+
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var status = appointmentService.SubscribeForAppointment(fixtureAppointment.Id, patientId);
+
+                // assert
+                status.Should().BeTrue();
+            }
+        }
+
+        [Fact]
+        public void ShouldUnsubscribeForAppointment()
+        {
+            // arrange
+            const int ALLOWED_STATUS_ID = 2;
+            var options = DbContextHelper.GetDbOptions(nameof(ShouldUnsubscribeForAppointment));
+            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
+            var fixturePatient = fixture.Build<User>()
+                .Create();
+
+            var patientId = fixturePatient.Id;
+
+            var fixtureAppointment = fixture.Build<Appointment>()
+                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
+                                           .With(a => a.Status, new AppointmentStatus
+                                           {
+                                               Id = ALLOWED_STATUS_ID
+                                           })
+                                           .With(a => a.UserId)
+                                           .Create();
+
+                 using (var context = new ApplicationContext(options))
+            {
+                context.Appointments.Add(fixtureAppointment);
+                context.SaveChanges();
+
+                var appointmentService = new AppointmentService(context);
+
+                // act
+                var status = appointmentService.UnsubscribeForAppointment(fixtureAppointment.Id);
+
+                // assert
+                status.Should().BeTrue();
+            }
+        }
+
+        public void Dispose()
+        {
+            // if we use AutoMapper we must reset it after each test
+            Mapper.Reset();
         }
     }
 }

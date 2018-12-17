@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace InternetHospital.BusinessLogic.Models.Appointment
 {
@@ -17,7 +16,7 @@ namespace InternetHospital.BusinessLogic.Models.Appointment
         }
         public DateTime? From { get; set; }
         public DateTime? Till { get; set; } = null;
-        public List<int> Statuses { get; set; } = new List<int>();
+        public IEnumerable<int> Statuses { get; set; } = new List<int>();
         public string SearchByName { get; set; }
     }
 }

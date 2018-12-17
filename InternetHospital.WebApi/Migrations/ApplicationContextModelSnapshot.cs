@@ -72,6 +72,117 @@ namespace InternetHospital.WebApi.Migrations
                     );
                 });
 
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArticleStatusId");
+
+                    b.Property<int>("AuthorId");
+
+                    b.Property<string>("ShortDescription");
+
+                    b.Property<string>("Text");
+
+                    b.Property<DateTime>("TimeOfCreation");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleStatusId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArticleId");
+
+                    b.Property<bool>("IsOnPreview");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("ArticleAttachments");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleEdition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArticleId");
+
+                    b.Property<int>("AuthorId");
+
+                    b.Property<DateTime>("Time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("ArticleEditions");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ArticleStatuses");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Active" },
+                        new { Id = 2, Name = "Deleted" }
+                    );
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ArticleTypes");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleTypeArticle", b =>
+                {
+                    b.Property<int>("ArticleId");
+
+                    b.Property<int>("TypeId");
+
+                    b.HasKey("ArticleId", "TypeId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("ArticleTypeArticles");
+                });
+
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Diploma", b =>
                 {
                     b.Property<int>("Id")
@@ -82,13 +193,13 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<string>("DiplomaURL");
 
-                    b.Property<int>("DoctorId");
-
                     b.Property<bool?>("IsValid");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Diplomas");
                 });
@@ -104,8 +215,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.Property<bool?>("IsApproved")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
-
-                    b.Property<string>("LicenseURL");
 
                     b.Property<int?>("SpecializationId");
 
@@ -198,8 +307,50 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.ToTable("IllnessHistories");
                 });
+                
+              modelBuilder.Entity("InternetHospital.DataAccess.Entities.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
+                    b.Property<DateTime>("Date");
+
+                    b.Property<bool>("IsRead");
+
+                    b.Property<string>("Message");
+
+                    b.Property<int>("RecepientId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecepientId");
+
+                    b.ToTable("Notifications");
+                });
+
+              modelBuilder.Entity("InternetHospital.DataAccess.Entities.License", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddedTime");
+
+                    b.Property<bool?>("IsValid");
+
+                    b.Property<string>("LicenseURL");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Licenses");
+                });
+
+              modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,17 +480,19 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<string>("LicenseURL");
-
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Role");
 
                     b.Property<string>("SecondName");
 
+                    b.Property<string>("Specialization");
+
                     b.Property<string>("ThirdName");
 
                     b.Property<int>("UserId");
+
+                    b.Property<bool?>("isRejected");
 
                     b.HasKey("Id");
 
@@ -543,11 +696,58 @@ namespace InternetHospital.WebApi.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Article", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.ArticleStatus", "ArticleStatus")
+                        .WithMany("Articles")
+                        .HasForeignKey("ArticleStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "Author")
+                        .WithMany("Articles")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleAttachment", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.Article", "Article")
+                        .WithMany("Attachments")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleEdition", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.Article", "Article")
+                        .WithMany("ArticleEditions")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "Author")
+                        .WithMany("AtricleEditions")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.ArticleTypeArticle", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.Article", "Article")
+                        .WithMany("Types")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternetHospital.DataAccess.Entities.ArticleType", "Type")
+                        .WithMany("Articles")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Diploma", b =>
                 {
-                    b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
                         .WithMany("Diplomas")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -590,6 +790,22 @@ namespace InternetHospital.WebApi.Migrations
                     b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
                         .WithMany("IllnessHistories")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Notification", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "Recepient")
+                        .WithMany("Notifications")
+                        .HasForeignKey("RecepientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+                
+            modelBuilder.Entity("InternetHospital.DataAccess.Entities.License", b =>
+                {
+                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
+                        .WithMany("Licenses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>

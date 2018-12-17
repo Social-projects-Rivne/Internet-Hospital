@@ -27,20 +27,10 @@ namespace InternetHospital.BusinessLogic.Services
             _uploadingFiles = uploadingFiles;
             _userManager = userManager;
         }
-
-        public async Task<PatientDetailedModel> Get(int id)
+        public async Task<(IEnumerable<IllnessHistoryModel> histories, int count)> GetFilteredHistories(IllnessHistorySearchModel queryParameters, string id)
         {
-            PatientDetailedModel returnedPatient = null;
-            var searchedPatient = await _context.Users.Include(p=> p.IllnessHistories).FirstOrDefaultAsync(pa=> pa.Id == id);
-            if (searchedPatient != null)
-            {  
-                returnedPatient = Mapper.Map<User, PatientDetailedModel>(searchedPatient);
-            }
-            return returnedPatient;
-        }
-        public (IEnumerable<IllnessHistoryModel> histories, int count) GetFilteredHistories(IllnessHistorySearchModel queryParameters)
-        {
-            var histories = _context.IllnessHistories.OrderBy(d => d.ConclusionTime).AsQueryable();
+            var patient = await _userManager.FindByIdAsync(id);
+            var histories = _context.IllnessHistories.Where(p => p.UserId == patient.Id).OrderBy(d => d.ConclusionTime).AsQueryable();
             if (queryParameters.SearchFromDate != null)
             {
                 var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
@@ -66,14 +56,15 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     AppointmentId = x.AppointmentId ?? default,
                     Complaints = x.Complaints,
-                    FinishAppointmentTime = x.ConclusionTime,
+                    FinishAppointmentTimeStamp = ((DateTimeOffset)x.ConclusionTime).ToUnixTimeMilliseconds(),
                     Diagnose = x.Diagnose,
                     DiseaseAnamnesis = x.DiseaseAnamnesis,
                     LifeAnamnesis = x.LifeAnamnesis,
                     LocalStatus = x.LocalStatus,
                     ObjectiveStatus = x.ObjectiveStatus,
                     SurveyPlan = x.SurveyPlan,
-                    TreatmentPlan = x.TreatmentPlan
+                    TreatmentPlan = x.TreatmentPlan,
+                    DoctorName = $"{x.Appointment.Doctor.User.FirstName} {x.Appointment.Doctor.User.SecondName} {x.Appointment.Doctor.User.ThirdName}"
                 });
 
             return historiesModel;
@@ -81,8 +72,12 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<PatientModel> GetPatientProfile(int userId)
         {
+            PatientModel patientModel = null;
             var patient = await _userManager.FindByIdAsync(userId.ToString());
-            var patientModel = Mapper.Map<User, PatientModel>(patient);
+            if (patient != null)
+            {
+                patientModel = Mapper.Map<User, PatientModel>(patient);
+            }
             return patientModel;
         }
 

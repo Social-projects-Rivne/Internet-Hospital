@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Models.Appointment;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -145,6 +145,48 @@ namespace InternetHospital.WebApi.Controllers
             var (status, message) = _doctorService.FillIllnessHistory(illnessHistory);
 
             return status ? (IActionResult)Ok() : BadRequest(new { message });
+        }
+
+        [HttpGet("previousAppointments")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult GetPreviousAppointments([FromQuery] AppointmentHistoryParameters parameters)
+        {
+            if (!int.TryParse(User.Identity.Name, out int doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var result = _doctorService.GetPreviousAppointments(parameters, doctorId);
+
+            return Ok(
+                new
+                {
+                    appointments = result.Entities,
+                    quantity = result.EntityAmount
+                }
+            );
+        }
+
+        [HttpGet("appointmentStatuses")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult GetAppointmentStatuses()
+        {
+            var statuses = _doctorService.GetAppointmentStatuses();
+            return Ok(statuses);
+        }
+
+        [HttpGet("mypatients")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult GetMyPatients([FromQuery] MyPatientsSearchParameters patientsSearch)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var pats = _doctorService.GetMyPatients(doctorId, patientsSearch);
+
+            return Ok(pats);
         }
     }
 }
