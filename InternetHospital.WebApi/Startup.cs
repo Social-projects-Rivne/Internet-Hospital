@@ -181,6 +181,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<IllnessHistory, IllnessHistoryModel>();
                 config.CreateMap<Appointment, AppointmentModel>()
                 .ForMember(appointment => appointment.Status, opt => opt.MapFrom(o => o.Status.Name));
+                config.CreateMap<User, AllowedPatientInfoModel>();
             });
 
             app.UseMvc();

@@ -32,7 +32,7 @@ namespace InternetHospital.WebApi.Controllers
 
         [Authorize(Policy = "ApprovedDoctors")]
         [HttpGet("AllAppointments")]
-        public IActionResult GetPreviousAppointments([FromQuery] AppointmentHistoryParameters parameters)
+        public IActionResult GetAllAppointments([FromQuery] AppointmentHistoryParameters parameters)
         {
             if (!int.TryParse(User.Identity.Name, out int doctorId))
             {

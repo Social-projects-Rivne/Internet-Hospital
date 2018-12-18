@@ -230,6 +230,28 @@ namespace InternetHospital.BusinessLogic.Services
             return (status, message);
         }
 
+        public AllowedPatientInfoModel GetPatientInfo(int userId, int doctorId)
+        {
+            var appointment = _context
+                                .Appointments
+                                .Where(a => a.UserId == userId
+                                        && a.DoctorId == doctorId
+                                        && a.IsAllowPatientInfo == true
+                                        && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                                .Include(a => a.User)
+                                    .ThenInclude(u => u.IllnessHistories)
+                                .SingleOrDefault();
+
+            if(appointment == null)
+            {
+                return null;
+            }
+
+            var patientProfile = Mapper.Map<User, AllowedPatientInfoModel>(appointment.User);
+
+            return patientProfile;
+        }
+
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
         {
             bool result = true;
