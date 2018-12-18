@@ -13,6 +13,5 @@ namespace InternetHospital.BusinessLogic.Models
         public string AvatarURL { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime? BirthDate { get; set; }
-        public IllnessHistoryModel IllnessHistory { get; set; }
     }
 }

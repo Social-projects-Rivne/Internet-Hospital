@@ -19,5 +19,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<string> GetDoctorAvatar(string doctorId);
         (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
         AllowedPatientInfoModel GetPatientInfo(int userId, int doctorId);
+        IEnumerable<IllnessHistoryModel> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId);
     }
 }

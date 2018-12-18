@@ -159,7 +159,21 @@ namespace InternetHospital.WebApi.Controllers
 
             var patient = _doctorService.GetPatientInfo(userId, doctorId);
 
-            return patient != null ? (IActionResult)Ok() : BadRequest();
+            return patient != null ? (IActionResult)Ok(patient) : BadRequest();
+        }
+
+        [HttpGet("GetPatientIllnessHistory")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult GetPatientIllnessHistory([FromQuery] IllnessHistorySearchModel queryParameters)
+        {
+            if (!int.TryParse(User.Identity.Name, out int doctorId))
+            {
+                return BadRequest();
+            }
+
+            var illnessHistories = _doctorService.GetPatientIllnessHistory(queryParameters, doctorId);
+
+            return illnessHistories != null ? (IActionResult)Ok(illnessHistories) : BadRequest();
         }
     }
 }

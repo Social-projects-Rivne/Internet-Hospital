@@ -239,7 +239,6 @@ namespace InternetHospital.BusinessLogic.Services
                                         && a.IsAllowPatientInfo == true
                                         && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
                                 .Include(a => a.User)
-                                    .ThenInclude(u => u.IllnessHistories)
                                 .SingleOrDefault();
 
             if(appointment == null)
@@ -250,6 +249,66 @@ namespace InternetHospital.BusinessLogic.Services
             var patientProfile = Mapper.Map<User, AllowedPatientInfoModel>(appointment.User);
 
             return patientProfile;
+        }
+
+        public IEnumerable<IllnessHistoryModel> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId)
+        {
+            var appointment = _context
+                    .Appointments
+                    .Where(a => a.UserId == queryParameters.UserId
+                            && a.DoctorId == doctorId
+                            && a.IsAllowPatientInfo == true
+                            && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                    .Include(a => a.User)
+                        .ThenInclude(u => u.IllnessHistories)
+                    .SingleOrDefault();
+
+            if (appointment == null)
+            {
+                return null;
+            }
+
+            var illnessHistories = appointment.User.IllnessHistories.AsQueryable();
+
+            if (queryParameters.SearchFromDate != null)
+            {
+                var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
+                illnessHistories = illnessHistories
+                    .Where(i => i.ConclusionTime >= fromDate);
+            }
+            if (queryParameters.SearchToDate != null)
+            {
+                var toDate = Convert.ToDateTime(queryParameters.SearchToDate);
+                toDate = toDate.AddDays(1);
+                illnessHistories = illnessHistories.
+                    Where(d => d.ConclusionTime <= toDate);
+            }
+            var historiesResult = PaginationHelper(illnessHistories, queryParameters.PageCount, queryParameters.Page).ToList();
+
+           // var patientIllnesses = Mapper.Map<ICollection<IllnessHistory>, ICollection<IllnessHistoryModel>>(appointment.User.IllnessHistories);
+
+            return historiesResult;
+        }
+
+        private IQueryable<IllnessHistoryModel> PaginationHelper(IQueryable<IllnessHistory> histories, int pageCount, int page)
+        {
+            var historiesModel = histories
+                .Skip(pageCount * (page - 1))
+                .Take(pageCount).Select(x => new IllnessHistoryModel
+                {
+                    AppointmentId = x.AppointmentId ?? default,
+                    Complaints = x.Complaints,
+                    FinishAppointmentTimeStamp = ((DateTimeOffset)x.ConclusionTime).ToUnixTimeMilliseconds(),
+                    Diagnose = x.Diagnose,
+                    DiseaseAnamnesis = x.DiseaseAnamnesis,
+                    LifeAnamnesis = x.LifeAnamnesis,
+                    LocalStatus = x.LocalStatus,
+                    ObjectiveStatus = x.ObjectiveStatus,
+                    SurveyPlan = x.SurveyPlan,
+                    TreatmentPlan = x.TreatmentPlan
+                });
+
+            return historiesModel;
         }
 
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)

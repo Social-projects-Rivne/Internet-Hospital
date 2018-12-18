@@ -138,7 +138,7 @@ namespace InternetHospital.BusinessLogic.Services
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     Status = a.Status.Name,
-                    isAllowPatientInfo = a.IsAllowPatientInfo
+                    IsAllowPatientInfo = a.IsAllowPatientInfo
                 });
             return appointments.ToList();
         }
