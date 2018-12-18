@@ -13,6 +13,7 @@ using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Models.Appointment;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using InternetHospital.BusinessLogic.Models.DoctorBlackList;
 
 namespace InternetHospital.BusinessLogic.Services
 {
@@ -22,6 +23,12 @@ namespace InternetHospital.BusinessLogic.Services
         private readonly UserManager<User> _userManager;
         private readonly IFilesService _uploadingFiles;
         const string DOCTOR = "Doctor";
+        private const string SORT_BY_FIRST_NAME = "firstName";
+        private const string SORT_BY_SECOND_NAME = "secondName";
+        private const string SORT_BY_THIRD_NAME = "thirdName";
+        private const string SORT_BY_EMAIL = "email";
+        private const string SORT_BY_DATE_OF_BANNED = "dateOfBanned";
+        private const string ORDER_ASC = "asc";
 
         public DoctorService(ApplicationContext context, IFilesService uploadingFiles, UserManager<User> userManager)
         {
@@ -52,8 +59,8 @@ namespace InternetHospital.BusinessLogic.Services
                     Specialization = searchedDoctor.Specialization.Name,
                     DoctorsInfo = searchedDoctor.DoctorsInfo,
                     AvatarURL = searchedDoctor.User.AvatarURL,
-                    //LicenseURL = searchedDoctor.User.Licenses
-                    //                                .LastOrDefault(l => l.IsValid == true).LicenseURL,
+                    LicenseURL = searchedDoctor.User.Licenses
+                                                    .LastOrDefault(l => l.IsValid == true)?.LicenseURL,
                     DiplomasURL = searchedDoctor.User.Diplomas.Where(d => d.IsValid == true)
                                                              .Select(d => d.DiplomaURL).ToArray()
                 };
@@ -330,6 +337,234 @@ namespace InternetHospital.BusinessLogic.Services
                 result = false;
             }
             return result;
+        }
+
+        /// <summary>
+        /// Get all patients who had appointments for current doctor
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <param name="queryParameters"></param>
+        /// <returns>
+        /// returns a collection of doctor's patients
+        /// </returns>
+        public FilteredModel<MyPatientModel> GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters)
+        {
+           
+            // get all patients of current doctor
+            var patients = _context.Users.Where(x => x.Appointments.Any(a => a.DoctorId == doctorId))
+                .Select(p => new MyPatientModel
+                {
+                    Id = p.Id,
+                    PatientFirstName = p.FirstName,
+                    PatientSecondName = p.SecondName,
+                    PatientThirdName = p.ThirdName,
+                    PatientEmail = p.Email,
+                });
+
+            // check search parameter
+            if (!string.IsNullOrEmpty(queryParameters.SearchByName))
+            {
+                var lowerSearchParam = queryParameters.SearchByName.ToLower();
+                patients = patients.Where(m => m.PatientFirstName.ToLower().Contains(lowerSearchParam)
+                                                   || m.PatientSecondName.ToLower().Contains(lowerSearchParam)
+                                                   || m.PatientThirdName.ToLower().Contains(lowerSearchParam));
+            }
+
+            // check order parameter
+            if (!string.IsNullOrEmpty(queryParameters.Order))
+            {
+                patients = SortMyPatients(patients, queryParameters.Sort, queryParameters.Order);
+            }
+
+            // declare new FilteredModel
+            FilteredModel<MyPatientModel> fModel = new FilteredModel<MyPatientModel>();
+            fModel.Amount = patients.Count();
+
+            patients = PaginationHelper<MyPatientModel>
+                .GetPageValues(patients, queryParameters.PageSize, queryParameters.Page);
+
+            fModel.Results = patients.ToList();
+
+            return fModel;
+        }
+
+        /// <summary>
+        /// Sorting patients by passed parameter
+        /// </summary>
+        /// <param name="patients"></param>
+        /// <param name="sortField"></param>
+        /// <param name="orderBy"></param>
+        /// <returns>
+        /// returns a collection of sorting patients
+        /// </returns>
+        private IQueryable<MyPatientModel> SortMyPatients(IQueryable<MyPatientModel> patients, string sortField, string orderBy)
+        {
+            if (orderBy == ORDER_ASC)
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_EMAIL:
+                        patients = patients.OrderBy(p => p.PatientEmail);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderBy(p => p.PatientFirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderBy(p => p.PatientSecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderBy(p => p.PatientThirdName);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_EMAIL:
+                        patients = patients.OrderByDescending(p => p.PatientEmail);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderByDescending(p => p.PatientFirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderByDescending(p => p.PatientSecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderByDescending(p => p.PatientThirdName);
+                        break;
+                }
+            }
+            return patients;
+        }
+
+        public bool AddToBlackList(AddToBlackListModel creationModel, int doctorId)
+        { 
+            try
+            {                
+                foreach(var patientId in creationModel.id)
+                {
+                    var blackListItem = new DoctorBlackList();
+
+                    blackListItem.DoctorId = doctorId;
+                    blackListItem.UserId = patientId;
+                    blackListItem.DateOfBlock = DateTime.Now;
+                    blackListItem.Description = creationModel.description;
+
+                    _context.DoctorBlackLists.Add(blackListItem);
+                    _context.SaveChanges();
+                }
+                
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public FilteredModel<MyBlackList> GetBlackList(int doctorId, MyPatientsSearchParameters queryParameters)
+        {
+            
+            // get all patients of current doctor
+            var patients = _context.DoctorBlackLists.Where(x => x.DoctorId == doctorId)
+                .Select(p => new MyBlackList
+                {
+                     PatientId = p.UserId,
+                     PatientFirstName = p.User.FirstName,
+                     PatientSecondName = p.User.SecondName,
+                     PatientThirdName = p.User.ThirdName,
+                     DateOfBanned = p.DateOfBlock,
+                     Description = p.Description
+                 });
+
+            // check search parameter
+            if (!string.IsNullOrEmpty(queryParameters.SearchByName))
+            {
+                var lowerSearchParam = queryParameters.SearchByName.ToLower();
+                patients = patients.Where(m => m.PatientFirstName.ToLower().Contains(lowerSearchParam)
+                                                   || m.PatientSecondName.ToLower().Contains(lowerSearchParam)
+                                                   || m.PatientThirdName.ToLower().Contains(lowerSearchParam));
+            }
+
+            // check order parameter
+            if (!string.IsNullOrEmpty(queryParameters.Order))
+            {
+                patients = SortMyBlackList(patients, queryParameters.Sort, queryParameters.Order);
+            }
+
+            // declare new FilteredModel
+            FilteredModel<MyBlackList> fModel = new FilteredModel<MyBlackList>();
+            fModel.Amount = patients.Count();
+
+            patients = PaginationHelper<MyBlackList>
+                .GetPageValues(patients, queryParameters.PageSize, queryParameters.Page);
+
+            fModel.Results = patients.ToList();
+
+            return fModel;
+        }
+
+        private IQueryable<MyBlackList> SortMyBlackList(IQueryable<MyBlackList> patients, string sortField, string orderBy)
+        {
+            if (orderBy == ORDER_ASC)
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_DATE_OF_BANNED:
+                        patients = patients.OrderBy(p => p.DateOfBanned);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderBy(p => p.PatientFirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderBy(p => p.PatientSecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderBy(p => p.PatientThirdName);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortField)
+                {
+                    case SORT_BY_DATE_OF_BANNED:
+                        patients = patients.OrderByDescending(p => p.DateOfBanned);
+                        break;
+                    case SORT_BY_FIRST_NAME:
+                        patients = patients.OrderByDescending(p => p.PatientFirstName);
+                        break;
+                    case SORT_BY_SECOND_NAME:
+                        patients = patients.OrderByDescending(p => p.PatientSecondName);
+                        break;
+                    case SORT_BY_THIRD_NAME:
+                        patients = patients.OrderByDescending(p => p.PatientThirdName);
+                        break;
+                }
+            }
+            return patients;
+        }
+
+        public bool RemoveFromBlackList(int[] patientsId, int doctorId)
+        {
+            try
+            {
+                foreach (var patientId in patientsId)
+                {
+                    var blackListItem = _context.DoctorBlackLists
+                .FirstOrDefault(dbl => dbl.DoctorId == doctorId && dbl.UserId == patientId);
+
+                    _context.DoctorBlackLists.Remove(blackListItem);
+                    _context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

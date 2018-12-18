@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models.DoctorBlackList;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -174,6 +174,62 @@ namespace InternetHospital.WebApi.Controllers
             var illnessHistories = _doctorService.GetPatientIllnessHistory(queryParameters, doctorId);
 
             return illnessHistories != null ? (IActionResult)Ok(illnessHistories) : BadRequest();
+        }
+
+        [HttpGet("mypatients")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult GetMyPatients([FromQuery] MyPatientsSearchParameters patientsSearch)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var pats = _doctorService.GetMyPatients(doctorId, patientsSearch);
+
+            return Ok(pats);
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("addtoblacklist")]
+        public IActionResult AddToBlackList([FromBody] AddToBlackListModel creationModel)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _doctorService.AddToBlackList(creationModel, doctorId);
+
+            return status ? (IActionResult)Ok() : BadRequest();
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("myblacklist")]
+        public IActionResult GetMyBlackList([FromQuery] MyPatientsSearchParameters creationModel)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var blackList = _doctorService.GetBlackList(doctorId, creationModel);
+
+            return Ok(blackList);
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("removefromblacklist")]
+        public IActionResult RemoveFromBlackList([FromBody] RemoveFromBlackListModel creationModel)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _doctorService.RemoveFromBlackList(creationModel.id, doctorId);
+
+            return status ? (IActionResult)Ok() : BadRequest();
         }
     }
 }
