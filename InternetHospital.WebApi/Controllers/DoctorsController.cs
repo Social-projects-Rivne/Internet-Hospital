@@ -43,7 +43,7 @@ namespace InternetHospital.WebApi.Controllers
         {
             var doctorId = User.Identity?.Name;
             bool result = await _doctorService.UpdateDoctorAvatar(doctorId, file);
-            if(result)
+            if (result)
             {
                 return Ok();
             }
@@ -53,7 +53,7 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("getAvatar")]
         [Authorize]
         public async Task<IActionResult> GetAvatar()
-       {
+        {
             var doctorId = User.Identity?.Name;
             string avatarURL = await _doctorService.GetDoctorAvatar(doctorId);
             if (!string.IsNullOrWhiteSpace(avatarURL))
@@ -131,7 +131,7 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest();
             }
 
-            var doctor =  _doctorService.GetDoctorProfile(userId);
+            var doctor = _doctorService.GetDoctorProfile(userId);
             if (doctor != null)
             {
                 return Ok(doctor);
@@ -173,7 +173,13 @@ namespace InternetHospital.WebApi.Controllers
 
             var illnessHistories = _doctorService.GetPatientIllnessHistory(queryParameters, doctorId);
 
-            return illnessHistories != null ? (IActionResult)Ok(illnessHistories) : BadRequest();
+            return illnessHistories != null ?
+                (IActionResult)Ok(new
+                {
+                    illnesses = illnessHistories.Entities,
+                    amount = illnessHistories.EntityAmount
+                })
+            : BadRequest();
         }
 
         [HttpGet("mypatients")]

@@ -21,7 +21,7 @@ namespace InternetHospital.BusinessLogic.Interfaces
         Task<string> GetDoctorAvatar(string doctorId);
         (bool status, string message) FillIllnessHistory(IllnessHistoryModel illnessModel);
         AllowedPatientInfoModel GetPatientInfo(int userId, int doctorId);
-        IEnumerable<IllnessHistoryModel> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId);
+        PageModel<IEnumerable<IllnessHistoryModel>> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId);
         FilteredModel<MyPatientModel> GetMyPatients(int doctorId, MyPatientsSearchParameters queryParameters);
         FilteredModel<MyBlackList> GetBlackList(int doctorId, MyPatientsSearchParameters queryParameters);
         bool AddToBlackList(AddToBlackListModel creationModel, int doctorId);

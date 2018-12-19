@@ -258,7 +258,7 @@ namespace InternetHospital.BusinessLogic.Services
             return patientProfile;
         }
 
-        public IEnumerable<IllnessHistoryModel> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId)
+        public PageModel<IEnumerable<IllnessHistoryModel>> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId)
         {
             var appointment = _context
                     .Appointments
@@ -290,11 +290,12 @@ namespace InternetHospital.BusinessLogic.Services
                 illnessHistories = illnessHistories.
                     Where(d => d.ConclusionTime <= toDate);
             }
+
+            var historyAmount = illnessHistories.Count();
             var historiesResult = PaginationHelper(illnessHistories, queryParameters.PageCount, queryParameters.Page).ToList();
 
-           // var patientIllnesses = Mapper.Map<ICollection<IllnessHistory>, ICollection<IllnessHistoryModel>>(appointment.User.IllnessHistories);
-
-            return historiesResult;
+            return new PageModel<IEnumerable<IllnessHistoryModel>>()
+            { EntityAmount = historyAmount, Entities = historiesResult };
         }
 
         private IQueryable<IllnessHistoryModel> PaginationHelper(IQueryable<IllnessHistory> histories, int pageCount, int page)
@@ -320,6 +321,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
         {
+            var a = new DateTime(illnessModel.FinishAppointmentTimeStamp/1000);
             bool result = true;
             try
             {
@@ -328,7 +330,7 @@ namespace InternetHospital.BusinessLogic.Services
                                                                             {
                                                                                 ih.DoctorId = appointment.DoctorId;
                                                                                 ih.UserId = appointment.UserId ?? default;
-                                                                                ih.ConclusionTime = new DateTime(im.FinishAppointmentTimeStamp);
+                                                                                ih.ConclusionTime = DateTimeOffset.FromUnixTimeSeconds(im.FinishAppointmentTimeStamp).UtcDateTime;
                                                                             }));
                 _context.IllnessHistories.Add(illnessHistory);
             }
