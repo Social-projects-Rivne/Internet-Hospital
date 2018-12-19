@@ -10,6 +10,7 @@ namespace InternetHospital.DataAccess.Entities
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int? UserRequestTypeId { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
@@ -19,6 +20,7 @@ namespace InternetHospital.DataAccess.Entities
         public string Address { get; set; }
         public bool? isRejected { get; set; }
 
+        public UserRequestType UserRequestType { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime AddedTime { get; set; }
         public User User { get; set; }

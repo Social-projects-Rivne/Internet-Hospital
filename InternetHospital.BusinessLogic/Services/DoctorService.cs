@@ -179,6 +179,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<bool> UpdateDoctorInfo(DoctorProfileModel doctorModel, int userId, IFormFileCollection passport, IFormFileCollection diploma, IFormFileCollection license)
         {
+            const int EDIT_PROFILE_REQUEST_ID = 1;
             var addedTime = DateTime.Now;
             var doctor = _context.Users
                 .Include(u => u.Doctor)
@@ -194,7 +195,7 @@ namespace InternetHospital.BusinessLogic.Services
                 dest.AddedTime = addedTime;
                 dest.Role = DOCTOR;
                 dest.UserId = doctor.Id;
-
+                dest.UserRequestTypeId = EDIT_PROFILE_REQUEST_ID;
             }));
 
             _context.Add(temporaryUser);
@@ -446,7 +447,7 @@ namespace InternetHospital.BusinessLogic.Services
             var patients = _context.DoctorBlackLists.Where(x => x.DoctorId == doctorId)
                 .Select(p => new MyBlackList
                 {
-                     PatientId = p.UserId,
+                     PatientId = p.UserId ?? default,
                      PatientFirstName = p.User.FirstName,
                      PatientSecondName = p.User.SecondName,
                      PatientThirdName = p.User.ThirdName,
