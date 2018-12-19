@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
+using InternetHospital.BusinessLogic.Models.DoctorBlackList;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternetHospital.WebApi.Controllers
@@ -43,7 +43,7 @@ namespace InternetHospital.WebApi.Controllers
         {
             var doctorId = User.Identity?.Name;
             bool result = await _doctorService.UpdateDoctorAvatar(doctorId, file);
-            if(result)
+            if (result)
             {
                 return Ok();
             }
@@ -53,17 +53,13 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("getAvatar")]
         [Authorize]
         public async Task<IActionResult> GetAvatar()
-       {
+        {
             var doctorId = User.Identity?.Name;
             string avatarURL = await _doctorService.GetDoctorAvatar(doctorId);
-            if (!string.IsNullOrWhiteSpace(avatarURL))
+            return Ok(new
             {
-                return Ok(new
-                {
-                    avatarURL
-                });
-            }
-            return BadRequest();
+                avatarURL
+            });
         }
 
         // GET: api/Doctors
@@ -131,7 +127,7 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest();
             }
 
-            var doctor =  _doctorService.GetDoctorProfile(userId);
+            var doctor = _doctorService.GetDoctorProfile(userId);
             if (doctor != null)
             {
                 return Ok(doctor);
@@ -174,6 +170,62 @@ namespace InternetHospital.WebApi.Controllers
         {
             var statuses = _doctorService.GetAppointmentStatuses();
             return Ok(statuses);
+        }
+
+        [HttpGet("mypatients")]
+        [Authorize(Policy = "ApprovedDoctors")]
+        public IActionResult GetMyPatients([FromQuery] MyPatientsSearchParameters patientsSearch)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var pats = _doctorService.GetMyPatients(doctorId, patientsSearch);
+
+            return Ok(pats);
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("addtoblacklist")]
+        public IActionResult AddToBlackList([FromBody] AddToBlackListModel creationModel)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _doctorService.AddToBlackList(creationModel, doctorId);
+
+            return status ? (IActionResult)Ok() : BadRequest();
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("myblacklist")]
+        public IActionResult GetMyBlackList([FromQuery] MyPatientsSearchParameters creationModel)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var blackList = _doctorService.GetBlackList(doctorId, creationModel);
+
+            return Ok(blackList);
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpPost("removefromblacklist")]
+        public IActionResult RemoveFromBlackList([FromBody] RemoveFromBlackListModel creationModel)
+        {
+            if (!int.TryParse(User.Identity.Name, out var doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _doctorService.RemoveFromBlackList(creationModel.id, doctorId);
+
+            return status ? (IActionResult)Ok() : BadRequest();
         }
     }
 }

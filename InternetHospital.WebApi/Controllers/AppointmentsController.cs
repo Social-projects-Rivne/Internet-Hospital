@@ -30,7 +30,7 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
-        [Authorize(Policy = "ApprovedPatients")]
+        [Authorize]
         [HttpGet("forpatient")]
         public IActionResult GetPatientAppointments()
         {

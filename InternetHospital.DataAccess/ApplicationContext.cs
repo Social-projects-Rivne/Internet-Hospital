@@ -12,6 +12,7 @@ namespace InternetHospital.DataAccess
         public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Diploma> Diplomas { get; set; }
+        public DbSet<License> Licenses { get; set; }
         public DbSet<RefreshToken> Tokens { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Status> Statuses { get; set; }
@@ -26,6 +27,8 @@ namespace InternetHospital.DataAccess
         public DbSet<ArticleTypeArticle> ArticleTypeArticles { get; set; }
         public DbSet<ArticleEdition> ArticleEditions { get; set; }
         public DbSet<ArticleStatus> ArticleStatuses { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<DoctorBlackList> DoctorBlackLists { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
