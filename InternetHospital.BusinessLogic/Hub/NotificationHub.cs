@@ -18,9 +18,10 @@ namespace InternetHospital.BusinessLogic.Hubs
         public override async Task OnConnectedAsync()
         {
             var userId = Context.User.Identity.Name;
+
             if (!string.IsNullOrEmpty(userId))
             {
-                _notificationService.NewMessageNotify(int.Parse(userId));
+                await _notificationService.OnLoad(int.Parse(userId));
             }
         }
     }
