@@ -13,6 +13,6 @@ namespace InternetHospital.BusinessLogic.Models
         public string ThirdName { get; set; }
         public string AvatarURL { get; set; }
         public DateTime? BirthDate { get; set; }
-        public int StatusId { get; set; }
+        public string Status { get; set; }
     }
 }

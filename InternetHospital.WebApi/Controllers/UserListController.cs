@@ -1,6 +1,7 @@
 ﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.DataAccess.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -19,9 +20,10 @@ namespace InternetHospital.WebApi.Controllers
 
         // GET: api/userlist 
         [HttpGet]
-        public IActionResult Get()
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllUsers([FromQuery] ModeratorSearchParameters patientsSearch)
         {
-            var Users = _userListService.GetUsers();
+            var Users = _userListService.GetUsers(patientsSearch);
             return Ok(Users);
         }
 
