@@ -58,12 +58,12 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("getviewfeedbacks")]
         public IActionResult GetViewFeedbacks([FromQuery]FeedbackSearchParams queryParameters)
         {
-            var (feedbacks, quantity) = _feedBackService.GetFeedbackViewModels(queryParameters);
+            var result = _feedBackService.GetFeedbackViewModels(queryParameters);
 
             return Ok(
                 new {
-                    feedbacks,
-                    quantity
+                    feedbacks = result.Entities,
+                    quantity = result.EntityAmount
                 });
         }
 

@@ -9,9 +9,10 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface IFeedBackService
     {
         FeedBack FeedBackCreate(FeedBackCreationModel model);
-        (IEnumerable<FeedbackViewModel>, int count) GetFeedbackViewModels(FeedbackSearchParams queryParameters);
+        PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters);
         IEnumerable<FeedBackType> GetFeedBackTypes();
         IEnumerable<UserModel> GetUsers();
+        IEnumerable<UserModel> GetUsers(IEnumerable<FeedBack> feedBacks);
         FeedBack UpdateFeedBack(FeedbackViewModel feedback);
     }
 }
