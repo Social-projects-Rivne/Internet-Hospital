@@ -95,12 +95,45 @@ namespace InternetHospital.BusinessLogic.Services
                     dest.AddedTime = addedTime;
                     dest.Role = PATIENT;
                     dest.UserId = patient.Id;
+                    dest.isRejected = false;
                 }));
 
             _context.Add(temporaryPatient);
-            _context.Update(patient);
+            //_context.Update(patient);
 
             await _uploadingFiles.UploadPassport(files, patient, addedTime);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateToDoctor(PatientToDoctorModel patientModel, int userId, IFormFileCollection diploma, IFormFileCollection license)
+        {
+            var addedTime = DateTime.Now;
+            var patient = _context.Users.FirstOrDefault(p => p.Id == userId);
+            if (patient == null)
+            {
+                return false;
+            }
+            var model = Mapper.Map<User, PatientModel>(patient);
+            var temporaryPatient = Mapper.Map<PatientModel, TemporaryUser>(model,
+                config => config.AfterMap((src, dest) =>
+                {
+                    dest.AddedTime = addedTime;
+                    dest.Role = PATIENT;
+                    dest.UserId = patient.Id;
+                    dest.Address = patientModel.Address;
+                    dest.Specialization = patientModel.Specialization;
+                    dest.isRejected = false;
+                    //dest.RequestTypeId = 2;
+                }));
+
+            _context.Add(temporaryPatient);
+            //_context.Update(patient);
+
+            await _uploadingFiles.UploadDiploma(diploma, patient, addedTime);
+            await _uploadingFiles.UploadLicense(license, patient, addedTime);
+
             await _context.SaveChangesAsync();
 
             return true;

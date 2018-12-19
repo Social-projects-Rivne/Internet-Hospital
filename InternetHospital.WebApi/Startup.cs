@@ -134,6 +134,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<IModeratorService, ModeratorService>();
             services.AddScoped<IArticleTypeService, ArticleTypeService>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IRequestService, RequestService>();
 
         }
 
@@ -171,6 +172,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<PatientModel, TemporaryUser>();
                 config.CreateMap<User, DoctorProfileModel>();
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
+                config.CreateMap<TemporaryUser, ChangeRoleModel>();
                 config.CreateMap<UserModel, User>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
