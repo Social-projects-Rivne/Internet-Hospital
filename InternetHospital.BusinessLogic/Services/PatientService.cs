@@ -83,6 +83,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         public async Task<bool> UpdatePatientInfo(PatientModel patientModel, int userId, IFormFileCollection files)
         {
+            const int EDIT_PROFILE_REQUEST_ID = 1;
             var addedTime = DateTime.Now;
             var patient = _context.Users.FirstOrDefault(p => p.Id == userId);
             if (patient == null)
@@ -96,6 +97,7 @@ namespace InternetHospital.BusinessLogic.Services
                     dest.AddedTime = addedTime;
                     dest.Role = PATIENT;
                     dest.UserId = patient.Id;
+                    dest.UserRequestTypeId = EDIT_PROFILE_REQUEST_ID;
                 }));
 
             _context.Add(temporaryPatient);

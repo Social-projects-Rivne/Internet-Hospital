@@ -56,14 +56,10 @@ namespace InternetHospital.WebApi.Controllers
         {
             var doctorId = User.Identity?.Name;
             string avatarURL = await _doctorService.GetDoctorAvatar(doctorId);
-            if (!string.IsNullOrWhiteSpace(avatarURL))
+            return Ok(new
             {
-                return Ok(new
-                {
-                    avatarURL
-                });
-            }
-            return BadRequest();
+                avatarURL
+            });
         }
 
         // GET: api/Doctors

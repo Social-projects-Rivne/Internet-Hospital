@@ -29,6 +29,7 @@ namespace InternetHospital.DataAccess
         public DbSet<ArticleStatus> ArticleStatuses { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<DoctorBlackList> DoctorBlackLists { get; set; }
+        public DbSet<UserRequestType> UserRequests { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
@@ -45,6 +46,7 @@ namespace InternetHospital.DataAccess
             builder.ApplyConfiguration(new AppointmentConfiguration());
             builder.ApplyConfiguration(new ArticleTypeArticleConfiguration());
             builder.ApplyConfiguration(new ArticleStatusConfiguration());
+            builder.ApplyConfiguration(new UserRequestTypeConfiguration());
             base.OnModelCreating(builder);
         }
     }
