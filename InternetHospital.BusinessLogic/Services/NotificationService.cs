@@ -71,7 +71,7 @@ namespace InternetHospital.BusinessLogic.Services
                 RecepientId = userId,
                 IsRead = false,
                 Message = message,
-                Date = DateTime.Now
+                Date = DateTime.UtcNow
             };
 
             try
