@@ -9,16 +9,19 @@ using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Models;
 using InternetHospital.BusinessLogic.Models.Appointment;
 using Microsoft.EntityFrameworkCore;
+using System.Transactions;
 
 namespace InternetHospital.BusinessLogic.Services
 {
     public class AppointmentService : IAppointmentService
     {
         private readonly ApplicationContext _context;
+        private readonly INotificationService _notificationService;
 
-        public AppointmentService(ApplicationContext context)
+        public AppointmentService(ApplicationContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
 
         /// <summary>
@@ -33,8 +36,8 @@ namespace InternetHospital.BusinessLogic.Services
             DeleteUncommittedAppointments(doctorId);
             var appointments = _context.Appointments
                 .Where(a => (a.DoctorId == doctorId)
-                            && (a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS 
-                                || a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS))
+                            && (a.StatusId == (int)AppointmentStatuses.DEFAULT_STATUS
+                                || a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS))
                 .Select(a => new AppointmentModel
                 {
                     Id = a.Id,
@@ -221,7 +224,7 @@ namespace InternetHospital.BusinessLogic.Services
                 .ToList();
 
             return new PageModel<List<AvailableAppointmentModel>>()
-                {EntityAmount = appointmentsAmount, Entities = appointmentsResult};
+            { EntityAmount = appointmentsAmount, Entities = appointmentsResult };
         }
 
         /// <summary>
@@ -246,7 +249,7 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can delete only your appointments");
             }
 
-            if (appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
+            if (appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
             {
                 return (false, "This appointment is reserved. You can only cancel it");
             }
@@ -267,7 +270,7 @@ namespace InternetHospital.BusinessLogic.Services
         /// </returns>
         public (bool status, string message) CancelAppointment(int appointmentId, int doctorId)
         {
-            var appointment = _context.Appointments
+            var appointment = _context.Appointments.Include(a => a.Doctor.User)
                 .FirstOrDefault(a => a.Id == appointmentId);
             if (appointment == null)
             {
@@ -279,16 +282,32 @@ namespace InternetHospital.BusinessLogic.Services
                 return (false, "You can cancel only your appointments");
             }
 
-            if (appointment.StatusId != (int) AppointmentStatuses.RESERVED_STATUS)
+            if (appointment.StatusId != (int)AppointmentStatuses.RESERVED_STATUS)
             {
                 return (false, "You can cancel only reserved appointments");
             }
 
-            appointment.StatusId = (int) AppointmentStatuses.CANCELED_STATUS;
-            _context.SaveChanges();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    appointment.StatusId = (int)AppointmentStatuses.CANCELED_STATUS;
+                    _context.SaveChanges();
 
-            return (true, "Appointment was canceled");
-        }       
+                    _notificationService.AddNotification((int)appointment.UserId, $"Your appointment with {appointment.Doctor.User.FirstName} " +
+                        $"{appointment.Doctor.User.SecondName} at {appointment.StartTime.ToShortTimeString()} {appointment.StartTime.ToShortDateString()} " +
+                        $"was canceled.");
+
+                    scope.Complete();
+                }
+                _notificationService.NewMessageNotify((int)appointment.UserId);
+                return (true, "Appointment was canceled");
+            }
+            catch
+            {
+                return (false, "Error with appointment cancelation");
+            }
+        }
 
         /// <summary>
         /// subscribe patient to appointment
@@ -303,17 +322,26 @@ namespace InternetHospital.BusinessLogic.Services
             var appointment = _context.Appointments
                 .FirstOrDefault(a => a.Id == appointmentModel.Id);
 
-            if (appointment == null || appointment.StatusId != (int) AppointmentStatuses.DEFAULT_STATUS)
+            if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
             {
                 return false;
             }
 
-            appointment.UserId = patientId;
-            appointment.IsAllowPatientInfo = appointmentModel.IsAllowPatientInfo;
-            appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
+            var patient = _context.Users.Find(patientId);
             try
             {
-                _context.SaveChanges();
+                using (var scope = new TransactionScope())
+                {
+                    appointment.UserId = patientId;
+                    appointment.IsAllowPatientInfo = appointmentModel.IsAllowPatientInfo;
+                    appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
+                    _context.SaveChanges();
+                    _notificationService.AddNotification(appointment.DoctorId, $"{patient.FirstName} {patient.SecondName} " +
+                        $"has subscribed for your appointment at {appointment.StartTime.ToShortTimeString()} " +
+                        $"{appointment.StartTime.ToShortDateString()} ");
+                    scope.Complete();
+                }
+                _notificationService.NewMessageNotify(appointment.DoctorId);
                 return true;
             }
             catch
@@ -339,12 +367,21 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 return false;
             }
-
-            appointment.UserId = null;
-            appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
+                        
+            var patient = _context.Users.Find(appointment.UserId);
             try
             {
-                _context.SaveChanges();
+                using (var scope = new TransactionScope())
+                {
+                    appointment.UserId = null;
+                    appointment.StatusId = (int)AppointmentStatuses.DEFAULT_STATUS;
+                    _context.SaveChanges();
+                    _notificationService.AddNotification(appointment.DoctorId, $"{patient.FirstName} {patient.SecondName} " +
+                        $"has unsubscribed for your appointment at {appointment.StartTime.ToShortTimeString()} " +
+                        $"{appointment.StartTime.ToShortDateString()} ");
+                    scope.Complete();
+                }
+                _notificationService.NewMessageNotify(appointment.DoctorId);
                 return true;
             }
             catch
@@ -359,7 +396,7 @@ namespace InternetHospital.BusinessLogic.Services
             {
                 var uncommittedAppointments = _context.Appointments
                     .Where(a => a.DoctorId == doctorId
-                                && a.StatusId == (int) AppointmentStatuses.DEFAULT_STATUS
+                                && a.StatusId == (int)AppointmentStatuses.DEFAULT_STATUS
                                 && DateTime.Now > a.StartTime);
                 _context.RemoveRange(uncommittedAppointments);
                 _context.SaveChanges();

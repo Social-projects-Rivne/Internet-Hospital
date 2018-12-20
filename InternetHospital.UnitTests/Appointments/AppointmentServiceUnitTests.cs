@@ -9,6 +9,8 @@ using InternetHospital.DataAccess.Entities;
 using InternetHospital.UnitTests.TestHelpers;
 using AutoMapper;
 using System;
+using InternetHospital.BusinessLogic.Interfaces;
+using Moq;
 
 namespace InternetHospital.UnitTests.Appointments
 {
@@ -17,6 +19,13 @@ namespace InternetHospital.UnitTests.Appointments
     /// </summary>
     public class AppointmentServiceUnitTests : IDisposable
     {
+       Mock<INotificationService> notificationService;
+
+        public AppointmentServiceUnitTests()
+        {
+            notificationService = new Mock<INotificationService>();             
+        }
+
         [Fact]
         public void ShouldGetMyAppointments()
         {
@@ -59,7 +68,7 @@ namespace InternetHospital.UnitTests.Appointments
             using (var context = new ApplicationContext(options))
             {
                 // create service with generated data
-                var appointmentService = new AppointmentService(context);
+                var appointmentService = new AppointmentService(context, notificationService.Object);
 
                 // act
                 var appointments = appointmentService.GetMyAppointments(doctorId);
@@ -102,7 +111,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             using (var context = new ApplicationContext(options))
             {
-                var appointmentService = new AppointmentService(context);
+                var appointmentService = new AppointmentService(context, notificationService.Object);
 
                 // act
                 var appointments = appointmentService.GetPatientsAppointments((int)patientId);
@@ -127,6 +136,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             var doctorId = fixtureDoctor.UserId;
 
+
             Mapper.Initialize(cfg => cfg.CreateMap<AppointmentCreationModel, Appointment>());
 
             using (var context = new ApplicationContext(options))
@@ -137,7 +147,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             using (var context = new ApplicationContext(options))
             {
-                var appointmentService = new AppointmentService(context);
+                var appointmentService = new AppointmentService(context, notificationService.Object);
 
                 // act
                 var status = appointmentService.AddAppointment(fixtureAppointment, doctorId);
@@ -178,7 +188,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             using (var context = new ApplicationContext(options))
             {
-                var appointmentService = new AppointmentService(context);
+                var appointmentService = new AppointmentService(context, notificationService.Object);
 
                 // act
                 var appointments = appointmentService.DeleteAppointment(appointmentId, DOCTOR_ID);
@@ -221,80 +231,6 @@ namespace InternetHospital.UnitTests.Appointments
             };
 
             return new List<AppointmentForPatient> { model };
-        }
-
-        [Fact]
-        public void ShouldSubscribeForAppointment()
-        {
-            // arrange
-            const int ALLOWED_STATUS_ID = 1;
-            var options = DbContextHelper.GetDbOptions(nameof(ShouldSubscribeForAppointment));
-            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
-
-            var fixturePatient = fixture.Build<User>()
-                .Create();
-
-            var patientId = fixturePatient.Id;
-
-            var fixtureAppointment = fixture.Build<Appointment>()
-                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
-                                           .With(a => a.Status, new AppointmentStatus
-                                           {
-                                               Id = ALLOWED_STATUS_ID
-                                           })
-                                           .With(a => a.UserId)
-                                           .Create();
-
-           
-            using (var context = new ApplicationContext(options))
-            {
-                context.Appointments.Add(fixtureAppointment);
-                context.SaveChanges();
-
-                var appointmentService = new AppointmentService(context);
-
-                // act
-                var status = true; // appointmentService.SubscribeForAppointment(fixtureAppointment, patientId);
-
-                // assert
-                status.Should().BeTrue();
-            }
-        }
-
-        [Fact]
-        public void ShouldUnsubscribeForAppointment()
-        {
-            // arrange
-            const int ALLOWED_STATUS_ID = 2;
-            var options = DbContextHelper.GetDbOptions(nameof(ShouldUnsubscribeForAppointment));
-            var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
-            var fixturePatient = fixture.Build<User>()
-                .Create();
-
-            var patientId = fixturePatient.Id;
-
-            var fixtureAppointment = fixture.Build<Appointment>()
-                                           .With(a => a.StatusId, ALLOWED_STATUS_ID)
-                                           .With(a => a.Status, new AppointmentStatus
-                                           {
-                                               Id = ALLOWED_STATUS_ID
-                                           })
-                                           .With(a => a.UserId)
-                                           .Create();
-
-                 using (var context = new ApplicationContext(options))
-            {
-                context.Appointments.Add(fixtureAppointment);
-                context.SaveChanges();
-
-                var appointmentService = new AppointmentService(context);
-
-                // act
-                var status = appointmentService.UnsubscribeForAppointment(fixtureAppointment.Id);
-
-                // assert
-                status.Should().BeTrue();
-            }
         }
 
         public void Dispose()

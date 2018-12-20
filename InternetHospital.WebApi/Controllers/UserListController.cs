@@ -21,9 +21,9 @@ namespace InternetHospital.WebApi.Controllers
         // GET: api/userlist 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetAllUsers([FromQuery] ModeratorSearchParameters patientsSearch)
+        public IActionResult GetAllUsers([FromQuery] UserListSearchParameters usersSearch)
         {
-            var Users = _userListService.GetUsers(patientsSearch);
+            var Users = _userListService.GetUsers(usersSearch);
             return Ok(Users);
         }
 

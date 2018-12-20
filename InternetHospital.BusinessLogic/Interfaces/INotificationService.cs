@@ -13,5 +13,6 @@ namespace InternetHospital.BusinessLogic.Interfaces
         bool AddNotification(int userId, string message);
         void NewMessageNotify(int id);
         Task OnLoad(int id);
+        bool CheckAllNotifications(int userId);
     }
 }

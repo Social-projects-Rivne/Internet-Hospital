@@ -137,7 +137,7 @@ namespace InternetHospital.WebApi.Controllers
             return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
 
-        [Authorize(Policy = "ApprovedPatients")]
+        [Authorize]
         [HttpPost("subscribe")]
         public IActionResult SubscribeForAppointment([FromBody] AppointmentSubscribeModel model)
         {

@@ -54,7 +54,14 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
                                                      RuleFor(a => a)
                                                          .Must(a => AddedToBlackList())
                                                          .OverridePropertyName("message")
-                                                         .WithMessage("The doctor added you to black list");
+                                                         .WithMessage("The doctor added you to black list")
+                                                         .DependentRules(() =>
+                                                         {
+                                                             RuleFor(a => a)
+                                                                 .Must(a => CheckPatientWasApproved())
+                                                                 .OverridePropertyName("message")
+                                                                 .WithMessage("Please enter all necessary data and wait for the moderator's approval");
+                                                         });
                                                  });
                                          });
                                  });
@@ -85,7 +92,7 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
         {
             var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
             return !_context.Appointments
-                .Any(a => a.UserId == patientId
+                .Any(a => a.UserId == patientId && a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS
                           && ((a.StartTime >= _appointment.StartTime && a.StartTime < _appointment.EndTime)
                               || (a.EndTime > _appointment.StartTime && a.EndTime <= _appointment.EndTime)));
         }
@@ -106,5 +113,14 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
             return !_context.DoctorBlackLists.Any(b => b.UserId == patientId
                                             && b.DoctorId == _appointment.DoctorId);
         }
+
+        private bool CheckPatientWasApproved()
+        {
+            var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
+            var STATUS_OF_APPROVED_PATIENTS = 2;
+            return !_context.Users.Any(p => p.Id == patientId
+                                            && p.StatusId == STATUS_OF_APPROVED_PATIENTS);
+        }
+
     }
 }
