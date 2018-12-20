@@ -54,7 +54,7 @@ namespace InternetHospital.BusinessLogic.Services
             string webRootPath = _env.WebRootPath;
             string folderName = "Images";
             string avatarFolder = "Avatar";
-            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, avatarFolder);
+            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName.Replace('_', '.'), avatarFolder);
 
             if (!Directory.Exists(fileDestDir))
             {
@@ -79,7 +79,7 @@ namespace InternetHospital.BusinessLogic.Services
                 await image.CopyToAsync(stream); 
             }
 
-            string pathFile = $"/{folderName}/{user.UserName}/{avatarFolder}/{fileName}";
+            string pathFile = $"/{folderName}/{user.UserName.Replace('_', '.')}/{avatarFolder}/{fileName}";
 
             user.AvatarURL = pathFile;
             await _userManager.UpdateAsync(user);
@@ -119,7 +119,7 @@ namespace InternetHospital.BusinessLogic.Services
             string webRootPath = _env.WebRootPath;
             string folderName = "Images";
             string addedTimeFolder = addedTime.ToString().Replace(':', '-');
-            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName, fileTypeFolder, addedTimeFolder);
+            var fileDestDir = Path.Combine(webRootPath, folderName, user.UserName.Replace('_', '.'), fileTypeFolder, addedTimeFolder);
 
             if (!Directory.Exists(fileDestDir))
             {
@@ -131,7 +131,7 @@ namespace InternetHospital.BusinessLogic.Services
                 var fileExtesion = Path.GetExtension(images[i].FileName);
                 var fileName = $"{Guid.NewGuid().ToString()}_{i + 1}" + fileExtesion;
                 var fileFullPath = Path.Combine(fileDestDir, fileName);
-                var dbURL = $"/{folderName}/{user.UserName}/{fileTypeFolder}/{addedTimeFolder}/{fileName}";
+                var dbURL = $"/{folderName}/{user.UserName.Replace('_', '.')}/{fileTypeFolder}/{addedTimeFolder}/{fileName}";
 
                 using (var stream = new FileStream(fileFullPath, FileMode.Create))
                 {

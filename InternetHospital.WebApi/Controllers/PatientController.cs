@@ -118,5 +118,28 @@ namespace InternetHospital.WebApi.Controllers
             }
             return BadRequest(new { message = "Couldnt find a patient" });
         }
+
+        [HttpPost("updateToDoctor")]
+        [Authorize]
+        public async Task<IActionResult> UpdateToDoctor([FromForm(Name = "DiplomaURL")]IFormFileCollection diploma,
+            [FromForm(Name = "LicenseURL")]IFormFileCollection license)
+        {
+            var patientModel = new PatientToDoctorModel
+            {
+                Address = Request.Form["Address"],
+                Specialization = Request.Form["Specialization"]
+            };
+
+            if (int.TryParse(User.Identity.Name, out int userId))
+            {
+
+                var result = await _patientService.UpdateToDoctor(patientModel, userId, diploma, license);
+                return result ? (IActionResult)Ok() : BadRequest(new { message = "Error during updating!" });
+            }
+            else
+            {
+                return BadRequest(new { message = "Error with user ID!" });
+            }
+        }
     }
 }
