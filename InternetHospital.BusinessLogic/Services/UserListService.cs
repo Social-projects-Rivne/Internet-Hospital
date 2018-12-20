@@ -17,6 +17,7 @@ namespace InternetHospital.BusinessLogic.Services
         private const string SORT_BY_SECOND_NAME = "secondName";
         private const string SORT_BY_THIRD_NAME = "thirdName";
         private const string SORT_BY_EMAIL = "email";
+        private const string SORT_BY_BIRTHDATE = "birthDate";
         private const string ORDER_ASC = "asc";
 
         public UserListService(ApplicationContext context)
@@ -59,7 +60,7 @@ namespace InternetHospital.BusinessLogic.Services
             return _context.Statuses.ToList();
         }
 
-        FilteredModel<UserModel> IUserListService.GetUsers(ModeratorSearchParameters queryParameters)
+        FilteredModel<UserModel> IUserListService.GetUsers(UserListSearchParameters queryParameters)
         {
             //return _context.Users.Select(u => Mapper.Map<User, UserModel>(u)).ToList();
             var users = _context.Users
@@ -81,6 +82,12 @@ namespace InternetHospital.BusinessLogic.Services
                 users = users.Where(u => u.FirstName.ToLower().Contains(lowerSearchParam)
                                                    || u.SecondName.ToLower().Contains(lowerSearchParam)
                                                    || u.ThirdName.ToLower().Contains(lowerSearchParam));
+            }
+
+            // check SelectedStatus parameter
+            if (!string.IsNullOrEmpty(queryParameters.SelectedStatus))
+            {
+                users = users.Where(u => u.Status == queryParameters.SelectedStatus);
             }
 
             // check order parameter
@@ -120,6 +127,9 @@ namespace InternetHospital.BusinessLogic.Services
                     case SORT_BY_THIRD_NAME:
                         users = users.OrderBy(u => u.ThirdName);
                         break;
+                    case SORT_BY_BIRTHDATE:
+                        users = users.OrderBy(u => u.BirthDate);
+                        break;
                 }
             }
             else
@@ -137,6 +147,9 @@ namespace InternetHospital.BusinessLogic.Services
                         break;
                     case SORT_BY_THIRD_NAME:
                         users = users.OrderByDescending(u => u.ThirdName);
+                        break;
+                    case SORT_BY_BIRTHDATE:
+                        users = users.OrderByDescending(u => u.BirthDate);
                         break;
                 }
             }
