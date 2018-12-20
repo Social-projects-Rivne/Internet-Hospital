@@ -149,7 +149,7 @@ namespace InternetHospital.BusinessLogic.Services
             Mapper.Map(user, doctorModel, opt => opt.AfterMap((u, dm) =>
             {
                 dm.Address = u.Doctor.Address;
-                dm.Specialization = u.Doctor.Specialization.Name;
+                dm.Specialization = u.Doctor.Specialization?.Name;
             }));
 
             return doctorModel;
