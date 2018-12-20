@@ -48,8 +48,27 @@ namespace InternetHospital.WebApi.Controllers
             }
 
             return BadRequest();
-        }      
-        
+        }
+
+        [Authorize]
+        [HttpPost("checkall")]
+        public IActionResult CheckAll()
+        {
+            if (!int.TryParse(User.Identity.Name, out var userId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var status = _notificationService.CheckAllNotifications(userId);
+            if (status)
+            {
+                _notificationService.OnLoad(userId);
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
         [Authorize(Roles ="Admin, Moderator")]
         [HttpPost("send")]
         public IActionResult Send([FromBody] MessageModel model)
