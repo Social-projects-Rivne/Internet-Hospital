@@ -14,17 +14,20 @@ using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
-    public class FeedBackService : IFeedBackService {
+    public class FeedBackService : IFeedBackService 
+    {
         private readonly ApplicationContext _context;
         private readonly ILogger<FeedBackService> _logger;
 
         public FeedBackService(ApplicationContext context,
-                               ILogger<FeedBackService> logger) {
+                               ILogger<FeedBackService> logger) 
+        {
             _logger = logger;
             _context = context;
         }
 
-        public FeedBack FeedBackCreate(FeedBackCreationModel model) {
+        public FeedBack FeedBackCreate(FeedBackCreationModel model) 
+        {
             FeedbackValidator validations = new FeedbackValidator();
             try {
                 validations.ValidateAndThrow(model);
@@ -57,12 +60,14 @@ namespace InternetHospital.BusinessLogic.Services
             return involvedUsers;
         }
 
-        public IEnumerable<UserModel> GetUsers() {
+        public IEnumerable<UserModel> GetUsers() 
+        {
             var feedBacks = _context.FeedBacks;
             ICollection<UserModel> involvedUsers = new List<UserModel>();
 
             var users = _context.Users;
-            foreach (var item in feedBacks) {
+            foreach (var item in feedBacks) 
+            {
                 var user = users.Find(item.UserId);
                 involvedUsers.Add(Mapper.Map<User, UserModel>(user));
             }
@@ -70,17 +75,19 @@ namespace InternetHospital.BusinessLogic.Services
             return involvedUsers;
         }
 
-        public PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters) {
+        public PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters) 
+        {
             List<FeedBack> feedBacks = _context.FeedBacks
                 .Include(f => f.User)
                 .Include(f => f.Type)
                 .ToList();
-            IEnumerable<UserModel> users = GetUsers(feedBacks);
+            var users = GetUsers(feedBacks);
 
             var feedbackViews = feedBacks
             .OrderByDescending(f => f.DateTime)
             .Select(f =>
-                 new FeedbackViewModel {
+                 new FeedbackViewModel 
+                 {
                      Id = f.Id,
                      FeedbackTypeId = f.TypeId,
                      Text = f.Text,

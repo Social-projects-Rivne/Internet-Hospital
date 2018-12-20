@@ -52,7 +52,7 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet("getinvolvedusers")]
         public IActionResult GedInvolvedUsers()
         {
-            return _feedBackService.GetUsers() == null ? (IActionResult)BadRequest(null) : Ok(_feedBackService.GetUsers());
+            return _feedBackService.GetUsers() == null ? (IActionResult)BadRequest() : Ok(_feedBackService.GetUsers());
         }
 
         [HttpGet("getviewfeedbacks")]
@@ -70,13 +70,8 @@ namespace InternetHospital.WebApi.Controllers
         [HttpPut("updatefeedback")]
         public IActionResult UpdateFeedback([FromBody]FeedbackViewModel feedback) 
         {
-
             var reply = _feedBackService.UpdateFeedBack(feedback);
-
-            if (reply != null)
-                return Ok();
-            else
-                return BadRequest();
+            return reply == null ? (IActionResult)BadRequest() : Ok();
         }
 
     }
