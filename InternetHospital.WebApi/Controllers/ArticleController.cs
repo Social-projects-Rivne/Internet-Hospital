@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InternetHospital.BusinessLogic.Interfaces;
+﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models.Articles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,13 +22,7 @@ namespace InternetHospital.WebApi.Controllers
         [HttpGet]
         public IActionResult GetArticles([FromQuery] HomePageArticlesFilteringModel filter)
         {
-            var articles = _articleService.GetArticlesForHomePage(filter);
-            if (articles != null)
-            {
-                return Ok(articles);
-            }
-
-            return NotFound();
+            return Ok(_articleService.GetArticlesForHomePage(filter));
         }
 
 

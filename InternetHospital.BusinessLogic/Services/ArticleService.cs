@@ -296,6 +296,12 @@ namespace InternetHospital.BusinessLogic.Services
 
         public HomePageArticlesModel GetArticlesForHomePage(HomePageArticlesFilteringModel articlesFilteringModel)
         {
+            var result = new HomePageArticlesModel
+            {
+                IsLast = true,
+                Articles = new List<HomePageArticleModel>(),
+                LastArticleId = -1
+            };
             var articles = _context.Articles.Where(a => a.ArticleStatus.Name == ACTIVE_ARTICLE);
             if (articlesFilteringModel.LastArticleId != null && articles.Any())
             {
@@ -308,9 +314,9 @@ namespace InternetHospital.BusinessLogic.Services
                         .Include(a => a.Types).ThenInclude(t => t.Type);
             if (articles.Any())
             {
-                var result = new HomePageArticlesModel();
                 result.LastArticleId = articles.LastOrDefault().Id;
-                result.IsLast = !_context.Articles.Any(a => a.Id < result.LastArticleId && a.ArticleStatus.Name == ACTIVE_ARTICLE);
+                result.IsLast = !_context.Articles.Any(a => a.Id < result.LastArticleId 
+                                                            && a.ArticleStatus.Name == ACTIVE_ARTICLE);
                 result.Articles = articles.Select(a => new HomePageArticleModel
                 {
                     Title = a.Title,
@@ -318,12 +324,12 @@ namespace InternetHospital.BusinessLogic.Services
                     DateOfCreation = a.TimeOfCreation,
                     ShortDescription = a.ShortDescription,
                     Author = $"{a.Author.FirstName} {a.Author.SecondName}",
-                    PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview).Select(att => att.Url).ToList()
+                    PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview)
+                                                        .Select(att => att.Url).ToList()
                 }).ToList();
-                return result;
             }
 
-            return null;
+            return result;
         }
     }
 }
