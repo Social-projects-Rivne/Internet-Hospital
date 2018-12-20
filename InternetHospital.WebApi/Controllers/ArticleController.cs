@@ -27,7 +27,12 @@ namespace InternetHospital.WebApi.Controllers
         public IActionResult GetArticles([FromQuery] HomePageArticlesFilteringModel filter)
         {
             var articles = _articleService.GetArticlesForHomePage(filter);
-            return Ok(articles);
+            if (articles != null)
+            {
+                return Ok(articles);
+            }
+
+            return NotFound();
         }
 
 
