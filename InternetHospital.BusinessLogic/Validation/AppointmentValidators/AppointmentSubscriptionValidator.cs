@@ -85,7 +85,7 @@ namespace InternetHospital.BusinessLogic.Validation.AppointmentValidators
         {
             var patientId = int.Parse(_httpContextAccessor.HttpContext.User.Identity.Name);
             return !_context.Appointments
-                .Any(a => a.UserId == patientId
+                .Any(a => a.UserId == patientId && a.StatusId == (int) AppointmentStatuses.RESERVED_STATUS
                           && ((a.StartTime >= _appointment.StartTime && a.StartTime < _appointment.EndTime)
                               || (a.EndTime > _appointment.StartTime && a.EndTime <= _appointment.EndTime)));
         }
