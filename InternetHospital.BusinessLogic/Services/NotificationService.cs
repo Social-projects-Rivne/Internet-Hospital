@@ -97,5 +97,20 @@ namespace InternetHospital.BusinessLogic.Services
             await _hubContext.Clients.User(id.ToString())
                    .SendAsync(ONLOAD_METHOD, GetUnreadNotificationsCount(id));
         }
+
+        public bool CheckAllNotifications(int userId)
+        {
+            var notifications = _context.Notifications
+                .Where(n => n.RecepientId == userId && !n.IsRead);
+
+            foreach (var item in notifications)
+            {
+                item.IsRead = true;
+            }
+
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }
