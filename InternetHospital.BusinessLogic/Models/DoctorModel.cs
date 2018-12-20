@@ -8,5 +8,7 @@
         public string ThirdName { get; set; }
         public string AvatarURL { get; set; }
         public string Specialization { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
     }
 }

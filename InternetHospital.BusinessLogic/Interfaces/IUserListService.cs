@@ -6,7 +6,7 @@ namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IUserListService
     {
-        IEnumerable<UserModel> GetUsers();
+        FilteredModel<UserModel> GetUsers(ModeratorSearchParameters queryParameters);
         (IEnumerable<UserModel> users, int count) FilteredUsers(UserSearchParameters queryParameters);
         IEnumerable<Status> GetStatuses();
     }
