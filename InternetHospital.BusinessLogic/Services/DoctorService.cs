@@ -324,7 +324,6 @@ namespace InternetHospital.BusinessLogic.Services
 
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
         {
-            var a = new DateTime(illnessModel.FinishAppointmentTimeStamp/1000);
             bool result = true;
             try
             {
@@ -333,7 +332,7 @@ namespace InternetHospital.BusinessLogic.Services
                                                                             {
                                                                                 ih.DoctorId = appointment.DoctorId;
                                                                                 ih.UserId = appointment.UserId ?? default;
-                                                                                ih.ConclusionTime = DateTimeOffset.FromUnixTimeSeconds(im.FinishAppointmentTimeStamp).UtcDateTime;
+                                                                                ih.ConclusionTime = DateTimeOffset.FromUnixTimeSeconds(im.FinishAppointmentTimeStamp / 1000).UtcDateTime;
                                                                             }));
                 _context.IllnessHistories.Add(illnessHistory);
             }
