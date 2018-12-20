@@ -98,7 +98,7 @@ namespace InternetHospital.WebApi.Controllers
                 PhoneNumber = Request.Form["PhoneNumber"],
                 BirthDate = DateTime.Parse(Request.Form["BirthDate"]),
                 Address = Request.Form["Address"],
-                Specialization = Request.Form["Specialization"],
+                Specialization = Request.Form["Specialization"]
             };
 
             TryValidateModel(doctorModel);

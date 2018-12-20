@@ -155,6 +155,7 @@ namespace InternetHospital.WebApi
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
+            services.AddScoped<IRequestService, RequestService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -191,6 +192,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<PatientModel, TemporaryUser>();
                 config.CreateMap<User, DoctorProfileModel>();
                 config.CreateMap<DoctorProfileModel, TemporaryUser>();
+                config.CreateMap<TemporaryUser, ChangeRoleModel>();
                 config.CreateMap<UserModel, User>();
                 config.CreateMap<Appointment, AvailableAppointmentModel>();
                 config.CreateMap<ModeratorCreatingModel, User>();
