@@ -249,7 +249,7 @@ namespace InternetHospital.BusinessLogic.Services
                                         && a.IsAllowPatientInfo == true
                                         && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
                                 .Include(a => a.User)
-                                .SingleOrDefault();
+                                .FirstOrDefault();
 
             if(appointment == null)
             {
@@ -271,7 +271,7 @@ namespace InternetHospital.BusinessLogic.Services
                             && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
                     .Include(a => a.User)
                         .ThenInclude(u => u.IllnessHistories)
-                    .SingleOrDefault();
+                            .FirstOrDefault();
 
             if (appointment == null)
             {

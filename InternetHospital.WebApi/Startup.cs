@@ -70,7 +70,7 @@ namespace InternetHospital.WebApi
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<ApplicationContext>(opt =>
                     {
-                        opt.UseSqlServer(Configuration.GetConnectionString("LocaleMsSql"),
+                        opt.UseSqlServer(Configuration.GetConnectionString("AzureConnection"),
                                       m => m.MigrationsAssembly("InternetHospital.WebApi"));
                     });
 
