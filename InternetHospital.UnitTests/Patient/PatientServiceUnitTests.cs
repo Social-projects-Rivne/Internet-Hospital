@@ -1,4 +1,5 @@
-﻿using AutoFixture;
+﻿using System.Threading.Tasks;
+using AutoFixture;
 using AutoMapper;
 using FluentAssertions;
 using InternetHospital.BusinessLogic.Models;
@@ -6,17 +7,11 @@ using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.UnitTests.TestHelpers;
-using Microsoft.AspNetCore.Identity;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace InternetHospital.UnitTests.PatientProfile
+namespace InternetHospital.UnitTests.Patient
 {
-    public class PatientServiceUnitTests : IDisposable
+    public class PatientServiceUnitTests
     {
         [Fact]
         public async void ShouldGetPatientProfile()
@@ -33,7 +28,10 @@ namespace InternetHospital.UnitTests.PatientProfile
                 context.Users.Add(fixtureUser);
                 context.SaveChanges();
             }
+
+            Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<User, PatientModel>());
+
             var fakeManager = FakeGenerator.GetFakeUserManager();
             fakeManager
                 .Setup(m => m.FindByIdAsync(fixtureUser.Id.ToString()))
@@ -64,7 +62,10 @@ namespace InternetHospital.UnitTests.PatientProfile
                 context.Users.Add(fixtureUser);
                 context.SaveChanges();
             }
+
+            Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<User, PatientModel>());
+
             var fakeManager = FakeGenerator.GetFakeUserManager();
             fakeManager
                 .Setup(m => m.FindByIdAsync(fixtureUser.Id.ToString()))
@@ -104,11 +105,6 @@ namespace InternetHospital.UnitTests.PatientProfile
                 Page = 1,
                 PageCount = 1
             };
-        }
-
-        public void Dispose()
-        {
-            Mapper.Reset();
         }
     }
 }
