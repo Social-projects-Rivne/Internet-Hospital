@@ -6,6 +6,7 @@ namespace InternetHospital.BusinessLogic.Models
 {
     public class IllnessHistorySearchModel
     {
+        public int UserId { get; set; }
         private const int MAX_PAGE_COUNT = 15;
         private const int DEFAULT_PAGE = 1;
         public int Page { get; set; } = DEFAULT_PAGE;

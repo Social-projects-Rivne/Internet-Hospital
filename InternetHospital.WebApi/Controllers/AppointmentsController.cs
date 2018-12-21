@@ -30,7 +30,35 @@ namespace InternetHospital.WebApi.Controllers
             return Ok(new { appointments = myAppointments });
         }
 
-        [Authorize]
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("AllAppointments")]
+        public IActionResult GetAllAppointments([FromQuery] AppointmentHistoryParameters parameters)
+        {
+            if (!int.TryParse(User.Identity.Name, out int doctorId))
+            {
+                return BadRequest(new { message = "Wrong claims" });
+            }
+
+            var result = _appointmentService.GetMyAppointments(parameters, doctorId);
+
+            return Ok(
+                new
+                {
+                    appointments = result.Entities,
+                    quantity = result.EntityAmount
+                }
+            );
+        }
+
+        [Authorize(Policy = "ApprovedDoctors")]
+        [HttpGet("appointmentStatuses")]
+        public IActionResult GetAppointmentStatuses()
+        {
+            var statuses = _appointmentService.GetAppointmentStatuses();
+            return Ok(statuses);
+        }
+
+        [Authorize(Policy = "ApprovedPatients")]
         [HttpGet("forpatient")]
         public IActionResult GetPatientAppointments()
         {
@@ -42,6 +70,15 @@ namespace InternetHospital.WebApi.Controllers
             var myAppointments = _appointmentService.GetPatientsAppointments(patientId);
 
             return Ok(new { appointments = myAppointments });
+        }
+
+        [Authorize(Policy = "ApprovedPatients")]
+        [HttpPatch("changeAccess")]
+        public IActionResult ChangePersonalInfoAccess([FromBody] ChangePatientInfoAccessModel model)
+        {
+            var result = _appointmentService.ChangeAccessForPersonalInfo(model);
+
+            return result ? (IActionResult)Ok() : BadRequest();
         }
 
         [HttpGet("available")]
@@ -109,7 +146,7 @@ namespace InternetHospital.WebApi.Controllers
                 return BadRequest(new { message = "Wrong claims" });
             }
 
-            var status = _appointmentService.SubscribeForAppointment(model.Id, patientId);
+            var status = _appointmentService.SubscribeForAppointment(model, patientId);
 
             return status ? (IActionResult)Ok() : BadRequest();
         }

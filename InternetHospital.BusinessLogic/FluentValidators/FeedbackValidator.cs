@@ -6,7 +6,7 @@ using System.Text;
 
 namespace InternetHospital.BusinessLogic.FluentValidators
 {
-    public class FeedbackValidator : AbstractValidator<FeedBackCreationModel>
+    public class FeedbackValidator : AbstractValidator<FeedbackCreationModel>
     {
         public FeedbackValidator()
         {

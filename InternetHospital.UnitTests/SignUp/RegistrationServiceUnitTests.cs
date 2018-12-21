@@ -6,18 +6,12 @@ using InternetHospital.BusinessLogic.Services;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.UnitTests.TestHelpers;
-using System;
 using Xunit;
 
 namespace InternetHospital.UnitTests.SignUp
 {
-    public class RegistrationServiceUnitTests: IDisposable
+    public class RegistrationServiceUnitTests
     {
-        public RegistrationServiceUnitTests()
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<UserRegistrationModel, User>());
-        }
-
         [Fact]
         public async void ShouldPatientRegistrate()
         {
@@ -30,6 +24,9 @@ namespace InternetHospital.UnitTests.SignUp
             var fixtureRegistrationModel = RegistrationHelper.GetRegistrationModel(expectedUser, RegistrationHelper.PATIENT);
             var fakeUserManager = RegistrationHelper.GetConfiguredUserManager();
             var fakeRoleManager = RegistrationHelper.GetFakeRoleManager();
+
+            Mapper.Reset();
+            Mapper.Initialize(cfg => cfg.CreateMap<UserRegistrationModel, User>());
 
             using (var context = new ApplicationContext(options))
             {
@@ -72,11 +69,6 @@ namespace InternetHospital.UnitTests.SignUp
                 res.Email.Should().BeEquivalentTo(expectedUser.Email);
                 res.Doctor.UserId.Should().Be(expectedUser.Doctor.UserId);
             }
-        }
-
-        public void Dispose()
-        {
-            Mapper.Reset();
         }
     }
 }

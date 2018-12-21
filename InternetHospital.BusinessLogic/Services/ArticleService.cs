@@ -293,5 +293,43 @@ namespace InternetHospital.BusinessLogic.Services
 
             return 0;
         }
+
+        public HomePageArticlesModel GetArticlesForHomePage(HomePageArticlesFilteringModel articlesFilteringModel)
+        {
+            var result = new HomePageArticlesModel
+            {
+                IsLast = true,
+                Articles = new List<HomePageArticleModel>(),
+                LastArticleId = -1
+            };
+            var articles = _context.Articles.Where(a => a.ArticleStatus.Name == ACTIVE_ARTICLE);
+            if (articlesFilteringModel.LastArticleId != null && articles.Any())
+            {
+                articles = articles.Where(a => a.Id < articlesFilteringModel.LastArticleId);
+            }
+            articles = articles.OrderByDescending(a => a.TimeOfCreation).AsQueryable()
+                .Take(articlesFilteringModel.AmountOfArticles)
+                .Include(a => a.Attachments)
+                .Include(a => a.Author)
+                .Include(a => a.Types).ThenInclude(t => t.Type);
+            if (articles.Any())
+            {
+                result.LastArticleId = articles.LastOrDefault().Id;
+                result.IsLast = !_context.Articles.Any(a => a.Id < result.LastArticleId 
+                                                            && a.ArticleStatus.Name == ACTIVE_ARTICLE);
+                result.Articles = articles.Select(a => new HomePageArticleModel
+                {
+                    Title = a.Title,
+                    Types = a.Types.Select(t => t.Type.Name).ToList(),
+                    CreationDate = a.TimeOfCreation,
+                    ShortDescription = a.ShortDescription,
+                    Author = $"{a.Author.FirstName} {a.Author.SecondName}",
+                    PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview)
+                                                    .Select(att => att.Url).ToList()
+                }).ToList();
+            }
+
+            return result;
+        }
     }
 }

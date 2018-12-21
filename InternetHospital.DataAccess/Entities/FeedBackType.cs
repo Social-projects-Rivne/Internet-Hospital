@@ -4,10 +4,10 @@ using System.Text;
 
 namespace InternetHospital.DataAccess.Entities 
 {
-    public class FeedBackType 
+    public class FeedbackType 
     {
         public int Id { set; get; }
         public string Name { set; get; }
-        public virtual ICollection<FeedBack> FeedBacks { set; get; }
+        public virtual ICollection<Feedback> Feedbacks { set; get; }
     }
 }

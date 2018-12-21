@@ -144,32 +144,38 @@ namespace InternetHospital.WebApi.Controllers
             return status ? (IActionResult)Ok() : BadRequest(new { message });
         }
 
-        [HttpGet("previousAppointments")]
+        [HttpGet("GetPatientInfo")]
         [Authorize(Policy = "ApprovedDoctors")]
-        public IActionResult GetPreviousAppointments([FromQuery] AppointmentHistoryParameters parameters)
+        public IActionResult GetPatientInfo([FromQuery] int userId)
         {
             if (!int.TryParse(User.Identity.Name, out int doctorId))
             {
-                return BadRequest(new { message = "Wrong claims" });
+                return BadRequest();
             }
 
-            var result = _doctorService.GetPreviousAppointments(parameters, doctorId);
+            var patient = _doctorService.GetPatientInfo(userId, doctorId);
 
-            return Ok(
-                new
-                {
-                    appointments = result.Entities,
-                    quantity = result.EntityAmount
-                }
-            );
+            return patient != null ? (IActionResult)Ok(patient) : BadRequest();
         }
 
-        [HttpGet("appointmentStatuses")]
+        [HttpGet("GetPatientIllnessHistory")]
         [Authorize(Policy = "ApprovedDoctors")]
-        public IActionResult GetAppointmentStatuses()
+        public IActionResult GetPatientIllnessHistory([FromQuery] IllnessHistorySearchModel queryParameters)
         {
-            var statuses = _doctorService.GetAppointmentStatuses();
-            return Ok(statuses);
+            if (!int.TryParse(User.Identity.Name, out int doctorId))
+            {
+                return BadRequest();
+            }
+
+            var illnessHistories = _doctorService.GetPatientIllnessHistory(queryParameters, doctorId);
+
+            return illnessHistories != null ?
+                (IActionResult)Ok(new
+                {
+                    illnesses = illnessHistories.Entities,
+                    amount = illnessHistories.EntityAmount
+                })
+            : BadRequest();
         }
 
         [HttpGet("mypatients")]

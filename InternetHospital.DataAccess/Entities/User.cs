@@ -19,7 +19,7 @@ namespace InternetHospital.DataAccess.Entities
         public virtual Status Status { get; set; }
         public virtual ICollection<RefreshToken> Tokens { get; set; }
         public virtual ICollection<IllnessHistory> IllnessHistories { get; set; }
-        public virtual ICollection<FeedBack> FeedBacks { set; get; }
+        public virtual ICollection<Feedback> FeedBacks { set; get; }
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<TemporaryUser> TemporaryUsers { get; set; }
         public virtual ICollection<Passport> Passports { get; set; }

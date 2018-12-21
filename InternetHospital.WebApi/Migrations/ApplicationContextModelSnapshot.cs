@@ -31,6 +31,10 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<DateTime>("EndTime");
 
+                    b.Property<bool>("IsAllowPatientInfo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
+
                     b.Property<DateTime>("StartTime");
 
                     b.Property<int>("StatusId")
@@ -255,6 +259,10 @@ namespace InternetHospital.WebApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateTime");
+
+                    b.Property<bool>("IsViewed");
+
+                    b.Property<string>("Reply");
 
                     b.Property<string>("Text");
 

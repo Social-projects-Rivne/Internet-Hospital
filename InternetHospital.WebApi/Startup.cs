@@ -140,7 +140,7 @@ namespace InternetHospital.WebApi
 
             //Dependency injection
             services.AddScoped<IAppointmentService, AppointmentService>();
-            services.AddScoped<IFeedBackService, FeedBackService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IDoctorService, DoctorService>();
@@ -186,7 +186,7 @@ namespace InternetHospital.WebApi
             {
                 config.CreateMap<UserRegistrationModel, User>();
                 config.CreateMap<AppointmentCreationModel, Appointment>();
-                config.CreateMap<FeedBackCreationModel, FeedBack>();
+                config.CreateMap<FeedbackCreationModel, Feedback>();
                 config.CreateMap<PatientModel, User>();
                 config.CreateMap<User, PatientDetailedModel>();
                 config.CreateMap<PatientModel, TemporaryUser>();
@@ -201,9 +201,9 @@ namespace InternetHospital.WebApi
                 config.CreateMap<Article, SendingArticleEditingModel>();
                 config.CreateMap<IllnessHistoryModel, IllnessHistory>();
                 config.CreateMap<IllnessHistory, IllnessHistoryModel>();
-                config.CreateMap<Appointment, PreviousAppointmentsModel>()
-                .ForMember(prevAppoint => prevAppoint.UserFullName, opt => opt.MapFrom(o => $"{o.User.FirstName} {o.User.SecondName}"))
-                .ForMember(prevAppoint => prevAppoint.Status, opt => opt.MapFrom(o => o.Status.Name));
+                config.CreateMap<Appointment, AppointmentModel>()
+                .ForMember(appointment => appointment.Status, opt => opt.MapFrom(o => o.Status.Name));
+                config.CreateMap<User, AllowedPatientInfoModel>();
                 config.CreateMap<TemporaryUser, User>().ForMember(i => i.Id, opt => opt.Ignore());
             });
 
