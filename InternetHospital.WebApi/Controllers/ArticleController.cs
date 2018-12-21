@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InternetHospital.BusinessLogic.Interfaces;
+﻿using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models.Articles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +18,13 @@ namespace InternetHospital.WebApi.Controllers
             _articleService = articleService;
             _articleTypeService = articleTypeService;
         }
+
+        [HttpGet]
+        public IActionResult GetArticles([FromQuery] HomePageArticlesFilteringModel filter)
+        {
+            return Ok(_articleService.GetArticlesForHomePage(filter));
+        }
+
 
         [HttpGet("moderate")]
         public IActionResult GetFilteredModerateArticles([FromQuery] ArticlesFilteringModel filter)

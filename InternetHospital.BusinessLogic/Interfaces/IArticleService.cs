@@ -7,8 +7,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
 {
     public interface IArticleService
     {
-        FilteredModel<ArticleModeratePreviewModel> GetModerateArticles(
-            ArticlesFilteringModel articlesFilteringModel);
+        FilteredModel<ArticleModeratePreviewModel> GetModerateArticles(ArticlesFilteringModel articlesFilteringModel);
+        HomePageArticlesModel GetArticlesForHomePage(HomePageArticlesFilteringModel articlesFilteringModel);
 
         bool DeleteArticle(int articleId);
         bool CreateArticle(ArticleCreatingModel newArticle);
