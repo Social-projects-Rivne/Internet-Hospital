@@ -14,22 +14,23 @@ using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
-    public class FeedBackService : IFeedBackService 
+    public class FeedBackService : IFeedBackService
     {
         private readonly ApplicationContext _context;
         private readonly ILogger<FeedBackService> _logger;
 
         public FeedBackService(ApplicationContext context,
-                               ILogger<FeedBackService> logger) 
+                               ILogger<FeedBackService> logger)
         {
             _logger = logger;
             _context = context;
         }
 
-        public FeedBack FeedBackCreate(FeedBackCreationModel model) 
+        public FeedBack FeedBackCreate(FeedBackCreationModel model)
         {
             FeedbackValidator validations = new FeedbackValidator();
-            try {
+            try
+            {
                 validations.ValidateAndThrow(model);
 
                 var feedback = Mapper.Map<FeedBackCreationModel, FeedBack>
@@ -38,35 +39,24 @@ namespace InternetHospital.BusinessLogic.Services
                 _context.SaveChanges();
                 return feedback;
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 _logger.LogCritical($"{nameof(FeedBackService)} failed with {exception.Message}", exception);
                 return null;
             }
         }
 
-        public IEnumerable<FeedBackType> GetFeedBackTypes() {
+        public IEnumerable<FeedBackType> GetFeedBackTypes()
+        {
             return _context.FeedBackTypes.ToList();
         }
 
-        public IEnumerable<UserModel> GetUsers(IEnumerable<FeedBack> feedBacks) {
-            ICollection<UserModel> involvedUsers = new List<UserModel>();
-
-            var users = _context.Users;
-            foreach (var item in feedBacks) {
-                var user = users.Find(item.UserId);
-                involvedUsers.Add(Mapper.Map<User, UserModel>(user));
-            }
-
-            return involvedUsers;
-        }
-
-        public IEnumerable<UserModel> GetUsers() 
+        public IEnumerable<UserModel> GetUsers(IEnumerable<FeedBack> feedBacks)
         {
-            var feedBacks = _context.FeedBacks;
             ICollection<UserModel> involvedUsers = new List<UserModel>();
 
             var users = _context.Users;
-            foreach (var item in feedBacks) 
+            foreach (var item in feedBacks)
             {
                 var user = users.Find(item.UserId);
                 involvedUsers.Add(Mapper.Map<User, UserModel>(user));
@@ -75,7 +65,22 @@ namespace InternetHospital.BusinessLogic.Services
             return involvedUsers;
         }
 
-        public PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters) 
+        public IEnumerable<UserModel> GetUsers()
+        {
+            var feedBacks = _context.FeedBacks;
+            ICollection<UserModel> involvedUsers = new List<UserModel>();
+
+            var users = _context.Users;
+            foreach (var item in feedBacks)
+            {
+                var user = users.Find(item.UserId);
+                involvedUsers.Add(Mapper.Map<User, UserModel>(user));
+            }
+
+            return involvedUsers;
+        }
+
+        public PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters)
         {
             List<FeedBack> feedBacks = _context.FeedBacks
                 .Include(f => f.User)
@@ -86,7 +91,7 @@ namespace InternetHospital.BusinessLogic.Services
             var feedbackViews = feedBacks
             .OrderByDescending(f => f.DateTime)
             .Select(f =>
-                 new FeedbackViewModel 
+                 new FeedbackViewModel
                  {
                      Id = f.Id,
                      FeedbackTypeId = f.TypeId,
@@ -106,7 +111,7 @@ namespace InternetHospital.BusinessLogic.Services
                      FeedbackTypeName = f.Type.Name
                  }
             );
-            
+
             if (queryParameters.SearchByName != null)
             {
                 var toLowerSearchParameter = queryParameters.SearchByName.ToLower();
@@ -129,7 +134,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         public FeedBack UpdateFeedBack(FeedbackViewModel feedback)
         {
-            FeedBack FeedbackEntity =  _context.FeedBacks.FirstOrDefault(x => x.Id == feedback.Id);
+            FeedBack FeedbackEntity = _context.FeedBacks.FirstOrDefault(x => x.Id == feedback.Id);
 
             FeedbackEntity.IsViewed = feedback.IsViewed;
             FeedbackEntity.Reply = feedback.Reply;

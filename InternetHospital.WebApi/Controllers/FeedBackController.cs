@@ -35,11 +35,11 @@ namespace InternetHospital.WebApi.Controllers
             {
                 feedBackCreationModel.UserId = userid;
                 var feedback = _feedBackService.FeedBackCreate(feedBackCreationModel);
-                return feedback == null ? (IActionResult)BadRequest( new { message = "Not valid feedback" }) : Ok();
+                return feedback == null ? (IActionResult)BadRequest(new { message = "Not valid feedback" }) : Ok();
             }
             else
             {
-                return NotFound( new  { message = "Form not valid" });
+                return NotFound(new { message = "Form not valid" });
             }
         }
 
@@ -61,14 +61,15 @@ namespace InternetHospital.WebApi.Controllers
             var result = _feedBackService.GetFeedbackViewModels(queryParameters);
 
             return Ok(
-                new {
+                new
+                {
                     feedbacks = result.Entities,
                     quantity = result.EntityAmount
                 });
         }
 
         [HttpPut("updatefeedback")]
-        public IActionResult UpdateFeedback([FromBody]FeedbackViewModel feedback) 
+        public IActionResult UpdateFeedback([FromBody]FeedbackViewModel feedback)
         {
             var reply = _feedBackService.UpdateFeedBack(feedback);
             return reply == null ? (IActionResult)BadRequest() : Ok();
