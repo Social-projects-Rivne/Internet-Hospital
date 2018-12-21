@@ -2,6 +2,7 @@
 using InternetHospital.BusinessLogic.Helpers;
 using InternetHospital.BusinessLogic.Interfaces;
 using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Models.EditProfile;
 using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -141,5 +142,120 @@ namespace InternetHospital.BusinessLogic.Services
 
             return (false, "Error!");
         }
+        public PageModel<IEnumerable<UserEditProfile>> GetRequestsEditProfiel(PageConfig pageConfig)
+        {
+            var tmpUsers = _context.TemporaryUsers
+                    .Include(tu => tu.User)
+                    .Where(tu => tu.isRejected == false && tu.UserRequestTypeId == 1);
+            if (tmpUsers.Count() == 0)
+            {
+                return null;
+            }
+
+            var uniqueTmpUsers = tmpUsers
+                .Include(u => u.User.Passports)
+                .Include(u => u.User.Diplomas)
+                .Include(u => u.User.Licenses)
+                .GroupBy(tu => tu.UserId)
+                .Select(tu => tu.LastOrDefault())
+                .AsEnumerable();
+
+            var amount = uniqueTmpUsers.Count();
+            var usersRequest = PaginationHelper<TemporaryUser>.GetPageValues(uniqueTmpUsers.AsQueryable(), pageConfig.PageSize, pageConfig.PageIndex);
+            var UsersEditProfile = usersRequest.AsEnumerable()
+                .Select(u => new UserEditProfile
+                {
+                    Id = u.UserId,
+                    FirstName = u.FirstName,
+                    SecondName = u.SecondName,
+                    ThirdName = u.ThirdName,
+                    BirthDate = u.BirthDate,
+                    Email = u.User.Email,
+                    Address = u.Address,
+                    Specialization = u.Specialization,
+                    PhoneNumber = u.PhoneNumber,
+                    RequestTime = u.AddedTime,
+                    Diplomas = u.User.Diplomas?.Where(d => d.AddedTime == u.AddedTime)
+                                    .Select(d => d.DiplomaURL).ToList(),
+                    Passport = u.User.Passports?.Where(p => p.AddedTime == u.AddedTime)
+                                    .Select(p => p.PassportURL).ToList(),
+                    License = u.User.Licenses?
+                                    .FirstOrDefault(l => l.AddedTime == u.AddedTime)?.LicenseURL
+                });
+            var pageModel = new PageModel<IEnumerable<UserEditProfile>>
+            {
+                EntityAmount = amount,
+                Entities = UsersEditProfile
+            };
+            return pageModel;
+        }
+        public async Task<(bool, string)> HandleEditUserProfile(int id, bool isApproved)
+        {
+            var tmpUsers = _context.TemporaryUsers
+                    .Include(tu => tu.User)
+                    .Where(tu => tu.isRejected == false && tu.UserId == id && tu.UserRequestTypeId == 1);
+
+            if (tmpUsers.Count() == 0)
+            {
+                return (false, "User undefined or already handled!");
+            }
+
+            tmpUsers.ToList().ForEach(tu => tu.isRejected = true);
+
+            if (isApproved)
+            {
+                var tmpUser = tmpUsers.AsEnumerable().LastOrDefault();
+                var user = _context.Users.Include(u => u.Doctor)
+                        .FirstOrDefault(u => u.Id == id);
+                if (tmpUser.User.Doctor == null)
+                {
+                    Mapper.Map<TemporaryUser, User>(tmpUser, user,
+                        config => config.AfterMap((src, dest) =>
+                        {
+                            dest.StatusId = 3;
+                        }));
+
+                    user.LastStatusChangeTime = DateTime.Now;
+                    _context.Users.Update(user);
+
+                    await _mailService.SendMsgToEmail(user.Email, "Request to edit profile",
+                        "Your request to edit profile was successfully approved!");
+
+                    await _context.SaveChangesAsync();
+                    return (true, "Successfully handled!");
+                }
+                else if (tmpUser.User.Doctor != null)
+                {
+                    var specializationId = _context.Specializations
+                        .FirstOrDefault(s => s.Name == tmpUser.Specialization).Id;
+
+                    Mapper.Map<TemporaryUser, User>(tmpUser, user,
+                        config => config.AfterMap((src, dest) =>
+                        {
+                            dest.Doctor.Address = src.Address;
+                            dest.Doctor.SpecializationId = specializationId;
+                            dest.StatusId = 3;
+                        }));
+                    user.LastStatusChangeTime = DateTime.Now;
+                    _context.Users.Update(user);
+
+                    await _mailService.SendMsgToEmail(user.Email, "Request to edit profile",
+                        "Your request to edit profile was successfully approved!");
+
+                    await _context.SaveChangesAsync();
+
+                    return (true, "Successfully handled!");
+                }
+            }
+            else if (isApproved == false)
+            {
+                await _context.SaveChangesAsync();
+                return (true, "User's request is rejected!");
+            }
+
+            await _context.SaveChangesAsync();
+            return (false, "Error!");
+        }
     }
 }
+

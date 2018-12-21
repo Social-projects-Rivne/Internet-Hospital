@@ -1,4 +1,5 @@
 ﻿using InternetHospital.BusinessLogic.Models;
+using InternetHospital.BusinessLogic.Models.EditProfile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace InternetHospital.BusinessLogic.Interfaces
     public interface IRequestService
     {
         PageModel<IEnumerable<ChangeRoleModel>> GetRequestsPatientToDoctor(PageConfig pageConfig);
-        //ChangeRoleModel GetDetailedUserRequest(int id);
         Task<(bool, string)> HandlePatientToDoctorRequest(int id, bool isApproved);
+        PageModel<IEnumerable<UserEditProfile>> GetRequestsEditProfiel(PageConfig pageConfig);
+        Task<(bool, string)> HandleEditUserProfile(int id, bool isApproved);
     }
 }

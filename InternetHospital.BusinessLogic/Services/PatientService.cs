@@ -98,6 +98,7 @@ namespace InternetHospital.BusinessLogic.Services
                     dest.Role = PATIENT;
                     dest.UserId = patient.Id;
                     dest.UserRequestTypeId = EDIT_PROFILE_REQUEST_ID;
+                    dest.isRejected = false;
                 }));
 
             _context.Add(temporaryPatient);

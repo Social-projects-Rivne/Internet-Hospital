@@ -35,5 +35,21 @@ namespace InternetHospital.WebApi.Controllers
             }
             return BadRequest(new { message = result.Item2 });
         }
+        [HttpGet("getEditProfile")]
+        public IActionResult GetEditProfileRequests([FromQuery] PageConfig pageConfig)
+        {
+            var users = _requestService.GetRequestsEditProfiel(pageConfig);
+            return Ok(users);
+        }
+        [HttpPut("handleEditProfile")]
+        public async Task<IActionResult> HandleEditUserProfile(RequestResultModel requestResultModel)
+        {
+            var result = await _requestService.HandleEditUserProfile(requestResultModel.Id, requestResultModel.IsApproved);
+            if (result.Item1)
+            {
+                return Ok(new { message = result.Item2 });
+            }
+            return BadRequest(new { message = result.Item2 });
+        }
     }
 }
