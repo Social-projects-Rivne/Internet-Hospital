@@ -309,9 +309,9 @@ namespace InternetHospital.BusinessLogic.Services
             }
             articles = articles.OrderByDescending(a => a.TimeOfCreation).AsQueryable()
                 .Take(articlesFilteringModel.AmountOfArticles)
-                        .Include(a => a.Attachments)
-                        .Include(a => a.Author)
-                        .Include(a => a.Types).ThenInclude(t => t.Type);
+                .Include(a => a.Attachments)
+                .Include(a => a.Author)
+                .Include(a => a.Types).ThenInclude(t => t.Type);
             if (articles.Any())
             {
                 result.LastArticleId = articles.LastOrDefault().Id;
@@ -321,11 +321,11 @@ namespace InternetHospital.BusinessLogic.Services
                 {
                     Title = a.Title,
                     Types = a.Types.Select(t => t.Type.Name).ToList(),
-                    DateOfCreation = a.TimeOfCreation,
+                    CreationDate = a.TimeOfCreation,
                     ShortDescription = a.ShortDescription,
                     Author = $"{a.Author.FirstName} {a.Author.SecondName}",
                     PreviewImageUrls = a.Attachments.Where(att => att.IsOnPreview)
-                                                        .Select(att => att.Url).ToList()
+                                                    .Select(att => att.Url).ToList()
                 }).ToList();
             }
 
