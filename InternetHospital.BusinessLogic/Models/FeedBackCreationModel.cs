@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InternetHospital.BusinessLogic.Models
 {
-    public class FeedBackCreationModel
+    public class FeedbackCreationModel
     {
         public string Text { get; set; }
         public int TypeId { set; get; }
