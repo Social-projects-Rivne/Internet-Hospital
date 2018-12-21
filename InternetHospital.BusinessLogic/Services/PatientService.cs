@@ -70,13 +70,13 @@ namespace InternetHospital.BusinessLogic.Services
             return historiesModel;
         }
 
-        public async Task<PatientModel> GetPatientProfile(int userId)
+        public async Task<PatientProfileModel> GetPatientProfile(int userId)
         {
-            PatientModel patientModel = null;
+            PatientProfileModel patientModel = null;
             var patient = await _userManager.FindByIdAsync(userId.ToString());
             if (patient != null)
             {
-                patientModel = Mapper.Map<User, PatientModel>(patient);
+                patientModel = Mapper.Map<User, PatientProfileModel>(patient);
             }
             return patientModel;
         }

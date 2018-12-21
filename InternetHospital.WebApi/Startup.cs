@@ -201,6 +201,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<Article, SendingArticleEditingModel>();
                 config.CreateMap<IllnessHistoryModel, IllnessHistory>();
                 config.CreateMap<IllnessHistory, IllnessHistoryModel>();
+                config.CreateMap<User, PatientProfileModel>();
                 config.CreateMap<Appointment, PreviousAppointmentsModel>()
                 .ForMember(prevAppoint => prevAppoint.UserFullName, opt => opt.MapFrom(o => $"{o.User.FirstName} {o.User.SecondName}"))
                 .ForMember(prevAppoint => prevAppoint.Status, opt => opt.MapFrom(o => o.Status.Name));
