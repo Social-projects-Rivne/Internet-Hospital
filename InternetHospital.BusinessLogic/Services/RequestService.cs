@@ -142,17 +142,11 @@ namespace InternetHospital.BusinessLogic.Services
 
             return (false, "Error!");
         }
-        public PageModel<IEnumerable<UserEditProfile>> GetRequestsEditProfiel(PageConfig pageConfig) // pass model PAgination model with pageCountModel and pageNumber
+        public PageModel<IEnumerable<UserEditProfile>> GetRequestsEditProfiel(PageConfig pageConfig)
         {
-            // int PageCount  // number of users on the page
-            // int Page  // page number 
             var tmpUsers = _context.TemporaryUsers
                     .Include(tu => tu.User)
                     .Where(tu => tu.isRejected == false && tu.UserRequestTypeId == 1);
-            //.Skip(pageConfig.PageSize * (pageConfig.PageIndex - 1))
-            //.Take(pageConfig.PageSize);
-            //.GroupBy(tu => tu.UserId)
-            //.Select(tu => tu.Last());
             if (tmpUsers.Count() == 0)
             {
                 return null;
@@ -193,7 +187,6 @@ namespace InternetHospital.BusinessLogic.Services
                 EntityAmount = amount,
                 Entities = UsersEditProfile
             };
-            // put result in PageModel<IEnumerable<ChangeRoleModel>> and return it
             return pageModel;
         }
         public async Task<(bool, string)> HandleEditUserProfile(int id, bool isApproved)
@@ -233,9 +226,6 @@ namespace InternetHospital.BusinessLogic.Services
                 }
                 else if (tmpUser.User.Doctor != null)
                 {
-                    //var user = _context.Users.Include(u => u.Doctor)
-                    //    .Where(u => u.Doctor != null)
-                    //    .FirstOrDefault(u => u.Id == id);
                     var specializationId = _context.Specializations
                         .FirstOrDefault(s => s.Name == tmpUser.Specialization).Id;
 
