@@ -9,6 +9,7 @@ namespace InternetHospital.DataAccess.AppContextConfiguration
         public void Configure(EntityTypeBuilder<Appointment> builder)
         {
             builder.Property(a => a.StatusId).IsConcurrencyToken();
+            builder.Property(a => a.IsAllowPatientInfo).HasDefaultValue(false);
         }
     }
 }

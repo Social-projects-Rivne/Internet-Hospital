@@ -53,6 +53,71 @@ namespace InternetHospital.BusinessLogic.Services
         }
 
         /// <summary>
+        /// Get all appointments for current doctor with search params
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns>
+        /// returns a list of doctor's appointments
+        /// </returns>
+        public PageModel<IEnumerable<AppointmentModel>> GetMyAppointments(AppointmentHistoryParameters parameters, int doctorId)
+        {
+            DeleteUncommittedAppointments(doctorId);
+            var appointments = _context.Appointments
+               .OrderByDescending(a => a.StartTime)
+               .Include(a => a.IllnessHistory)
+               .Include(a => a.User)
+               .Include(a => a.Status)
+               .Where(a => a.DoctorId == doctorId);
+
+            if (!string.IsNullOrEmpty(parameters.SearchByName))
+            {
+                var lowerSearchParam = parameters.SearchByName.ToLower();
+                appointments = appointments.Where(a => a.User.FirstName.ToLower().Contains(lowerSearchParam)
+                                                       || a.User.SecondName.ToLower().Contains(lowerSearchParam));
+            }
+
+            if (parameters.From != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime >= parameters.From.Value);
+            }
+
+            if (parameters.Till != null)
+            {
+                appointments = appointments
+                    .Where(a => a.StartTime <= parameters.Till.Value);
+            }
+
+            if (parameters.Statuses.Count() > 0)
+            {
+                var predicate = PredicateBuilder.False<Appointment>();
+
+                foreach (var status in parameters.Statuses)
+                {
+                    predicate = predicate.Or(p => p.StatusId == status);
+                }
+
+                appointments = appointments.Where(predicate);
+            }
+
+            var appointmentsAmount = appointments.Count();
+            var appointmentsResult = PaginationHelper<Appointment>
+                .GetPageValues(appointments, parameters.PageCount, parameters.Page)
+                .Select(a => Mapper.Map<Appointment, AppointmentModel>(a))
+                .ToList();
+
+            return new PageModel<IEnumerable<AppointmentModel>>()
+            { EntityAmount = appointmentsAmount, Entities = appointmentsResult };
+        }
+
+        public IEnumerable<string> GetAppointmentStatuses()
+        {
+            var statuses = Enum.GetNames(typeof(AppointmentStatuses))
+                .Select(s => (s.Replace('_', ' ')).ToLower());
+            return statuses;
+        }
+
+        /// <summary>
         /// Get all reserved appointments for current patient
         /// </summary>
         /// <param name="patientId"></param>
@@ -75,9 +140,32 @@ namespace InternetHospital.BusinessLogic.Services
                     Address = a.Address,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
-                    Status = a.Status.Name
+                    Status = a.Status.Name,
+                    IsAllowPatientInfo = a.IsAllowPatientInfo
                 });
             return appointments.ToList();
+        }
+
+        public bool ChangeAccessForPersonalInfo(ChangePatientInfoAccessModel model)
+        {
+            var appointment = _context.Appointments
+               .FirstOrDefault(a => a.Id == model.AppointmentId);
+
+            if (appointment == null)
+            {
+                return false;
+            }
+            
+            appointment.IsAllowPatientInfo = model.IsAllowPatientInfo;
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -229,10 +317,10 @@ namespace InternetHospital.BusinessLogic.Services
         /// <returns>
         /// status of subscription to appointment
         /// </returns>
-        public bool SubscribeForAppointment(int appointmentId, int patientId)
+        public bool SubscribeForAppointment(AppointmentSubscribeModel appointmentModel, int patientId)
         {
             var appointment = _context.Appointments
-                .FirstOrDefault(a => a.Id == appointmentId);
+                .FirstOrDefault(a => a.Id == appointmentModel.Id);
 
             if (appointment == null || appointment.StatusId != (int)AppointmentStatuses.DEFAULT_STATUS)
             {
@@ -245,6 +333,7 @@ namespace InternetHospital.BusinessLogic.Services
                 using (var scope = new TransactionScope())
                 {
                     appointment.UserId = patientId;
+                    appointment.IsAllowPatientInfo = appointmentModel.IsAllowPatientInfo;
                     appointment.StatusId = (int)AppointmentStatuses.RESERVED_STATUS;
                     _context.SaveChanges();
                     _notificationService.AddNotification(appointment.DoctorId, $"{patient.FirstName} {patient.SecondName} " +

@@ -4,14 +4,16 @@ using InternetHospital.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InternetHospital.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20181211115937_Add boolean property to appointment entity")]
+    partial class Addbooleanpropertytoappointmententity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,29 +231,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.DoctorBlackList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOfBlock");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("DoctorId");
-
-                    b.Property<int?>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("DoctorBlackLists");
-                });
-
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.FeedBack", b =>
                 {
                     b.Property<int>("Id")
@@ -350,27 +329,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Licenses");
-                });
-
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<bool>("IsRead");
-
-                    b.Property<string>("Message");
-
-                    b.Property<int>("RecepientId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecepientId");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
@@ -515,15 +473,11 @@ namespace InternetHospital.WebApi.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<int?>("UserRequestTypeId");
-
                     b.Property<bool?>("isRejected");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserRequestTypeId");
 
                     b.ToTable("TemporaryUsers");
                 });
@@ -596,24 +550,6 @@ namespace InternetHospital.WebApi.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.UserRequestType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("TypeName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserRequests");
-
-                    b.HasData(
-                        new { Id = 1, TypeName = "Request to edit profile" },
-                        new { Id = 2, TypeName = "Request to become a doctor" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -808,18 +744,6 @@ namespace InternetHospital.WebApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.DoctorBlackList", b =>
-                {
-                    b.HasOne("InternetHospital.DataAccess.Entities.Doctor", "Doctor")
-                        .WithMany("BlackList")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
-                        .WithMany("DoctorBlackLists")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.FeedBack", b =>
                 {
                     b.HasOne("InternetHospital.DataAccess.Entities.FeedBackType", "Type")
@@ -857,14 +781,6 @@ namespace InternetHospital.WebApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("InternetHospital.DataAccess.Entities.Notification", b =>
-                {
-                    b.HasOne("InternetHospital.DataAccess.Entities.User", "Recepient")
-                        .WithMany("Notifications")
-                        .HasForeignKey("RecepientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.Passport", b =>
                 {
                     b.HasOne("InternetHospital.DataAccess.Entities.User", "User")
@@ -887,10 +803,6 @@ namespace InternetHospital.WebApi.Migrations
                         .WithMany("TemporaryUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("InternetHospital.DataAccess.Entities.UserRequestType", "UserRequestType")
-                        .WithMany("TemporaryUsers")
-                        .HasForeignKey("UserRequestTypeId");
                 });
 
             modelBuilder.Entity("InternetHospital.DataAccess.Entities.User", b =>

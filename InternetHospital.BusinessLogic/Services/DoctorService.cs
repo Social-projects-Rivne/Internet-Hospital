@@ -240,61 +240,86 @@ namespace InternetHospital.BusinessLogic.Services
             return (status, message);
         }
 
-        public PageModel<IEnumerable<PreviousAppointmentsModel>> GetPreviousAppointments(AppointmentHistoryParameters parameters, int doctorId)
+        public AllowedPatientInfoModel GetPatientInfo(int userId, int doctorId)
         {
-            var appointments = _context.Appointments
-                .OrderByDescending(a => a.StartTime)
-                .Include(a => a.IllnessHistory)
-                .Include(a => a.User)
-                .Include(a => a.Status)
-                .Where(a => a.DoctorId == doctorId);
+            var appointment = _context
+                                .Appointments
+                                .Where(a => a.UserId == userId
+                                        && a.DoctorId == doctorId
+                                        && a.IsAllowPatientInfo == true
+                                        && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                                .Include(a => a.User)
+                                .SingleOrDefault();
 
-            if (!string.IsNullOrEmpty(parameters.SearchByName))
+            if(appointment == null)
             {
-                var lowerSearchParam = parameters.SearchByName.ToLower();
-                appointments = appointments.Where(a => a.User.FirstName.ToLower().Contains(lowerSearchParam)
-                                                       || a.User.SecondName.ToLower().Contains(lowerSearchParam));
+                return null;
             }
 
-            if (parameters.From != null)
-            {
-                appointments = appointments
-                    .Where(a => a.StartTime >= parameters.From.Value);
-            }
+            var patientProfile = Mapper.Map<User, AllowedPatientInfoModel>(appointment.User);
 
-            if (parameters.Till != null)
-            {
-                appointments = appointments
-                    .Where(a => a.StartTime <= parameters.Till.Value);
-            }
-
-            if (parameters.Statuses.Count() > 0)
-            {
-                var predicate = PredicateBuilder.False<Appointment>();
-
-                foreach (var status in parameters.Statuses)
-                {
-                    predicate = predicate.Or(p => p.StatusId == status);
-                }
-
-                appointments = appointments.Where(predicate);
-            }
-
-            var appointmentsAmount = appointments.Count();
-            var appointmentsResult = PaginationHelper<Appointment>
-                .GetPageValues(appointments, parameters.PageCount, parameters.Page)
-                .Select(a => Mapper.Map<Appointment, PreviousAppointmentsModel>(a))
-                .ToList();
-
-            return new PageModel<IEnumerable<PreviousAppointmentsModel>>()
-            { EntityAmount = appointmentsAmount, Entities = appointmentsResult };
+            return patientProfile;
         }
 
-        public IEnumerable<string> GetAppointmentStatuses()
+        public PageModel<IEnumerable<IllnessHistoryModel>> GetPatientIllnessHistory(IllnessHistorySearchModel queryParameters, int doctorId)
         {
-            var statuses = Enum.GetNames(typeof(AppointmentStatuses))
-                .Select(s=> (s.Replace('_',' ')).ToLower());
-            return statuses;
+            var appointment = _context
+                    .Appointments
+                    .Where(a => a.UserId == queryParameters.UserId
+                            && a.DoctorId == doctorId
+                            && a.IsAllowPatientInfo == true
+                            && a.StatusId == (int)AppointmentStatuses.RESERVED_STATUS)
+                    .Include(a => a.User)
+                        .ThenInclude(u => u.IllnessHistories)
+                    .SingleOrDefault();
+
+            if (appointment == null)
+            {
+                return null;
+            }
+
+            var illnessHistories = appointment.User.IllnessHistories.AsQueryable();
+
+            if (queryParameters.SearchFromDate != null)
+            {
+                var fromDate = Convert.ToDateTime(queryParameters.SearchFromDate);
+                illnessHistories = illnessHistories
+                    .Where(i => i.ConclusionTime >= fromDate);
+            }
+            if (queryParameters.SearchToDate != null)
+            {
+                var toDate = Convert.ToDateTime(queryParameters.SearchToDate);
+                toDate = toDate.AddDays(1);
+                illnessHistories = illnessHistories.
+                    Where(d => d.ConclusionTime <= toDate);
+            }
+
+            var historyAmount = illnessHistories.Count();
+            var historiesResult = PaginationHelper(illnessHistories, queryParameters.PageCount, queryParameters.Page).ToList();
+
+            return new PageModel<IEnumerable<IllnessHistoryModel>>()
+            { EntityAmount = historyAmount, Entities = historiesResult };
+        }
+
+        private IQueryable<IllnessHistoryModel> PaginationHelper(IQueryable<IllnessHistory> histories, int pageCount, int page)
+        {
+            var historiesModel = histories
+                .Skip(pageCount * (page - 1))
+                .Take(pageCount).Select(x => new IllnessHistoryModel
+                {
+                    AppointmentId = x.AppointmentId ?? default,
+                    Complaints = x.Complaints,
+                    FinishAppointmentTimeStamp = ((DateTimeOffset)x.ConclusionTime).ToUnixTimeMilliseconds(),
+                    Diagnose = x.Diagnose,
+                    DiseaseAnamnesis = x.DiseaseAnamnesis,
+                    LifeAnamnesis = x.LifeAnamnesis,
+                    LocalStatus = x.LocalStatus,
+                    ObjectiveStatus = x.ObjectiveStatus,
+                    SurveyPlan = x.SurveyPlan,
+                    TreatmentPlan = x.TreatmentPlan
+                });
+
+            return historiesModel;
         }
 
         private bool FillIllness(IllnessHistoryModel illnessModel, Appointment appointment)
@@ -307,7 +332,7 @@ namespace InternetHospital.BusinessLogic.Services
                                                                             {
                                                                                 ih.DoctorId = appointment.DoctorId;
                                                                                 ih.UserId = appointment.UserId ?? default;
-                                                                                ih.ConclusionTime = new DateTime(im.FinishAppointmentTimeStamp);
+                                                                                ih.ConclusionTime = DateTimeOffset.FromUnixTimeSeconds(im.FinishAppointmentTimeStamp / 1000).UtcDateTime;
                                                                             }));
                 _context.IllnessHistories.Add(illnessHistory);
             }
