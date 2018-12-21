@@ -8,7 +8,6 @@ using InternetHospital.DataAccess;
 using InternetHospital.DataAccess.Entities;
 using InternetHospital.UnitTests.TestHelpers;
 using AutoMapper;
-using System;
 using InternetHospital.BusinessLogic.Interfaces;
 using Moq;
 
@@ -17,13 +16,13 @@ namespace InternetHospital.UnitTests.Appointments
     /// <summary>
     /// Represents unit tests for AppointmentService.
     /// </summary>
-    public class AppointmentServiceUnitTests : IDisposable
+    public class AppointmentServiceUnitTests
     {
-       Mock<INotificationService> notificationService;
+        private readonly Mock<INotificationService> _notificationService;
 
         public AppointmentServiceUnitTests()
         {
-            notificationService = new Mock<INotificationService>();             
+            _notificationService = new Mock<INotificationService>();             
         }
 
         [Fact]
@@ -68,7 +67,7 @@ namespace InternetHospital.UnitTests.Appointments
             using (var context = new ApplicationContext(options))
             {
                 // create service with generated data
-                var appointmentService = new AppointmentService(context, notificationService.Object);
+                var appointmentService = new AppointmentService(context, _notificationService.Object);
 
                 // act
                 var appointments = appointmentService.GetMyAppointments(doctorId);
@@ -87,6 +86,7 @@ namespace InternetHospital.UnitTests.Appointments
             var fixture = FixtureHelper.CreateOmitOnRecursionFixture();
 
             var fixtureAppointment = fixture.Build<Appointment>()
+                .With(a => a.IsAllowPatientInfo, false)
                 .With(a => a.StatusId, ALLOWED_STATUS_ID)
                 .With(a => a.Status, new AppointmentStatus
                 {
@@ -111,10 +111,10 @@ namespace InternetHospital.UnitTests.Appointments
 
             using (var context = new ApplicationContext(options))
             {
-                var appointmentService = new AppointmentService(context, notificationService.Object);
+                var appointmentService = new AppointmentService(context, _notificationService.Object);
 
                 // act
-                var appointments = appointmentService.GetPatientsAppointments((int)patientId);
+                var appointments = appointmentService.GetPatientsAppointments(patientId.GetValueOrDefault());
 
                 // assert
                 appointments.Should().BeEquivalentTo(expectedData);
@@ -136,7 +136,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             var doctorId = fixtureDoctor.UserId;
 
-
+            Mapper.Reset();
             Mapper.Initialize(cfg => cfg.CreateMap<AppointmentCreationModel, Appointment>());
 
             using (var context = new ApplicationContext(options))
@@ -147,7 +147,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             using (var context = new ApplicationContext(options))
             {
-                var appointmentService = new AppointmentService(context, notificationService.Object);
+                var appointmentService = new AppointmentService(context, _notificationService.Object);
 
                 // act
                 var status = appointmentService.AddAppointment(fixtureAppointment, doctorId);
@@ -188,7 +188,7 @@ namespace InternetHospital.UnitTests.Appointments
 
             using (var context = new ApplicationContext(options))
             {
-                var appointmentService = new AppointmentService(context, notificationService.Object);
+                var appointmentService = new AppointmentService(context, _notificationService.Object);
 
                 // act
                 var appointments = appointmentService.DeleteAppointment(appointmentId, DOCTOR_ID);
@@ -227,16 +227,11 @@ namespace InternetHospital.UnitTests.Appointments
                 Address = appointment.Address,
                 StartTime = appointment.StartTime,
                 EndTime = appointment.EndTime,
-                Status = appointment.Status.Name
+                Status = appointment.Status.Name,
+                IsAllowPatientInfo = false
             };
 
             return new List<AppointmentForPatient> { model };
-        }
-
-        public void Dispose()
-        {
-            // if we use AutoMapper we must reset it after each test
-            Mapper.Reset();
         }
     }
 }
