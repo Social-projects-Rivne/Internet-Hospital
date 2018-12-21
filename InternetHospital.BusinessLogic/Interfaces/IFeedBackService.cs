@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace InternetHospital.BusinessLogic.Interfaces
 {
-    public interface IFeedBackService
+    public interface IFeedbackService
     {
-        FeedBack FeedBackCreate(FeedBackCreationModel model);
+        Feedback FeedbackCreate(FeedbackCreationModel model);
         PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters);
-        IEnumerable<FeedBackType> GetFeedBackTypes();
+        IEnumerable<FeedbackType> GetFeedbackTypes();
         IEnumerable<UserModel> GetUsers();
-        IEnumerable<UserModel> GetUsers(IEnumerable<FeedBack> feedBacks);
-        FeedBack UpdateFeedBack(FeedbackViewModel feedback);
+        IEnumerable<UserModel> GetUsers(IEnumerable<Feedback> feedbacks);
+        Feedback UpdateFeedback(FeedbackViewModel feedback);
     }
 }

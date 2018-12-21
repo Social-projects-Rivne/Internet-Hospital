@@ -14,44 +14,44 @@ using System.Linq;
 
 namespace InternetHospital.BusinessLogic.Services
 {
-    public class FeedBackService : IFeedBackService
+    public class FeedbackService : IFeedbackService
     {
         private readonly ApplicationContext _context;
-        private readonly ILogger<FeedBackService> _logger;
+        private readonly ILogger<FeedbackService> _logger;
 
-        public FeedBackService(ApplicationContext context,
-                               ILogger<FeedBackService> logger)
+        public FeedbackService(ApplicationContext context,
+                               ILogger<FeedbackService> logger)
         {
             _logger = logger;
             _context = context;
         }
 
-        public FeedBack FeedBackCreate(FeedBackCreationModel model)
+        public Feedback FeedbackCreate(FeedbackCreationModel model)
         {
             FeedbackValidator validations = new FeedbackValidator();
             try
             {
                 validations.ValidateAndThrow(model);
 
-                var feedback = Mapper.Map<FeedBackCreationModel, FeedBack>
+                var feedback = Mapper.Map<FeedbackCreationModel, Feedback>
                     (model, cfg => cfg.AfterMap((src, dest) => dest.DateTime = DateTime.Now));
-                _context.FeedBacks.Add(feedback);
+                _context.Feedbacks.Add(feedback);
                 _context.SaveChanges();
                 return feedback;
             }
             catch (Exception exception)
             {
-                _logger.LogCritical($"{nameof(FeedBackService)} failed with {exception.Message}", exception);
+                _logger.LogCritical($"{nameof(FeedbackService)} failed with {exception.Message}", exception);
                 return null;
             }
         }
 
-        public IEnumerable<FeedBackType> GetFeedBackTypes()
+        public IEnumerable<FeedbackType> GetFeedbackTypes()
         {
-            return _context.FeedBackTypes.ToList();
+            return _context.FeedbackTypes.ToList();
         }
 
-        public IEnumerable<UserModel> GetUsers(IEnumerable<FeedBack> feedBacks)
+        public IEnumerable<UserModel> GetUsers(IEnumerable<Feedback> feedBacks)
         {
             ICollection<UserModel> involvedUsers = new List<UserModel>();
 
@@ -67,11 +67,11 @@ namespace InternetHospital.BusinessLogic.Services
 
         public IEnumerable<UserModel> GetUsers()
         {
-            var feedBacks = _context.FeedBacks;
+            var feedbacks = _context.Feedbacks;
             ICollection<UserModel> involvedUsers = new List<UserModel>();
 
             var users = _context.Users;
-            foreach (var item in feedBacks)
+            foreach (var item in feedbacks)
             {
                 var user = users.Find(item.UserId);
                 involvedUsers.Add(Mapper.Map<User, UserModel>(user));
@@ -82,7 +82,7 @@ namespace InternetHospital.BusinessLogic.Services
 
         public PageModel<List<FeedbackViewModel>> GetFeedbackViewModels(FeedbackSearchParams queryParameters)
         {
-            List<FeedBack> feedBacks = _context.FeedBacks
+            List<Feedback> feedBacks = _context.Feedbacks
                 .Include(f => f.User)
                 .Include(f => f.Type)
                 .ToList();
@@ -132,9 +132,9 @@ namespace InternetHospital.BusinessLogic.Services
             return new PageModel<List<FeedbackViewModel>>() { EntityAmount = feedbackViews.Count(), Entities = feedbacks };
         }
 
-        public FeedBack UpdateFeedBack(FeedbackViewModel feedback)
+        public Feedback UpdateFeedback(FeedbackViewModel feedback)
         {
-            FeedBack FeedbackEntity = _context.FeedBacks.FirstOrDefault(x => x.Id == feedback.Id);
+            Feedback FeedbackEntity = _context.Feedbacks.FirstOrDefault(x => x.Id == feedback.Id);
 
             FeedbackEntity.IsViewed = feedback.IsViewed;
             FeedbackEntity.Reply = feedback.Reply;

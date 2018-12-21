@@ -16,8 +16,8 @@ namespace InternetHospital.DataAccess
         public DbSet<RefreshToken> Tokens { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<FeedBack> FeedBacks { set; get; }
-        public DbSet<FeedBackType> FeedBackTypes { set; get; }
+        public DbSet<Feedback> Feedbacks { set; get; }
+        public DbSet<FeedbackType> FeedbackTypes { set; get; }
         public DbSet<IllnessHistory> IllnessHistories { set; get; }
         public DbSet<Passport> Passports { set; get; }
         public DbSet<TemporaryUser> TemporaryUsers { set; get; }
