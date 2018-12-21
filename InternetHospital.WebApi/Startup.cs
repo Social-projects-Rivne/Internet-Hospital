@@ -204,6 +204,7 @@ namespace InternetHospital.WebApi
                 config.CreateMap<Appointment, PreviousAppointmentsModel>()
                 .ForMember(prevAppoint => prevAppoint.UserFullName, opt => opt.MapFrom(o => $"{o.User.FirstName} {o.User.SecondName}"))
                 .ForMember(prevAppoint => prevAppoint.Status, opt => opt.MapFrom(o => o.Status.Name));
+                config.CreateMap<TemporaryUser, User>().ForMember(i => i.Id, opt => opt.Ignore());
             });
 
             app.UseSignalR(routes =>
